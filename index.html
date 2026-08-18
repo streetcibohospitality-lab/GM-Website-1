@@ -12,9 +12,17 @@
 <meta property="og:image" content="https://www.grubmonkeys.in/images/img-013.jpg">
 <meta property="og:type" content="restaurant">
 <meta name="theme-color" content="#3A3A3A">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jaro&family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/woff2" href="fonts/Jaro-Regular.woff2">
+<link rel="preload" as="font" type="font/woff2" href="fonts/Lexend-400.woff2">
+<style>
+/* Self-hosted brand fonts — no dependency on Google Fonts being reachable */
+@font-face{ font-family:'Jaro'; src:url('fonts/Jaro-Regular.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face{ font-family:'Lexend'; src:url('fonts/Lexend-300.woff2') format('woff2'); font-weight:300; font-style:normal; font-display:swap; }
+@font-face{ font-family:'Lexend'; src:url('fonts/Lexend-400.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face{ font-family:'Lexend'; src:url('fonts/Lexend-600.woff2') format('woff2'); font-weight:600; font-style:normal; font-display:swap; }
+@font-face{ font-family:'Lexend'; src:url('fonts/Lexend-700.woff2') format('woff2'); font-weight:700; font-style:normal; font-display:swap; }
+@font-face{ font-family:'Lexend'; src:url('fonts/Lexend-800.woff2') format('woff2'); font-weight:800; font-style:normal; font-display:swap; }
+</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
