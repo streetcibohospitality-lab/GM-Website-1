@@ -90,6 +90,57 @@
       <a href="menu.html" class="btn btn-diner">View The Menu <span class="arrow" aria-hidden="true">→</span></a>
       <a href="#locations" class="btn btn-ticket">Find A Diner <span class="arrow" aria-hidden="true">→</span></a>
     </div>
+    <!-- KOT 063: insert inside .hero-copy, immediately before .hero-city-line -->
+<div class="kot-terminal" id="kotTerminal">
+  <div class="kot-terminal-head" aria-hidden="true">
+    <span>KITCHEN LINE</span>
+    <b>KOT 063</b>
+  </div>
+
+  <button class="kot-print-button" id="kotPrintButton" type="button" aria-controls="kotPaper" aria-expanded="false">
+    <span class="kot-button-light" aria-hidden="true"></span>
+    <span class="kot-button-copy">
+      <strong>PRINT YOUR KOT</strong>
+      <small>PRESS TO PRINT</small>
+    </span>
+  </button>
+
+  <div class="kot-printer" aria-label="Kitchen order token printer">
+    <div class="kot-printer-top" aria-hidden="true">
+      <span class="kot-printer-brand">GRUB MONKEYS</span>
+      <span class="kot-status-light"></span>
+    </div>
+    <div class="kot-printer-slot" aria-hidden="true"></div>
+
+    <div class="kot-paper-window">
+      <article class="kot-paper" id="kotPaper" aria-live="polite">
+        <div class="kot-paper-header">
+          <strong>GRUB MONKEYS</strong>
+          <span>KITCHEN ORDER TOKEN</span>
+        </div>
+        <div class="kot-rule"></div>
+        <div class="kot-meta">
+          <span>KOT <b id="kotNumber">#063</b></span>
+          <span>TABLE <b>WEB-063</b></span>
+          <span>TIME <b id="kotTime">--:--</b></span>
+        </div>
+        <div class="kot-rule"></div>
+        <div class="kot-ticket-content" id="kotTicketContent">
+          <h3>FIRST TIME HERE?</h3>
+          <p>1 × KOREAN KONG</p>
+          <p>1 × DIRTY FRIES</p>
+          <p>1 × PBJ SHAKE</p>
+          <strong class="kot-house-rule">HOUSE RULE: COME HUNGRY.</strong>
+        </div>
+        <div class="kot-rule dashed"></div>
+        <a class="kot-ticket-action" id="kotTicketAction" href="menu.html">VIEW THE FULL MENU <span>→</span></a>
+        <div class="kot-tear">TEAR HERE · · · · · · · · ·</div>
+      </article>
+    </div>
+  </div>
+
+  <div class="kot-print-status" id="kotPrintStatus" role="status" aria-live="polite">READY</div>
+</div>
     <div class="hero-city-line">Bengaluru · Manipal · Mangalore · Moodbidri · Mysore</div>
   </div>
   <div class="hero-photo-panel">

@@ -311,3 +311,99 @@
 
   document.querySelectorAll('.js-year').forEach(el=>el.textContent=new Date().getFullYear());
 })();
+
+/* GRUB MONKEYS — KOT 063 hero printer interaction */
+(function(){
+  const terminal=document.getElementById('kotTerminal');
+  const button=document.getElementById('kotPrintButton');
+  const timeEl=document.getElementById('kotTime');
+  const numberEl=document.getElementById('kotNumber');
+  const contentEl=document.getElementById('kotTicketContent');
+  const actionEl=document.getElementById('kotTicketAction');
+  const statusEl=document.getElementById('kotPrintStatus');
+  if(!terminal||!button||!contentEl||!actionEl) return;
+
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const tickets=[
+    {
+      title:'FIRST TIME HERE?',
+      lines:['1 × KOREAN KONG','1 × DIRTY FRIES','1 × PBJ SHAKE'],
+      note:'HOUSE RULE: COME HUNGRY.',
+      cta:'VIEW THE FULL MENU',
+      href:'menu.html'
+    },
+    {
+      title:'WING DEPARTMENT',
+      lines:['START SAFE → MAPLE GLAZED','TURN IT UP → PERI PERI','GO FULL MONKEY → GHOST PEPPER'],
+      note:'20+ FLAVOURS. PICK YOUR DAMAGE.',
+      cta:'SEE THE WINGS',
+      href:'menu.html'
+    },
+    {
+      title:'YOUR TABLE IS READY.',
+      lines:['RED BOOTHS','CHECKERBOARD FLOORS','BIG BURGERS · LOUD ROCK'],
+      note:'BORN IN MANIPAL. RAISED ACROSS KARNATAKA.',
+      cta:'FIND A DINER',
+      href:'#locations'
+    },
+    {
+      title:'MONKEY\'S PICK',
+      lines:['KOREAN KONG','DIRTY FRIES','PBJ SHAKE'],
+      note:'DON\'T OVERTHINK IT. ORDER APPROVED.',
+      cta:'ORDER ONLINE',
+      href:'#order'
+    }
+  ];
+
+  let index=0;
+  let printing=false;
+  let hasPrinted=false;
+
+  function liveTime(){
+    return new Intl.DateTimeFormat(undefined,{hour:'2-digit',minute:'2-digit'}).format(new Date());
+  }
+  function renderTicket(ticket){
+    const safe=(s)=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+    contentEl.innerHTML=`<h3>${safe(ticket.title)}</h3>${ticket.lines.map(line=>`<p>${safe(line)}</p>`).join('')}<strong class="kot-house-rule">${safe(ticket.note)}</strong>`;
+    actionEl.innerHTML=`${safe(ticket.cta)} <span>→</span>`;
+    actionEl.setAttribute('href',ticket.href);
+    if(timeEl) timeEl.textContent=liveTime();
+    if(numberEl) numberEl.textContent=`#${String(63+index).padStart(3,'0')}`;
+  }
+  function setStatus(text){if(statusEl) statusEl.textContent=text;}
+
+  function printTicket(){
+    if(printing) return;
+    printing=true;
+
+    const start=()=>{
+      renderTicket(tickets[index]);
+      terminal.classList.remove('is-resetting','is-printed');
+      terminal.classList.add('is-printing');
+      button.setAttribute('aria-expanded','true');
+      setStatus('PRINTING...');
+
+      const finishDelay=reduced?40:1120;
+      window.setTimeout(()=>{
+        terminal.classList.remove('is-printing');
+        terminal.classList.add('is-printed');
+        setStatus('KOT READY · PRINT ANOTHER');
+        button.querySelector('strong').textContent='PRINT ANOTHER KOT';
+        button.querySelector('small').textContent='FRESH PICK FROM THE KITCHEN';
+        hasPrinted=true;
+        printing=false;
+        index=(index+1)%tickets.length;
+      },finishDelay);
+    };
+
+    if(hasPrinted){
+      terminal.classList.remove('is-printed','is-printing');
+      terminal.classList.add('is-resetting');
+      setStatus('RESETTING...');
+      window.setTimeout(start,reduced?20:330);
+    } else start();
+  }
+
+  button.addEventListener('click',printTicket);
+  if(timeEl) timeEl.textContent=liveTime();
+})();
