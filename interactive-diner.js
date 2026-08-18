@@ -189,6 +189,7 @@
         <strong>Sauce Heat Meter</strong>
         <small>Mild → Hot → Monkey Business</small>
       </div>
+      <img class="gm-heat-shot" src="images/food/02-wing-sauce-action.jpeg" alt="Grub Monkeys wings being tossed in sauce" width="1122" height="1402" loading="lazy" decoding="async">
       <div class="gm-gauge">
         <div class="gm-gauge-arc" aria-hidden="true"></div>
         <div class="gm-gauge-needle" aria-hidden="true"></div>

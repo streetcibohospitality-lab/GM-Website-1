@@ -499,3 +499,24 @@
 .gm-photo-strip{position:relative}
 #m1 .gm-heat-meter{grid-column:1/-1}
 #m1 .menu-row.gm-heat-match{background:rgba(0,221,194,.09);box-shadow:inset 4px 0 0 var(--gm-id-teal);padding-left:8px;transition:background .18s ease,box-shadow .18s ease,padding-left .18s ease}
+
+/* Sauce Heat Meter — Wing Sauce Action photograph (final food asset pack).
+   Explicit width+height (not aspect-ratio) so the intrinsic 1122x1402 file
+   can never dictate layout height. Sits beside the gauge on desktop and
+   above it on narrow screens. */
+.gm-heat-shot{
+  display:block;
+  width:150px;
+  height:188px;
+  object-fit:cover;
+  object-position:center;
+  border:3px solid var(--gm-red,#EB0000);
+  margin:0 auto 14px;
+}
+@media(min-width:900px){
+  .gm-heat-meter{position:relative}
+  .gm-heat-shot{position:absolute;top:18px;right:18px;margin:0}
+}
+@media(max-width:520px){
+  .gm-heat-shot{width:124px;height:155px}
+}

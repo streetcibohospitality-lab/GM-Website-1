@@ -84,8 +84,10 @@
   const tvSection=document.getElementById('monkey-tv');
   const neonSign=document.getElementById('onAirSign');
   const channels=[...document.querySelectorAll('.tv-channel')];
+  const sound=document.getElementById('tvSound');
   let tvStarted=false;
   let tvAutoBooted=false;
+  let tvUserPaused=false;
   function syncPlayLabel(){
     if(play && tv) {
       play.textContent=tv.paused?'PLAY':'PAUSE';
@@ -112,10 +114,30 @@
     tv.addEventListener('error',()=>{ if(play){ play.disabled=true; play.textContent='VIDEO'; } });
     if(play) play.addEventListener('click',async()=>{
       if(tv.paused){
+        tvUserPaused=false;
         if(!tvStarted) pulsePower();
         tvStarted=true;
         try{ await tv.play(); }catch(e){}
-      }else tv.pause();
+      }else{
+        tvUserPaused=true;
+        tv.pause();
+      }
+    });
+    /* Sound stays off until the visitor explicitly asks for it — never auto-unmuted. */
+    if(sound){
+      const syncSoundLabel=()=>{
+        sound.textContent=tv.muted?'SOUND OFF':'SOUND ON';
+        sound.setAttribute('aria-pressed',tv.muted?'false':'true');
+        sound.setAttribute('aria-label',tv.muted?'Turn Monkey TV sound on':'Turn Monkey TV sound off');
+      };
+      sound.addEventListener('click',()=>{ tv.muted=!tv.muted; syncSoundLabel(); });
+      tv.addEventListener('volumechange',syncSoundLabel);
+      syncSoundLabel();
+    }
+    /* Pause when the tab is hidden; resume only if the visitor didn't pause it. */
+    document.addEventListener('visibilitychange',()=>{
+      if(document.hidden){ if(!tv.paused) tv.pause(); }
+      else if(!tvUserPaused && tvAutoBooted) tv.play().catch(()=>{});
     });
     if(restart) restart.addEventListener('click',()=>{pulseChannelSwitch(); tv.currentTime=0; if(!tv.paused) tv.play().catch(()=>{});});
     channels.forEach(btn=>btn.addEventListener('click',()=>{
@@ -137,7 +159,10 @@
             tvAutoBooted=true;
             if(neonSign) neonSign.classList.add('warm');
             pulsePower();
-            setTimeout(()=>{ tv.play().then(()=>{tvStarted=true;}).catch(()=>{}); },120);
+            setTimeout(()=>{ if(!tvUserPaused) tv.play().then(()=>{tvStarted=true;}).catch(()=>{}); },120);
+          } else if(entry.isIntersecting && tvAutoBooted && !tvUserPaused && tv.paused){
+            /* Returning to the TV resumes playback unless the visitor paused it. */
+            tv.play().catch(()=>{});
           } else if(!entry.isIntersecting && !tv.paused) tv.pause();
         });
       },{threshold:.35});
