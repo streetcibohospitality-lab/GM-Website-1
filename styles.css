@@ -494,10 +494,12 @@ nav.scrolled .hamburger span{ background: var(--gm-grey); }
 .fr-perk-desc{ font-size:0.8rem; color: rgba(240,239,233,0.48); line-height:1.7; max-width:44ch; }
 .fr-form{ background: rgba(240,239,233,0.05); border:2px solid var(--gm-line-on-dark); padding: 34px; }
 .fr-form-title{ font-family:var(--f-display); text-transform:uppercase; font-size:1.5rem; margin-bottom:6px; }
-.fr-form-sub{ font-size:0.78rem; color: rgba(240,239,233,0.45); margin-bottom: 24px; }
+.fr-form-sub{ font-size:0.82rem; color: rgba(240,239,233,0.78); margin-bottom: 24px; }
 .fr-row{ display:grid; grid-template-columns:1fr 1fr; gap: 14px; }
 .fr-group{ display:flex; flex-direction:column; gap:6px; margin-bottom:14px; }
-.fr-label{ font-size:0.6rem; letter-spacing:0.08em; text-transform:uppercase; color: rgba(240,239,233,0.5); font-weight:600; }
+/* Form labels were 9.6px at 3.47:1 — under the AA floor and hard to read on
+   the site's only lead-capture surface. Larger and near-opaque. */
+.fr-label{ font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color: rgba(240,239,233,0.86); font-weight:700; }
 .fr-input, .fr-select, .fr-textarea{
   background: rgba(240,239,233,0.06); border:1px solid var(--gm-line-on-dark); color: var(--gm-white);
   font-family:inherit; font-size:0.85rem; padding: 12px 14px; border-radius:0; width:100%; transition: border-color var(--gm-motion-fast);
@@ -513,7 +515,9 @@ nav.scrolled .hamburger span{ background: var(--gm-grey); }
 }
 .fr-submit:hover:not(:disabled){ transform: translateY(-2px); box-shadow: 0 6px 0 var(--gm-white); }
 .fr-submit:active:not(:disabled){ transform: translateY(2px); box-shadow: 0 1px 0 var(--gm-white); }
-.fr-note{ font-size:0.6rem; color: rgba(240,239,233,0.28); text-align:center; margin-top:10px; line-height:1.6; }
+/* Consent text was 9.6px at 2.09:1 — effectively invisible. This is the line
+   people are agreeing to, so it needs to be legible, not decorative. */
+.fr-note{ font-size:0.72rem; color: rgba(240,239,233,0.72); text-align:center; margin-top:10px; line-height:1.6; }
 @media (max-width: 860px){ .fr-grid{ grid-template-columns:1fr; } .fr-row{ grid-template-columns:1fr; } }
 
 /* ============================================================
@@ -579,7 +583,7 @@ body.menu-open{overflow:hidden}
 .hero-h-split .line:nth-child(2) span{color:var(--gm-red)}
 .hero-sub-split{position:static;color:#5d5752;max-width:42ch;opacity:0;animation:fadeUp .6s var(--gm-ease-editorial) .4s forwards;margin-top:30px;font-size:.9rem;line-height:1.75}
 .hero-btns-split{position:static;opacity:0;animation:fadeUp .6s var(--gm-ease-editorial) .5s forwards;margin-top:28px}
-.hero-city-line{font-size:.63rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;margin-top:40px;color:#746e69;border-top:1px solid var(--gm-line);padding-top:14px}
+.hero-city-line{font-size:.63rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;margin-top:40px;color:#6b6560;border-top:1px solid var(--gm-line);padding-top:14px}
 .hero-photo-panel{position:relative;min-height:calc(100svh - 74px);overflow:hidden;background:var(--gm-grey)}
 .hero-photo-panel>img{width:100%;height:100%;object-fit:cover;object-position:center;animation:heroPhotoIn 1.25s var(--gm-ease-editorial) both}
 .hero-photo-panel::after{content:"";position:absolute;inset:auto 0 0;height:30%;background:linear-gradient(transparent,rgba(0,0,0,.55));pointer-events:none}
@@ -725,28 +729,36 @@ section[id], #order{scroll-margin-top:82px}
     opacity:.97;
     filter:drop-shadow(0 15px 17px rgba(58,58,58,.18));
   }
+  /* Backgrounds rather than <img>: a background declared only inside this
+     media query is never fetched below 1280px, where the cassette is hidden. */
   .hero-cassette-base{
     display:block;
     width:100%;
-    height:auto;
+    aspect-ratio:700 / 933;
+    background:url("images/grub-monkeys-cassette.webp") no-repeat center/contain;
   }
   .hero-cassette-reel{
     position:absolute;
     display:block;
     width:19.43%;
-    height:auto;
+    aspect-ratio:1;
     border-radius:50%;
     transform-origin:50% 50%;
     will-change:transform;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:contain;
   }
   .hero-cassette-reel-top{
     left:39.14%;
     top:21.33%;
+    background-image:url("images/cassette-reel-top.webp");
     animation:heroCassetteReelSpin 3.15s linear infinite;
   }
   .hero-cassette-reel-bottom{
     left:39.00%;
     top:65.38%;
+    background-image:url("images/cassette-reel-bottom.webp");
     animation:heroCassetteReelSpin 2.85s linear infinite;
   }
 }
@@ -970,8 +982,17 @@ section[id], #order{scroll-margin-top:82px}
 .loc-row{cursor:pointer}
 .loc-row.active-key{background:rgba(0,221,194,.08)}
 
-/* Jukebox coin slot */
-.gm-jukebox-player{position:relative}
+/* Jukebox coin slot.
+   The coin slot/token/trigger are absolutely positioned and need a positioned
+   ancestor — but the player is already position:absolute above, which
+   establishes a containing block just as well as relative does. The earlier
+   `position:relative` override here was therefore unnecessary, and actively
+   harmful: it left the player's left/right/top percentages in force while
+   changing their meaning, so they stopped being insets and became a *shift*
+   of 21% right (18% under 560px) and 49% down. That pushed the player's right
+   edge past .jukebox-section's overflow:hidden and amputated Drop Coin, the
+   A2/B2 selectors and the Mixcloud iframe on phones. Leaving the player
+   absolute restores the intended overlay and keeps the coin slot anchored. */
 .coin-slot-wrap{position:absolute;left:18px;top:-16px;display:grid;gap:5px;justify-items:start}
 .coin-slot-label{font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gm-white);background:var(--gm-grey);padding:5px 8px;border:2px solid var(--gm-white)}
 .coin-slot{position:relative;width:70px;height:10px;border-radius:999px;background:#1d1d1d;box-shadow:inset 0 2px 2px rgba(255,255,255,.14)}
@@ -1546,13 +1567,13 @@ section[id], #order{scroll-margin-top:82px}
 .kot-rule.dashed{background:none;border-top:1px dashed rgba(45,45,45,.65)}
 .kot-meta{display:grid;grid-template-columns:1fr;gap:2px}
 .kot-meta span{display:flex;justify-content:space-between;gap:10px}
-.kot-ticket-content h3{font-family:inherit;font-size:.67rem;margin:0 0 8px;text-transform:uppercase}
+.kot-ticket-content .kot-ticket-title{display:block;font-family:inherit;font-size:.67rem;font-weight:800;margin:0 0 8px;text-transform:uppercase}
 .kot-ticket-content p{margin:2px 0}
 .kot-house-rule{display:block;margin-top:10px;font-size:.57rem;text-transform:uppercase}
 .kot-ticket-action{display:flex;justify-content:space-between;gap:8px;color:var(--kot-ink);font-weight:900;text-decoration:none;text-transform:uppercase;letter-spacing:.02em}
 .kot-ticket-action:hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
 .kot-tear{margin-top:16px;text-align:center;font-size:.44rem;letter-spacing:.08em;opacity:.56;white-space:nowrap}
-.kot-print-status{margin-top:9px;font-size:.47rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#756f69}
+.kot-print-status{margin-top:9px;font-size:.47rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#6b6560}
 
 /* Printing sequence */
 .kot-terminal.is-printing .kot-button-light,
@@ -1664,10 +1685,28 @@ section[id], #order{scroll-margin-top:82px}
    Power-on / static / scanline motion already exist above and
    are intentionally not duplicated here.
    ============================================================ */
-.monkey-tv-video{width:100%;height:100%;display:block;object-fit:cover;background:#090909}
+.monkey-tv-video{width:100%;height:100%;display:block;object-fit:cover;background:#090909;color:var(--gm-white,#F0EFE9)}
 .crt-glass{position:absolute;inset:0;pointer-events:none;z-index:4;
   background:radial-gradient(ellipse at center,rgba(255,255,255,0) 52%,rgba(0,0,0,.16) 79%,rgba(0,0,0,.38) 100%)}
 .tv-sound-button[aria-pressed="true"]{background:var(--gm-teal,#00DDC2);color:var(--gm-grey,#3A3A3A)}
+
+/* Unplayable reel: dim the dead controls and label the screen, so a failed
+   MP4 reads as "no signal" rather than as a broken button over a still frame.
+   The poster keeps showing, so the CRT is never blank. */
+.crt-button:disabled{opacity:.4;cursor:not-allowed}
+.tv-no-signal .crt-screen::after{
+  content:"NO SIGNAL";
+  position:absolute;
+  inset:auto 0 12% 0;
+  z-index:5;
+  text-align:center;
+  color:var(--gm-white,#F0EFE9);
+  background:rgba(0,0,0,.62);
+  padding:7px 0;
+  font-size:.62rem;
+  font-weight:800;
+  letter-spacing:.22em;
+}
 /* The real reel is a 1:1 square and .crt-screen is 4:3 at every breakpoint, so
    `cover` always shows the same middle 75% band — the ceiling above and the bare
    counter below are what get trimmed, which is what we want. A centred crop is
@@ -1680,3 +1719,81 @@ section[id], #order{scroll-margin-top:82px}
 .hero-photo-panel>img{object-position:68% center}
 @media(max-width:900px){ .hero-photo-panel>img{object-position:72% center} }
 @media(max-width:560px){ .hero-photo-panel>img{object-position:76% center} }
+
+/* ============================================================
+   CONTRAST — WCAG AA corrections.
+
+   Sorta White (#F0EFE9) on Monkey Red (#EB0000) measures 4.02:1, just under
+   the 4.5:1 AA floor for normal-size text. Every instance below is small
+   text, so none of them qualify for the 3:1 large-text allowance.
+
+   The brand red is deliberately left untouched: pure #FFFFFF on #EB0000
+   measures 4.63:1 and passes, so the correction is made on the text rather
+   than by darkening the brand colour. Cream to white on red is a barely
+   perceptible shift and keeps the palette intact.
+   ============================================================ */
+.btn-diner,
+.kot-print-button,
+.menu-tab.active,
+.menu-tab.active .jcode,
+.ticker-item,
+.ticker-item::after,
+.fr-submit,
+.order-code,
+.coin-trigger,
+.gm-session-chip,
+.gm-fortune-group>span,
+.gm-sauce-meter__photo-label span,
+.gm-sauce-meter__photo-label strong{
+  color:#FFFFFF;
+}
+
+/* Monkey Teal (#00DDC2) on Sorta White measures 1.50:1 — unreadable at the
+   14px used for the Monkey TV channel codes. A deepened teal reserved for
+   small teal text on light surfaces measures 4.74:1. Large decorative
+   numerals keep the bright brand teal. */
+:root{ --gm-teal-ink:#00776A; }
+.tv-channel span{ color:var(--gm-teal-ink); }
+
+/* ============================================================
+   TOUCH TARGETS — WCAG 2.5.8 (24x24 CSS px minimum).
+   Inline and footer links were rendering 15-18px tall on phones.
+   Padding is used rather than min-height so the text baselines and the
+   existing flex/column gaps are unchanged; the gaps are reduced by the
+   same amount the padding adds so vertical rhythm holds.
+   ============================================================ */
+@media(max-width:900px){
+  .foot-links{ gap:2px; }
+  .foot-links a,
+  .foot-social a,
+  .foot-bottom a{
+    display:inline-flex;
+    align-items:center;
+    min-height:24px;
+    padding:4px 0;
+  }
+  .loc-row-links .loc-link,
+  .text-cta,
+  .kot-ticket-action,
+  #roadsideDirections{
+    display:inline-flex;
+    align-items:center;
+    min-height:24px;
+  }
+  .coin-trigger{ min-height:32px; display:inline-flex; align-items:center; }
+}
+
+/* Monkey Red as *text* on Sorta White is also 4.02:1. Same treatment as the
+   reverse pairing: a marginally deepened red reserved for small red text on
+   light surfaces (4.51:1). Large display type keeps the exact brand red. */
+:root{ --gm-red-ink:#DC0000; }
+.tv-channel:hover,
+.tv-channel.active,
+.tv-channel.active span,
+.story-founder,
+.clock-brand,
+.flip-kicker,
+.gm-fortune-copy .gm-machine-code{
+  color:var(--gm-red-ink);
+}
+.matchbook-brand{ color:#FFFFFF; }

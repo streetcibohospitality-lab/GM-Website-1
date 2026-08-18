@@ -315,7 +315,7 @@
 .gm-juke-select::before{content:"";position:absolute;top:5px;right:5px;width:6px;height:6px;border-radius:50%;background:#585858}
 .gm-juke-select[aria-pressed="true"]{background:var(--gm-id-red);color:var(--gm-id-white);transform:translateY(2px)}
 .gm-juke-select[aria-pressed="true"]::before{background:var(--gm-id-teal);box-shadow:0 0 8px rgba(0,221,194,.65)}
-.gm-juke-select[aria-disabled="true"]{opacity:.45;cursor:not-allowed}
+.gm-juke-select[aria-disabled="true"],.gm-juke-select:disabled{opacity:.45;cursor:not-allowed}
 .gm-juke-selection-note{grid-column:1/-1;color:rgba(240,239,233,.58);font-size:.5rem;letter-spacing:.08em;text-transform:uppercase}
 
 /* ---------- PHOTO BOOTH MODE: REUSE EXISTING GRUB IRL PHOTOS ---------- */
@@ -1247,4 +1247,44 @@
    surface so the ticket reads as one piece of paper again. */
 .gm-sauce-meter__ticket footer{
   background:transparent;
+}
+
+/* ============================================================
+   CONTRAST — AA corrections for this stylesheet's components.
+   These live here rather than in styles.css because interactive-diner.css
+   loads second: an equal-specificity rule in styles.css would lose the
+   cascade. Sorta White on Monkey Red is 4.02:1 at these small sizes;
+   pure white on the same red is 4.63:1 and passes without touching the
+   brand colour.
+   ============================================================ */
+.gm-session-chip,
+.gm-fortune-group>span,
+.gm-fortune-machine::before{
+  color:#FFFFFF;
+}
+
+/* Remaining AA corrections, resolved against measured render paths.
+   Sorta White on Monkey Red is 4.02:1; pure white on the same red is 4.63:1.
+   Monkey Red as text on Sorta White is likewise 4.02:1; --gm-red-ink (#DC0000)
+   is 4.51:1. Only genuinely red-backed elements are targeted — the plain
+   .loc-row list sits on a light surface and is deliberately left alone; only
+   .loc-row.featured is red. */
+.matchbook-inside span,
+.story-origin-poster .origin-copy span,
+#motelKeytag #keyName,
+#motelKeytag #keyNum,
+.loc-row.featured .loc-row-tag,
+.loc-row.featured .loc-row-address,
+.loc-row.featured .loc-row-name,
+.gm-juke-select[aria-pressed="true"],
+.gm-photobooth-trigger,
+.btn-ticket.on-dark,
+.gm-tray-ticket span{
+  color:#FFFFFF;
+}
+
+.gm-fortune-copy .gm-machine-code,
+.loc-row.featured .loc-link,
+.loc-row.featured .loc-link.outline{
+  color:var(--gm-red-ink,#DC0000);
 }

@@ -36,7 +36,7 @@
 
 <nav id="siteNav" aria-label="Primary navigation">
   <a href="index.html" class="nav-logo" aria-label="Grub Monkeys home">
-    <img src="images/img-002.jpg" alt="">
+    <img src="images/img-002.jpg" alt="" width="1032" height="1032">
     <span class="nav-logo-text">GRUB MONKEYS</span>
   </a>
   <ul class="nav-links">
@@ -54,7 +54,7 @@
 <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
   <div class="mm-top">
     <a href="index.html" class="mm-brand" aria-label="Grub Monkeys home">
-      <img src="images/img-002.jpg" alt="">
+      <img src="images/img-002.jpg" alt="" width="1032" height="1032">
       <span class="nav-logo-text" style="color:var(--gm-white);">GRUB MONKEYS</span>
     </a>
     <button class="mm-close" id="mobileMenuClose" aria-label="Close menu">✕</button>
@@ -74,10 +74,15 @@
 <main>
 <header class="hero hero-split">
   <div class="hero-copy">
+    <!-- Decorative only (the wrapper is aria-hidden and every layer had alt="").
+         These are painted as CSS backgrounds inside the >=1280px media query so
+         phones never download them: as <img> they were fetched even though
+         .hero-cassette is display:none below 1280px, costing ~974KB per mobile
+         visit for artwork that could never be shown. -->
     <div class="hero-cassette" aria-hidden="true">
-      <img class="hero-cassette-base" src="images/grub-monkeys-cassette.png" alt=""/>
-      <img class="hero-cassette-reel hero-cassette-reel-top" src="images/cassette-reel-top.png" alt=""/>
-      <img class="hero-cassette-reel hero-cassette-reel-bottom" src="images/cassette-reel-bottom.png" alt=""/>
+      <span class="hero-cassette-base"></span>
+      <span class="hero-cassette-reel hero-cassette-reel-top"></span>
+      <span class="hero-cassette-reel hero-cassette-reel-bottom"></span>
     </div>
     <div class="hero-poster-rail" aria-hidden="true"><span>GM / 63</span><span>BURGERS · WINGS · SHAKES</span></div>
     <div class="hero-price-ticket" aria-hidden="true"><span>COUNTER PICK</span><strong>KOREAN<br>KONG</strong><small>HOT · CRISPY · STACKED</small></div>
@@ -127,7 +132,7 @@
         </div>
         <div class="kot-rule"></div>
         <div class="kot-ticket-content" id="kotTicketContent">
-          <h3>FIRST TIME HERE?</h3>
+          <strong class="kot-ticket-title">FIRST TIME HERE?</strong>
           <p>1 × KOREAN KONG</p>
           <p>1 × DIRTY FRIES</p>
           <p>1 × PBJ SHAKE</p>
@@ -248,7 +253,7 @@
 </div>
 <div class="atmo-grid">
 <div class="atmo-photo big reveal">
-<img alt="Grub Monkeys diner interior with checkerboard floor, red booths and neon signage" loading="lazy" src="images/img-001.jpg"/>
+<img alt="Grub Monkeys diner interior with checkerboard floor, red booths and neon signage" loading="lazy" src="images/img-001.jpg" width="800" height="600"/>
 </div>
 <div class="atmo-tags reveal">
 <div class="atmo-tag on"><em>Red</em> Booths.</div>
@@ -260,7 +265,7 @@
 </div>
 <div class="atmo-grid" style="margin-top:2px;">
 <div class="atmo-photo small reveal" style="grid-column:1;">
-<img alt="Vintage Burger House wall art and onion rings at Grub Monkeys" loading="lazy" src="images/img-009.jpg"/>
+<img alt="Vintage Burger House wall art and onion rings at Grub Monkeys" loading="lazy" src="images/img-009.jpg" width="1200" height="837"/>
 </div>
 </div>
 </section>
@@ -293,7 +298,7 @@
     </div>
     <div class="story-origin-poster reveal" aria-label="Grub Monkeys Manipal origin graphic">
       <div class="origin-checker" aria-hidden="true"></div>
-      <img src="images/img-002.jpg" alt="">
+      <img src="images/img-002.jpg" alt="" width="1032" height="1032">
       <div class="origin-copy">
         <span>THE ORIGIN</span>
         <strong>MANIPAL.</strong>
@@ -325,8 +330,11 @@
 </div>
 <div class="locations-stage reveal">
   <div class="roadside-panel" id="roadsidePanel">
-    <div class="roadside-photo"><img src="images/img-001.jpg" alt="Grub Monkeys diner interior"></div>
-    <div class="roadside-sign">
+    <div class="roadside-photo"><img src="images/img-001.jpg" alt="Grub Monkeys diner interior" width="800" height="600"></div>
+    <!-- aria-live so keyboard/screen-reader users hear the stage change when
+         they move through the diner list below; the rows update it on
+         hover, focus and click. -->
+    <div class="roadside-sign" aria-live="polite">
       <span class="roadside-route">DINER / <b id="roadsideNum">01</b></span>
       <strong id="roadsideName">MANIPAL — THE OG</strong>
       <small id="roadsideCity">MANIPAL · KARNATAKA</small>
@@ -449,7 +457,7 @@
 </div>
 <div class="social-strip reveal">
 
-<a href="https://www.instagram.com/grubmonkeysbangalore/" rel="noopener" target="_blank"><img alt="Onion rings and diner wall art" loading="lazy" src="images/img-009.jpg"/><span class="social-cap">Diner Details</span></a>
+<a href="https://www.instagram.com/grubmonkeysbangalore/" rel="noopener" target="_blank"><img alt="Onion rings and diner wall art" loading="lazy" src="images/img-009.jpg" width="1200" height="837"/><span class="social-cap">Diner Details</span></a>
 <a href="https://www.instagram.com/grubmonkeysbangalore/" rel="noopener" target="_blank"><img alt="Grub Monkeys Po'Boy" loading="lazy" width="1536" height="1024" src="images/food/08-poboy.jpeg"/><span class="social-cap">Po'Boy</span></a>
 <a href="https://www.instagram.com/grubmonkeysbangalore/" rel="noopener" target="_blank"><img alt="Grub Monkeys Dirty Dog" loading="lazy" width="1536" height="1024" src="images/food/07-dirty-dog.jpeg"/><span class="social-cap">Dirty Dog</span></a>
 

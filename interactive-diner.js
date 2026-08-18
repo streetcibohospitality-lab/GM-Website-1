@@ -393,9 +393,11 @@
 
   /* ----------------------------------------------------------
      7. JUKEBOX SELECTOR — UPGRADE EXISTING JUKEBOX ONLY
-     Only A1 has a verified feed in the current project. Other slots
-     are intentionally disabled rather than faking different music.
-     Claude may enable them when approved feed URLs are supplied.
+     Only A1 has a verified feed in the current project. The other slots use
+     the real `disabled` attribute rather than aria-disabled alone, so they
+     are not keyboard-reachable dead controls, and they carry customer-facing
+     copy rather than an authoring note. Enable them by giving each a real
+     Mixcloud feed URL — never by faking different music.
      ---------------------------------------------------------- */
   const jukePlayer=$('#gmJukeboxPlayer');
   const mixcloud=$('.mixcloud-player',jukePlayer||document);
@@ -404,13 +406,13 @@
     selector.className='gm-juke-selector';
     selector.innerHTML=`
       <button type="button" class="gm-juke-select" data-code="A1" aria-pressed="true">A1 · Classic Rock</button>
-      <button type="button" class="gm-juke-select" data-code="A2" aria-pressed="false" aria-disabled="true">A2 · Add Mix</button>
-      <button type="button" class="gm-juke-select" data-code="B1" aria-pressed="false" aria-disabled="true">B1 · Add Mix</button>
-      <button type="button" class="gm-juke-select" data-code="B2" aria-pressed="false" aria-disabled="true">B2 · Add Mix</button>
-      <div class="gm-juke-selection-note">A1 uses the currently approved Mixcloud feed. Add real feed URLs before enabling A2/B1/B2.</div>`;
+      <button type="button" class="gm-juke-select" data-code="A2" aria-pressed="false" disabled>A2 · Coming Soon</button>
+      <button type="button" class="gm-juke-select" data-code="B1" aria-pressed="false" disabled>B1 · Coming Soon</button>
+      <button type="button" class="gm-juke-select" data-code="B2" aria-pressed="false" disabled>B2 · Coming Soon</button>
+      <div class="gm-juke-selection-note">More mixes are being cut. A1 is spinning now.</div>`;
     jukePlayer.insertBefore(selector,mixcloud);
     $$('.gm-juke-select',selector).forEach(btn=>btn.addEventListener('click',()=>{
-      if(btn.getAttribute('aria-disabled')==='true') return;
+      if(btn.disabled) return;
       $$('.gm-juke-select',selector).forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));
       // Reload the verified feed only on explicit user selection; never autoplay.
       const src=mixcloud.getAttribute('src');

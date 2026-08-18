@@ -90,6 +90,9 @@
   let tvUserPaused=false;
   function syncPlayLabel(){
     if(play && tv) {
+      /* Once the reel is known unplayable the button stays NO SIGNAL — play/pause
+         events still fire on a failed element and would otherwise relabel it. */
+      if(play.dataset.failed==='true') return;
       play.textContent=tv.paused?'PLAY':'PAUSE';
       play.setAttribute('aria-label',tv.paused?'Play Monkey TV':'Pause Monkey TV');
     }
@@ -111,7 +114,30 @@
   if(tv){
     tv.addEventListener('play',syncPlayLabel);
     tv.addEventListener('pause',syncPlayLabel);
-    tv.addEventListener('error',()=>{ if(play){ play.disabled=true; play.textContent='VIDEO'; } });
+    /* Surface an unplayable reel instead of leaving a dead PAUSE button over a
+       frozen poster. The media is declared with a child <source>, and media
+       errors fire on that element without bubbling, so a listener on <video>
+       alone never runs — it stays here for direct-src failures, but the
+       <source> listener is the one that actually catches a missing or
+       undecodable MP4. networkState NO_SOURCE is the belt-and-braces case:
+       some browsers reject every candidate without firing either event. */
+    function tvUnavailable(){
+      if(!play || play.dataset.failed==='true') return;
+      play.dataset.failed='true';
+      play.disabled=true;
+      play.textContent='NO SIGNAL';
+      play.setAttribute('aria-label','Monkey TV video is unavailable');
+      if(restart) restart.disabled=true;
+      if(sound) sound.disabled=true;
+      if(tvShell) tvShell.classList.add('tv-no-signal');
+    }
+    tv.addEventListener('error',tvUnavailable);
+    const tvSource=tv.querySelector('source');
+    if(tvSource) tvSource.addEventListener('error',tvUnavailable);
+    tv.addEventListener('loadedmetadata',()=>{ if(play){ play.dataset.failed=''; } });
+    window.setTimeout(()=>{
+      if(tv.networkState===HTMLMediaElement.NETWORK_NO_SOURCE && tv.readyState===0) tvUnavailable();
+    },8000);
     if(play) play.addEventListener('click',async()=>{
       if(tv.paused){
         tvUserPaused=false;
@@ -370,7 +396,7 @@
   }
   function renderTicket(ticket){
     const safe=(s)=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
-    contentEl.innerHTML=`<h3>${safe(ticket.title)}</h3>${ticket.lines.map(line=>`<p>${safe(line)}</p>`).join('')}<strong class="kot-house-rule">${safe(ticket.note)}</strong>`;
+    contentEl.innerHTML=`<strong class="kot-ticket-title">${safe(ticket.title)}</strong>${ticket.lines.map(line=>`<p>${safe(line)}</p>`).join('')}<strong class="kot-house-rule">${safe(ticket.note)}</strong>`;
     actionEl.innerHTML=`${safe(ticket.cta)} <span>→</span>`;
     actionEl.setAttribute('href',ticket.href);
     if(timeEl) timeEl.textContent=liveTime();

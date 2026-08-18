@@ -16,7 +16,20 @@
     e.preventDefault();
     setStatus('');
     if(document.getElementById('fi-company')?.value) return;
-    if(!form.reportValidity()) return;
+    if(!form.reportValidity()){
+      /* reportValidity() pops the browser's own bubble on a single field, which
+         a screen reader user may never receive. Name the outstanding fields in
+         the live region too, and move focus to the first one. */
+      const invalid=[...form.querySelectorAll(':invalid')].filter(el=>!el.closest('.hp-field'));
+      const names=invalid
+        .map(el=>(form.querySelector('label[for="'+el.id+'"]')||{}).textContent)
+        .filter(Boolean).map(t=>t.trim());
+      if(names.length){
+        setStatus('Please complete '+names.length+' required field'+(names.length>1?'s':'')+': '+names.join(', ')+'.','error');
+      }
+      if(invalid[0]) invalid[0].focus();
+      return;
+    }
 
     btn.disabled=true;
     btn.textContent='Sending…';
