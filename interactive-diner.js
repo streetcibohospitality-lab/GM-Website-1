@@ -176,55 +176,156 @@
   }
 
   /* ----------------------------------------------------------
-     4. SAUCE HEAT METER — NEW MENU UTILITY
-     Curated heat grouping must be kitchen-verified before launch.
+     4. SAUCE HEAT METER — approved live-CSS instrument.
+     Heat grouping comes from the brand's own heat graphic
+     (red/top = hottest, green/bottom = mildest) and matches the
+     twenty Wings - Rs.220 flavours on this page exactly.
+     Production never auto-cycles: the visitor drives the level.
      ---------------------------------------------------------- */
   const wingsPanel=$('#m1');
   if(wingsPanel && !$('#gmHeatMeter')){
     const heat=document.createElement('section');
-    heat.className='gm-heat-meter';
+    heat.className='gm-sauce-meter';
     heat.id='gmHeatMeter';
+    heat.dataset.level='0';
+    heat.setAttribute('aria-labelledby','gmSauceMeterTitle');
     heat.innerHTML=`
-      <div class="gm-heat-head">
-        <strong>Sauce Heat Meter</strong>
-        <small>Mild → Hot → Monkey Business</small>
+      <header class="gm-sauce-meter__head">
+        <div>
+          <p class="gm-sauce-meter__eyebrow">GRUB MONKEYS · SAUCE CONTROL 063</p>
+          <h3 id="gmSauceMeterTitle">Pick your heat.</h3>
+        </div>
+        <div class="gm-sauce-meter__live" aria-hidden="true">
+          <span class="gm-sauce-meter__live-dot"></span>
+          LIVE
+        </div>
+      </header>
+      <div class="gm-sauce-meter__grid">
+        <figure class="gm-sauce-meter__photo">
+          <img src="images/food/02-wing-sauce-action.jpeg" alt="Glazed chicken wing being dipped into sauce" width="1122" height="1402" loading="lazy" decoding="async">
+          <figcaption class="gm-sauce-meter__photo-label">
+            <span>WING TEST</span>
+            <strong>SAUCE / 063</strong>
+          </figcaption>
+        </figure>
+        <div class="gm-sauce-meter__instrument" aria-label="Interactive sauce heat meter">
+          <span class="gm-sauce-meter__screw gm-sauce-meter__screw--1" aria-hidden="true"></span>
+          <span class="gm-sauce-meter__screw gm-sauce-meter__screw--2" aria-hidden="true"></span>
+          <span class="gm-sauce-meter__screw gm-sauce-meter__screw--3" aria-hidden="true"></span>
+          <span class="gm-sauce-meter__screw gm-sauce-meter__screw--4" aria-hidden="true"></span>
+          <div class="gm-sauce-meter__dial-wrap">
+            <div class="gm-sauce-meter__dial" aria-hidden="true">
+              <div class="gm-sauce-meter__ticks"></div>
+              <div class="gm-sauce-meter__segment gm-sauce-meter__segment--mild"></div>
+              <div class="gm-sauce-meter__segment gm-sauce-meter__segment--warm"></div>
+              <div class="gm-sauce-meter__segment gm-sauce-meter__segment--hot"></div>
+              <div class="gm-sauce-meter__segment gm-sauce-meter__segment--monkey"></div>
+              <span class="gm-sauce-meter__dial-label gm-sauce-meter__dial-label--mild">MILD</span>
+              <span class="gm-sauce-meter__dial-label gm-sauce-meter__dial-label--warm">WARM</span>
+              <span class="gm-sauce-meter__dial-label gm-sauce-meter__dial-label--hot">HOT</span>
+              <span class="gm-sauce-meter__dial-label gm-sauce-meter__dial-label--monkey">MONKEY<br>BUSINESS</span>
+              <div class="gm-sauce-meter__needle" id="gmSauceNeedle"></div>
+              <div class="gm-sauce-meter__hub"><span>63</span></div>
+            </div>
+            <div class="gm-sauce-meter__glass" aria-hidden="true"></div>
+          </div>
+          <div class="gm-sauce-meter__buttons" role="group" aria-label="Choose a sauce heat level">
+            <button class="gm-sauce-meter__level is-active" type="button" data-level="0" aria-pressed="true"><i aria-hidden="true"></i><span>MILD</span></button>
+            <button class="gm-sauce-meter__level" type="button" data-level="1" aria-pressed="false"><i aria-hidden="true"></i><span>WARM</span></button>
+            <button class="gm-sauce-meter__level" type="button" data-level="2" aria-pressed="false"><i aria-hidden="true"></i><span>HOT</span></button>
+            <button class="gm-sauce-meter__level" type="button" data-level="3" aria-pressed="false"><i aria-hidden="true"></i><span>MONKEY<br>BUSINESS</span></button>
+          </div>
+          <div class="gm-sauce-meter__printer" aria-live="polite" aria-atomic="true">
+            <div class="gm-sauce-meter__slot" aria-hidden="true"><span></span></div>
+            <article class="gm-sauce-meter__ticket" id="gmSauceTicket">
+              <div class="gm-sauce-meter__ticket-top">
+                <span>HEAT LEVEL</span>
+                <span>ORDER 063</span>
+              </div>
+              <h4 id="gmSauceLevelName">MILD</h4>
+              <ul id="gmSauceFlavourList"></ul>
+              <footer>
+                <span>5 FLAVOURS</span>
+                <span>MONKEY APPROVED</span>
+              </footer>
+            </article>
+          </div>
+        </div>
       </div>
-      <img class="gm-heat-shot" src="images/food/02-wing-sauce-action.jpeg" alt="Grub Monkeys wings being tossed in sauce" width="1122" height="1402" loading="lazy" decoding="async">
-      <div class="gm-gauge">
-        <div class="gm-gauge-arc" aria-hidden="true"></div>
-        <div class="gm-gauge-needle" aria-hidden="true"></div>
-        <div class="gm-gauge-center" aria-hidden="true"></div>
-        <span class="gm-gauge-label mild">Mild</span>
-        <span class="gm-gauge-label hot">Hot</span>
-        <span class="gm-gauge-label monkey">Monkey Business</span>
-      </div>
-      <label>
-        <span class="sr-only">Wing heat level</span>
-        <input class="gm-heat-range" type="range" min="0" max="3" step="1" value="0" aria-describedby="gmHeatResult">
-      </label>
-      <div class="gm-heat-result" id="gmHeatResult" aria-live="polite"><b>Mild</b><p>Maple Glazed · Teriyaki · Creamy Butter Garlic · Garlic Parmesan</p></div>`;
+      <p class="gm-sauce-meter__hint">
+        Pick a heat level. The needle swings live and the flavour ticket reprints.
+      </p>`;
     wingsPanel.prepend(heat);
-    const range=$('.gm-heat-range',heat);
-    const gauge=$('.gm-gauge',heat);
-    const result=$('.gm-heat-result',heat);
+
+    const ticket=$('#gmSauceTicket',heat);
+    const levelName=$('#gmSauceLevelName',heat);
+    const list=$('#gmSauceFlavourList',heat);
+    const buttons=$$('.gm-sauce-meter__level',heat);
+
+    /* HEAT-DATA.md is the source of truth. Names are reproduced exactly as
+       supplied — including "Carribean" and "Carolina Gold (BBQ & Must)" —
+       and must not be reordered or silently corrected. */
     const levels=[
-      {name:'Mild',angle:-72,flavours:'Maple Glazed · Teriyaki · Creamy Butter Garlic · Garlic Parmesan'},
-      {name:'Warm',angle:-28,flavours:'Texas BBQ · Carolina Gold · Honey Buffalo · Citrus Pepper'},
-      {name:'Hot',angle:22,flavours:'Peri Peri Dry · Buffalo Sauce · Sriracha Blaze · Nashville · Thai Chilli'},
-      {name:'Monkey Business',angle:70,flavours:'Ghost Pepper · Mango Habanero · Honey Gochujang'}
+      {name:'MILD',angle:-160,accent:'#00DDC2',
+        flavours:['Cheese Sauce','Thai Chilli','Honey Buffalo','Teriyaki','Maple Glazed']},
+      {name:'WARM',angle:-118,accent:'#E5A12A',
+        flavours:['Carribean Dry','Creamy Butter Garlic','Lemon Pepper Ranch','Sesame Thai Glaze Lemon','Carolina Gold (BBQ & Must)']},
+      {name:'HOT',angle:-62,accent:'#E95C22',
+        flavours:['Nashville','Texas BBQ','Citrus Pepper','Lemon Chilli Dry','Peri Peri Dry']},
+      {name:'MONKEY BUSINESS',angle:-20,accent:'#EB0000',
+        flavours:['Ghost Pepper','Spicy Strawberry','Honey Gochujang','Buffalo Sauce','Sriracha Blaze']}
     ];
-    function setHeat(){
-      const level=levels[Number(range.value)];
-      gauge.style.setProperty('--gm-heat-angle',`${level.angle}deg`);
-      result.innerHTML=`<b>${level.name}</b><p>${level.flavours}</p>`;
-      const names=level.flavours.split(' · ');
+
+    function renderFlavours(items){
+      list.replaceChildren(...items.map(flavour=>{
+        const li=document.createElement('li');
+        li.textContent=flavour;
+        return li;
+      }));
+    }
+
+    function animateTicket(){
+      if(reduceMotion) return;
+      ticket.classList.remove('is-printing');
+      void ticket.offsetWidth;
+      ticket.classList.add('is-printing');
+      window.setTimeout(()=>ticket.classList.remove('is-printing'),560);
+    }
+
+    /* The menu lists three flavours per row, so a row can straddle two heat
+       levels; highlighting whichever rows contain the selected flavours is
+       still the fastest way to find the sauce in the list below. Parentheticals
+       are stripped because the menu prints "Carolina Gold" without the suffix. */
+    function highlightRows(flavours){
+      const names=flavours.map(f=>f.replace(/\s*\(.*\)\s*/,'').trim().toLowerCase());
       $$('.menu-row.multi',wingsPanel).forEach(row=>{
         const text=(row.textContent||'').toLowerCase();
-        row.classList.toggle('gm-heat-match',names.some(name=>text.includes(name.toLowerCase())));
+        row.classList.toggle('gm-heat-match',names.some(name=>text.includes(name)));
       });
     }
-    range.addEventListener('input',setHeat);
-    setHeat();
+
+    function setLevel(index,animate){
+      const safeIndex=Math.max(0,Math.min(levels.length-1,Number(index)));
+      const data=levels[safeIndex];
+      heat.dataset.level=String(safeIndex);
+      heat.style.setProperty('--gm-sm-needle',`${data.angle}deg`);
+      heat.style.setProperty('--gm-sm-active',data.accent);
+      levelName.textContent=data.name;
+      renderFlavours(data.flavours);
+      buttons.forEach((button,buttonIndex)=>{
+        const active=buttonIndex===safeIndex;
+        button.classList.toggle('is-active',active);
+        button.setAttribute('aria-pressed',active?'true':'false');
+      });
+      highlightRows(data.flavours);
+      if(animate) animateTicket();
+    }
+
+    buttons.forEach(button=>{
+      button.addEventListener('click',()=>setLevel(button.dataset.level,true));
+    });
+
+    setLevel(0,false);
   }
 
   /* Deep-link from the counter tray to existing menu tabs. */
