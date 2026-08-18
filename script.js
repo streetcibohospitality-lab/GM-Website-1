@@ -201,31 +201,12 @@
     blindIo.observe(sigWindow);
   } else if(sigWindow) sigWindow.classList.add('blind-open');
 
-  const flipboard=document.getElementById('flipboard');
-  const flipCurrent=document.getElementById('flipCurrent');
-  const flipNext=document.getElementById('flipNext');
-  if(flipboard && flipCurrent && flipNext){
-    let msgs=[];
-    try{ msgs=JSON.parse(flipboard.dataset.messages||'[]'); }catch(e){}
-    if(!Array.isArray(msgs) || msgs.length<2) msgs=['CHANNEL 63','BURGERS','WINGS'];
-    let fi=0;
-    flipCurrent.textContent=msgs[0];
-    flipNext.textContent=msgs[1 % msgs.length];
-    if(!reduceMotion){
-      setInterval(()=>{
-        const nextIndex=(fi+1)%msgs.length;
-        flipNext.textContent=msgs[nextIndex];
-        flipboard.classList.remove('flipping');
-        void flipboard.offsetWidth;
-        flipboard.classList.add('flipping');
-        setTimeout(()=>{
-          fi=nextIndex;
-          flipCurrent.textContent=msgs[fi];
-          flipboard.classList.remove('flipping');
-        },620);
-      },4600);
-    }
-  }
+  /* The legacy flipboard cycle (CHANNEL 63 / BURGERS / WINGS / SHAKES /
+     OPEN LATE on a 4.6s interval) was removed per the Interactive Diner V2
+     de-duplication map: interactive-diner.js repurposes this same board into
+     one per-session SPECIAL OF THE DAY. Leaving the old timer running would
+     have kept overwriting the special. The board markup is untouched — only
+     the interval that mutated it is gone. */
 
   const keytag=document.getElementById('motelKeytag');
   const keyNum=document.getElementById('keyNum');
