@@ -1668,10 +1668,10 @@ section[id], #order{scroll-margin-top:82px}
 .crt-glass{position:absolute;inset:0;pointer-events:none;z-index:4;
   background:radial-gradient(ellipse at center,rgba(255,255,255,0) 52%,rgba(0,0,0,.16) 79%,rgba(0,0,0,.38) 100%)}
 .tv-sound-button[aria-pressed="true"]{background:var(--gm-teal,#00DDC2);color:var(--gm-grey,#3A3A3A)}
-@media(max-width:700px){
-  /* Keep the burger/action subject visible when the CRT crops tighter on phones. */
-  .monkey-tv-video{object-position:center 42%}
-}
+/* The real reel is a 1:1 square and .crt-screen is 4:3 at every breakpoint, so
+   `cover` always shows the same middle 75% band — the ceiling above and the bare
+   counter below are what get trimmed, which is what we want. A centred crop is
+   therefore correct at all widths; no per-breakpoint object-position is needed. */
 
 /* Korean Kong hero crop — the photograph is a 3:2 landscape with the burger
    sitting right-of-centre and deliberate empty counter to its left. In the tall
