@@ -1933,3 +1933,36 @@ section[id], #order{scroll-margin-top:82px}
   .sig-item.d{ margin-top:10px; }
   .sig-more{ margin-top:14px; padding-top:0; }
 }
+
+/* ============================================================
+   JUKEBOX PLAYER — stop overlaying it on phones.
+
+   The player is position:absolute at top:49% of .gm-jukebox, so only the
+   graphic's lower 51% is available to it. That works while the graphic is
+   tall: 850px on desktop and 700px on tablet leave 189px and 75px of
+   headroom. On phones the graphic is 438px (390px viewport) and 400px
+   (360px), giving ~215px of room for a panel whose content is now 346-360px
+   — the 2x2 selector grid, the note and the 60px Mixcloud iframe. It
+   overflowed by 81-115px and .jukebox-section's overflow:hidden clipped it,
+   taking the B1/B2 buttons and the entire audio player with it.
+
+   Below 700px it moves into normal flow underneath the jukebox graphic,
+   where it can be as tall as its content needs. position:relative rather
+   than static so the coin slot, token and trigger keep their containing
+   block; the inherited percentage offsets are cleared because on a
+   relatively positioned box they would shift it rather than inset it.
+   ============================================================ */
+@media(max-width:700px){
+  .gm-jukebox-player{
+    position:relative;
+    left:auto;
+    right:auto;
+    top:auto;
+    width:100%;
+    /* In flow it would sit at the very top of the machine and cover the arch,
+       lights and speaker. Push it down over the body instead, by an amount
+       that still leaves the panel inside the section at both phone widths. */
+    margin:clamp(64px, 24vw, 104px) auto 0;
+  }
+  .coin-slot-wrap{ top:-14px; }
+}

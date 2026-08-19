@@ -1288,3 +1288,10 @@
 .loc-row.featured .loc-link.outline{
   color:var(--gm-red-ink,#DC0000);
 }
+
+/* The order status card is pinned bottom-right of .order-band, which clips
+   with overflow:hidden. At bottom:12px the card's last 3px fell outside the
+   clip and the ORDER RECEIVED line was shaved on phones. */
+@media(max-width:900px){
+  .gm-order-status{ bottom:20px; }
+}
