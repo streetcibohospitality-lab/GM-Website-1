@@ -1414,7 +1414,7 @@ section[id], #order{scroll-margin-top:82px}
 @media(max-width:1100px){
   .hero-price-ticket{display:none}
   .monkey-tv-section{grid-template-columns:.72fr 1.28fr}.crt-wrap{width:64vw;margin-right:0}
-  .sig-item.a{min-height:620px}
+  .sig-item.a{min-height:clamp(400px,44vw,500px)}
   .locations-stage{grid-template-columns:300px 1fr;gap:28px}.roadside-photo{height:250px}.loc-row{grid-template-columns:60px 1fr;grid-template-areas:"num name" "num addr" "links links";row-gap:6px}.loc-row-num{grid-area:num}.loc-row-name-wrap{grid-area:name}.loc-row-address{grid-area:addr}.loc-row-links{grid-area:links;justify-content:flex-start}
   .jukebox-section{grid-template-columns:.7fr 1.3fr}
   .order-band h2{font-size:clamp(4rem,8vw,7rem)}
@@ -1431,7 +1431,7 @@ section[id], #order{scroll-margin-top:82px}
   .flipboard-band{margin:0;padding:26px var(--pad-x) 38px;grid-template-columns:1fr}.flipboard{width:100%}
   .locations{padding:84px 0}.loc-head{margin-bottom:28px}.motel-keytag{display:none}.loc-head > .sec-num,.loc-head > h2{padding-right:0}.locations-stage{display:block;padding:0}.roadside-panel{position:relative;top:auto;margin:0 var(--pad-x) 28px;display:grid;grid-template-columns:.8fr 1.2fr;box-shadow:7px 8px 0 var(--gm-red)}.roadside-photo{height:180px}.roadside-sign{padding:18px}.roadside-sign strong{font-size:1.7rem}.loc-list{margin:0}.loc-row{padding:22px var(--pad-x);grid-template-columns:52px 1fr;grid-template-areas:"num name" "num addr" "links links"}.loc-row.featured{margin:0;padding-left:var(--pad-x);padding-right:var(--pad-x)}
   .jukebox-section{min-height:auto;grid-template-columns:1fr;padding:84px var(--pad-x)}.juke-ghost-code{font-size:90vw;right:-15vw;bottom:4vh}.gm-jukebox{max-width:560px}
-  .social{padding:84px 0 96px}.social-strip{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding:18px var(--pad-x) 48px;gap:18px}.social-strip a:nth-child(n){flex:0 0 72vw;transform:rotate(0)!important;scroll-snap-align:center}.social-strip a:nth-child(odd){transform:rotate(-1.2deg)!important}.social-strip a:nth-child(even){transform:rotate(1deg)!important}
+  .social{padding:84px 0 96px}.social-strip{display:flex;flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x mandatory;padding:18px var(--pad-x) 48px;gap:18px}.social-strip a:nth-child(n){flex:0 0 72vw;transform:rotate(0)!important;scroll-snap-align:center}.social-strip a:nth-child(odd){transform:rotate(-1.2deg)!important}.social-strip a:nth-child(even){transform:rotate(1deg)!important}
   .reviews{padding:78px var(--pad-x)}.review-board-wrap{padding:18px;box-shadow:8px 9px 0 var(--gm-red)}.review-board-label{display:none}.review-rail{padding:38px 28px 30px;min-height:310px;transform:none}.review-quote{font-size:clamp(2rem,9vw,3.4rem)}
   .order-band{min-height:auto;padding:76px var(--pad-x) 62px;display:grid;grid-template-columns:1fr;gap:42px}.order-band h2{font-size:clamp(4.2rem,18vw,7rem);max-width:6ch}.order-actions{justify-content:flex-start;max-width:none}.order-bell-wrap{margin-left:0}
   .franchise-teaser-home .fr-teaser{grid-template-columns:1fr auto;gap:16px;padding:28px var(--pad-x)}.fr-strip-code{display:none}.franchise-teaser-home h2{font-size:clamp(1.65rem,6vw,2.4rem)}
@@ -1797,3 +1797,98 @@ section[id], #order{scroll-margin-top:82px}
   color:var(--gm-red-ink);
 }
 .matchbook-brand{ color:#FFFFFF; }
+
+/* ============================================================
+   VERTICAL RHYTHM COMPRESSION
+
+   The V11 layout pass sized most sections to roughly one viewport — several
+   carried min-height in svh, and section padding had grown to 200-256px
+   combined. Measured before this block: 13,208px on desktop (14.7 screens)
+   and 15,387px on mobile (18.2 screens), which reads as dead space rather
+   than deliberate negative space.
+
+   Two changes, applied proportionally so the asymmetric section rhythm the
+   V11 direction depends on is preserved rather than flattened:
+
+   1. Sections size to their content. The svh min-heights are released
+      except where a section IS a full-bleed statement (the hero, the final
+      diner sign), and those are trimmed so the next section peeks above the
+      fold and signals there is more page.
+   2. Section padding drops by roughly a third, on a shared clamp scale so
+      it keeps tracking viewport width.
+   ============================================================ */
+
+:root{
+  --sec-y:        clamp(44px, 5.2vw, 68px);  /* standard section padding   */
+  --sec-y-tight:  clamp(32px, 3.6vw, 46px);  /* bands and strips           */
+  --sec-y-loose:  clamp(52px, 6.4vw, 84px);  /* the few that carry a hero  */
+}
+
+/* --- Release the full-screen constraints --- */
+.monkey-tv-section{ min-height:auto; }
+.jukebox-section{ min-height:auto; }
+.order-band{ min-height:auto; }
+.diner-counter{ min-height:auto; }
+.final-cta{ min-height:auto; }
+.atmo-photo.big{ min-height:clamp(280px,42svh,420px); }
+
+/* The hero stays a poster, but at a full 100svh the fold lands exactly on
+   its bottom edge and the page looks like it ends there. Trimming it lets
+   the ticker show through as a scroll cue. */
+.hero.hero-split{ min-height:88svh; }
+
+/* --- Section padding, reduced on a shared scale --- */
+.signature{        padding-top:var(--sec-y);       padding-bottom:var(--sec-y); }
+.locations{        padding-top:var(--sec-y-loose); padding-bottom:var(--sec-y-loose); }
+.social{           padding-top:var(--sec-y-loose); padding-bottom:var(--sec-y-loose); }
+.reviews{          padding-top:var(--sec-y);       padding-bottom:var(--sec-y); }
+.story{            padding-top:var(--sec-y);       padding-bottom:var(--sec-y); }
+.monkey-tv-section{padding-top:var(--sec-y);       padding-bottom:var(--sec-y); }
+.jukebox-section{  padding-top:var(--sec-y);       padding-bottom:var(--sec-y); }
+.order-band{       padding-top:var(--sec-y);       padding-bottom:var(--sec-y); }
+.final-cta{        padding-top:var(--sec-y-loose); padding-bottom:var(--sec-y-loose); }
+.campaign-band{    padding-top:var(--sec-y-tight); padding-bottom:var(--sec-y-tight); }
+.franchise{        padding-top:var(--sec-y);       padding-bottom:var(--sec-y); }
+.atmosphere{       padding-top:var(--sec-y);       padding-bottom:0; }
+.gm-fortune-section{padding-top:var(--sec-y);      padding-bottom:var(--sec-y); }
+.diner-counter{    padding-top:var(--sec-y-tight); padding-bottom:var(--sec-y-tight); }
+.flipboard-band{   padding-top:var(--sec-y-tight); padding-bottom:var(--sec-y-tight); }
+
+/* Phones were the worst case at 18.2 screens: same scale, tightened again,
+   since every section is single-column there and the padding stacks up. */
+@media(max-width:900px){
+  :root{
+    --sec-y:       clamp(38px, 8vw, 52px);
+    --sec-y-tight: clamp(26px, 6vw, 36px);
+    --sec-y-loose: clamp(44px, 9vw, 60px);
+  }
+  .hero.hero-split{ min-height:auto; }
+  .hero-copy{ min-height:auto; }
+  .atmo-photo.big{ min-height:clamp(240px,36svh,340px); }
+}
+
+/* --- Oversized content blocks -------------------------------------------
+   The remaining height was content, not padding. These are the blocks that
+   were scaled to fill a viewport rather than to suit their subject. The
+   photography stays large — this is a photograph-led site — just no longer
+   a full screen each. */
+
+/* A single atmosphere photo occupied 68svh (648px at 900px tall). */
+.atmo-photo.big{ min-height:clamp(300px, 46svh, 460px); }
+.atmo-photo.small{ min-height:clamp(190px, 26svh, 250px); }
+
+/* Hall of Fame: the tiles carry explicit min-heights from the V11 pass (the
+   hero tile a hard 720px), which is what actually set the section's height —
+   aspect-ratio cannot win against a larger min-height. Trimmed at source, so
+   the asymmetric a/b/c/d composition is unchanged, just less tall. */
+.sig-item.a{ min-height:clamp(420px, 46vw, 530px); }
+.sig-item.b,
+.sig-item.c{ min-height:250px; aspect-ratio:16/8.2; }
+.sig-item.d{ min-height:205px; aspect-ratio:30/7; }
+
+/* interactive-diner.css loads after styles.css, so the fortune section's own
+   padding beat the shared scale above. Matched here at equal specificity. */
+.gm-fortune-section.gm-fortune-section{
+  padding-top:var(--sec-y);
+  padding-bottom:var(--sec-y);
+}
