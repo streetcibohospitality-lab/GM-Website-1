@@ -1401,3 +1401,74 @@
 .gm-hunger-guide{
   color:#FFFFFF;
 }
+
+/* ============================================================
+   TAIL SECTIONS — RECLAIM RESERVED-BUT-UNPAINTED SPACE
+   ============================================================ */
+
+/* .order-band carries flex-wrap:wrap from its original row layout
+   (justify-content:space-between, align-items:flex-end). Inside
+   .proof-order-combo it is switched to flex-direction:column, but the
+   wrap was never reset. A column flex container with a definite height
+   wraps into COLUMNS, so the counter tray and the order-status toast
+   were pushed into a second column beginning past the band's right edge
+   and clipped away by overflow:hidden -- at 1440 the tray started 278px
+   beyond that edge. They painted nothing at any width measured (1440,
+   1280, 1100, 900, 390) yet still reserved ~300px of flow height, which
+   set the combo row height and, through align-items:stretch, forced the
+   review noticeboard to 906px for a 106px quote. Scoped to the combo so
+   the standalone band on the menu page keeps its original wrapping. */
+.proof-order-combo > .order-band{
+  flex-wrap:nowrap;
+}
+
+/* With the band no longer inflated by invisible content, stop stretching
+   the noticeboard to match it: size it to the quote it actually holds
+   and centre it in the row. Only above the 1050px breakpoint, where the
+   combo is still two columns. */
+@media(min-width:1051px){
+  .proof-order-combo{
+    align-items:center;
+  }
+}
+
+/* Gallery: 84px of padding at each end plus a 60px trailing gap under
+   the polaroid strip. The 48px chin on each polaroid is the caption
+   area of the photo frame, so that stays -- only the section padding
+   and the strip's trailing gap come down. */
+.social{
+  padding-top:clamp(38px,4.4vw,58px);
+  padding-bottom:clamp(30px,3.4vw,44px);
+}
+.social-strip{
+  padding-bottom:26px;
+}
+
+/* Footer and franchise teaser: trim the leading/trailing bands that
+   carry no type. */
+.foot-tagline{
+  padding-top:38px;
+  padding-bottom:28px;
+}
+.foot-grid{
+  padding-top:32px;
+  padding-bottom:24px;
+  gap:32px;
+}
+.franchise-teaser-home .fr-teaser{
+  padding-top:24px;
+  padding-bottom:24px;
+}
+
+/* Remaining slack in the red panel is the spacing between its blocks --
+   the tray's leading margin and the band's flex gap. Everything below
+   the tray is the kitchen-status readout, which does paint, so the panel
+   is not padded out any further. */
+@media(min-width:1051px){
+  .proof-order-combo > .order-band{
+    gap:6px;
+  }
+  .proof-order-combo .gm-counter-tray{
+    margin-top:12px;
+  }
+}
