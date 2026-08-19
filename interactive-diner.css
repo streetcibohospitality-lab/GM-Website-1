@@ -1289,9 +1289,116 @@
   color:var(--gm-red-ink,#DC0000);
 }
 
+/* =========================================================
+   WHAT SHOULD I ORDER? — RANDOM MENU RECOMMENDATION UPGRADE
+   Appetite scales the number of real menu picks.
+   ========================================================= */
+.gm-hunger-guide{
+  display:block;
+  color:rgba(240,239,233,.82);
+  font-size:.5rem;
+  line-height:1;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+  font-weight:800;
+}
+
+.gm-fortune-machine.is-dispensing{
+  padding-bottom:var(--gm-fortune-card-space,255px);
+}
+
+.gm-fortune-result-meta{
+  margin-top:7px;
+  font-size:.52rem;
+  line-height:1;
+  font-weight:900;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--gm-id-red);
+}
+
+.gm-fortune-card ul{
+  gap:8px;
+}
+
+.gm-fortune-card li{
+  display:grid;
+  grid-template-columns:76px minmax(0,1fr);
+  gap:9px;
+  align-items:start;
+}
+
+.gm-fortune-card li span{
+  display:inline-block;
+  padding-top:2px;
+  font-size:.48rem;
+  line-height:1.15;
+  letter-spacing:.1em;
+  font-weight:900;
+  text-transform:uppercase;
+  color:var(--gm-id-red);
+}
+
+.gm-fortune-card li b{
+  min-width:0;
+  font-size:.78rem;
+  line-height:1.28;
+  font-weight:800;
+}
+
+.gm-fortune-machine[data-pick-count="4"] .gm-fortune-card{
+  min-height:255px;
+}
+
+@media(max-width:640px){
+  .gm-fortune-card li{
+    grid-template-columns:64px minmax(0,1fr);
+    gap:7px;
+  }
+  .gm-fortune-machine[data-pick-count="4"] .gm-fortune-card{
+    min-height:275px;
+  }
+}
+
+/* ============================================================
+   COMPACT JUKEBOX SELECTOR
+   The shell is now roughly half its original desktop width; keep every
+   selector/function, but arrange the four choices as a readable 2×2 deck.
+   ============================================================ */
+#gmJukeboxPlayer .gm-juke-selector{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:4px;
+  margin:1px 0 5px;
+}
+#gmJukeboxPlayer .gm-juke-select{
+  min-height:34px;
+  padding:4px 5px;
+  border-width:1px;
+  font-size:.48rem;
+  line-height:1.15;
+  letter-spacing:.045em;
+}
+#gmJukeboxPlayer .gm-juke-select::before{
+  top:4px;
+  right:4px;
+  width:5px;
+  height:5px;
+}
+#gmJukeboxPlayer .gm-juke-selection-note{
+  font-size:.43rem;
+  line-height:1.35;
+  letter-spacing:.055em;
+}
+
 /* The order status card is pinned bottom-right of .order-band, which clips
    with overflow:hidden. At bottom:12px the card's last 3px fell outside the
    clip and the ORDER RECEIVED line was shaved on phones. */
 @media(max-width:900px){
   .gm-order-status{ bottom:20px; }
+}
+
+/* The appetite guide added by the random-order update sits on the red machine
+   at 8px and 0.82 alpha, giving 4.02:1. Full-opacity white reaches 4.63:1. */
+.gm-hunger-guide{
+  color:#FFFFFF;
 }

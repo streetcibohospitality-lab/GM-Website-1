@@ -106,7 +106,7 @@
         <div class="gm-fortune-copy">
           <span class="gm-machine-code">COUNTER 63 / HOUSE PICK</span>
           <h2>What Should<br><em>I Order?</em></h2>
-          <p>Set your hunger level, pick your lane and pull the selector. The diner machine will throw you a combo.</p>
+          <p>Pick your appetite and your lane. Every pull is a fresh menu pick — the hungrier you are, the bigger the order.</p>
         </div>
         <div class="gm-fortune-machine">
           <div class="gm-fortune-controls">
@@ -117,6 +117,7 @@
                 <button class="gm-selector-btn" type="button" data-value="very" aria-pressed="false">Very Hungry</button>
                 <button class="gm-selector-btn" type="button" data-value="destroy" aria-pressed="false">Destroy Me</button>
               </div>
+              <small class="gm-hunger-guide">1 pick · 2 picks · 4 picks</small>
             </div>
             <div class="gm-fortune-group" data-group="protein">
               <span>Pick your lane</span>
@@ -140,39 +141,205 @@
       </div>`;
     signature.insertAdjacentElement('afterend',section);
 
-    const recs={
+    /*
+       Recommendation engine
+       ---------------------
+       Pools are curated only from item names present in menu.html.
+       Appetite changes both the type and number of recommendations:
+       - Hungry:      1 lighter main
+       - Very Hungry: 1 main + 1 side
+       - Destroy Me:  1 feast main + 1 side + 1 extra + 1 shake/drink
+
+       The result is randomized on first view, on every selector click,
+       and every time the visitor pulls the selector again.
+    */
+    const menuPools={
       veg:{
-        hungry:['Classic Veg','Salted Fries'],
-        very:['Melted Mozzarella Veg','Dirty Fries','PBJ Shake'],
-        destroy:['Flamin Cottage Burger','Dirty Fries','PBJ Shake']
+        lightMain:[
+          'Classic Veg','Herb & Chilli','Deep Fried Veg','BBQ Cottage Cheese',
+          'Peri Peri Cottage 🌶','Cheesy Potatoes','Fried Mushroom & Potato'
+        ],
+        main:[
+          'Grilled Cottage','Melted Mozzarella Veg','Coles Cottage',
+          'Herb Chilly Mushroom Burger','Pot & Shrooms Burger','Herbivore',
+          'Alfredo Cottage Cheese & Veggies','Batter Fried Cottage',
+          'Thai Sandwich Cottage','Creamy Burnt Garlic Cottage',
+          "Flamin' Quesso 🌶🌶🌶",'Creamy Burnt Garlic Cheese'
+        ],
+        feastMain:[
+          'Flamin Cottage Burger 🌶🌶🌶','Herbivore','Pot & Shrooms Burger',
+          'Raging Pot-aah-to 🌶🌶🌶','Alfredo Cottage Cheese & Veggies',
+          'Melted Mozzarella Veg'
+        ],
+        side:[
+          'Dirty Fries','Wild West','Cheese & Chipotle','Thundering Fries',
+          'Fries Mexicana','Loaded Nachos','Peri Peri Fried Corn 🌶',
+          'Jalapeño Pops','Potato Wedges','Pizza Fingers','Classic Mac'
+        ],
+        extra:[
+          'Loaded Nachos','Classic Mac','Pizza Fingers','Dirty Fries',
+          'Peri Peri Fried Mushroom 🌶','Caesar Salad'
+        ]
       },
       chicken:{
-        hungry:['Original Burger','Salted Fries'],
-        very:['Korean Kong','Dirty Fries','PBJ Shake'],
-        destroy:['Korean Kong','Southwest Fried Chicken Fries','PBJ Shake']
+        lightMain:[
+          'Original Burger','Spicy Pulled Chicken 🌶','Batter Fried Chicken',
+          'Chicken Mince','Classic Dog','Cheese Dog',
+          'Spicy Grill Chicken & Cheddar 🌶','Smoked Chicken & Ranch'
+        ],
+        main:[
+          'The Afrikaan 🌶','Nashville 🌶','Rush Hour','Bexr Kexr',
+          'Hot Garlic Chicken 🌶','Dirty Dog','Chilli Dog 🌶','Texan Dog',
+          'Chicken Bacon Lettuce Tomato (BLT)','Buffalo Chicken 🌶',
+          'Chicken Chilly 🌶','Spicy Grill Chicken & Cheddar Cheese'
+        ],
+        feastMain:[
+          'Korean Kong','Boston Burger','The Fire House 🌶🌶🌶',
+          'Spitfire Thighs 🌶🌶🌶','Spitfire Dawg 🌶🌶🌶'
+        ],
+        side:[
+          'Chickpop Fries','Chicken & Cheese','Loaded Fries',
+          'Southwest Fried Chicken Fries','Fried Chicken Salad',
+          'Buffalo Chicken 🌶','Chicken Chilly 🌶'
+        ],
+        extra:[
+          'Wings — Honey Gochujang','Wings — Texas BBQ',
+          'Wings — Lemon Pepper Ranch','Wings — Sriracha Blaze',
+          'Chicken Strips — Wildfire Tenders','Chicken Strips — Buffalo Strips',
+          'Southwest Fried Chicken Fries'
+        ]
       },
       other:{
-        hungry:['Fish O Filet','Salted Fries'],
-        very:['The Carnivore','Dirty Fries','PBJ Shake'],
-        destroy:['Caribbean Shrimp Burger','Dirty Fries','PBJ Shake']
+        lightMain:[
+          'Fish O Filet','Fried Shrimp Wrap','Honey Roasted Salami',
+          'Cajun Fried Shrimp 🌶','Prawn Pesto','African Janga 🌶'
+        ],
+        main:[
+          'Caribbean Shrimp Burger','Honey Fire Shrimp','Pesto Shrimp',
+          'Fish & Chips','Flamin Shrimps 🌶','Shrimp & Cheese',
+          'Creamy Shrimp & Chicken Ham','The Carnivore'
+        ],
+        feastMain:[
+          'Jaws And Claws','Angry Nemo 🌶🌶🌶','All Meat Po-Daddy',
+          'The Carnivore','Caribbean Shrimp Burger','Fish & Chips'
+        ],
+        side:[
+          'Seafood Nachos',"Pepper'd Fish & Lime",'Prawn Salsa & Cheese',
+          'African Janga 🌶','Flamin Shrimps 🌶','Shrimp & Cheese'
+        ],
+        extra:[
+          'Seafood Nachos','Prawn Salsa & Cheese','Pesto Shrimp',
+          'African Janga 🌶','Flamin Shrimps 🌶','Fish & Chips'
+        ]
       }
     };
+
+    const drinkPool=[
+      'PBJ (Peanut Butter Jelly)','Muddy Strawberry','Cotton Candy',
+      'Walnut Brownie Shake','Chocolate Malt','Nutto Coffee',
+      'Virgin Mojito','Berry Cherry','Peach Passion'
+    ];
+
+    const plans={
+      hungry:[['lightMain','MAIN']],
+      very:[['main','MAIN'],['side','SIDE']],
+      destroy:[['feastMain','MAIN'],['side','SIDE'],['extra','EXTRA'],['drink','SHAKE / DRINK']]
+    };
+
     const state={hunger:'hungry',protein:'veg'};
+    const lastResults=new Map();
+
+    const laneNames={veg:'VEG',chicken:'CHICKEN',other:'OTHER'};
+    const titleNames={hungry:'HOUSE PICK',very:'BIG APPETITE PICK',destroy:'FULL MONKEY MODE'};
+
+    function randomInt(max){
+      if(max<=1) return 0;
+      if(window.crypto?.getRandomValues){
+        const bucket=new Uint32Array(1);
+        window.crypto.getRandomValues(bucket);
+        return bucket[0]%max;
+      }
+      return Math.floor(Math.random()*max);
+    }
+
+    function choose(pool,used){
+      const available=pool.filter(item=>!used.has(item));
+      const source=available.length?available:pool;
+      return source[randomInt(source.length)];
+    }
+
+    function buildResult(){
+      const lane=menuPools[state.protein];
+      const plan=plans[state.hunger];
+      const used=new Set();
+      const picks=[];
+
+      plan.forEach(([poolName,role])=>{
+        const pool=poolName==='drink'?drinkPool:lane[poolName];
+        const item=choose(pool,used);
+        if(item){
+          used.add(item);
+          picks.push({role,item});
+        }
+      });
+
+      return picks;
+    }
+
+    function freshResult(){
+      const key=`${state.protein}:${state.hunger}`;
+      let picks=buildResult();
+      let signature=picks.map(pick=>pick.item).join('|');
+      let attempts=0;
+
+      while(signature===lastResults.get(key) && attempts<10){
+        picks=buildResult();
+        signature=picks.map(pick=>pick.item).join('|');
+        attempts+=1;
+      }
+
+      lastResults.set(key,signature);
+      return picks;
+    }
+
+    function dispense(){
+      const card=$('.gm-fortune-card',section);
+      const machine=$('.gm-fortune-machine',section);
+      const pull=$('.gm-fortune-pull',section);
+      const picks=freshResult();
+      const count=picks.length;
+      const lane=laneNames[state.protein];
+      const title=titleNames[state.hunger];
+
+      const cardSpace=count>=4?330:count===2?255:215;
+      machine.style.setProperty('--gm-fortune-card-space',`${cardSpace}px`);
+      machine.dataset.pickCount=String(count);
+
+      card.innerHTML=`
+        <strong>${title}</strong>
+        <div class="gm-fortune-result-meta">${count} MENU PICK${count===1?'':'S'} · ${lane}</div>
+        <ul>${picks.map(pick=>`<li><span>${pick.role}</span><b>${pick.item}</b></li>`).join('')}</ul>
+        <small>${sessionText} · RANDOMIZED FROM THE CURRENT MENU · <a href="menu.html" style="color:inherit;font-weight:900">VIEW MENU →</a></small>`;
+
+      machine.classList.remove('is-dispensing');
+      void machine.offsetWidth;
+      machine.classList.add('is-dispensing');
+      pull.textContent='PULL AGAIN ↻';
+    }
+
     $$('.gm-fortune-group',section).forEach(group=>{
       $$('.gm-selector-btn',group).forEach(btn=>btn.addEventListener('click',()=>{
         $$('.gm-selector-btn',group).forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));
         state[group.dataset.group]=btn.dataset.value;
+        dispense();
       }));
     });
-    $('.gm-fortune-pull',section).addEventListener('click',()=>{
-      const card=$('.gm-fortune-card',section);
-      const items=recs[state.protein][state.hunger];
-      const title=state.hunger==='destroy'?'FULL MONKEY MODE':state.hunger==='very'?'BIG APPETITE PICK':'HOUSE PICK';
-      card.innerHTML=`<strong>${title}</strong><ul>${items.map(item=>`<li>${item}</li>`).join('')}</ul><small>${sessionText} · <a href="menu.html" style="color:inherit;font-weight:900">VIEW MENU →</a></small>`;
-      $('.gm-fortune-machine',section).classList.remove('is-dispensing');
-      void $('.gm-fortune-machine',section).offsetWidth;
-      $('.gm-fortune-machine',section).classList.add('is-dispensing');
-    });
+
+    $('.gm-fortune-pull',section).addEventListener('click',dispense);
+
+    // The machine should always have a real recommendation visible.
+    // Start with a randomized Hungry + Veg pick, then refresh on every interaction.
+    window.setTimeout(dispense,180);
   }
 
   /* ----------------------------------------------------------
@@ -517,8 +684,14 @@
     pair.className='gm-condiment-pair';
     pair.setAttribute('aria-label','Diner condiment details');
     pair.innerHTML=`<button type="button" class="gm-condiment ketchup" aria-label="Ketchup bottle">K</button><button type="button" class="gm-condiment mustard" aria-label="Mustard bottle">M</button>`;
+    /* Insert against .order-actions' own parent rather than assuming it is a
+       direct child of #order. The Order + Hungry Yet consolidation wrapped it
+       in .order-band__top, which made order.insertBefore(pair, actions) throw
+       NotFoundError and abort the rest of this script — taking the condiment
+       bottles and the motel keytag's picked state down with it. */
     const actions=$('.order-actions',order);
-    if(actions) order.insertBefore(pair,actions); else order.appendChild(pair);
+    if(actions && actions.parentNode) actions.parentNode.insertBefore(pair,actions);
+    else order.appendChild(pair);
   }
 
   /* ----------------------------------------------------------

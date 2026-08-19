@@ -1935,22 +1935,806 @@ section[id], #order{scroll-margin-top:82px}
 }
 
 /* ============================================================
+   REVIEWS + ORDER — compact shared desktop scene
+   Keeps both sections visible together instead of spending a full viewport
+   on one customer quote and then another oversized ordering panel.
+   ============================================================ */
+.proof-order-combo{
+  background:var(--gm-grey);
+  padding:clamp(52px,6vw,82px) var(--pad-x);
+  display:grid;
+  grid-template-columns:minmax(0,1.18fr) minmax(330px,.82fr);
+  gap:clamp(18px,2.6vw,34px);
+  align-items:stretch;
+}
+
+.proof-order-combo > .reviews,
+.proof-order-combo > .order-band{
+  min-height:0;
+  padding:0;
+  margin:0;
+}
+
+/* Customer note stays tactile, but becomes an editorial card rather than a full screen. */
+.proof-order-combo > .reviews{
+  background:transparent;
+  display:flex;
+}
+
+.proof-order-combo .review-board-wrap{
+  width:100%;
+  max-width:none;
+  margin:0;
+  padding:22px;
+  border-width:3px;
+  box-shadow:8px 9px 0 var(--gm-red);
+  display:flex;
+  align-items:stretch;
+}
+
+.proof-order-combo .review-board-label{
+  right:16px;
+  top:-14px;
+  padding:7px 10px;
+  font-size:.52rem;
+}
+
+.proof-order-combo .review-rail{
+  width:100%;
+  max-width:none;
+  min-height:0;
+  margin:0;
+  padding:34px 34px 28px;
+  transform:rotate(-.35deg);
+  box-shadow:5px 6px 0 rgba(0,0,0,.18);
+  display:flex;
+  flex-direction:column;
+}
+
+.proof-order-combo .review-rail .sec-num{
+  margin-bottom:14px;
+}
+
+.proof-order-combo .review-slide.active{
+  flex:1;
+}
+
+.proof-order-combo .review-quote{
+  max-width:27ch;
+  margin:0;
+  font-size:clamp(1.55rem,2.5vw,2.65rem);
+  line-height:1.08;
+}
+
+.proof-order-combo .review-meta{
+  margin-top:16px;
+  font-size:.68rem;
+  line-height:1.45;
+}
+
+.proof-order-combo .review-nav{
+  margin-top:20px;
+  gap:14px;
+}
+
+.proof-order-combo .review-arrow{
+  width:36px;
+  height:36px;
+}
+
+/* Online ordering becomes the companion counter card in the same scene. */
+.proof-order-combo > .order-band{
+  position:relative;
+  overflow:hidden;
+  background:var(--gm-red);
+  border:3px solid var(--gm-white);
+  box-shadow:8px 9px 0 rgba(0,0,0,.22);
+  padding:52px 30px 28px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  align-items:stretch;
+  gap:24px;
+  color:var(--gm-white);
+}
+
+.proof-order-combo .order-counter-edge{
+  height:18px;
+  border-top-width:2px;
+  border-bottom-width:2px;
+}
+
+.proof-order-combo .order-code{
+  font-size:.56rem;
+}
+
+.proof-order-combo .order-band h2{
+  margin-top:9px;
+  max-width:6ch;
+  font-size:clamp(3.05rem,5.4vw,5.25rem);
+  line-height:.8;
+}
+
+.proof-order-combo .order-actions{
+  max-width:none;
+  width:100%;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  align-items:end;
+  justify-content:stretch;
+}
+
+.proof-order-combo .order-actions .btn{
+  min-width:0;
+  width:100%;
+  min-height:46px;
+  justify-content:center;
+  padding-inline:12px;
+  font-size:.62rem;
+}
+
+.proof-order-combo .order-bell-wrap{
+  grid-column:1 / -1;
+  justify-self:start;
+  margin:8px 0 0;
+  padding-left:0;
+}
+
+.proof-order-combo .order-bell{
+  transform:scale(.88);
+  transform-origin:left bottom;
+}
+
+.proof-order-combo .order-ticket{
+  right:auto;
+  left:72px;
+  top:10px;
+}
+
+@media(max-width:1050px){
+  .proof-order-combo{
+    grid-template-columns:1fr;
+    padding-top:64px;
+    padding-bottom:64px;
+  }
+
+  .proof-order-combo > .order-band{
+    display:grid;
+    grid-template-columns:minmax(0,.9fr) minmax(330px,1.1fr);
+    align-items:center;
+    gap:26px;
+    padding:46px 28px 28px;
+  }
+
+  .proof-order-combo .order-actions{
+    align-self:center;
+  }
+}
+
+@media(max-width:700px){
+  .proof-order-combo{
+    padding:54px var(--pad-x);
+    gap:22px;
+  }
+
+  .proof-order-combo .review-board-wrap{
+    padding:14px;
+    box-shadow:6px 7px 0 var(--gm-red);
+  }
+
+  .proof-order-combo .review-board-label{
+    display:none;
+  }
+
+  .proof-order-combo .review-rail{
+    padding:32px 22px 24px;
+    transform:none;
+  }
+
+  .proof-order-combo .review-quote{
+    font-size:clamp(1.7rem,7.5vw,2.45rem);
+  }
+
+  .proof-order-combo > .order-band{
+    display:flex;
+    padding:42px 22px 24px;
+  }
+
+  .proof-order-combo .order-band h2{
+    font-size:clamp(3.2rem,14vw,5rem);
+  }
+
+  .proof-order-combo .order-actions{
+    grid-template-columns:1fr;
+  }
+
+  .proof-order-combo .order-bell-wrap{
+    grid-column:auto;
+  }
+}
+
+/* ============================================================
+   JUKEBOX — COMPACT 50% VISUAL FOOTPRINT
+   Keeps the original CSS-built shell, coin interaction, vinyl,
+   selector and Mixcloud player while reducing the object size.
+   ============================================================ */
+@media (min-width:861px){
+  .jukebox-section{
+    grid-template-columns:minmax(300px,1fr) minmax(360px,.82fr);
+    gap:clamp(28px,4vw,60px);
+  }
+  .gm-jukebox{
+    max-width:360px;
+  }
+}
+
+.gm-jukebox{
+  filter:drop-shadow(0 16px 18px rgba(0,0,0,.32));
+}
+
+/* Preserve the same physical object, but tune fixed-pixel details so they
+   remain crisp at the smaller shell size rather than looking oversized. */
+.gm-jukebox-shell{
+  border-width:4px;
+  box-shadow:inset 0 0 0 4px var(--gm-grey);
+}
+.juke-arch{
+  border-width:6px;
+  border-bottom-width:3px;
+  box-shadow:0 0 0 3px var(--gm-teal);
+}
+.juke-lights{
+  height:12px;
+  background:radial-gradient(circle,var(--gm-white) 0 2px,transparent 2.6px) left center/10% 100% repeat-x;
+}
+.juke-columns::before,
+.juke-columns::after{
+  border-width:3px;
+}
+.juke-speaker{
+  background:radial-gradient(circle,var(--gm-teal) 0 1px,transparent 1.5px) 0 0/7px 7px;
+}
+.juke-base{
+  border-width:3px;
+  background:repeating-linear-gradient(0deg,var(--gm-white) 0 3px,var(--gm-grey) 3px 6px);
+}
+
+/* The control deck is proportionally wider inside the smaller body so all
+   original functions remain legible and clickable. */
+.gm-jukebox-player{
+  left:10%;
+  right:10%;
+  top:45%;
+  min-height:0;
+  padding:9px;
+  gap:7px;
+  border-width:3px;
+  box-shadow:0 0 0 3px var(--gm-teal);
+}
+.juke-record{
+  width:44px;
+  height:44px;
+  border-width:2px;
+}
+.juke-record span{
+  width:19px;
+  height:19px;
+  font-size:.48rem;
+}
+.juke-player-label strong{font-size:.6rem}
+.juke-player-label small{font-size:.46rem}
+.gm-jukebox-player .mixcloud-player{height:58px}
+
+.coin-slot-wrap{
+  left:10px;
+  top:-14px;
+  gap:3px;
+}
+.coin-slot-label{
+  font-size:.47rem;
+  padding:3px 5px;
+  border-width:1px;
+}
+.coin-slot{
+  width:54px;
+  height:8px;
+}
+.coin-token{
+  left:17px;
+  top:-20px;
+  width:19px;
+  height:19px;
+  border-width:1px;
+}
+.coin-token::before{font-size:.39rem}
+.coin-trigger{
+  right:8px;
+  top:-20px;
+  padding:5px 7px;
+  border-width:1px;
+  font-size:.52rem;
+  box-shadow:3px 3px 0 rgba(58,58,58,.8);
+}
+
+/* Keep it compact on stacked layouts too, without making it narrower than
+   the interactive control deck can comfortably support. */
+@media (max-width:860px){
+  .gm-jukebox{max-width:360px}
+  .jukebox-section{gap:30px}
+}
+
+@media (max-width:420px){
+  .gm-jukebox{max-width:min(340px,100%)}
+  .gm-jukebox-player{left:8%;right:8%;top:44%;padding:8px}
+  .juke-record{width:40px;height:40px}
+  .gm-jukebox-player .mixcloud-player{height:56px}
+}
+
+
+/* ============================================================
+   ORDER + "HUNGRY YET?" — ONE COMPACT COUNTER CARD
+   The final CTA now lives inside the existing order card instead
+   of spending another full section on the same conversion moment.
+   Keeps Reviews + Order in one scene and removes the duplicate page.
+   ============================================================ */
+
+.proof-order-combo > .order-band{
+  gap:18px;
+  padding-bottom:22px;
+}
+
+.proof-order-combo .order-band__top{
+  display:grid;
+  gap:20px;
+  min-width:0;
+}
+
+.proof-order-combo .order-band__headline{
+  min-width:0;
+}
+
+.proof-order-combo .order-hungry-bridge{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  height:10px;
+  border-top:2px solid var(--gm-white);
+  border-bottom:2px solid var(--gm-white);
+  overflow:hidden;
+}
+
+.proof-order-combo .order-hungry-bridge span{
+  background:var(--gm-white);
+}
+
+.proof-order-combo .order-hungry-bridge span:nth-child(even){
+  background:var(--gm-grey);
+}
+
+.proof-order-combo .diner-sign--compact{
+  width:100%;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  gap:14px 18px;
+  padding:22px 18px 20px;
+  border:3px solid var(--gm-white);
+  background:rgba(58,58,58,.12);
+  box-shadow:5px 6px 0 rgba(0,0,0,.18);
+  text-align:left;
+  overflow:hidden;
+}
+
+.proof-order-combo .diner-sign--compact__copy{
+  min-width:0;
+}
+
+.proof-order-combo .diner-sign--compact h3{
+  margin:6px 0 0;
+  font-family:var(--f-display);
+  font-size:clamp(2.35rem,4.4vw,4.35rem);
+  line-height:.82;
+  text-transform:uppercase;
+  color:var(--gm-white);
+}
+
+.proof-order-combo .diner-sign--compact .btns{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  gap:8px;
+  margin:0;
+}
+
+.proof-order-combo .diner-sign--compact .btn{
+  min-height:42px;
+  padding:11px 13px;
+  font-size:.58rem;
+  white-space:nowrap;
+}
+
+/* The existing sign-light script still targets these bulbs. Keep them
+   decorative and outside all text/CTA hit areas. */
+.proof-order-combo .diner-sign--compact .sign-bulbs{
+  position:absolute;
+  left:10px;
+  right:10px;
+  display:flex;
+  justify-content:space-between;
+  pointer-events:none;
+}
+
+.proof-order-combo .diner-sign--compact .sign-bulbs.top{
+  top:6px;
+}
+
+.proof-order-combo .diner-sign--compact .sign-bulbs.bottom{
+  bottom:6px;
+}
+
+.proof-order-combo .diner-sign--compact .bulb{
+  width:5px;
+  height:5px;
+  opacity:.35;
+}
+
+.proof-order-combo .diner-sign--compact.lit .bulb{
+  opacity:1;
+}
+
+/* This section no longer exists in the homepage markup. Keep this guard
+   in case stale cache/partial merges leave it behind. */
+.final-cta{
+  min-height:0;
+}
+
+@media(min-width:1051px){
+  .proof-order-combo > .order-band{
+    justify-content:flex-start;
+  }
+
+  .proof-order-combo .order-band__top{
+    flex:1 1 auto;
+    align-content:start;
+  }
+
+  .proof-order-combo .order-actions{
+    margin-top:auto;
+  }
+}
+
+@media(max-width:1050px){
+  .proof-order-combo > .order-band{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    gap:18px;
+  }
+
+  .proof-order-combo .order-band__top{
+    display:grid;
+    grid-template-columns:minmax(0,.88fr) minmax(320px,1.12fr);
+    gap:24px;
+    align-items:center;
+  }
+
+  .proof-order-combo .diner-sign--compact{
+    grid-template-columns:minmax(0,1fr) auto;
+  }
+}
+
+@media(max-width:700px){
+  .proof-order-combo .order-band__top{
+    grid-template-columns:1fr;
+  }
+
+  .proof-order-combo .diner-sign--compact{
+    grid-template-columns:1fr;
+    padding:22px 18px 18px;
+  }
+
+  .proof-order-combo .diner-sign--compact h3{
+    font-size:clamp(3rem,15vw,4.8rem);
+  }
+
+  .proof-order-combo .diner-sign--compact .btns{
+    justify-content:flex-start;
+  }
+
+  .proof-order-combo .diner-sign--compact .btn{
+    flex:1 1 140px;
+    justify-content:center;
+  }
+}
+
+@media(max-width:430px){
+  .proof-order-combo .order-hungry-bridge{
+    grid-template-columns:repeat(8,1fr);
+  }
+
+  .proof-order-combo .order-hungry-bridge span:nth-child(n+9){
+    display:none;
+  }
+}
+
+
+.proof-order-combo .diner-sign--compact h3{
+  position:relative;
+  color:rgba(255,255,255,.84);
+  transition:color .2s ease,text-shadow .2s ease;
+}
+
+.proof-order-combo .diner-sign--compact.lit h3{
+  animation:signWarm .7s steps(1,end) .15s forwards;
+}
+
+.proof-order-combo .diner-sign--compact h3{
+  position:relative;
+  color:rgba(255,255,255,.84);
+  transition:color .2s ease,text-shadow .2s ease;
+}
+
+.proof-order-combo .diner-sign--compact.lit h3{
+  animation:signWarm .7s steps(1,end) .15s forwards;
+}
+
+
+/* ============================================================
+   HALL OF FAME — SQUARE DINER PHOTO FRAMES
+   Full 1:1 food photography with clean retro framing.
+   Text/prices live outside the image so the food stays unobstructed.
+   ============================================================ */
+.signature#signature{
+  padding-top:clamp(54px,6vw,82px);
+  padding-bottom:clamp(58px,6vw,86px);
+  overflow:hidden;
+}
+.signature#signature .sig-head{
+  max-width:1080px;
+  margin:0 auto clamp(24px,3vw,36px);
+  padding:0 var(--pad-x);
+}
+.signature#signature .sig-grid.sig-grid-square{
+  max-width:1080px;
+  margin:0 auto;
+  padding:0 var(--pad-x);
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  grid-template-rows:none;
+  gap:clamp(22px,3.2vw,38px);
+  overflow:visible;
+}
+.signature#signature .sig-item.a,
+.signature#signature .sig-item.b,
+.signature#signature .sig-item.c,
+.signature#signature .sig-item.d{
+  grid-column:auto;
+  grid-row:auto;
+  min-height:0;
+  aspect-ratio:auto;
+  margin:0;
+  padding:30px 13px 13px;
+  display:block;
+  position:relative;
+  overflow:visible;
+  background:var(--gm-white);
+  border:3px solid var(--gm-grey);
+  box-shadow:8px 9px 0 rgba(58,58,58,.16), 12px 13px 0 var(--gm-red);
+  transform:none;
+}
+
+/* Red/cream diner-check rail built into the frame, not over the food. */
+.signature#signature .sig-item::before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  height:13px;
+  border-bottom:2px solid var(--gm-grey);
+  background:repeating-linear-gradient(90deg,var(--gm-red) 0 18px,var(--gm-white) 18px 36px);
+}
+.signature#signature .sig-item::after{
+  position:absolute;
+  top:15px;
+  right:12px;
+  z-index:3;
+  padding:3px 7px 2px;
+  background:var(--gm-grey);
+  color:var(--gm-white);
+  border:1px solid var(--gm-grey);
+  font-size:.46rem;
+  line-height:1;
+  font-weight:900;
+  letter-spacing:.12em;
+}
+.signature#signature .sig-item:nth-child(1)::after{content:"HOF / 01"}
+.signature#signature .sig-item:nth-child(2)::after{content:"HOF / 02"}
+.signature#signature .sig-item:nth-child(3)::after{content:"HOF / 03"}
+.signature#signature .sig-item:nth-child(4)::after{content:"HOF / 04"}
+
+.signature#signature .sig-photo-frame{
+  position:relative;
+  width:100%;
+  aspect-ratio:1 / 1;
+  overflow:hidden;
+  background:var(--gm-grey);
+  border:3px solid var(--gm-grey);
+  box-shadow:inset 0 0 0 3px var(--gm-white);
+}
+.signature#signature .sig-photo-frame::before,
+.signature#signature .sig-photo-frame::after{
+  content:"";
+  position:absolute;
+  z-index:4;
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  border:1px solid #5f5f5f;
+  background:radial-gradient(circle at 35% 30%,#fff,#aaa 52%,#555);
+  box-shadow:0 0 0 1px rgba(58,58,58,.25);
+  pointer-events:none;
+}
+.signature#signature .sig-photo-frame::before{left:8px;top:8px}
+.signature#signature .sig-photo-frame::after{right:8px;bottom:8px}
+
+.signature#signature .sig-item img{
+  width:100%;
+  height:100%;
+  aspect-ratio:1 / 1;
+  display:block;
+  object-fit:cover;
+  transform:scale(1.001);
+  filter:none;
+  transition:transform var(--gm-motion-medium) var(--gm-ease-editorial), filter .2s ease;
+}
+.signature#signature .sig-item.a img{object-position:68% 50%}
+.signature#signature .sig-item.b img{object-position:50% 49%}
+.signature#signature .sig-item.c img{object-position:50% 43%}
+.signature#signature .sig-item.d img{object-position:50% 50%}
+.signature#signature .sig-item:hover img{transform:scale(1.025)}
+
+/* Copy becomes a diner menu plate below the square photo — never overlays it. */
+.signature#signature .sig-item-label,
+.signature#signature .sig-item.a .sig-item-label{
+  position:relative;
+  left:auto;
+  right:auto;
+  bottom:auto;
+  padding:15px 3px 2px;
+  color:var(--gm-grey);
+  background:none;
+}
+.signature#signature .sig-item-title-row{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:14px;
+  padding-bottom:9px;
+  border-bottom:2px solid var(--gm-grey);
+}
+.signature#signature .sig-item-name,
+.signature#signature .sig-item.a .sig-item-name{
+  min-width:0;
+  font-size:clamp(1.75rem,3.1vw,3rem);
+  line-height:.9;
+  color:var(--gm-grey);
+}
+.signature#signature .sig-item-price{
+  position:static;
+  flex:0 0 auto;
+  margin-top:1px;
+  padding:5px 8px 4px;
+  transform:rotate(-1.5deg);
+  background:var(--gm-red);
+  color:var(--gm-white);
+  border:2px solid var(--gm-grey);
+  box-shadow:3px 3px 0 rgba(58,58,58,.14);
+  font-size:.67rem;
+  line-height:1;
+  white-space:nowrap;
+}
+.signature#signature .sig-item-desc{
+  max-width:none;
+  margin-top:9px;
+  color:rgba(58,58,58,.78);
+  font-size:.72rem;
+  line-height:1.45;
+}
+.signature#signature .sig-more{
+  max-width:1080px;
+  margin:clamp(24px,3vw,36px) auto 0;
+  padding:0 var(--pad-x);
+  text-align:right;
+}
+
+/* Keep the old fan-favourite blind as a tiny awning label in the frame rail.
+   It no longer covers the Korean Kong photograph on entry. */
+.signature#signature .window-blind{
+  position:absolute;
+  inset:15px auto auto 14px;
+  z-index:5;
+  width:auto;
+  height:auto;
+  padding:0;
+  background:none;
+  transform:none!important;
+  box-shadow:none;
+  display:block;
+  animation:none!important;
+  will-change:auto;
+}
+.signature#signature .window-blind::before{display:none}
+.signature#signature .window-blind span{
+  display:block;
+  padding:3px 7px 2px;
+  border:1px solid var(--gm-grey);
+  background:var(--gm-teal);
+  color:var(--gm-grey);
+  font-size:.45rem;
+  line-height:1;
+  font-weight:900;
+  letter-spacing:.1em;
+  box-shadow:2px 2px 0 rgba(58,58,58,.12);
+}
+.signature#signature .sig-item.blind-open .window-blind{animation:none!important;transform:none!important}
+
+@media(max-width:860px){
+  .signature#signature{padding-top:58px;padding-bottom:66px}
+  .signature#signature .sig-head{margin-bottom:22px}
+  .signature#signature .sig-grid.sig-grid-square{
+    display:flex;
+    grid-template-columns:none;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    gap:16px;
+    padding-right:var(--pad-x);
+    scrollbar-width:none;
+  }
+  .signature#signature .sig-grid.sig-grid-square::-webkit-scrollbar{display:none}
+  .signature#signature .sig-item.a,
+  .signature#signature .sig-item.b,
+  .signature#signature .sig-item.c,
+  .signature#signature .sig-item.d{
+    flex:0 0 min(78vw,430px);
+    min-height:0!important;
+    aspect-ratio:auto!important;
+    scroll-snap-align:center;
+    padding:28px 11px 11px;
+  }
+  .signature#signature .sig-item.a .sig-item-label{padding:14px 3px 2px}
+  .signature#signature .sig-item-name,
+  .signature#signature .sig-item.a .sig-item-name{font-size:clamp(1.65rem,7vw,2.4rem)}
+  .signature#signature .sig-more{text-align:left;margin-top:24px}
+}
+
+@media(max-width:480px){
+  .signature#signature .sig-item.a,
+  .signature#signature .sig-item.b,
+  .signature#signature .sig-item.c,
+  .signature#signature .sig-item.d{flex-basis:84vw}
+  .signature#signature .sig-item-title-row{gap:9px}
+  .signature#signature .sig-item-price{font-size:.59rem;padding:5px 6px 4px}
+}
+
+/* ============================================================
    JUKEBOX PLAYER — stop overlaying it on phones.
+   (Re-applied after the compact-jukebox update, which rebuilt the
+   player's positioning but not this guard.)
 
-   The player is position:absolute at top:49% of .gm-jukebox, so only the
-   graphic's lower 51% is available to it. That works while the graphic is
-   tall: 850px on desktop and 700px on tablet leave 189px and 75px of
-   headroom. On phones the graphic is 438px (390px viewport) and 400px
-   (360px), giving ~215px of room for a panel whose content is now 346-360px
-   — the 2x2 selector grid, the note and the 60px Mixcloud iframe. It
-   overflowed by 81-115px and .jukebox-section's overflow:hidden clipped it,
-   taking the B1/B2 buttons and the entire audio player with it.
+   The player is absolute at top:44-45% of .gm-jukebox, so only the
+   graphic's lower half is available to it. That is fine while the shell is
+   tall. On phones the shell is 340-360px wide and 4/5 tall, leaving roughly
+   230px for a control deck whose content is well over 300px — the 2x2
+   selector grid, the note and the Mixcloud iframe. It overflows, and
+   .jukebox-section{overflow:hidden} then clips the B1/B2 buttons and the
+   audio player itself out of existence.
 
-   Below 700px it moves into normal flow underneath the jukebox graphic,
-   where it can be as tall as its content needs. position:relative rather
-   than static so the coin slot, token and trigger keep their containing
-   block; the inherited percentage offsets are cleared because on a
-   relatively positioned box they would shift it rather than inset it.
+   Below 700px it moves into normal flow over the machine's body, where it
+   can be as tall as its content needs. position:relative rather than static
+   so the coin slot keeps its containing block; the inherited percentage
+   offsets are cleared because on a relatively positioned box they shift it
+   rather than inset it.
    ============================================================ */
 @media(max-width:700px){
   .gm-jukebox-player{
@@ -1959,10 +2743,17 @@ section[id], #order{scroll-margin-top:82px}
     right:auto;
     top:auto;
     width:100%;
-    /* In flow it would sit at the very top of the machine and cover the arch,
-       lights and speaker. Push it down over the body instead, by an amount
-       that still leaves the panel inside the section at both phone widths. */
     margin:clamp(64px, 24vw, 104px) auto 0;
   }
   .coin-slot-wrap{ top:-14px; }
+}
+
+/* Prices moved into the caption plate by the square Hall of Fame update, so
+   they land on a red chip at 10.72px. Sorta White on Monkey Red is 4.02:1
+   there; pure white on the same red is 4.63:1 and clears AA without
+   touching the brand colour — matching the correction already applied to
+   the site's other small-text-on-red surfaces. */
+.signature#signature .sig-item-price,
+.sig-item-title-row .sig-item-price{
+  color:#FFFFFF;
 }
