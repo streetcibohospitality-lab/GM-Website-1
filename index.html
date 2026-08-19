@@ -513,6 +513,10 @@
 </section>
 <div class="proof-order-combo">
 <section class="reviews" id="reviews">
+<!-- The noticeboard's own label is a decorative span, so the section had
+     no heading. Now that the "Hungry Yet?" sign lives here, an h3 would
+     otherwise nest under the gallery's h2. -->
+<h2 class="sr-only">Word On The Street</h2>
 <div class="review-board-wrap">
   <div class="review-board-label" aria-hidden="true">DINER NOTICEBOARD / CUSTOMER NOTES</div>
 <div class="review-rail reveal">
@@ -545,6 +549,25 @@
 </div>
 </div>
 
+<div class="order-hungry-bridge" aria-hidden="true">
+  <span></span><span></span><span></span><span></span><span></span>
+  <span></span><span></span><span></span><span></span><span></span>
+  <span></span><span></span>
+</div>
+
+<div class="diner-sign diner-sign--compact" id="dinerSign">
+  <div class="sign-bulbs top" id="bulbsTop" aria-hidden="true"></div>
+  <div class="diner-sign--compact__copy">
+    <span class="order-code">LAST CALL / COUNTER 63</span>
+    <h3>Hungry Yet?</h3>
+  </div>
+  <div class="btns">
+    <a href="menu.html" class="btn btn-ticket on-dark">View Menu</a>
+    <a href="#locations" class="btn btn-ticket on-dark">Find A Diner</a>
+  </div>
+  <div class="sign-bulbs bottom" id="bulbsBottom" aria-hidden="true"></div>
+</div>
+
 </section>
 <section class="order-band grain" id="order">
   <div class="retro-upholstery retro-upholstery--red" aria-hidden="true"></div>
@@ -566,24 +589,6 @@
     </div>
   </div>
 
-  <div class="order-hungry-bridge" aria-hidden="true">
-    <span></span><span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span><span></span>
-    <span></span><span></span>
-  </div>
-
-  <div class="diner-sign diner-sign--compact" id="dinerSign">
-    <div class="sign-bulbs top" id="bulbsTop" aria-hidden="true"></div>
-    <div class="diner-sign--compact__copy">
-      <span class="order-code">LAST CALL / COUNTER 63</span>
-      <h3>Hungry Yet?</h3>
-    </div>
-    <div class="btns">
-      <a href="menu.html" class="btn btn-ticket on-dark">View Menu</a>
-      <a href="#locations" class="btn btn-ticket on-dark">Find A Diner</a>
-    </div>
-    <div class="sign-bulbs bottom" id="bulbsBottom" aria-hidden="true"></div>
-  </div>
 </section>
 </div>
 <div class="retro-chrome-rail retro-chrome-rail--dark" aria-hidden="true"><span></span></div>

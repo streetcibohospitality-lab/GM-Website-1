@@ -1472,3 +1472,38 @@
     margin-top:12px;
   }
 }
+
+/* ============================================================
+   "HUNGRY YET?" SIGN MOVED UNDER THE NOTICEBOARD
+   ============================================================ */
+
+/* The sign and its approach rail were the last two blocks of the red
+   panel. Moved into the reviews column so the panel gets shorter and the
+   space under the cropped noticeboard is used. .reviews was a flex row
+   holding a single board; it now stacks board, rail and sign. */
+.proof-order-combo > .reviews{
+  flex-direction:column;
+  justify-content:center;
+  gap:0;
+}
+
+.proof-order-combo > .reviews > .order-hungry-bridge{
+  margin-top:14px;
+}
+
+.proof-order-combo > .reviews > .diner-sign--compact{
+  margin-top:6px;
+}
+
+/* On the red panel the sign sat on a translucent dark tint. Against the
+   grey column that tint is nearly invisible, so give it the red ground
+   it used to borrow from its parent. */
+.proof-order-combo > .reviews > .diner-sign--compact{
+  background:var(--gm-red);
+}
+
+/* The rail alternated white and grey to read as stitching on red; on the
+   grey column the grey segments disappear, so alternate against red. */
+.proof-order-combo > .reviews > .order-hungry-bridge span:nth-child(even){
+  background:var(--gm-red);
+}
