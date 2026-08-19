@@ -1390,15 +1390,14 @@
   letter-spacing:.055em;
 }
 
-/* The order status card is pinned bottom-right of .order-band, which clips
-   with overflow:hidden. At bottom:12px the card's last 3px fell outside the
-   clip and the ORDER RECEIVED line was shaved on phones. */
+/* Re-applied: the order status card is pinned bottom-right of .order-band,
+   which clips; at bottom:12px its last 3px was shaved on phones. */
 @media(max-width:900px){
   .gm-order-status{ bottom:20px; }
 }
 
-/* The appetite guide added by the random-order update sits on the red machine
-   at 8px and 0.82 alpha, giving 4.02:1. Full-opacity white reaches 4.63:1. */
+/* Re-applied: the appetite guide sits on the red machine at 8px / 0.82 alpha
+   for 4.02:1. Full-opacity white reaches 4.63:1. */
 .gm-hunger-guide{
   color:#FFFFFF;
 }

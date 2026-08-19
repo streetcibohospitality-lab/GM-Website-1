@@ -2718,24 +2718,258 @@ section[id], #order{scroll-margin-top:82px}
 }
 
 /* ============================================================
-   JUKEBOX PLAYER — stop overlaying it on phones.
-   (Re-applied after the compact-jukebox update, which rebuilt the
-   player's positioning but not this guard.)
-
-   The player is absolute at top:44-45% of .gm-jukebox, so only the
-   graphic's lower half is available to it. That is fine while the shell is
-   tall. On phones the shell is 340-360px wide and 4/5 tall, leaving roughly
-   230px for a control deck whose content is well over 300px — the 2x2
-   selector grid, the note and the Mixcloud iframe. It overflows, and
-   .jukebox-section{overflow:hidden} then clips the B1/B2 buttons and the
-   audio player itself out of existence.
-
-   Below 700px it moves into normal flow over the machine's body, where it
-   can be as tall as its content needs. position:relative rather than static
-   so the coin slot keeps its containing block; the inherited percentage
-   offsets are cleared because on a relatively positioned box they shift it
-   rather than inset it.
+   REVIEWS + COUNTER 08 — 50% HEIGHT COMPRESSION (DESKTOP)
+   Keeps the same noticeboard / red counter language and every control,
+   but removes the oversized vertical footprint that was bleeding into
+   the following section on laptop-sized screens.
    ============================================================ */
+@media (min-width:1051px){
+  .proof-order-combo{
+    padding-top:clamp(24px,3vw,38px);
+    padding-bottom:clamp(24px,3vw,38px);
+    gap:clamp(14px,2vw,24px);
+  }
+
+  .proof-order-combo .review-board-wrap{
+    padding:12px;
+    box-shadow:6px 7px 0 var(--gm-red);
+  }
+
+  .proof-order-combo .review-board-label{
+    top:-11px;
+    right:12px;
+    padding:5px 8px;
+    font-size:.46rem;
+  }
+
+  .proof-order-combo .review-rail{
+    padding:20px 24px 18px;
+    min-height:0;
+    box-shadow:4px 5px 0 rgba(0,0,0,.18);
+  }
+
+  .proof-order-combo .review-rail .sec-num{
+    margin-bottom:8px;
+  }
+
+  .proof-order-combo .review-rail .sec-num .n{
+    font-size:clamp(2.4rem,4vw,3.7rem);
+  }
+
+  .proof-order-combo .review-rail .sec-num .t{
+    font-size:.58rem;
+  }
+
+  .proof-order-combo .review-slide.active{
+    flex:0 0 auto;
+  }
+
+  .proof-order-combo .review-quote{
+    max-width:34ch;
+    font-size:clamp(1.2rem,1.85vw,1.85rem);
+    line-height:1.06;
+  }
+
+  .proof-order-combo .review-meta{
+    margin-top:9px;
+    font-size:.57rem;
+    line-height:1.3;
+  }
+
+  .proof-order-combo .review-nav{
+    margin-top:11px;
+    gap:10px;
+  }
+
+  .proof-order-combo .review-arrow{
+    width:30px;
+    height:30px;
+  }
+
+  .proof-order-combo .review-counter{
+    font-size:.62rem;
+  }
+
+  .proof-order-combo > .order-band{
+    padding:26px 20px 16px;
+    gap:10px;
+    justify-content:flex-start;
+  }
+
+  .proof-order-combo .order-counter-edge{
+    height:10px;
+  }
+
+  .proof-order-combo .order-band__top{
+    gap:10px;
+    flex:0 0 auto;
+  }
+
+  .proof-order-combo .order-code{
+    font-size:.48rem;
+  }
+
+  .proof-order-combo .order-band h2{
+    margin-top:5px;
+    font-size:clamp(2.45rem,3.8vw,3.75rem);
+    line-height:.78;
+    max-width:6ch;
+  }
+
+  .proof-order-combo .order-actions{
+    margin-top:0;
+    gap:7px;
+  }
+
+  .proof-order-combo .order-actions .btn{
+    min-height:36px;
+    padding:8px 9px;
+    font-size:.52rem;
+  }
+
+  .proof-order-combo .order-bell-wrap{
+    margin-top:2px;
+    min-height:44px;
+    transform:scale(.8);
+    transform-origin:left center;
+  }
+
+  .proof-order-combo .order-hungry-bridge{
+    height:6px;
+    border-top-width:1px;
+    border-bottom-width:1px;
+  }
+
+  .proof-order-combo .diner-sign--compact{
+    gap:8px 12px;
+    padding:13px 12px 12px;
+    border-width:2px;
+    box-shadow:3px 4px 0 rgba(0,0,0,.18);
+  }
+
+  .proof-order-combo .diner-sign--compact h3{
+    margin-top:3px;
+    font-size:clamp(1.9rem,3vw,2.75rem);
+    line-height:.82;
+  }
+
+  .proof-order-combo .diner-sign--compact .btns{
+    gap:6px;
+  }
+
+  .proof-order-combo .diner-sign--compact .btn{
+    min-height:34px;
+    padding:8px 10px;
+    font-size:.5rem;
+  }
+
+  .proof-order-combo .diner-sign--compact .sign-bulbs.top{
+    top:3px;
+  }
+
+  .proof-order-combo .diner-sign--compact .sign-bulbs.bottom{
+    bottom:3px;
+  }
+
+  .proof-order-combo .diner-sign--compact .bulb{
+    width:4px;
+    height:4px;
+  }
+}
+
+
+/* =========================================================
+   STORY ORIGIN — MANIPAL PHOTO
+   Full-frame origin diner photo in the existing retro frame.
+   ========================================================= */
+.story-origin-poster.story-origin-photo{
+  position:relative;
+  min-height:470px;
+  overflow:hidden;
+  border:4px solid var(--gm-grey);
+  background:var(--gm-grey);
+  box-shadow:9px 10px 0 rgba(58,58,58,.14);
+  display:flex;
+  align-items:flex-end;
+  isolation:isolate;
+}
+
+.story-origin-poster.story-origin-photo>img{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  width:100%;
+  height:100%;
+  max-width:none;
+  aspect-ratio:auto;
+  object-fit:cover;
+  object-position:center;
+  border-radius:0;
+  opacity:1;
+}
+
+.story-origin-poster.story-origin-photo::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  background:linear-gradient(
+    180deg,
+    rgba(0,0,0,.02) 0%,
+    rgba(0,0,0,.04) 52%,
+    rgba(0,0,0,.72) 100%
+  );
+}
+
+.story-origin-poster.story-origin-photo .origin-checker{
+  z-index:3;
+}
+
+.story-origin-poster.story-origin-photo .origin-copy{
+  position:relative;
+  z-index:4;
+  width:100%;
+  padding:32px;
+  color:var(--gm-white);
+}
+
+.story-origin-poster.story-origin-photo .origin-copy strong{
+  text-shadow:0 3px 0 rgba(58,58,58,.35);
+}
+
+.story-origin-poster.story-origin-photo .origin-copy small{
+  color:var(--gm-grey);
+  background:var(--gm-teal);
+}
+
+@media(max-width:860px){
+  .story-origin-poster.story-origin-photo{
+    min-height:390px;
+  }
+}
+
+@media(max-width:560px){
+  .story-origin-poster.story-origin-photo{
+    min-height:330px;
+  }
+
+  .story-origin-poster.story-origin-photo .origin-copy{
+    padding:24px;
+  }
+}
+
+/* ============================================================
+   RE-APPLIED FIXES (the uploaded build predates them)
+   ============================================================ */
+
+/* Jukebox player: absolute at top:44-45% of a 4/5 shell leaves only the lower
+   half for a control deck that is taller than that on phones, so
+   .jukebox-section{overflow:hidden} clipped the B1/B2 buttons and the audio
+   player. Below 700px it moves into normal flow over the machine body.
+   position:relative keeps the coin slot's containing block; the inherited
+   percentage offsets are cleared since on a relative box they shift rather
+   than inset. */
 @media(max-width:700px){
   .gm-jukebox-player{
     position:relative;
@@ -2748,12 +2982,36 @@ section[id], #order{scroll-margin-top:82px}
   .coin-slot-wrap{ top:-14px; }
 }
 
-/* Prices moved into the caption plate by the square Hall of Fame update, so
-   they land on a red chip at 10.72px. Sorta White on Monkey Red is 4.02:1
-   there; pure white on the same red is 4.63:1 and clears AA without
-   touching the brand colour — matching the correction already applied to
-   the site's other small-text-on-red surfaces. */
+/* Hall of Fame prices sit on red chips at ~10.7px. Sorta White on Monkey Red
+   is 4.02:1; pure white is 4.63:1 and clears AA without changing the brand. */
 .signature#signature .sig-item-price,
 .sig-item-title-row .sig-item-price{
   color:#FFFFFF;
+}
+
+/* The combined scene pairs two equal-height cards, and the order column
+   genuinely needs its height (779px of content at 1440). The noticeboard's
+   content is only ~180px, so .review-rail — a flex column starting at
+   flex-start — left roughly 560px of dead white below the pagination.
+   Centring the group distributes that space around the pinned note instead
+   of pooling it in one empty block. The cards stay the same size as each
+   other; only the note's vertical position changes. */
+@media(min-width:1051px){
+  .review-rail{
+    justify-content:center;
+  }
+}
+
+/* The origin headline inherits clamp(3.4rem,7vw,6.4rem) — sized against the
+   viewport while the poster is a fixed-width column, so the two diverge as
+   the screen widens. "MANIPAL." overflowed the frame by 51px at 1440 and
+   57px at 1920 and the poster's overflow:hidden clipped the "L." off.
+   Sizing it against the frame with container units keeps it inside at any
+   width; the mobile sizes were already fine and land in the same range. */
+.story-origin-poster.story-origin-photo{
+  container-type:inline-size;
+  container-name:gmorigin;
+}
+.story-origin-poster.story-origin-photo .origin-copy strong{
+  font-size:clamp(2.4rem, 18.5cqw, 5.4rem);
 }
