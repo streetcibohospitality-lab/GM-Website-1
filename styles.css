@@ -1892,3 +1892,44 @@ section[id], #order{scroll-margin-top:82px}
   padding-top:var(--sec-y);
   padding-bottom:var(--sec-y);
 }
+
+/* ============================================================
+   HALL OF FAME — fit the section within one viewport.
+
+   It measured 1,176px against a 900px viewport: 68px padding top and
+   bottom, a 152px head, and an 837px tile grid. The grid is ~71% of that,
+   so the reduction comes mostly from the crops rather than from squeezing
+   the type or the spacing to nothing.
+
+   The composition is unchanged — the same a/b/c/d arrangement, the hero
+   tile still spanning the left column with the two stacked tiles beside it
+   and the wide tile beneath. Only the crop proportions and the padding
+   change. Scoped above the mobile breakpoint, where the grid becomes a
+   horizontal scroller with its own aspect ratios.
+   ============================================================ */
+@media(min-width:901px){
+  .signature{
+    padding-top:36px;
+    padding-bottom:36px;
+  }
+
+  /* Drive the tile heights from the viewport rather than from crop ratios.
+     Fixed aspect ratios depend on the rendered column width, which changes
+     with the grid's max-width cap, so they overshoot on wide screens and
+     undershoot on narrow ones. Explicit rows in svh keep the section within
+     one screen at every desktop size. */
+  .sig-grid{
+    /* Row 3 is pinned rather than auto: it holds only the tail of the
+       spanning hero tile, and as an auto row it inflated to ~91px. */
+    grid-template-rows:22svh 22svh 0 18svh;
+  }
+  .sig-item.a,
+  .sig-item.b,
+  .sig-item.c,
+  .sig-item.d{
+    min-height:0;
+    aspect-ratio:auto;
+  }
+  .sig-item.d{ margin-top:10px; }
+  .sig-more{ margin-top:14px; padding-top:0; }
+}
