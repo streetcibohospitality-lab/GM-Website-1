@@ -329,15 +329,41 @@
   const h=document.getElementById('clockHour');
   const m=document.getElementById('clockMinute');
   const s=document.getElementById('clockSecond');
+  const digital=document.getElementById('grubTimeDigital');
+  const indiaClockParts=new Intl.DateTimeFormat('en-GB',{
+    timeZone:'Asia/Kolkata',
+    hour:'2-digit',
+    minute:'2-digit',
+    second:'2-digit',
+    hourCycle:'h23'
+  });
+  const indiaClockText=new Intl.DateTimeFormat('en-IN',{
+    timeZone:'Asia/Kolkata',
+    hour:'numeric',
+    minute:'2-digit',
+    second:'2-digit',
+    hour12:true
+  });
   function setClock(){
     if(!h || !m || !s) return;
     const now=new Date();
-    const sec=now.getSeconds();
-    const min=now.getMinutes()+sec/60;
-    const hr=(now.getHours()%12)+min/60;
+    const parts=Object.fromEntries(
+      indiaClockParts.formatToParts(now)
+        .filter(part=>part.type!=='literal')
+        .map(part=>[part.type,part.value])
+    );
+    const sec=Number(parts.second || 0);
+    const min=Number(parts.minute || 0)+sec/60;
+    const hr=(Number(parts.hour || 0)%12)+min/60;
     h.style.transform=`translateX(-50%) rotate(${hr*30}deg)`;
     m.style.transform=`translateX(-50%) rotate(${min*6}deg)`;
     s.style.transform=`translateX(-50%) rotate(${sec*6}deg)`;
+
+    if(digital){
+      digital.textContent=indiaClockText.format(now);
+      digital.dateTime=now.toISOString();
+      digital.setAttribute('aria-label',`Current Grub Time ${digital.textContent}, India Standard Time`);
+    }
   }
   if(h&&m&&s){ setClock(); setInterval(setClock,1000); }
 

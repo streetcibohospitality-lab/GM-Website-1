@@ -7,6 +7,8 @@
 <link rel="preload" as="font" type="font/woff2" href="fonts/Jaro-Regular.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="fonts/Lexend-400.woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="retro-ambient.css">
+<link rel="stylesheet" href="material-light.css">
 <link rel="stylesheet" href="interactive-diner.css">
 <link rel="icon" href="favicon.png" type="image/png">
 
@@ -206,6 +208,9 @@
   <div class="sig-head reveal">
     <div class="sec-num"><span class="n">02</span><span class="t">Fan Favourites</span></div>
     <h2 class="poster-h sig-head-h">The Grub <em>Hall Of Fame.</em></h2>
+    <div class="retro-stamp retro-stamp--hof" aria-hidden="true">HOUSE PICK · GM / 63</div>
+    <div class="retro-spark-cluster retro-spark-cluster--hof" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="retro-halftone retro-halftone--hof" aria-hidden="true"></div>
   </div>
 
   <div class="sig-grid sig-grid-square">
@@ -213,7 +218,7 @@
       <div class="window-blind" aria-hidden="true"><span>FAN FAVOURITE</span></div>
       <div class="sig-photo-frame">
         <img alt="Korean Kong fried chicken burger" loading="lazy" width="1536" height="1024" src="images/food/01-korean-kong-hero.jpeg"/>
-      </div>
+      <span class="retro-frame-glint" aria-hidden="true"></span></div>
       <div class="sig-item-label">
         <div class="sig-item-title-row">
           <div class="sig-item-name">Korean Kong</div>
@@ -226,7 +231,7 @@
     <div class="sig-item b reveal">
       <div class="sig-photo-frame">
         <img alt="Grub Monkeys signature wings platter" loading="lazy" width="1086" height="1448" src="images/food/03-signature-wings-platter.jpeg"/>
-      </div>
+      <span class="retro-frame-glint" aria-hidden="true"></span></div>
       <div class="sig-item-label">
         <div class="sig-item-title-row">
           <div class="sig-item-name">20+ Wings</div>
@@ -239,7 +244,7 @@
     <div class="sig-item c reveal">
       <div class="sig-photo-frame">
         <img alt="PBJ peanut butter jelly thickshake" loading="lazy" width="1122" height="1402" src="images/food/05-pbj-milkshake.jpeg"/>
-      </div>
+      <span class="retro-frame-glint" aria-hidden="true"></span></div>
       <div class="sig-item-label">
         <div class="sig-item-title-row">
           <div class="sig-item-name">PBJ Shake</div>
@@ -252,7 +257,7 @@
     <div class="sig-item d reveal">
       <div class="sig-photo-frame">
         <img alt="Grub Monkeys MOAW wrap, sliced open" loading="lazy" width="1086" height="1448" src="images/food/06-moaw.jpeg"/>
-      </div>
+      <span class="retro-frame-glint" aria-hidden="true"></span></div>
       <div class="sig-item-label">
         <div class="sig-item-title-row">
           <div class="sig-item-name">MOAW — Spicy Pulled Chicken</div>
@@ -267,13 +272,16 @@
     <a class="text-cta" href="menu.html">Explore The Full Menu <span class="arrow">→</span></a>
   </div>
 </section>
+<div class="retro-chrome-rail" aria-hidden="true"><span></span></div>
 <section class="atmosphere" id="vibe">
+<div class="retro-upholstery retro-upholstery--dark" aria-hidden="true"></div>
 <div class="atmo-head reveal">
 <div class="sec-num on-dark"><span class="n">03</span><span class="t">The Diner</span></div>
 <h2 class="poster-h" style="color:var(--gm-white); font-size:clamp(2.4rem,6vw,4.6rem);">Walk In. <em>Stay A While.</em></h2>
 </div>
 <div class="atmo-grid">
 <div class="atmo-photo big reveal">
+<span class="retro-frame-glint" aria-hidden="true"></span>
 <img alt="Grub Monkeys diner interior with checkerboard floor, red booths and neon signage" loading="lazy" src="images/img-001.jpg" width="800" height="600"/>
 </div>
 <div class="atmo-tags reveal">
@@ -301,17 +309,32 @@
       <p>What started as a student hangout in Manipal grew into a 1960s-inspired American diner built around checkerboard floors, red booths, vintage wall art and unapologetically heavy grub.</p>
       <p>From late-night cravings to weekend tables, Grub Monkeys is about food with attitude and a diner experience people remember.</p>
       <div class="story-founder">Grub Monkeys · A StreetCibo Hospitality Pvt Ltd brand</div>
-      <div class="story-decor-row" aria-hidden="true">
-        <div class="grub-clock" id="grubClock">
-          <div class="clock-face"><span class="clock-brand">GRUB<br>TIME</span><span class="clock-mark right">3</span><span class="clock-mark bottom">6</span><span class="clock-mark left">9</span><span class="clock-hand hour" id="clockHour"></span><span class="clock-hand minute" id="clockMinute"></span><span class="clock-hand second" id="clockSecond"></span><span class="clock-pin"></span></div>
+      <div class="retro-stamp retro-stamp--story" aria-hidden="true">MANIPAL ORIGIN · GM / 63</div>
+      <div class="retro-spark-cluster retro-spark-cluster--story" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="retro-halftone retro-halftone--story" aria-hidden="true"></div>
+      <div class="story-decor-row">
+        <div class="grub-clock" id="grubClock" role="group" aria-label="Current Grub Time in India">
+          <div class="clock-face">
+            <span class="clock-brand">GRUB<br>TIME</span>
+            <span class="clock-mark right">3</span>
+            <span class="clock-mark bottom">6</span>
+            <span class="clock-mark left">9</span>
+            <span class="clock-hand hour" id="clockHour"></span>
+            <span class="clock-hand minute" id="clockMinute"></span>
+            <span class="clock-hand second" id="clockSecond"></span>
+            <span class="clock-pin"></span>
+            <time class="clock-digital" id="grubTimeDigital" datetime="">--:--:--</time>
+            <span class="clock-zone">IST</span>
+          </div>
         </div>
-        <div class="matchbook-deco">
+        <div class="matchbook-deco" aria-hidden="true">
           <div class="matchbook-lid"></div>
           <div class="matchbook-brand">GRUB MONKEYS</div>
         </div>
       </div>
     </div>
     <div class="story-origin-poster story-origin-photo reveal" aria-label="Grub Monkeys Manipal origin">
+      <span class="retro-frame-glint" aria-hidden="true"></span>
       <img src="images/founder-mueen-ahmed.webp" alt="Grub Monkeys poster — The go-to American diner experience. Founded by Mueen Ahmed, the visionary founder who brought the magic of 1960s American diners to the streets of Manipal, and then took it to Bengaluru. Bengaluru, Karnataka." width="1122" height="1402">
       <div class="origin-checker" aria-hidden="true"></div>
       <div class="origin-copy">
@@ -322,6 +345,7 @@
     </div>
   </div>
 </section>
+<div class="retro-chrome-rail retro-chrome-rail--short" aria-hidden="true"><span></span></div>
 <section class="campaign-band grain reveal" aria-label="Grub Monkeys menu favourites">
   <div class="campaign-line">BURGERS.</div>
   <div class="campaign-line outline">WINGS. FRIES.</div>
@@ -337,15 +361,20 @@
   </div>
 </section>
 <div class="checker-strip big on-red"></div>
+<div class="retro-chrome-rail retro-chrome-rail--on-cream" aria-hidden="true"><span></span></div>
 <section class="locations" id="locations">
 <div class="loc-head reveal">
 <div class="sec-num"><span class="n">05</span><span class="t">Find Us</span></div>
 <h2 class="poster-h" style="font-size:clamp(2.4rem,6vw,4.6rem);">Find Your <em>Grub Monkeys.</em></h2>
 <div class="motel-keytag" id="motelKeytag" aria-hidden="true"><div class="key-hole"></div><span class="key-num" id="keyNum">01</span><span class="key-name" id="keyName">MANIPAL</span></div>
+<div class="route-63-marker" id="route63Marker" aria-hidden="true">
+  <span>ROUTE</span><strong>63</strong><small>KARNATAKA DINERS</small>
+</div>
+<div class="retro-halftone retro-halftone--locations" aria-hidden="true"></div>
 </div>
 <div class="locations-stage reveal">
   <div class="roadside-panel" id="roadsidePanel">
-    <div class="roadside-photo"><img src="images/img-001.jpg" alt="Grub Monkeys diner interior" width="800" height="600"></div>
+    <div class="roadside-photo"><span class="retro-frame-glint" aria-hidden="true"></span><img src="images/img-001.jpg" alt="Grub Monkeys diner interior" width="800" height="600"></div>
     <!-- aria-live so keyboard/screen-reader users hear the stage change when
          they move through the diner list below; the rows update it on
          hover, focus and click. -->
@@ -436,6 +465,7 @@
 </div>
 </section>
 <section class="jukebox-section" id="jukebox">
+  <div class="retro-upholstery retro-upholstery--dark retro-upholstery--jukebox" aria-hidden="true"></div>
   <div class="juke-ghost-code" aria-hidden="true">A1</div>
   <div class="jukebox-copy reveal">
     <div class="sec-num on-dark"><span class="n">06</span><span class="t">Drop A Coin</span></div>
@@ -468,6 +498,8 @@
 <div class="sec-num on-dark"><span class="n">07</span><span class="t">Grub IRL</span></div>
 <h2 class="poster-h" style="color:var(--gm-white); font-size:clamp(2.2rem,5.5vw,4rem);">Grub <em>IRL.</em></h2>
 </div>
+<div class="retro-stamp retro-stamp--social" aria-hidden="true">DINER FILM · GM / 63</div>
+<div class="retro-spark-cluster retro-spark-cluster--social" aria-hidden="true"><i></i><i></i><i></i></div>
 <a class="text-cta on-dark" href="https://www.instagram.com/grubmonkeysbangalore/" rel="noopener" target="_blank">@grubmonkeysbangalore <span class="arrow">→</span></a>
 </div>
 <div class="social-strip reveal">
@@ -515,6 +547,7 @@
 
 </section>
 <section class="order-band grain" id="order">
+  <div class="retro-upholstery retro-upholstery--red" aria-hidden="true"></div>
   <div class="order-counter-edge" aria-hidden="true"></div>
 
   <div class="order-band__top">
@@ -553,9 +586,13 @@
   </div>
 </section>
 </div>
+<div class="retro-chrome-rail retro-chrome-rail--dark" aria-hidden="true"><span></span></div>
 <section class="franchise franchise-teaser-home" id="franchise">
   <div class="fr-teaser reveal">
     <div class="fr-strip-code" aria-hidden="true">FR / 09</div>
+    <div class="retro-stamp retro-stamp--franchise" aria-hidden="true">1960s INSPIRED · GM / 63</div>
+    <div class="retro-spark-cluster retro-spark-cluster--franchise" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="retro-halftone retro-halftone--franchise" aria-hidden="true"></div>
     <div class="sec-num on-dark"><span class="n">09</span><span class="t">Own A Diner</span></div>
     <h2 class="poster-h" style="color:var(--gm-white);">Bring The <em>Monkey Business</em> To Your City.</h2>
     <p>Interested in building a Grub Monkeys diner? See the franchise overview and send the team your details.</p>
@@ -610,5 +647,6 @@
 </div>
 <script src="script.js" defer></script>
 <script src="interactive-diner.js" defer></script>
+<script src="retro-ambient.js" defer></script>
 </body>
 </html>
