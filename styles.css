@@ -3015,3 +3015,49 @@ section[id], #order{scroll-margin-top:82px}
 .story-origin-poster.story-origin-photo .origin-copy strong{
   font-size:clamp(2.4rem, 18.5cqw, 5.4rem);
 }
+
+/* ============================================================
+   STORY PANEL — FOUNDER POSTER
+
+   The panel now holds a finished poster rather than a photograph, so it is
+   shown whole. Three things follow from that:
+
+   1. The frame takes the poster's own 1122x1402 (0.8) proportion at every
+      breakpoint. The desktop frame already matched, but tablet was 1.77 and
+      mobile 1.06, which would have sliced the artwork.
+   2. object-fit:contain rather than cover, so the poster can never be
+      cropped even if the frame rounds differently.
+   3. The THE ORIGIN / MANIPAL. caption is hidden here. It is white text on
+      a dark scrim, and the poster's lower third is cream — the caption
+      would be close to illegible and would cover the poster's own badge
+      and stripe. The poster already carries that copy in its body text.
+   ============================================================ */
+.story-origin-poster.story-origin-photo:has(img[src*="founder-"]){
+  aspect-ratio:1122 / 1402;
+  min-height:0;
+  background:var(--gm-white,#F0EFE9);
+}
+.story-origin-poster.story-origin-photo:has(img[src*="founder-"]) > img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center;
+}
+.story-origin-poster.story-origin-photo:has(img[src*="founder-"]) .origin-copy,
+.story-origin-poster.story-origin-photo:has(img[src*="founder-"]) .origin-checker,
+.story-origin-poster.story-origin-photo:has(img[src*="founder-"])::before,
+.story-origin-poster.story-origin-photo:has(img[src*="founder-"])::after{
+  display:none;
+}
+
+/* With a poster rather than a photograph, the panel carries real copy — the
+   founder's name and the description — so it has to be readable. At the V11
+   1.18fr/.82fr split with a 130px gutter it rendered at 33% of native. Give
+   the poster column more width and tighten the gutter; the text column stays
+   comfortably above 45 characters. */
+@media(min-width:1101px){
+  .story-v5 .story-grid:has(img[src*="founder-"]){
+    grid-template-columns:1fr .92fr;
+    gap:clamp(48px,5vw,78px);
+  }
+}
