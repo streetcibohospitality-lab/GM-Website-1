@@ -10,6 +10,9 @@
 <link rel="stylesheet" href="retro-ambient.css">
 <link rel="stylesheet" href="material-light.css">
 <link rel="stylesheet" href="interactive-diner.css">
+<link rel="stylesheet" href="new-motion.css">
+<link rel="stylesheet" href="final-detail-pass.css">
+<link rel="stylesheet" href="gm-corrections.css">
 <link rel="icon" href="favicon.png" type="image/png">
 
 <link rel="canonical" href="https://www.grubmonkeys.in/menu.html">
@@ -73,6 +76,19 @@
 <div class="menu-head reveal">
 <div class="sec-num on-dark"><span class="n">01</span><span class="t">The Full Spread</span></div>
 <h2 class="poster-h" style="color:var(--gm-white); font-size:clamp(2.8rem,8vw,7rem);">The Menu.</h2>
+<div class="menu-split-board" id="menuSplitBoard">
+  <span class="menu-split-board__label">NOW SERVING</span>
+  <span class="sr-only" id="menuSplitLive" aria-live="polite" aria-atomic="true">A1 Fries &amp; Nachos</span>
+  <div class="menu-split-board__window" aria-hidden="true">
+    <div class="menu-split-board__face menu-split-board__face--old" id="menuSplitOld">
+      <b>A1</b><strong>FRIES &amp; NACHOS</strong>
+    </div>
+    <div class="menu-split-board__face menu-split-board__face--new" id="menuSplitNew">
+      <b>A1</b><strong>FRIES &amp; NACHOS</strong>
+    </div>
+    <span class="menu-split-board__hinge" aria-hidden="true"></span>
+  </div>
+</div>
 </div>
 <div class="menu-wrap">
 <div class="menu-tabs" id="menuTabs" role="tablist">
@@ -338,28 +354,84 @@
 </div>
 </div>
 <div class="menu-preview-col">
-<div class="menu-preview-sticky">
+<div class="menu-preview-sticky" id="menuPreviewSticky">
 <img alt="" id="menuPreviewImg" width="1086" height="1448" src="images/food/04-loaded-fries.jpeg"/>
+<div class="menu-preview-heat" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="menu-fountain-fizz" aria-hidden="true">
+  <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+  <span>FIZZ</span>
+</div>
 </div>
 </div>
 </div>
 </div>
 </section>
-  <div class="receipt-wrap" id="receiptPrinterWrap">
-<div class="receipt-printer" aria-hidden="true">
-  <div class="receipt-printer-top"></div>
-  <div class="receipt-printer-slot"></div>
-  <div class="receipt-printer-light"></div>
-</div>
-<div class="receipt reveal" id="receiptCard">
-<div class="receipt-brand">Grub Monkeys</div>
-<div>American Diner · 1960s-Inspired</div>
-<div class="receipt-line"></div>
-<div>Burgers</div><div>Wings</div><div>Fries</div><div>Shakes</div>
-<div class="receipt-line"></div>
-<div class="receipt-thanks">Thanks For Grubbing</div>
-</div>
-</div>
+  <section class="receipt-trio-section" id="counterPaperwork" aria-labelledby="counterPaperworkTitle">
+    <div class="receipt-trio-head">
+      <span>COUNTER PAPERWORK / 063—065</span>
+      <h2 id="counterPaperworkTitle">Three Chits.<br><em>One Diner.</em></h2>
+      <p>Fresh off the counter — a little Grub Monkeys lore with your menu.</p>
+    </div>
+
+    <div class="receipt-trio-grid">
+      <div class="receipt-wrap receipt-station" data-receipt-delay="0">
+        <div class="receipt-printer" aria-hidden="true">
+          <div class="receipt-printer-top"></div>
+          <div class="receipt-printer-slot"></div>
+          <div class="receipt-printer-light"></div>
+        </div>
+        <article class="receipt">
+          <div class="receipt-brand">Grub Monkeys</div>
+          <div class="receipt-kot-code">KOT 063 / DINER DNA</div>
+          <div class="receipt-line"></div>
+          <div><b>BORN</b> · MANIPAL</div>
+          <div><b>STYLE</b> · 1960s-INSPIRED</div>
+          <div><b>GRUB</b> · BURGERS / WINGS / FRIES</div>
+          <div><b>SOUND</b> · LOUD ROCK</div>
+          <div class="receipt-line"></div>
+          <div class="receipt-thanks">Eat Like It's 1963.</div>
+        </article>
+      </div>
+
+      <div class="receipt-wrap receipt-station" data-receipt-delay="220">
+        <div class="receipt-printer" aria-hidden="true">
+          <div class="receipt-printer-top"></div>
+          <div class="receipt-printer-slot"></div>
+          <div class="receipt-printer-light"></div>
+        </div>
+        <article class="receipt">
+          <div class="receipt-brand">Grub Monkeys</div>
+          <div class="receipt-kot-code">KOT 064 / HOUSE RULES</div>
+          <div class="receipt-line"></div>
+          <div>01 · COME HUNGRY</div>
+          <div>02 · SAUCE YOUR WINGS</div>
+          <div>03 · SAVE ROOM FOR A SHAKE</div>
+          <div>04 · SHARE FRIES — OPTIONAL</div>
+          <div class="receipt-line"></div>
+          <div class="receipt-thanks">Sit. Grub. Repeat.</div>
+        </article>
+      </div>
+
+      <div class="receipt-wrap receipt-station" data-receipt-delay="440">
+        <div class="receipt-printer" aria-hidden="true">
+          <div class="receipt-printer-top"></div>
+          <div class="receipt-printer-slot"></div>
+          <div class="receipt-printer-light"></div>
+        </div>
+        <article class="receipt">
+          <div class="receipt-brand">Grub Monkeys</div>
+          <div class="receipt-kot-code">KOT 065 / YOUR ROUTE</div>
+          <div class="receipt-line"></div>
+          <div><b>FLAGSHIP</b> · NEW BEL ROAD</div>
+          <div><b>DINERS</b> · 6 ACROSS KARNATAKA</div>
+          <div><b>ORDER</b> · SWIGGY / ZOMATO</div>
+          <div><b>GRUB TIME</b> · IST</div>
+          <div class="receipt-line"></div>
+          <div class="receipt-thanks">Pick Your Diner.</div>
+        </article>
+      </div>
+    </div>
+  </section>
   <section class="order-band grain" id="order">
   <div>
     <span class="order-code">ORDER / ONLINE</span>
@@ -419,5 +491,6 @@
 <script src="menu.js" defer></script>
 <script src="interactive-diner.js" defer></script>
 <script src="retro-ambient.js" defer></script>
+<script src="new-motion.js" defer></script>
 </body>
 </html>

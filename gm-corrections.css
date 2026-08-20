@@ -1,0 +1,369 @@
+/* ============================================================
+   GRUB MONKEYS — CORRECTIONS LAYER
+   ------------------------------------------------------------
+   Every contrast correction and layout fix applied on top of the
+   design files lives here, and this file is linked LAST on every page.
+   It used to sit at the end of
+   interactive-diner.css, which worked only while that was the final
+   stylesheet; new-motion.css and final-detail-pass.css now load after
+   it, and two corrections silently lost the cascade to equal-specificity
+   rules in final-detail-pass.css.
+
+   KEEP THIS LINK LAST. If another stylesheet is added after it, these
+   corrections can be overridden again and the contrast failures come
+   back without any visible error.
+
+   Reference values, all measured rather than estimated:
+     Sorta White #F0EFE9 on Monkey Red #EB0000 ....... 4.02:1  (fails)
+     Pure white  #FFFFFF on Monkey Red #EB0000 ....... 4.63:1  (passes)
+     Monkey Red  #EB0000 on Sorta White #F0EFE9 ...... 4.02:1  (fails)
+     --gm-red-ink #DC0000 on Sorta White ............. 4.51:1  (passes)
+     --gm-red-ink #DC0000 on counter cream #F3F0E7 ... 4.56:1  (passes)
+   ============================================================ */
+
+/* ============================================================
+   CONTRAST — AA corrections for this stylesheet's components.
+   These live here rather than in styles.css because interactive-diner.css
+   loads second: an equal-specificity rule in styles.css would lose the
+   cascade. Sorta White on Monkey Red is 4.02:1 at these small sizes;
+   pure white on the same red is 4.63:1 and passes without touching the
+   brand colour.
+   ============================================================ */
+.gm-session-chip,
+.gm-fortune-group>span,
+.gm-fortune-machine::before{
+  color:#FFFFFF;
+}
+
+/* Remaining AA corrections, resolved against measured render paths.
+   Sorta White on Monkey Red is 4.02:1; pure white on the same red is 4.63:1.
+   Monkey Red as text on Sorta White is likewise 4.02:1; --gm-red-ink (#DC0000)
+   is 4.51:1. Only genuinely red-backed elements are targeted — the plain
+   .loc-row list sits on a light surface and is deliberately left alone; only
+   .loc-row.featured is red. */
+.matchbook-inside span,
+.story-origin-poster .origin-copy span,
+#motelKeytag #keyName,
+#motelKeytag #keyNum,
+.loc-row.featured .loc-row-tag,
+.loc-row.featured .loc-row-address,
+.loc-row.featured .loc-row-name,
+.gm-juke-select[aria-pressed="true"],
+.gm-photobooth-trigger,
+.btn-ticket.on-dark,
+.gm-tray-ticket span{
+  color:#FFFFFF;
+}
+
+.gm-fortune-copy .gm-machine-code,
+.loc-row.featured .loc-link,
+.loc-row.featured .loc-link.outline{
+  color:var(--gm-red-ink,#DC0000);
+}
+
+/* =========================================================
+   WHAT SHOULD I ORDER? — RANDOM MENU RECOMMENDATION UPGRADE
+   Appetite scales the number of real menu picks.
+   ========================================================= */
+.gm-hunger-guide{
+  display:block;
+  color:rgba(240,239,233,.82);
+  font-size:.5rem;
+  line-height:1;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+  font-weight:800;
+}
+
+.gm-fortune-machine.is-dispensing{
+  padding-bottom:var(--gm-fortune-card-space,255px);
+}
+
+.gm-fortune-result-meta{
+  margin-top:7px;
+  font-size:.52rem;
+  line-height:1;
+  font-weight:900;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--gm-id-red);
+}
+
+.gm-fortune-card ul{
+  gap:8px;
+}
+
+.gm-fortune-card li{
+  display:grid;
+  grid-template-columns:76px minmax(0,1fr);
+  gap:9px;
+  align-items:start;
+}
+
+.gm-fortune-card li span{
+  display:inline-block;
+  padding-top:2px;
+  font-size:.48rem;
+  line-height:1.15;
+  letter-spacing:.1em;
+  font-weight:900;
+  text-transform:uppercase;
+  color:var(--gm-id-red);
+}
+
+.gm-fortune-card li b{
+  min-width:0;
+  font-size:.78rem;
+  line-height:1.28;
+  font-weight:800;
+}
+
+.gm-fortune-machine[data-pick-count="4"] .gm-fortune-card{
+  min-height:255px;
+}
+
+@media(max-width:640px){
+  .gm-fortune-card li{
+    grid-template-columns:64px minmax(0,1fr);
+    gap:7px;
+  }
+  .gm-fortune-machine[data-pick-count="4"] .gm-fortune-card{
+    min-height:275px;
+  }
+}
+
+/* ============================================================
+   COMPACT JUKEBOX SELECTOR
+   The shell is now roughly half its original desktop width; keep every
+   selector/function, but arrange the four choices as a readable 2×2 deck.
+   ============================================================ */
+#gmJukeboxPlayer .gm-juke-selector{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:4px;
+  margin:1px 0 5px;
+}
+#gmJukeboxPlayer .gm-juke-select{
+  min-height:34px;
+  padding:4px 5px;
+  border-width:1px;
+  font-size:.48rem;
+  line-height:1.15;
+  letter-spacing:.045em;
+}
+#gmJukeboxPlayer .gm-juke-select::before{
+  top:4px;
+  right:4px;
+  width:5px;
+  height:5px;
+}
+#gmJukeboxPlayer .gm-juke-selection-note{
+  font-size:.43rem;
+  line-height:1.35;
+  letter-spacing:.055em;
+}
+
+/* Re-applied: the order status card is pinned bottom-right of .order-band,
+   which clips; at bottom:12px its last 3px was shaved on phones. */
+@media(max-width:900px){
+  .gm-order-status{ bottom:20px; }
+}
+
+/* Re-applied: the appetite guide sits on the red machine at 8px / 0.82 alpha
+   for 4.02:1. Full-opacity white reaches 4.63:1. */
+.gm-hunger-guide{
+  color:#FFFFFF;
+}
+
+/* ============================================================
+   TAIL SECTIONS — RECLAIM RESERVED-BUT-UNPAINTED SPACE
+   ============================================================ */
+
+/* .order-band carries flex-wrap:wrap from its original row layout
+   (justify-content:space-between, align-items:flex-end). Inside
+   .proof-order-combo it is switched to flex-direction:column, but the
+   wrap was never reset. A column flex container with a definite height
+   wraps into COLUMNS, so the counter tray and the order-status toast
+   were pushed into a second column beginning past the band's right edge
+   and clipped away by overflow:hidden -- at 1440 the tray started 278px
+   beyond that edge. They painted nothing at any width measured (1440,
+   1280, 1100, 900, 390) yet still reserved ~300px of flow height, which
+   set the combo row height and, through align-items:stretch, forced the
+   review noticeboard to 906px for a 106px quote. Scoped to the combo so
+   the standalone band on the menu page keeps its original wrapping. */
+.proof-order-combo > .order-band{
+  flex-wrap:nowrap;
+}
+
+/* With the band no longer inflated by invisible content, stop stretching
+   the noticeboard to match it: size it to the quote it actually holds
+   and centre it in the row. Only above the 1050px breakpoint, where the
+   combo is still two columns. */
+@media(min-width:1051px){
+  .proof-order-combo{
+    align-items:center;
+  }
+}
+
+/* Gallery: 84px of padding at each end plus a 60px trailing gap under
+   the polaroid strip. The 48px chin on each polaroid is the caption
+   area of the photo frame, so that stays -- only the section padding
+   and the strip's trailing gap come down. */
+.social{
+  padding-top:clamp(38px,4.4vw,58px);
+  padding-bottom:clamp(30px,3.4vw,44px);
+}
+.social-strip{
+  padding-bottom:26px;
+}
+
+/* Footer and franchise teaser: trim the leading/trailing bands that
+   carry no type. */
+.foot-tagline{
+  padding-top:38px;
+  padding-bottom:28px;
+}
+.foot-grid{
+  padding-top:32px;
+  padding-bottom:24px;
+  gap:32px;
+}
+.franchise-teaser-home .fr-teaser{
+  padding-top:24px;
+  padding-bottom:24px;
+}
+
+/* Remaining slack in the red panel is the spacing between its blocks --
+   the tray's leading margin and the band's flex gap. Everything below
+   the tray is the kitchen-status readout, which does paint, so the panel
+   is not padded out any further. */
+@media(min-width:1051px){
+  .proof-order-combo > .order-band{
+    gap:6px;
+  }
+  .proof-order-combo .gm-counter-tray{
+    margin-top:12px;
+  }
+}
+
+/* ============================================================
+   "HUNGRY YET?" SIGN MOVED UNDER THE NOTICEBOARD
+   ============================================================ */
+
+/* The sign and its approach rail were the last two blocks of the red
+   panel. Moved into the reviews column so the panel gets shorter and the
+   space under the cropped noticeboard is used. .reviews was a flex row
+   holding a single board; it now stacks board, rail and sign. */
+.proof-order-combo > .reviews{
+  flex-direction:column;
+  justify-content:center;
+  gap:0;
+}
+
+.proof-order-combo > .reviews > .order-hungry-bridge{
+  margin-top:14px;
+}
+
+.proof-order-combo > .reviews > .diner-sign--compact{
+  margin-top:6px;
+}
+
+/* On the red panel the sign sat on a translucent dark tint. Against the
+   grey column that tint is nearly invisible, so give it the red ground
+   it used to borrow from its parent. */
+.proof-order-combo > .reviews > .diner-sign--compact{
+  background:var(--gm-red);
+}
+
+/* The rail alternated white and grey to read as stitching on red; on the
+   grey column the grey segments disappear, so alternate against red. */
+.proof-order-combo > .reviews > .order-hungry-bridge span:nth-child(even){
+  background:var(--gm-red);
+}
+
+/* The ghost wordmark hangs off bottom:-12vh, which was harmless while it
+   was (wrongly) in flow and the jukebox section was 1090px tall. Now that
+   it is absolute again and the section is 542px, that offset pushed it
+   108px into the gallery below. Pinned to the section's own bottom edge.
+   Below 901px the existing rule already insets it, so this is scoped. */
+@media(min-width:901px){
+  .juke-ghost-code{
+    bottom:0;
+  }
+}
+
+
+/* The franchise teaser's halftone is a fixed 110px tall at top:-25px,
+   sized for a taller teaser than this one (~95px). It reached 23px above
+   the section and lapped 14px into the counter spread above. Sized to the
+   teaser instead of a fixed height so the dot field still fills the band
+   but its box stays inside the section -- overflow:hidden would have
+   hidden the overhang while leaving the box overlapping. */
+.franchise-teaser-home .retro-halftone--franchise{
+  top:0;
+  height:100%;
+}
+
+/* ============================================================
+   COUNTER SPREAD — AA CORRECTIONS
+   Measured against the spread's own cream ground (#F3F0E7) and the
+   featured row's red, all at the small sizes these actually render.
+   ============================================================ */
+
+/* The session chip was forced to pure white further up this file, which
+   was right while it sat on Monkey Red. In the counter head it sits on
+   cream, where white measured 1.14:1 -- effectively invisible. Its
+   border follows currentColor, so the ink recolours both. */
+.counter-order-head .gm-session-chip{
+  color:var(--gm-grey,#3A3A3A);
+}
+
+/* Monkey Red on this cream is 4.07:1; --gm-red-ink is 4.56:1. */
+.counter-kicker,
+.counter-diner-context > span{
+  color:var(--gm-red-ink,#DC0000);
+}
+
+/* #82776C on the same cream is 3.84:1. Held in the same warm grey
+   family, darkened to 4.79:1. */
+.counter-detail-line{
+  color:#736858;
+}
+
+/* The live open/closed readout inherits the grey ink, which is 2.45:1
+   against the featured row's red. White reaches 4.63:1. */
+.loc-row.featured .loc-live-status,
+.loc-row.featured .loc-live-status b{
+  color:#FFFFFF;
+}
+
+/* Same story as the session chip: the tray ticket was forced to white
+   for the red panel, and the counter spread puts the tray on cream,
+   where white measured 1.14:1. */
+.diner-counter-spread .gm-tray-ticket span{
+  color:var(--gm-grey,#3A3A3A);
+}
+
+/* Sorta White on Monkey Red is 4.02:1 at this size; pure white is 4.63:1. */
+.irl-handle-board__title{
+  color:#FFFFFF;
+}
+
+/* Monkey Red on Sorta White is 4.02:1; --gm-red-ink is 4.51:1. */
+.receipt-trio-head > span{
+  color:var(--gm-red-ink,#DC0000);
+}
+
+/* ============================================================
+   TEAM POSTER FRAME
+   ============================================================ */
+
+/* The uncropped-poster frame in styles.css pins the ratio to 1122/1402,
+   the portrait founder artwork it was written for. It selects on
+   img[src*="founder-"], so the new square team poster (1254x1254) matched
+   it too and was letterboxed -- roughly 65px of empty cream above and
+   below. Matched to the square artwork. The image inside is positioned,
+   so the frame needs a real ratio to size against; aspect-ratio:auto
+   collapses it to 8px. Update this if the poster's shape changes. */
+.story-origin-poster.story-origin-photo:has(img[src*="founder-team-poster"]){
+  aspect-ratio:1 / 1;
+}

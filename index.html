@@ -11,6 +11,9 @@
 <link rel="stylesheet" href="material-light.css">
 <link rel="stylesheet" href="diner-counter-spread.css">
 <link rel="stylesheet" href="interactive-diner.css">
+<link rel="stylesheet" href="new-motion.css">
+<link rel="stylesheet" href="final-detail-pass.css">
+<link rel="stylesheet" href="gm-corrections.css">
 <link rel="icon" href="favicon.png" type="image/png">
 
 <link rel="canonical" href="https://www.grubmonkeys.in/">
@@ -362,6 +365,7 @@
     <div class="sig-item b reveal">
       <div class="sig-photo-frame">
         <img alt="Grub Monkeys signature wings platter" loading="lazy" width="1086" height="1448" src="images/food/03-signature-wings-platter.jpeg"/>
+      <div class="wing-heat-haze" aria-hidden="true"><i></i><i></i><i></i></div>
       <span class="retro-frame-glint" aria-hidden="true"></span></div>
       <div class="sig-item-label">
         <div class="sig-item-title-row">
@@ -374,7 +378,11 @@
 
     <div class="sig-item c reveal">
       <div class="sig-photo-frame">
-        <img alt="PBJ peanut butter jelly thickshake" loading="lazy" width="1122" height="1402" src="images/food/05-pbj-milkshake.jpeg"/>
+        <img alt="PBJ peanut butter jelly thickshake" loading="lazy" width="1280" height="1280" src="images/food/05-pbj-milkshake.jpeg"/>
+      <div class="fountain-carbonation" aria-hidden="true">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        <span class="fountain-hiss">PSHHHT</span>
+      </div>
       <span class="retro-frame-glint" aria-hidden="true"></span></div>
       <div class="sig-item-label">
         <div class="sig-item-title-row">
@@ -407,20 +415,31 @@
 <section class="atmosphere" id="vibe">
 <div class="retro-upholstery retro-upholstery--dark" aria-hidden="true"></div>
 <div class="atmo-head reveal">
-<div class="sec-num on-dark"><span class="n">03</span><span class="t">The Diner</span></div>
-<h2 class="poster-h" style="color:var(--gm-white); font-size:clamp(2.4rem,6vw,4.6rem);">Walk In. <em>Stay A While.</em></h2>
+<div class="atmo-head-copy">
+  <div class="sec-num on-dark"><span class="n">03</span><span class="t">The Diner</span></div>
+  <h2 class="poster-h" style="color:var(--gm-white); font-size:clamp(2.4rem,6vw,4.6rem);">Walk In. <em>Stay A While.</em></h2>
+</div>
+<div class="atmo-neon-elements" aria-hidden="true">
+  <span class="atmo-neon atmo-neon--star">★</span>
+  <span class="atmo-neon atmo-neon--bolt">↯</span>
+  <span class="atmo-neon atmo-neon--sixty3">63</span>
+</div>
 </div>
 <div class="atmo-grid">
-<div class="atmo-photo big reveal">
+<div class="atmo-photo big reveal condensation-reveal" id="dinerWindowReveal">
 <span class="retro-frame-glint" aria-hidden="true"></span>
-<img alt="Grub Monkeys diner interior with checkerboard floor, red booths and neon signage" loading="lazy" src="images/img-001.jpg" width="800" height="600"/>
+<img alt="Retro American diner interior with checkerboard floor, red and blue booths, wall frames and neon lights" loading="lazy" src="images/walk-in-stay-awhile-main.webp" width="1254" height="1254"/>
+<div class="diner-condensation" aria-hidden="true">
+  <span class="diner-condensation__scribble">EAT LIKE IT'S 1963</span>
+  <i></i><i></i><i></i><i></i><i></i><i></i>
+</div>
 </div>
 <div class="atmo-tags reveal">
 <div class="atmo-tag on"><em>Red</em> Booths.</div>
 <div class="atmo-tag on"><em>Checkerboard</em> Floors.</div>
 <div class="atmo-tag on">Big Burgers.</div>
 <div class="atmo-tag on">Loud Rock.</div>
-
+<div class="atmo-race-strip" aria-hidden="true"><span></span></div>
 </div>
 </div>
 </section>
@@ -431,6 +450,12 @@
   <div class="counter-object condiment mustard" aria-hidden="true"><span>M</span></div>
   <div class="counter-ticket" aria-hidden="true"><span>ORDER 63</span><strong>BURGERS<br>WINGS<br>SHAKES</strong><small>THANKS FOR GRUBBING</small></div>
   <div class="counter-copy"><span>COUNTER SERVICE / LOUD ROCK</span><strong>SIT. GRUB. REPEAT.</strong></div>
+  <div class="edge-diner-stool" id="edgeDinerStool" aria-hidden="true">
+    <span class="edge-diner-stool__seat"></span>
+    <span class="edge-diner-stool__post"></span>
+    <span class="edge-diner-stool__ring"></span>
+    <span class="edge-diner-stool__base"></span>
+  </div>
 </section>
 <section class="story story-v5" id="story">
   <div class="story-grid">
@@ -466,7 +491,7 @@
     </div>
     <div class="story-origin-poster story-origin-photo reveal" aria-label="Grub Monkeys Manipal origin">
       <span class="retro-frame-glint" aria-hidden="true"></span>
-      <img src="images/founder-mueen-ahmed.webp" alt="Grub Monkeys poster — The go-to American diner experience. Founded by Mueen Ahmed, the visionary founder who brought the magic of 1960s American diners to the streets of Manipal, and then took it to Bengaluru. Bengaluru, Karnataka." width="1122" height="1402">
+      <img src="images/founder-team-poster.webp" alt="Grub Monkeys team poster featuring Mueen Ahmed, Mohammed Afridi, and Mohammed Hisham" width="1254" height="1254">
       <div class="origin-checker" aria-hidden="true"></div>
       <div class="origin-copy">
         <span>THE ORIGIN</span>
@@ -608,6 +633,12 @@
 </section>
 <section class="jukebox-section" id="jukebox">
   <div class="retro-upholstery retro-upholstery--dark retro-upholstery--jukebox" aria-hidden="true"></div>
+  <div class="juke-vinyl-field" aria-hidden="true">
+    <span class="loose-vinyl loose-vinyl--one"><i>63</i></span>
+    <span class="loose-vinyl loose-vinyl--two"><i>GM</i></span>
+    <span class="loose-vinyl loose-vinyl--three"><i>A1</i></span>
+    <span class="loose-vinyl loose-vinyl--four"><i>ROCK</i></span>
+  </div>
   <div class="juke-ghost-code" aria-hidden="true">A1</div>
   <div class="jukebox-copy reveal">
     <div class="sec-num on-dark"><span class="n">06</span><span class="t">Drop A Coin</span></div>
@@ -642,19 +673,36 @@
 </div>
 <div class="retro-stamp retro-stamp--social" aria-hidden="true">DINER FILM · GM / 63</div>
 <div class="retro-spark-cluster retro-spark-cluster--social" aria-hidden="true"><i></i><i></i><i></i></div>
-<a class="text-cta on-dark" href="https://www.instagram.com/grubmonkeysbangalore/" rel="noopener" target="_blank">@grubmonkeysbangalore <span class="arrow">→</span></a>
+<div class="irl-handle-board reveal" aria-label="Grub Monkeys Instagram handles">
+  <div class="irl-handle-board__title">FOLLOW THE DINERS</div>
+  <div class="irl-handle-board__grid">
+    <a href="https://www.instagram.com/grubmonkeysbangalore/" rel="noopener" target="_blank">@grubmonkeysbangalore</a>
+    <a href="https://www.instagram.com/grubmonkeysmanipal/" rel="noopener" target="_blank">@grubmonkeysmanipal</a>
+    <a href="https://www.instagram.com/grubmonkeysmysore/" rel="noopener" target="_blank">@grubmonkeysmysore</a>
+    <a href="https://www.instagram.com/grubmonkeysmangalore/" rel="noopener" target="_blank">@grubmonkeysmangalore</a>
+    <a href="https://www.instagram.com/grubmonkeysmoodbidri/" rel="noopener" target="_blank">@grubmonkeysmoodbidri</a>
+  </div>
 </div>
-<div class="social-strip reveal">
+</div>
+<div class="social-strip reveal camera-roll" id="grubIrlRoll">
 
-<a href="https://www.instagram.com/grubmonkeysbangalore/" rel="noopener" target="_blank"><img alt="Onion rings and diner wall art" loading="lazy" src="images/img-009.jpg" width="1200" height="837"/><span class="social-cap">Diner Details</span></a>
-<a href="https://www.instagram.com/grubmonkeysbangalore/" rel="noopener" target="_blank"><img alt="Grub Monkeys Po'Boy" loading="lazy" width="1536" height="1024" src="images/food/08-poboy.jpeg"/><span class="social-cap">Po'Boy</span></a>
-<a href="https://www.instagram.com/grubmonkeysbangalore/" rel="noopener" target="_blank"><img alt="Grub Monkeys Dirty Dog" loading="lazy" width="1536" height="1024" src="images/food/07-dirty-dog.jpeg"/><span class="social-cap">Dirty Dog</span></a>
+<a class="camera-shot" href="https://www.instagram.com/grubmonkeysbangalore/" rel="noopener" target="_blank"><img alt="Onion rings and diner wall art" loading="lazy" src="images/img-009.jpg" width="1200" height="837"/><span class="social-cap">Diner Details</span></a>
+<a class="camera-shot" href="https://www.instagram.com/grubmonkeysbangalore/" rel="noopener" target="_blank"><img alt="Grub Monkeys Po'Boy" loading="lazy" width="1536" height="1024" src="images/food/08-poboy.jpeg"/><span class="social-cap">Po'Boy</span></a>
+<a class="camera-shot" href="https://www.instagram.com/grubmonkeysbangalore/" rel="noopener" target="_blank"><img alt="Grub Monkeys Dirty Dog" loading="lazy" width="1536" height="1024" src="images/food/07-dirty-dog.jpeg"/><span class="social-cap">Dirty Dog</span></a>
 
-<a href="https://www.instagram.com/grubmonkeysbangalore/" rel="noopener" target="_blank"><img alt="African Janga prawns" loading="lazy" width="1122" height="1402" src="images/food/09-african-janga-prawns.jpeg"/><span class="social-cap">African Janga</span></a>
+<a class="camera-shot" href="https://www.instagram.com/grubmonkeysbangalore/" rel="noopener" target="_blank"><img alt="African Janga prawns" loading="lazy" width="1280" height="1280" src="images/food/09-african-janga-prawns.jpeg"/><span class="social-cap">African Janga</span></a>
 </div>
 </section>
 <section class="diner-counter-spread" id="reviews" aria-labelledby="counterSpreadTitle">
   <div class="counter-shell">
+    <div class="kitchen-pass-rail" id="kitchenPassRail" aria-hidden="true">
+      <span class="kitchen-pass-rail__bar"></span>
+      <span class="kitchen-pass-rail__clip"></span>
+      <span class="kitchen-pass-ticket" id="kitchenPassTicket">
+        <small>TABLE WEB-63</small>
+        <strong id="kitchenPassStatus">STATUS: HUNGRY</strong>
+      </span>
+    </div>
     <div class="counter-chrome-edge" aria-hidden="true"><span></span></div>
 
     <div class="counter-proof">
@@ -812,7 +860,7 @@
     <div class="retro-halftone retro-halftone--franchise" aria-hidden="true"></div>
     <div class="sec-num on-dark"><span class="n">09</span><span class="t">Own A Diner</span></div>
     <h2 class="poster-h" style="color:var(--gm-white);">Bring The <em>Monkey Business</em> To Your City.</h2>
-    <p>Interested in building a Grub Monkeys diner? See the franchise overview and send the team your details.</p>
+    <p>Interested in opening a Grub Monkeys diner? Explore the franchise overview and send the team your details.</p>
     <a href="franchise.html" class="btn btn-diner fr-home-btn">Franchise With Us <span class="arrow" aria-hidden="true">→</span></a>
   </div>
 </section>
@@ -865,5 +913,6 @@
 <script src="script.js" defer></script>
 <script src="interactive-diner.js" defer></script>
 <script src="retro-ambient.js" defer></script>
+<script src="new-motion.js" defer></script>
 </body>
 </html>
