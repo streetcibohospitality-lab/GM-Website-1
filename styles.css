@@ -1819,9 +1819,13 @@ section[id], #order{scroll-margin-top:82px}
    ============================================================ */
 
 :root{
-  --sec-y:        clamp(44px, 5.2vw, 68px);  /* standard section padding   */
-  --sec-y-tight:  clamp(32px, 3.6vw, 46px);  /* bands and strips           */
-  --sec-y-loose:  clamp(52px, 6.4vw, 84px);  /* the few that carry a hero  */
+  /* Second pass. Adjacent sections each contribute their own padding, so
+     every boundary was carrying 136-170px of empty ground before any
+     internal margins were added on top; the measured voids at section
+     joins ran 200-285px. Roughly a third comes off again. */
+  --sec-y:        clamp(30px, 3.4vw, 46px);  /* standard section padding   */
+  --sec-y-tight:  clamp(22px, 2.4vw, 32px);  /* bands and strips           */
+  --sec-y-loose:  clamp(36px, 4.2vw, 56px);  /* the few that carry a hero  */
 }
 
 /* --- Release the full-screen constraints --- */
@@ -1858,9 +1862,9 @@ section[id], #order{scroll-margin-top:82px}
    since every section is single-column there and the padding stacks up. */
 @media(max-width:900px){
   :root{
-    --sec-y:       clamp(38px, 8vw, 52px);
-    --sec-y-tight: clamp(26px, 6vw, 36px);
-    --sec-y-loose: clamp(44px, 9vw, 60px);
+    --sec-y:       clamp(26px, 5.4vw, 36px);
+    --sec-y-tight: clamp(18px, 4vw, 26px);
+    --sec-y-loose: clamp(30px, 6vw, 42px);
   }
   .hero.hero-split{ min-height:auto; }
   .hero-copy{ min-height:auto; }

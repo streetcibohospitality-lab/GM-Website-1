@@ -371,9 +371,11 @@
   background-size:132px 79px;
 }
 
-.atmosphere > :not(.retro-upholstery),
-.jukebox-section > :not(.retro-upholstery),
-.proof-order-combo > .order-band > :not(.retro-upholstery){
+/* Same exclusion as the heads above: .juke-ghost-code and the counter
+   edge position themselves, so lifting them here would override that. */
+.atmosphere > :not(.retro-upholstery,.juke-ghost-code,.order-counter-edge),
+.jukebox-section > :not(.retro-upholstery,.juke-ghost-code,.order-counter-edge),
+.proof-order-combo > .order-band > :not(.retro-upholstery,.juke-ghost-code,.order-counter-edge){
   position:relative;
   z-index:1;
 }

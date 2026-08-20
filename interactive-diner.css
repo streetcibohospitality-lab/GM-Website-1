@@ -1507,3 +1507,14 @@
 .proof-order-combo > .reviews > .order-hungry-bridge span:nth-child(even){
   background:var(--gm-red);
 }
+
+/* The ghost wordmark hangs off bottom:-12vh, which was harmless while it
+   was (wrongly) in flow and the jukebox section was 1090px tall. Now that
+   it is absolute again and the section is 542px, that offset pushed it
+   108px into the gallery below. Pinned to the section's own bottom edge.
+   Below 901px the existing rule already insets it, so this is scoped. */
+@media(min-width:901px){
+  .juke-ghost-code{
+    bottom:0;
+  }
+}

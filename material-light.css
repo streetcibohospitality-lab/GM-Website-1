@@ -246,7 +246,14 @@
   pointer-events:none;
 }
 
-.jukebox-section > *{
+/* Lifts the jukebox content above the section's texture layers. The
+   universal child selector also caught .juke-ghost-code -- the oversized
+   background wordmark, authored as position:absolute with z-index:-1 --
+   and turned it into a 490px block in the grid flow, pushing the copy and
+   the player down by that much and painting it in front of them rather
+   than behind. Decorative layers are excluded so they keep their own
+   placement. */
+.jukebox-section > :not(.juke-ghost-code,.retro-upholstery){
   position:relative;
   z-index:1;
 }
