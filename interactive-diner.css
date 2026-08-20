@@ -1518,3 +1518,54 @@
     bottom:0;
   }
 }
+
+/* The franchise teaser's halftone is a fixed 110px tall at top:-25px,
+   sized for a taller teaser than this one (~95px). It reached 23px above
+   the section and lapped 14px into the counter spread above. Sized to the
+   teaser instead of a fixed height so the dot field still fills the band
+   but its box stays inside the section -- overflow:hidden would have
+   hidden the overhang while leaving the box overlapping. */
+.franchise-teaser-home .retro-halftone--franchise{
+  top:0;
+  height:100%;
+}
+
+/* ============================================================
+   COUNTER SPREAD — AA CORRECTIONS
+   Measured against the spread's own cream ground (#F3F0E7) and the
+   featured row's red, all at the small sizes these actually render.
+   ============================================================ */
+
+/* The session chip was forced to pure white further up this file, which
+   was right while it sat on Monkey Red. In the counter head it sits on
+   cream, where white measured 1.14:1 -- effectively invisible. Its
+   border follows currentColor, so the ink recolours both. */
+.counter-order-head .gm-session-chip{
+  color:var(--gm-grey,#3A3A3A);
+}
+
+/* Monkey Red on this cream is 4.07:1; --gm-red-ink is 4.56:1. */
+.counter-kicker,
+.counter-diner-context > span{
+  color:var(--gm-red-ink,#DC0000);
+}
+
+/* #82776C on the same cream is 3.84:1. Held in the same warm grey
+   family, darkened to 4.79:1. */
+.counter-detail-line{
+  color:#736858;
+}
+
+/* The live open/closed readout inherits the grey ink, which is 2.45:1
+   against the featured row's red. White reaches 4.63:1. */
+.loc-row.featured .loc-live-status,
+.loc-row.featured .loc-live-status b{
+  color:#FFFFFF;
+}
+
+/* Same story as the session chip: the tray ticket was forced to white
+   for the red panel, and the counter spread puts the tray on cream,
+   where white measured 1.14:1. */
+.diner-counter-spread .gm-tray-ticket span{
+  color:var(--gm-grey,#3A3A3A);
+}

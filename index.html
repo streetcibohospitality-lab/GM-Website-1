@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="retro-ambient.css">
 <link rel="stylesheet" href="material-light.css">
+<link rel="stylesheet" href="diner-counter-spread.css">
 <link rel="stylesheet" href="interactive-diner.css">
 <link rel="icon" href="favicon.png" type="image/png">
 
@@ -22,14 +23,144 @@
 <meta property="og:type" content="website">
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org",
-  "@type":"Organization",
-  "name":"GRUB MONKEYS",
-  "url":"https://www.grubmonkeys.in/",
-  "logo":"https://www.grubmonkeys.in/images/img-002.jpg",
-  "sameAs":[
-    "https://www.instagram.com/grubmonkeysbangalore/",
-    "https://www.instagram.com/grubmonkeysmangalore/"
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.grubmonkeys.in/#organization",
+      "name": "GRUB MONKEYS",
+      "url": "https://www.grubmonkeys.in/",
+      "logo": "https://www.grubmonkeys.in/images/img-002.jpg",
+      "sameAs": [
+        "https://www.instagram.com/grubmonkeysbangalore/",
+        "https://www.instagram.com/grubmonkeysmangalore/"
+      ]
+    },
+    {
+      "@type": "Restaurant",
+      "@id": "https://www.grubmonkeys.in/#manipal",
+      "name": "Grub Monkeys Manipal",
+      "url": "https://www.grubmonkeys.in/#locations",
+      "telephone": "+918892858915",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Dr VS Acharya Rd, Vidyaratna Nagar",
+        "addressLocality": "Manipal",
+        "addressRegion": "Karnataka",
+        "postalCode": "576104",
+        "addressCountry": "IN"
+      },
+      "openingHours": "Mo-Su 12:30-22:30",
+      "servesCuisine": [
+        "American",
+        "Burgers",
+        "Wings"
+      ]
+    },
+    {
+      "@type": "Restaurant",
+      "@id": "https://www.grubmonkeys.in/#mysore",
+      "name": "Grub Monkeys Mysore",
+      "url": "https://www.grubmonkeys.in/#locations",
+      "telephone": "+918073580194",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "2775, Sri Devi Prasad, 4th Main Rd, Vani Vilas Mohalla",
+        "addressLocality": "Mysuru",
+        "addressRegion": "Karnataka",
+        "postalCode": "570002",
+        "addressCountry": "IN"
+      },
+      "openingHours": "Mo-Su 12:00-22:00",
+      "servesCuisine": [
+        "American",
+        "Burgers",
+        "Wings"
+      ]
+    },
+    {
+      "@type": "Restaurant",
+      "@id": "https://www.grubmonkeys.in/#new-bel-road",
+      "name": "Grub Monkeys New BEL Road Diner",
+      "url": "https://www.grubmonkeys.in/#locations",
+      "telephone": "+916366166696",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "188, Kousalya, New BEL Rd, Devasandra Layout",
+        "addressLocality": "Bengaluru",
+        "addressRegion": "Karnataka",
+        "postalCode": "560094",
+        "addressCountry": "IN"
+      },
+      "openingHours": "Mo-Su 11:45-22:30",
+      "servesCuisine": [
+        "American",
+        "Burgers",
+        "Wings"
+      ]
+    },
+    {
+      "@type": "Restaurant",
+      "@id": "https://www.grubmonkeys.in/#koramangala",
+      "name": "Grub Monkeys Koramangala 8th Block",
+      "url": "https://www.grubmonkeys.in/#locations",
+      "telephone": "+916364267980",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "20, MIG, Ground Floor, KHB Colony, Koramangala 8th Block",
+        "addressLocality": "Bengaluru",
+        "addressRegion": "Karnataka",
+        "postalCode": "560095",
+        "addressCountry": "IN"
+      },
+      "servesCuisine": [
+        "American",
+        "Burgers",
+        "Wings"
+      ]
+    },
+    {
+      "@type": "Restaurant",
+      "@id": "https://www.grubmonkeys.in/#moodbidri",
+      "name": "Grub Monkeys Moodbidri",
+      "url": "https://www.grubmonkeys.in/#locations",
+      "telephone": "+917619158555",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "G1 & G2, Vishal Trade Centre, Vidyagiri",
+        "addressLocality": "Moodbidri",
+        "addressRegion": "Karnataka",
+        "postalCode": "574227",
+        "addressCountry": "IN"
+      },
+      "openingHours": "Mo-Su 11:00-22:30",
+      "servesCuisine": [
+        "American",
+        "Burgers",
+        "Wings"
+      ]
+    },
+    {
+      "@type": "Restaurant",
+      "@id": "https://www.grubmonkeys.in/#mangalore",
+      "name": "Grub Monkeys Mangalore",
+      "url": "https://www.grubmonkeys.in/#locations",
+      "telephone": "+918600207544",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Platinum Point Building, Falnir Rd, Bendoor",
+        "addressLocality": "Mangaluru",
+        "addressRegion": "Karnataka",
+        "postalCode": "575001",
+        "addressCountry": "IN"
+      },
+      "openingHours": "Mo-Su 12:00-22:30",
+      "servesCuisine": [
+        "American",
+        "Burgers",
+        "Wings"
+      ]
+    }
   ]
 }
 </script>
@@ -172,7 +303,7 @@
     <div class="neon-sign" id="onAirSign" aria-hidden="true"><span class="neon-face">ON AIR</span></div>
     <div class="sec-num"><span class="n">01</span><span class="t">Now Showing</span></div>
     <h2 class="poster-h tv-title">Monkey<br><em>TV.</em></h2>
-    <p>Channel 63 is a fast cut through the grub, the diner and the mood. Hit play, pick a scene and tune in.</p>
+    <p>Channel 63. Hot grills. Cold shakes. Red booths. Nine seconds of monkey business. Pick a scene and tune in.</p>
     <div class="tv-channel-list" aria-label="Jump to a Monkey TV scene">
       <button type="button" class="tv-channel active" data-time="0.2"><span>CH 01</span> The Pour</button>
       <button type="button" class="tv-channel" data-time="3.6"><span>CH 02</span> The Board</button>
@@ -306,8 +437,8 @@
     <div class="story-text reveal">
       <div class="sec-num"><span class="n">04</span><span class="t">The Story</span></div>
       <h2 class="poster-h story-h">Born in Manipal.<br><span style="color:var(--gm-red);">Raised Across Karnataka.</span></h2>
-      <p>What started as a student hangout in Manipal grew into a 1960s-inspired American diner built around checkerboard floors, red booths, vintage wall art and unapologetically heavy grub.</p>
-      <p>From late-night cravings to weekend tables, Grub Monkeys is about food with attitude and a diner experience people remember.</p>
+      <p>It started in Manipal: American-diner grub, generous portions and a room built for staying longer than planned. Today, Grub Monkeys runs across Karnataka — but Manipal is still where the story starts.</p>
+      <p>The formula stayed simple: burgers, wings, fries, thick shakes, loud music and a diner experience with enough character to remember.</p>
       <div class="story-founder">Grub Monkeys · A StreetCibo Hospitality Pvt Ltd brand</div>
       <div class="retro-stamp retro-stamp--story" aria-hidden="true">MANIPAL ORIGIN · GM / 63</div>
       <div class="retro-spark-cluster retro-spark-cluster--story" aria-hidden="true"><i></i><i></i><i></i></div>
@@ -366,7 +497,7 @@
 <div class="loc-head reveal">
 <div class="sec-num"><span class="n">05</span><span class="t">Find Us</span></div>
 <h2 class="poster-h" style="font-size:clamp(2.4rem,6vw,4.6rem);">Find Your <em>Grub Monkeys.</em></h2>
-<div class="motel-keytag" id="motelKeytag" aria-hidden="true"><div class="key-hole"></div><span class="key-num" id="keyNum">01</span><span class="key-name" id="keyName">MANIPAL</span></div>
+<div class="motel-keytag" id="motelKeytag" aria-hidden="true"><div class="key-hole"></div><span class="key-num" id="keyNum">03</span><span class="key-name" id="keyName">NEW BEL ROAD</span></div>
 <div class="route-63-marker" id="route63Marker" aria-hidden="true">
   <span>ROUTE</span><strong>63</strong><small>KARNATAKA DINERS</small>
 </div>
@@ -379,88 +510,99 @@
          they move through the diner list below; the rows update it on
          hover, focus and click. -->
     <div class="roadside-sign" aria-live="polite">
-      <span class="roadside-route">DINER / <b id="roadsideNum">01</b></span>
-      <strong id="roadsideName">MANIPAL — THE OG</strong>
-      <small id="roadsideCity">MANIPAL · KARNATAKA</small>
-      <a id="roadsideDirections" href="https://maps.google.com/?q=Grub+Monkeys+Manipal" target="_blank" rel="noopener">GET DIRECTIONS →</a>
+      <span class="roadside-route">DINER / <b id="roadsideNum">03</b></span>
+      <strong id="roadsideName">NEW BEL ROAD</strong>
+      <small id="roadsideCity">BENGALURU · FLAGSHIP OUTLET</small>
+      <span class="roadside-hours" id="roadsideHours">CHECKING HOURS…</span>
+      <div class="roadside-actions">
+        <a id="roadsideCall" href="tel:+916366166696">CALL DINER →</a>
+        <a id="roadsideDirections" href="https://maps.google.com/?q=Grub+Monkeys+New+BEL+Road+Bangalore" target="_blank" rel="noopener">GET DIRECTIONS →</a>
+      </div>
     </div>
   </div>
   <div class="loc-list reveal">
-<div class="loc-row">
+<div class="loc-row" data-diner="manipal" data-open="12:30" data-close="22:30" data-hours-source="google" data-phone="+918892858915" data-zomato="https://www.zomato.com/manipal/grub-monkeys-vidyaratna-nagar" data-swiggy="" data-directions="https://maps.google.com/?q=Grub+Monkeys+Manipal">
 <div class="loc-row-num">01</div>
-<div class="loc-row-name-wrap">
+<div class="loc-row-name-wrap" tabindex="0" role="button" aria-label="Select Manipal — The OG as your diner">
 <div class="loc-row-tag">Manipal · Udupi District</div>
 <div class="loc-row-name">Manipal — The OG</div>
+<div class="loc-live-status" data-loc-status><span aria-hidden="true"></span><b>CHECKING HOURS…</b></div>
 </div>
-<div class="loc-row-address">Manipal, Udupi District, Karnataka</div>
+<div class="loc-row-address">Dr VS Acharya Rd, Vidyaratna Nagar, Manipal</div>
 <div class="loc-row-links">
+<a class="loc-link" href="https://www.zomato.com/manipal/grub-monkeys-vidyaratna-nagar" rel="noopener" target="_blank">Zomato</a>
+<a class="loc-link" href="tel:+918892858915">Call</a>
 <a class="loc-link outline" href="https://maps.google.com/?q=Grub+Monkeys+Manipal" rel="noopener" target="_blank">Directions</a>
-</div>
-</div>
-<div class="loc-row">
+</div></div>
+<div class="loc-row" data-diner="mysore" data-open="12:00" data-close="22:00" data-hours-source="google" data-phone="+918073580194" data-zomato="https://www.zomato.com/mysore/grub-monkeys-gokulam" data-swiggy="https://www.swiggy.com/restaurants/959068/dineout" data-directions="https://maps.google.com/?q=Grub+Monkeys+Mysore">
 <div class="loc-row-num">02</div>
-<div class="loc-row-name-wrap">
+<div class="loc-row-name-wrap" tabindex="0" role="button" aria-label="Select Mysore Diner as your diner">
 <div class="loc-row-tag">Mysore · Karnataka</div>
 <div class="loc-row-name">Mysore Diner</div>
+<div class="loc-live-status" data-loc-status><span aria-hidden="true"></span><b>CHECKING HOURS…</b></div>
 </div>
-<div class="loc-row-address">Mysore, Karnataka</div>
+<div class="loc-row-address">2775, Sri Devi Prasad, 4th Main Rd, Vani Vilas Mohalla, Mysuru</div>
 <div class="loc-row-links">
 <a class="loc-link" href="https://www.zomato.com/mysore/grub-monkeys-gokulam" rel="noopener" target="_blank">Zomato</a>
 <a class="loc-link" href="https://www.swiggy.com/restaurants/959068/dineout" rel="noopener" target="_blank">Swiggy</a>
+<a class="loc-link" href="tel:+918073580194">Call</a>
 <a class="loc-link outline" href="https://maps.google.com/?q=Grub+Monkeys+Mysore" rel="noopener" target="_blank">Directions</a>
-</div>
-</div>
-<div class="loc-row featured">
+</div></div>
+<div class="loc-row featured" data-diner="new-bel-road" data-open="11:45" data-close="22:30" data-hours-source="google" data-phone="+916366166696" data-zomato="https://www.zomato.com/bangalore/grub-monkeys-new-bel-road-bangalore" data-swiggy="https://www.swiggy.com/city/bangalore/grub-monkeys-new-bel-road-rest466237" data-directions="https://maps.google.com/?q=Grub+Monkeys+New+BEL+Road+Bangalore">
 <div class="loc-row-num">03</div>
-<div class="loc-row-name-wrap">
+<div class="loc-row-name-wrap" tabindex="0" role="button" aria-label="Select New BEL Road as your diner">
 <div class="loc-row-tag">Bengaluru · Flagship Outlet</div>
 <div class="loc-row-name">New BEL Road</div>
+<div class="loc-live-status" data-loc-status><span aria-hidden="true"></span><b>CHECKING HOURS…</b></div>
 </div>
-<div class="loc-row-address">188, Kousalya Building, Devasandra Layout, Bangalore</div>
+<div class="loc-row-address">188, Kousalya, New BEL Rd, Devasandra Layout, Bengaluru</div>
 <div class="loc-row-links">
 <a class="loc-link" href="https://www.zomato.com/bangalore/grub-monkeys-new-bel-road-bangalore" rel="noopener" target="_blank">Zomato</a>
 <a class="loc-link" href="https://www.swiggy.com/city/bangalore/grub-monkeys-new-bel-road-rest466237" rel="noopener" target="_blank">Swiggy</a>
+<a class="loc-link" href="tel:+916366166696">Call</a>
 <a class="loc-link outline" href="https://maps.google.com/?q=Grub+Monkeys+New+BEL+Road+Bangalore" rel="noopener" target="_blank">Directions</a>
-</div>
-</div>
-<div class="loc-row">
+</div></div>
+<div class="loc-row" data-diner="koramangala" data-open="" data-close="" data-hours-source="unverified" data-phone="+916364267980" data-zomato="https://www.zomato.com/bangalore/grub-monkeys-koramangala-8th-block-bangalore/order" data-swiggy="https://www.swiggy.com/city/bangalore/grub-monkeys-koramangala-rest1069518" data-directions="https://maps.app.goo.gl/Ey7GhdfkTTjCHcFe6">
 <div class="loc-row-num">04</div>
-<div class="loc-row-name-wrap">
+<div class="loc-row-name-wrap" tabindex="0" role="button" aria-label="Select Koramangala 8th Block as your diner">
 <div class="loc-row-tag">Bengaluru</div>
 <div class="loc-row-name">Koramangala 8th Block</div>
+<div class="loc-live-status" data-loc-status><span aria-hidden="true"></span><b>CHECKING HOURS…</b></div>
 </div>
-<div class="loc-row-address">Sai Niwas, 20, KHB Colony, Koramangala, Bengaluru</div>
+<div class="loc-row-address">20, MIG, Ground Floor, KHB Colony, Koramangala 8th Block, Bengaluru</div>
 <div class="loc-row-links">
-<a class="loc-link" href="https://www.zomato.com/bangalore/grub-monkeys-koramangala-8th-block-bangalore/reviews" rel="noopener" target="_blank">Zomato</a>
+<a class="loc-link" href="https://www.zomato.com/bangalore/grub-monkeys-koramangala-8th-block-bangalore/order" rel="noopener" target="_blank">Zomato</a>
 <a class="loc-link" href="https://www.swiggy.com/city/bangalore/grub-monkeys-koramangala-rest1069518" rel="noopener" target="_blank">Swiggy</a>
+<a class="loc-link" href="tel:+916364267980">Call</a>
 <a class="loc-link outline" href="https://maps.app.goo.gl/Ey7GhdfkTTjCHcFe6" rel="noopener" target="_blank">Directions</a>
-</div>
-</div>
-<div class="loc-row">
+</div></div>
+<div class="loc-row" data-diner="moodbidri" data-open="11:00" data-close="22:30" data-hours-source="google" data-phone="+917619158555" data-zomato="" data-swiggy="https://www.swiggy.com/city/mangaluru/grub-monkeys-moodbidri-rest1236541" data-directions="https://maps.google.com/?q=Grub+Monkeys+Moodbidri">
 <div class="loc-row-num">05</div>
-<div class="loc-row-name-wrap">
+<div class="loc-row-name-wrap" tabindex="0" role="button" aria-label="Select Moodbidri Diner as your diner">
 <div class="loc-row-tag">Moodbidri · Karnataka</div>
 <div class="loc-row-name">Moodbidri Diner</div>
+<div class="loc-live-status" data-loc-status><span aria-hidden="true"></span><b>CHECKING HOURS…</b></div>
 </div>
-<div class="loc-row-address">Moodbidri, Karnataka</div>
+<div class="loc-row-address">G1 & G2, Vishal Trade Centre, Vidyagiri, Moodbidri</div>
 <div class="loc-row-links">
 <a class="loc-link" href="https://www.swiggy.com/city/mangaluru/grub-monkeys-moodbidri-rest1236541" rel="noopener" target="_blank">Swiggy</a>
+<a class="loc-link" href="tel:+917619158555">Call</a>
 <a class="loc-link outline" href="https://maps.google.com/?q=Grub+Monkeys+Moodbidri" rel="noopener" target="_blank">Directions</a>
-</div>
-</div>
-<div class="loc-row">
+</div></div>
+<div class="loc-row" data-diner="mangalore" data-open="12:00" data-close="22:30" data-hours-source="google" data-phone="+918600207544" data-zomato="https://www.zomato.com/mangalore/grub-monkeys-bendoor/order" data-swiggy="https://www.swiggy.com/city/mangaluru/grub-monkeys-lalbagh-falnir-rest1257104" data-directions="https://maps.google.com/?q=Grub+Monkeys+Mangalore">
 <div class="loc-row-num">06</div>
-<div class="loc-row-name-wrap">
+<div class="loc-row-name-wrap" tabindex="0" role="button" aria-label="Select Mangalore Diner as your diner">
 <div class="loc-row-tag">Mangalore · Karnataka</div>
 <div class="loc-row-name">Mangalore Diner</div>
+<div class="loc-live-status" data-loc-status><span aria-hidden="true"></span><b>CHECKING HOURS…</b></div>
 </div>
-<div class="loc-row-address">Mangalore, Karnataka</div>
+<div class="loc-row-address">Platinum Point Building, Falnir Rd, Bendoor, Mangaluru</div>
 <div class="loc-row-links">
 <a class="loc-link" href="https://www.zomato.com/mangalore/grub-monkeys-bendoor/order" rel="noopener" target="_blank">Zomato</a>
 <a class="loc-link" href="https://www.swiggy.com/city/mangaluru/grub-monkeys-lalbagh-falnir-rest1257104" rel="noopener" target="_blank">Swiggy</a>
+<a class="loc-link" href="tel:+918600207544">Call</a>
 <a class="loc-link outline" href="https://maps.google.com/?q=Grub+Monkeys+Mangalore" rel="noopener" target="_blank">Directions</a>
-</div>
-</div>
+</div></div>
 </div>
 </div>
 </section>
@@ -470,7 +612,7 @@
   <div class="jukebox-copy reveal">
     <div class="sec-num on-dark"><span class="n">06</span><span class="t">Drop A Coin</span></div>
     <h2 class="poster-h juke-title">Monkey<br><em>Jukebox.</em></h2>
-    <p>Classic rock lives here. Press play when you want it — the site never starts audio on its own.</p>
+    <p>Drop a coin. Pick a cut. Make the diner louder. Sound starts only when you press play.</p>
     <div class="juke-now"><span>A1</span><b>CLASSIC ROCK</b><small>60s → 90s</small></div>
   </div>
   <div class="gm-jukebox reveal" aria-label="Grub Monkeys classic rock jukebox">
@@ -511,86 +653,156 @@
 <a href="https://www.instagram.com/grubmonkeysbangalore/" rel="noopener" target="_blank"><img alt="African Janga prawns" loading="lazy" width="1122" height="1402" src="images/food/09-african-janga-prawns.jpeg"/><span class="social-cap">African Janga</span></a>
 </div>
 </section>
-<div class="proof-order-combo">
-<section class="reviews" id="reviews">
-<!-- The noticeboard's own label is a decorative span, so the section had
-     no heading. Now that the "Hungry Yet?" sign lives here, an h3 would
-     otherwise nest under the gallery's h2. -->
-<h2 class="sr-only">Word On The Street</h2>
-<div class="review-board-wrap">
-  <div class="review-board-label" aria-hidden="true">DINER NOTICEBOARD / CUSTOMER NOTES</div>
-<div class="review-rail reveal">
-<div class="sec-num"><span class="n">08</span><span class="t">Word On The Street</span></div>
-<div class="review-slide active">
-<p class="review-quote">I usually struggle to finish even one burger, but I ended up finishing two. The PBJ thick shake was quite filling too.</p>
-<div class="review-meta">Shreya P. · via <a href="https://www.district.in/dining/bangalore/grub-monkeys-koramangala-8th-block-bangalore" rel="noopener" target="_blank">District.in</a> · Koramangala</div>
-</div>
-<div class="review-slide">
-<p class="review-quote">Pure vintage vibes. Shoutout to the Carnivore Burger and Peri Peri Dry Wings.</p>
-<div class="review-meta">Aditya M. · via <a href="https://www.zomato.com" rel="noopener" target="_blank">Zomato</a> · Koramangala</div>
-</div>
-<div class="review-slide">
-<p class="review-quote">Best place to get loaded fries in B-Town. My recommendation: dirty fries and the PBJ shake.</p>
-<div class="review-meta">Ujwal P. · via <a href="https://yappe.in/karnataka/bengaluru/grub-monkeys-new-bel-road/983800" rel="noopener" target="_blank">Yappe.in</a> · New BEL Road</div>
-</div>
-<div class="review-slide">
-<p class="review-quote">My kid loved the place — so many board games. The burgers were yummy, fish and chips was really good.</p>
-<div class="review-meta">Nisha R. · Mangalore</div>
-</div>
-<div class="review-slide">
-<p class="review-quote">Generous quantity, great flavours. A stunning spot for speciality fries and burgers — won't find it elsewhere.</p>
-<div class="review-meta">Vikas K. · Manipal / Udupi</div>
-</div>
-<div class="review-nav">
-<button aria-label="Previous review" class="review-arrow" id="prevReview">←</button>
-<span class="review-counter"><span class="cur" id="reviewCur">01</span> / <span id="reviewTotal">05</span></span>
-<button aria-label="Next review" class="review-arrow" id="nextReview">→</button>
-</div>
-</div>
-</div>
+<section class="diner-counter-spread" id="reviews" aria-labelledby="counterSpreadTitle">
+  <div class="counter-shell">
+    <div class="counter-chrome-edge" aria-hidden="true"><span></span></div>
 
-<div class="order-hungry-bridge" aria-hidden="true">
-  <span></span><span></span><span></span><span></span><span></span>
-  <span></span><span></span><span></span><span></span><span></span>
-  <span></span><span></span>
-</div>
+    <div class="counter-proof">
+      <div class="counter-proof__label" aria-hidden="true">DINER NOTICEBOARD / 10 CUSTOMER NOTES</div>
 
-<div class="diner-sign diner-sign--compact" id="dinerSign">
-  <div class="sign-bulbs top" id="bulbsTop" aria-hidden="true"></div>
-  <div class="diner-sign--compact__copy">
-    <span class="order-code">LAST CALL / COUNTER 63</span>
-    <h3>Hungry Yet?</h3>
-  </div>
-  <div class="btns">
-    <a href="menu.html" class="btn btn-ticket on-dark">View Menu</a>
-    <a href="#locations" class="btn btn-ticket on-dark">Find A Diner</a>
-  </div>
-  <div class="sign-bulbs bottom" id="bulbsBottom" aria-hidden="true"></div>
-</div>
+      <div class="counter-review-note">
+        <div class="counter-review-pin counter-review-pin--left" aria-hidden="true"></div>
+        <div class="counter-review-pin counter-review-pin--right" aria-hidden="true"></div>
 
-</section>
-<section class="order-band grain" id="order">
-  <div class="retro-upholstery retro-upholstery--red" aria-hidden="true"></div>
-  <div class="order-counter-edge" aria-hidden="true"></div>
+        <div class="sec-num">
+          <span class="n">08</span>
+          <span class="t">Word On The Street</span>
+        </div>
 
-  <div class="order-band__top">
-    <div class="order-band__headline">
-      <span class="order-code">ORDER / ONLINE</span>
-      <h2>Hot Grub.<br>Few Taps.</h2>
+        <div class="counter-review-stage" aria-live="polite" aria-atomic="true">
+          <article class="review-slide active">
+            <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="review-quote">I usually struggle to finish even one burger, but I ended up finishing two. The PBJ thick shake was quite filling too.</p>
+            <div class="review-meta">Shreya P. · via <a href="https://www.district.in/dining/bangalore/grub-monkeys-koramangala-8th-block-bangalore" rel="noopener" target="_blank">District.in</a> · Koramangala</div>
+          </article>
+
+          <article class="review-slide">
+            <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="review-quote">Pure vintage vibes. Shoutout to the Carnivore Burger and Peri Peri Dry Wings.</p>
+            <div class="review-meta">Aditya M. · via <a href="https://www.zomato.com" rel="noopener" target="_blank">Zomato</a> · Koramangala</div>
+          </article>
+
+          <article class="review-slide">
+            <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="review-quote">Best place to get loaded fries in B-Town. My recommendation: dirty fries and the PBJ shake.</p>
+            <div class="review-meta">Ujwal P. · via <a href="https://yappe.in/karnataka/bengaluru/grub-monkeys-new-bel-road/983800" rel="noopener" target="_blank">Yappe.in</a> · New BEL Road</div>
+          </article>
+
+          <article class="review-slide review-slide--google">
+            <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="review-quote">My kid loved the place — so many board games. The burgers were yummy, and the fish and chips was really good.</p>
+            <div class="review-meta">Priyanka A. · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grub+Monkeys+Mangalore" rel="noopener" target="_blank">5★ Google Review</a> · Mangalore</div>
+          </article>
+
+          <article class="review-slide review-slide--google">
+            <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="review-quote">Absolutely loved the experience — delicious food, cozy ambience, welcoming service, and a perfect addition to Mangalore’s cafe scene.</p>
+            <div class="review-meta">Trishal P. · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grub+Monkeys+Mangalore" rel="noopener" target="_blank">5★ Google Review</a> · Mangalore</div>
+          </article>
+
+          <article class="review-slide review-slide--google">
+            <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="review-quote">Loved the American diner vibes! The crispy chicken burger was juicy and crunchy, and the wings were bursting with flavor.</p>
+            <div class="review-meta">Shaswath S. · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grub+Monkeys+Mangalore" rel="noopener" target="_blank">5★ Google Review</a> · Mangalore</div>
+          </article>
+
+          <article class="review-slide review-slide--google">
+            <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="review-quote">Good food and even better vibes — cozy, comfortable and welcoming, with every dish tasty and well presented.</p>
+            <div class="review-meta">Nishmitha S. · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grub+Monkeys+Mangalore" rel="noopener" target="_blank">5★ Google Review</a> · Mangalore</div>
+          </article>
+
+          <article class="review-slide review-slide--google">
+            <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="review-quote">Fabulous ambience. Must visit. Delicious dining.</p>
+            <div class="review-meta">Shri N. · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grub+Monkeys+Mangalore" rel="noopener" target="_blank">5★ Google Review</a> · Mangalore</div>
+          </article>
+
+          <article class="review-slide review-slide--google">
+            <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="review-quote">Great food and nice ambiance!</p>
+            <div class="review-meta">Preethika A. · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grub+Monkeys+Mangalore" rel="noopener" target="_blank">5★ Google Review</a> · Mangalore</div>
+          </article>
+
+          <article class="review-slide review-slide--google">
+            <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="review-quote">Felt like being back home — familiar burgers, now with a little retro American diner ambience.</p>
+            <div class="review-meta">Aysha T. · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grub+Monkeys+Mangalore" rel="noopener" target="_blank">5★ Google Review</a> · Mangalore</div>
+          </article>
+        </div>
+
+        <div class="review-nav">
+          <button aria-label="Previous review" class="review-arrow" id="prevReview" type="button">←</button>
+          <span class="review-counter"><span class="cur" id="reviewCur">01</span> / <span id="reviewTotal">10</span></span>
+          <button aria-label="Next review" class="review-arrow" id="nextReview" type="button">→</button>
+          <span class="review-source-chip">7 GOOGLE 5★</span>
+        </div>
+      </div>
     </div>
 
-    <div class="order-actions">
-      <a href="https://www.swiggy.com/city/bangalore/grub-monkeys" target="_blank" rel="noopener" class="btn btn-ticket on-dark">Order On Swiggy <span class="arrow" aria-hidden="true">→</span></a>
-      <a href="https://www.zomato.com/bangalore/restaurants/grub-monkeys" target="_blank" rel="noopener" class="btn btn-ticket on-dark">Order On Zomato <span class="arrow" aria-hidden="true">→</span></a>
-      <button type="button" class="order-bell-wrap" id="orderBellWrap" aria-label="Order up bell">
-        <span class="order-ticket" id="orderTicket">ORDER UP!</span>
-        <span class="order-bell" aria-hidden="true"><span class="bell-knob"></span><span class="bell-base"></span></span>
-      </button>
+    <div class="counter-order-main" id="order">
+      <div class="counter-order-head">
+        <div>
+          <span class="counter-kicker">COUNTER 08 / ORDER ONLINE</span>
+          <h2 id="counterSpreadTitle">Hot Grub.<br><em>Few Taps.</em></h2>
+        </div>
+        <div class="counter-service-status" aria-hidden="true">
+          <span class="counter-service-lamp" id="counterServiceLamp"></span>
+          <span>READY</span>
+        </div>
+      </div>
+
+      <p class="counter-order-copy">Pick your platform. We’ll handle the hot part.</p>
+
+      <div class="counter-diner-context" id="orderDinerContext" aria-live="polite">
+        <span>YOUR DINER</span>
+        <strong id="orderDinerName">NEW BEL ROAD · FLAGSHIP</strong>
+        <small id="orderDinerStatus">CHECKING HOURS…</small>
+        <a href="#locations">CHANGE DINER</a>
+      </div>
+
+      <div class="counter-order-row">
+        <div class="counter-order-tickets">
+          <a href="https://www.swiggy.com/city/bangalore/grub-monkeys" target="_blank" rel="noopener" class="counter-order-ticket" data-order-platform="swiggy">
+            <span class="counter-order-ticket__micro">NEW BEL ROAD / SWIGGY</span>
+            <strong>Order On Swiggy</strong>
+            <span class="counter-order-ticket__arrow" aria-hidden="true">→</span>
+          </a>
+          <a href="https://www.zomato.com/bangalore/restaurants/grub-monkeys" target="_blank" rel="noopener" class="counter-order-ticket" data-order-platform="zomato">
+            <span class="counter-order-ticket__micro">NEW BEL ROAD / ZOMATO</span>
+            <strong>Order On Zomato</strong>
+            <span class="counter-order-ticket__arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        <button type="button" class="counter-bell-station order-bell-wrap" id="orderBellWrap" aria-label="Ring the Counter 08 order bell">
+          <span class="order-ticket" id="orderTicket">ORDER UP!</span>
+          <span class="order-bell" aria-hidden="true">
+            <span class="bell-knob"></span>
+            <span class="bell-base"></span>
+          </span>
+          <span class="counter-bell-caption">RING FOR GRUB</span>
+        </button>
+      </div>
+
+      <div class="counter-detail-line" aria-hidden="true">
+        <span>BURGERS</span><i></i><span>WINGS</span><i></i><span>FRIES</span><i></i><span>SHAKES</span>
+      </div>
+    </div>
+
+    <div class="counter-fascia" id="dinerSign">
+      <div class="counter-fascia__copy">
+        <span>LAST CALL / COUNTER 63</span>
+        <h3>Hungry Yet?</h3>
+      </div>
+      <div class="counter-fascia__actions">
+        <a href="menu.html" class="counter-fascia-btn">View Menu <span aria-hidden="true">→</span></a>
+        <a href="#locations" class="counter-fascia-btn counter-fascia-btn--outline">Find A Diner <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="counter-fascia__glint" aria-hidden="true"></div>
     </div>
   </div>
-
 </section>
-</div>
 <div class="retro-chrome-rail retro-chrome-rail--dark" aria-hidden="true"><span></span></div>
 <section class="franchise franchise-teaser-home" id="franchise">
   <div class="fr-teaser reveal">

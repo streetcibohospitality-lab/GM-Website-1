@@ -3065,3 +3065,51 @@ section[id], #order{scroll-margin-top:82px}
     gap:clamp(48px,5vw,78px);
   }
 }
+
+
+/* =========================================================
+   FINAL UX POLISH — LIVE DINER HOURS + SESSION OUTLET
+   Functional, restrained, and integrated into existing UI.
+   ========================================================= */
+.loc-row-name-wrap[role="button"]{cursor:pointer;outline-offset:5px}
+.loc-row-name-wrap[role="button"]:focus-visible{outline:2px solid var(--gm-teal)}
+.loc-live-status{
+  display:flex;align-items:center;gap:6px;margin-top:7px;
+  font-size:.52rem;line-height:1.15;font-weight:900;letter-spacing:.055em;text-transform:uppercase;
+  color:var(--gm-grey);
+}
+.loc-live-status span{width:8px;height:8px;border-radius:50%;background:#8b8b88;box-shadow:0 0 0 2px rgba(58,58,58,.08)}
+.loc-live-status.is-open span{background:var(--gm-teal);box-shadow:0 0 0 2px rgba(0,221,194,.14),0 0 10px rgba(0,221,194,.28)}
+.loc-live-status.is-closed span{background:var(--gm-red)}
+.loc-live-status.is-check span{background:#d1a600}
+.loc-row.is-selected-diner{box-shadow:inset 5px 0 0 var(--gm-teal)}
+.loc-row.is-selected-diner .loc-row-name-wrap::after{
+  content:"YOUR DINER";display:inline-block;margin-top:8px;padding:4px 6px 3px;
+  background:var(--gm-teal);color:var(--gm-grey);font-size:.43rem;font-weight:900;letter-spacing:.1em;
+}
+.roadside-hours{
+  display:inline-flex;align-items:center;width:max-content;max-width:100%;
+  margin-top:9px;padding:6px 8px 5px;border:2px solid currentColor;
+  font-size:.56rem;font-weight:900;letter-spacing:.07em;text-transform:uppercase;
+}
+.roadside-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:11px}
+.roadside-actions a{font-size:.56rem;font-weight:900;letter-spacing:.06em;text-decoration:none;color:inherit}
+.roadside-actions a:hover,.roadside-actions a:focus-visible{text-decoration:underline;text-underline-offset:3px}
+.counter-diner-context{
+  display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;gap:8px 12px;align-items:center;
+  margin:12px 0 17px;padding:9px 10px;border-top:2px solid rgba(58,58,58,.22);border-bottom:2px solid rgba(58,58,58,.22);
+  font-size:.52rem;letter-spacing:.055em;text-transform:uppercase;
+}
+.counter-diner-context>span{font-weight:900;color:var(--gm-red)}
+.counter-diner-context>strong{min-width:0;font-size:.65rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.counter-diner-context>small{font-size:.5rem;font-weight:800;color:var(--gm-grey)}
+.counter-diner-context>a{justify-self:end;color:var(--gm-grey);font-size:.48rem;font-weight:900;text-underline-offset:3px}
+.counter-order-ticket.is-unavailable{display:none}
+.counter-order-tickets:has(.counter-order-ticket.is-unavailable){grid-template-columns:minmax(0,1fr)}
+
+@media(max-width:760px){
+  .counter-diner-context{grid-template-columns:auto 1fr;gap:5px 9px}
+  .counter-diner-context>small{grid-column:1 / -1}
+  .counter-diner-context>a{grid-column:1 / -1;justify-self:start}
+  .roadside-actions{gap:10px}
+}

@@ -208,17 +208,46 @@
   if(slides.length){
     const cur=document.getElementById('reviewCur');
     const total=document.getElementById('reviewTotal');
+    const stage=document.querySelector('.counter-review-stage');
     let index=0;
+    let reviewAnimating=false;
     const pad=n=>String(n).padStart(2,'0');
     if(total) total.textContent=pad(slides.length);
-    function show(i){
-      slides[index].classList.remove('active');
-      index=(i+slides.length)%slides.length;
-      slides[index].classList.add('active');
-      if(cur) cur.textContent=pad(index+1);
+
+    function show(i,direction=1){
+      if(reviewAnimating || slides.length<2) return;
+      const next=(i+slides.length)%slides.length;
+      if(next===index) return;
+
+      if(reduceMotion){
+        slides[index].classList.remove('active');
+        index=next;
+        slides[index].classList.add('active');
+        if(cur) cur.textContent=pad(index+1);
+        return;
+      }
+
+      reviewAnimating=true;
+      stage?.classList.remove('to-next','to-prev');
+      stage?.classList.add(direction>0?'to-next':'to-prev');
+
+      const outgoing=slides[index];
+      const incoming=slides[next];
+      outgoing.classList.add('is-leaving');
+      incoming.classList.add('is-entering','active');
+
+      window.setTimeout(()=>{
+        outgoing.classList.remove('active','is-leaving');
+        incoming.classList.remove('is-entering');
+        index=next;
+        if(cur) cur.textContent=pad(index+1);
+        stage?.classList.remove('to-next','to-prev');
+        reviewAnimating=false;
+      },260);
     }
-    document.getElementById('prevReview')?.addEventListener('click',()=>show(index-1));
-    document.getElementById('nextReview')?.addEventListener('click',()=>show(index+1));
+
+    document.getElementById('prevReview')?.addEventListener('click',()=>show(index-1,-1));
+    document.getElementById('nextReview')?.addEventListener('click',()=>show(index+1,1));
   }
 
   function buildBulbs(container,count){
@@ -265,22 +294,89 @@
   const roadsideNum=document.getElementById('roadsideNum');
   const roadsideName=document.getElementById('roadsideName');
   const roadsideCity=document.getElementById('roadsideCity');
+  const roadsideHours=document.getElementById('roadsideHours');
+  const roadsideCall=document.getElementById('roadsideCall');
   const roadsideDirections=document.getElementById('roadsideDirections');
   const roadsidePanel=document.getElementById('roadsidePanel');
-  const locRows=[...document.querySelectorAll('.loc-row')];
-  function setKeyFromRow(row){
+  const orderDinerName=document.getElementById('orderDinerName');
+  const orderDinerStatus=document.getElementById('orderDinerStatus');
+  const locRows=[...document.querySelectorAll('.loc-row[data-diner]')];
+  const selectedDinerKey='gm_selected_diner_v1';
+  let selectedDinerSlug=null;
+  try{ selectedDinerSlug=sessionStorage.getItem(selectedDinerKey); }catch(err){}
+  if(!selectedDinerSlug || !locRows.some(row=>row.dataset.diner===selectedDinerSlug)) selectedDinerSlug='new-bel-road';
+
+  const indiaParts=new Intl.DateTimeFormat('en-GB',{
+    timeZone:'Asia/Kolkata',weekday:'short',hour:'2-digit',minute:'2-digit',hourCycle:'h23'
+  });
+  const time12=value=>{
+    if(!value) return '';
+    const [h,m]=value.split(':').map(Number);
+    const suffix=h>=12?'PM':'AM';
+    const hour=(h%12)||12;
+    return `${hour}:${String(m).padStart(2,'0')} ${suffix}`;
+  };
+  const minutes=value=>{
+    if(!value) return null;
+    const [h,m]=value.split(':').map(Number);
+    return h*60+m;
+  };
+  function currentISTMinutes(){
+    const parts=Object.fromEntries(indiaParts.formatToParts(new Date()).filter(p=>p.type!=='literal').map(p=>[p.type,p.value]));
+    return Number(parts.hour||0)*60+Number(parts.minute||0);
+  }
+  function statusForRow(row){
+    if(!row) return {text:'HOURS UNAVAILABLE',state:'check'};
+    if(row.dataset.hoursSource==='unverified') return {text:"CHECK GOOGLE FOR TODAY'S HOURS",state:'check'};
+    const open=minutes(row.dataset.open), close=minutes(row.dataset.close), now=currentISTMinutes();
+    if(open===null || close===null) return {text:'HOURS UNAVAILABLE',state:'check'};
+    if(now>=open && now<close) return {text:`OPEN NOW · UNTIL ${time12(row.dataset.close)}`,state:'open'};
+    if(now<open) return {text:`OPENS TODAY · ${time12(row.dataset.open)}`,state:'closed'};
+    return {text:`CLOSED · OPENS TOMORROW ${time12(row.dataset.open)}`,state:'closed'};
+  }
+  function syncLocationStatuses(){
+    locRows.forEach(row=>{
+      const status=statusForRow(row);
+      const el=row.querySelector('[data-loc-status]');
+      if(!el) return;
+      el.classList.remove('is-open','is-closed','is-check');
+      el.classList.add(`is-${status.state}`);
+      const label=el.querySelector('b');
+      if(label) label.textContent=status.text;
+    });
+    const selected=locRows.find(row=>row.dataset.diner===selectedDinerSlug);
+    if(selected) applySelectedDiner(selected,false);
+  }
+  function updateOrderTickets(row){
+    document.querySelectorAll('[data-order-platform]').forEach(ticket=>{
+      const platform=ticket.dataset.orderPlatform;
+      const href=platform==='swiggy'?row.dataset.swiggy:row.dataset.zomato;
+      const micro=ticket.querySelector('.counter-order-ticket__micro');
+      if(href){
+        ticket.href=href;
+        ticket.classList.remove('is-unavailable');
+        ticket.removeAttribute('aria-disabled');
+      }else{
+        ticket.classList.add('is-unavailable');
+        ticket.setAttribute('aria-disabled','true');
+      }
+      if(micro) micro.textContent=`${(row.querySelector('.loc-row-name')?.textContent||'YOUR DINER').replace(' Diner','').toUpperCase()} / ${platform.toUpperCase()}`;
+    });
+  }
+  function previewDiner(row){
     if(!row) return;
-    locRows.forEach(r=>r.classList.toggle('active-key', r===row));
     const num=(row.querySelector('.loc-row-num')?.textContent||'01').trim();
-    const name=(row.querySelector('.loc-row-name')?.textContent||'MANIPAL').trim().toUpperCase();
-    const city=(row.querySelector('.loc-row-tag')?.textContent||'KARNATAKA').trim().toUpperCase();
-    const directions=row.querySelector('.loc-link.outline');
+    const name=(row.querySelector('.loc-row-name')?.textContent||'MANIPAL').trim();
+    const tag=(row.querySelector('.loc-row-tag')?.textContent||'KARNATAKA').trim();
+    const status=statusForRow(row);
     if(keyNum) keyNum.textContent=num;
-    if(keyName) keyName.textContent=name.replace(' DINER','');
+    if(keyName) keyName.textContent=name.toUpperCase().replace(' DINER','');
     if(roadsideNum) roadsideNum.textContent=num;
-    if(roadsideName) roadsideName.textContent=name;
-    if(roadsideCity) roadsideCity.textContent=city;
-    if(roadsideDirections && directions) roadsideDirections.href=directions.href;
+    if(roadsideName) roadsideName.textContent=name.toUpperCase();
+    if(roadsideCity) roadsideCity.textContent=tag.toUpperCase();
+    if(roadsideHours) roadsideHours.textContent=status.text;
+    if(roadsideCall){ roadsideCall.href=`tel:${row.dataset.phone||''}`; roadsideCall.textContent='CALL DINER →'; }
+    if(roadsideDirections && row.dataset.directions) roadsideDirections.href=row.dataset.directions;
     if(roadsidePanel && !reduceMotion){
       roadsidePanel.animate([{transform:'translateY(3px)',opacity:.9},{transform:'translateY(0)',opacity:1}],{duration:220,easing:'ease-out'});
     }
@@ -291,10 +387,32 @@
       setTimeout(()=>keytag.classList.remove('swing'),820);
     }
   }
-  locRows.forEach((row,i)=>{
-    ['mouseenter','focusin','click'].forEach(evt=>row.addEventListener(evt,()=>setKeyFromRow(row)));
-    if(i===0) setKeyFromRow(row);
+  function applySelectedDiner(row,persist=true){
+    if(!row) return;
+    selectedDinerSlug=row.dataset.diner;
+    if(persist){ try{sessionStorage.setItem(selectedDinerKey,selectedDinerSlug);}catch(err){} }
+    locRows.forEach(r=>r.classList.toggle('is-selected-diner',r===row));
+    previewDiner(row);
+    const status=statusForRow(row);
+    const label=(row.querySelector('.loc-row-name')?.textContent||'Your diner').trim();
+    if(orderDinerName) orderDinerName.textContent=label.toUpperCase()+(row.classList.contains('featured')?' · FLAGSHIP':'');
+    if(orderDinerStatus) orderDinerStatus.textContent=status.text;
+    updateOrderTickets(row);
+  }
+  locRows.forEach(row=>{
+    row.addEventListener('mouseenter',()=>previewDiner(row));
+    row.addEventListener('focusin',()=>previewDiner(row));
+    const picker=row.querySelector('.loc-row-name-wrap[role="button"]');
+    picker?.addEventListener('click',()=>applySelectedDiner(row,true));
+    picker?.addEventListener('keydown',evt=>{
+      if(evt.key==='Enter' || evt.key===' '){evt.preventDefault();applySelectedDiner(row,true);}
+    });
+    row.querySelectorAll('.loc-row-links a').forEach(link=>link.addEventListener('click',()=>applySelectedDiner(row,true)));
   });
+  const initialSelected=locRows.find(row=>row.dataset.diner===selectedDinerSlug) || locRows[0];
+  applySelectedDiner(initialSelected,false);
+  syncLocationStatuses();
+  window.setInterval(syncLocationStatuses,60000);
 
   const socialStrip=document.querySelector('.social-strip');
   if(socialStrip && 'IntersectionObserver' in window && !reduceMotion){
@@ -311,7 +429,36 @@
     setTimeout(()=>bellWrap.classList.remove('ring'),760);
   }
   bellWrap?.addEventListener('click', ringBell);
-  bellWrap?.addEventListener('mouseenter', ()=>{ if(window.innerWidth>767) ringBell(); }, {passive:true});
+
+  const counterLamp=document.getElementById('counterServiceLamp');
+  document.querySelectorAll('[data-order-platform]').forEach(ticket=>{
+    ticket.addEventListener('pointerdown',()=>{
+      ticket.classList.add('is-pressed');
+      counterLamp?.classList.add('is-pulsing');
+    });
+    ['pointerup','pointercancel','pointerleave'].forEach(evt=>{
+      ticket.addEventListener(evt,()=>{
+        ticket.classList.remove('is-pressed');
+        window.setTimeout(()=>counterLamp?.classList.remove('is-pulsing'),420);
+      });
+    });
+  });
+
+  const counterSpread=document.querySelector('.diner-counter-spread');
+  if(counterSpread){
+    if(reduceMotion || !('IntersectionObserver' in window)){
+      counterSpread.classList.add('is-entered');
+    }else{
+      const counterIo=new IntersectionObserver(entries=>{
+        entries.forEach(entry=>{
+          if(!entry.isIntersecting) return;
+          counterSpread.classList.add('is-entered');
+          counterIo.disconnect();
+        });
+      },{threshold:.28});
+      counterIo.observe(counterSpread);
+    }
+  }
 
   const coinTrigger=document.getElementById('coinTrigger');
   const jukeboxPlayer=document.getElementById('gmJukeboxPlayer');

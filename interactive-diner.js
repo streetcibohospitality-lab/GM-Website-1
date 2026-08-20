@@ -536,7 +536,7 @@
     board.innerHTML=`<div class="gm-order-status-head"><span>KITCHEN STATUS</span><span>${sessionText}</span></div><div class="gm-order-status-line">ORDER RECEIVED</div>`;
     order.appendChild(board);
     const line=$('.gm-order-status-line',board);
-    $$('#order .order-actions a[href*="swiggy"],#order .order-actions a[href*="zomato"]').forEach(link=>{
+    $$('#order [data-order-platform],#order .order-actions a[href*="swiggy"],#order .order-actions a[href*="zomato"]').forEach(link=>{
       link.addEventListener('click',e=>{
         if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey) return;
         e.preventDefault();
@@ -679,7 +679,7 @@
   /* ----------------------------------------------------------
      11. CONDIMENT DETAILS — NEW CSS OBJECTS, ONE LOCATION ONLY
      ---------------------------------------------------------- */
-  if(order && !$('.gm-condiment-pair',order)){
+  if(order && !$('.gm-condiment-pair',order) && !order.classList.contains('counter-order-main')){
     const pair=document.createElement('div');
     pair.className='gm-condiment-pair';
     pair.setAttribute('aria-label','Diner condiment details');
