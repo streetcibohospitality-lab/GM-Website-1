@@ -693,3 +693,49 @@ body[data-page="menu"] .dot.nv{
     grid-template-columns:1fr;
   }
 }
+
+
+/* =============================================================
+   LIVE CSS TEAM BOARD
+   Interactive recreation of the supplied team poster.
+   ============================================================= */
+.team-live-wrap{min-width:0;align-self:start}
+.team-live-board{position:relative;overflow:hidden;min-height:100%;padding:clamp(22px,3vw,38px);color:var(--gm-grey);background:radial-gradient(circle at 20% 18%,rgba(58,58,58,.035) 0 1px,transparent 1.5px) 0 0/17px 17px,linear-gradient(180deg,#fffdf6 0%,#f1eadc 100%);border:6px solid #f5eee0;outline:4px solid var(--gm-red);outline-offset:-13px;box-shadow:0 0 0 4px #171717,10px 12px 0 rgba(58,58,58,.16);isolation:isolate}
+.team-live-board::before{content:"";position:absolute;inset:18px;border:2px solid rgba(235,0,0,.14);pointer-events:none}
+.team-live-board::after{content:"";position:absolute;left:0;right:0;bottom:0;height:24px;background:linear-gradient(174deg,transparent 0 48%,var(--gm-teal) 49% 60%,transparent 61%),linear-gradient(176deg,transparent 0 64%,var(--gm-red) 65% 100%);pointer-events:none}
+.team-live-brand{position:relative;z-index:2;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:18px;padding:8px 14px 14px}
+.team-live-brand img{width:clamp(62px,7vw,92px);height:clamp(62px,7vw,92px);object-fit:contain;filter:drop-shadow(0 2px 0 rgba(58,58,58,.16))}
+.team-live-brand__name{font-family:var(--f-display,"Arial Black",sans-serif);font-size:clamp(2rem,4.6vw,4.6rem);line-height:.8;font-weight:400;letter-spacing:.025em}
+.team-live-brand__tag{margin-top:10px;color:#117f82;font-size:clamp(.52rem,.95vw,.78rem);line-height:1;font-weight:900;letter-spacing:.09em}
+.team-live-rule{display:flex;align-items:center;justify-content:center;gap:12px;margin:20px 0 18px}
+.team-live-rule span{flex:1 1 80px;height:2px;background:var(--gm-red)}
+.team-live-rule i{color:var(--gm-red);font-style:normal;font-size:1rem}
+.team-live-rule strong{font-family:var(--f-display,"Arial Black",sans-serif);font-size:clamp(1.3rem,2.5vw,2.25rem);line-height:1;font-weight:400;white-space:nowrap}
+.team-live-people{position:relative;display:grid;grid-template-columns:1.22fr 1fr 1fr;gap:0;margin:10px 0 22px}
+.team-person{position:relative;min-width:0;min-height:230px;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:26px 18px 28px;color:var(--gm-grey);text-decoration:none;border-left:1px solid rgba(235,0,0,.65);transition:opacity .22s ease,transform .22s cubic-bezier(.22,1,.36,1)}
+.team-person:first-child{border-left:0}
+.team-person--founder{align-items:flex-start;padding-left:8px;padding-right:28px}
+.team-person__eyebrow{position:absolute;top:8px;left:8px;color:var(--gm-red);font-size:.58rem;line-height:1;font-weight:900;letter-spacing:.11em}
+.team-person__star{display:block;margin-bottom:14px;color:var(--gm-red);font-size:1.15rem;line-height:1;transform-origin:50% 50%;transition:transform .25s cubic-bezier(.2,.9,.25,1.3)}
+.team-person__name{position:relative;display:block;color:var(--gm-grey);font-family:var(--f-display,"Arial Black",sans-serif);font-size:clamp(1.22rem,2.55vw,2.3rem);line-height:.91;font-weight:400;text-align:center;letter-spacing:.015em;text-transform:uppercase;transition:transform .22s cubic-bezier(.22,1,.36,1),text-shadow .18s ease,color .18s ease}
+.team-person--founder .team-person__name{color:var(--gm-red);font-size:clamp(2.55rem,5.5vw,5.2rem);line-height:.82;text-align:left}
+.team-person__underline{display:block;width:56%;height:3px;margin-top:15px;background:var(--gm-teal);transform:scaleX(.58);transform-origin:left center;transition:transform .26s cubic-bezier(.22,1,.36,1)}
+.team-person:not(.team-person--founder) .team-person__underline{transform-origin:center}
+.team-person__linkedin{margin-top:9px;color:var(--gm-red);font-size:.48rem;line-height:1;font-weight:900;letter-spacing:.12em;opacity:0;transform:translateY(5px);transition:opacity .18s ease,transform .18s ease}
+.team-person:hover,.team-person:focus-visible{transform:translateY(-3px);outline:2px solid transparent;outline-offset:4px}
+.team-person:hover .team-person__name,.team-person:focus-visible .team-person__name{transform:translateY(-2px);text-shadow:2px 0 0 rgba(0,221,194,.52),-2px 0 0 rgba(235,0,0,.28);animation:teamRegistrationSnap .26s ease-out both}
+.team-person:hover .team-person__star,.team-person:focus-visible .team-person__star{transform:rotate(14deg) scale(1.12)}
+.team-person:hover .team-person__underline,.team-person:focus-visible .team-person__underline{transform:scaleX(1)}
+.team-person:hover .team-person__linkedin,.team-person:focus-visible .team-person__linkedin{opacity:1;transform:translateY(0)}
+.team-live-people:has(.team-person:hover) .team-person:not(:hover),.team-live-people:has(.team-person:focus-visible) .team-person:not(:focus-visible){opacity:.68}
+@keyframes teamRegistrationSnap{0%{text-shadow:0 0 0 rgba(0,221,194,0),0 0 0 rgba(235,0,0,0)}46%{text-shadow:3px 0 0 rgba(0,221,194,.62),-3px 0 0 rgba(235,0,0,.36)}100%{text-shadow:2px 0 0 rgba(0,221,194,.52),-2px 0 0 rgba(235,0,0,.28)}}
+.team-live-divider{display:flex;align-items:center;gap:12px;max-width:78%;margin:4px auto 20px}
+.team-live-divider span{flex:1;height:2px;background:var(--gm-grey)}
+.team-live-divider b{color:var(--gm-red);font-size:.78rem;letter-spacing:.22em}
+.team-live-copy{position:relative;z-index:2;max-width:54ch;margin:0 auto;padding:0 18px 32px;color:var(--gm-grey);font-size:clamp(.72rem,1.15vw,.9rem);line-height:1.65;text-align:center}
+.team-live-stars{position:absolute;left:24px;right:24px;bottom:42px;display:flex;justify-content:space-between;color:var(--gm-teal);font-size:2.2rem;opacity:.92;pointer-events:none}
+.team-live-stars i{font-style:normal}
+.team-archive-caption{margin-top:14px;padding:9px 12px 8px;border-left:4px solid var(--gm-red);color:var(--gm-grey);background:rgba(240,239,233,.62);font-size:.49rem;line-height:1;font-weight:900;letter-spacing:.13em}
+@media(max-width:920px){.team-live-people{grid-template-columns:1fr}.team-person{min-height:auto;padding:24px 12px;border-left:0;border-top:1px solid rgba(235,0,0,.42)}.team-person:first-child{border-top:0}.team-person--founder{align-items:center;padding-left:12px;padding-right:12px}.team-person__eyebrow{position:static;margin-bottom:10px}.team-person--founder .team-person__name{text-align:center;font-size:clamp(2.8rem,12vw,4.9rem)}.team-person__linkedin{opacity:.72;transform:none}.team-person__underline{transform:scaleX(.9);transform-origin:center}.team-live-divider{max-width:92%}}
+@media(max-width:560px){.team-live-board{padding:20px 16px 28px}.team-live-brand{grid-template-columns:54px 1fr;gap:12px;padding-inline:8px}.team-live-brand img{width:54px;height:54px}.team-live-brand__name{font-size:2rem}.team-live-brand__tag{font-size:.43rem}.team-live-rule{gap:7px}.team-live-rule strong{font-size:1.35rem}.team-live-rule i{font-size:.76rem}.team-live-copy{padding-inline:6px}}
+@media(prefers-reduced-motion:reduce){.team-person,.team-person__name,.team-person__star,.team-person__underline,.team-person__linkedin{animation:none!important;transition:none!important}}

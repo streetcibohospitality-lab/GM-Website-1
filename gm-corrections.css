@@ -367,3 +367,64 @@
 .story-origin-poster.story-origin-photo:has(img[src*="founder-team-poster"]){
   aspect-ratio:1 / 1;
 }
+
+/* ============================================================
+   LIVE CSS TEAM BOARD — AA CORRECTIONS
+   All three sit on Sorta White at normal-text sizes (12.48px and
+   9.28px), so 4.5:1 applies rather than the large-text threshold.
+   ============================================================ */
+
+/* #117F82 on Sorta White is 4.16:1; --gm-teal-ink is 4.74:1. */
+.team-live-brand__tag{
+  color:var(--gm-teal-ink,#00776A);
+}
+
+/* Monkey Red on Sorta White is 4.02:1; --gm-red-ink is 4.51:1. The star
+   divider is decorative and would be exempt, but it is real text in the
+   accessibility tree and the ink is visually indistinguishable here. */
+.team-person__eyebrow,
+.team-live-divider > b{
+  color:var(--gm-red-ink,#DC0000);
+}
+
+/* ============================================================
+   LIVE CSS TEAM BOARD — NAMES SIZED TO THE BOARD, NOT THE VIEWPORT
+   ============================================================ */
+
+/* The names use viewport units -- clamp(2.55rem,5.5vw,5.2rem) for the
+   founder and clamp(1.22rem,2.55vw,2.3rem) for the other two -- but the
+   board sits in the story's narrow right column, about 378px wide at a
+   1440 viewport, so each name column is roughly 117-143px. 5.5vw is 79px
+   of display type in a 143px column. Measured at 1440, the founder name
+   ran 141px past its own column and straight across the next one, and
+   the other two overflowed 53px each: all three names overlapped.
+   Sized against the board instead so the type tracks the space it
+   actually occupies. Below 921px the board is a single full-width
+   column and already fits, so this is scoped above that. */
+@media(min-width:921px){
+  .team-live-people{
+    container-type:inline-size;
+    container-name:gmteam;
+  }
+  .team-person__name{
+    font-size:clamp(.62rem, 5.4cqw, 1.24rem);
+    hyphens:none;
+  }
+  .team-person--founder .team-person__name{
+    font-size:clamp(.9rem, 9.4cqw, 2.1rem);
+  }
+}
+
+/* The brand lockup has the same problem: clamp(2rem,4.6vw,4.6rem) is
+   66px at a 1440 viewport, and the name sits in a 152px cell inside the
+   378px board. Measured scrollWidth 271 against clientWidth 152, so
+   "GRUB MONKEYS" rendered as "GRUB MONKE". Sized against the lockup. */
+@media(min-width:921px){
+  .team-live-brand{
+    container-type:inline-size;
+    container-name:gmteambrand;
+  }
+  .team-live-brand__name{
+    font-size:clamp(1rem, 12cqw, 2.4rem);
+  }
+}
