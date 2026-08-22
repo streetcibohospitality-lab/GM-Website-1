@@ -1,0 +1,5 @@
+# Grub Monkeys — https://www.grubmonkeys.in/
+User-agent: *
+Allow: /
+
+Sitemap: https://www.grubmonkeys.in/sitemap.xml
