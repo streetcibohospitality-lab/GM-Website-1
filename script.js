@@ -612,3 +612,29 @@
   button.addEventListener('click',printTicket);
   if(timeEl) timeEl.textContent=liveTime();
 })();
+
+/* GRUB MONKEYS — vinyl storage reveal around jukebox */
+(function(){
+  const field=document.querySelector('.juke-vinyl-field');
+  const rack=document.getElementById('vinylRack');
+  const records=document.getElementById('vinylRackRecords');
+  if(!field || !rack || !records) return;
+
+  function setOpen(open){
+    field.classList.toggle('is-open',open);
+    rack.setAttribute('aria-expanded',String(open));
+    records.setAttribute('aria-hidden',String(!open));
+    const subtitle=rack.querySelector('.vinyl-rack__subtitle');
+    if(subtitle) subtitle.textContent=open ? 'TAP TO CLOSE' : 'TAP TO OPEN';
+  }
+
+  setOpen(false);
+
+  rack.addEventListener('click',()=>{
+    setOpen(!field.classList.contains('is-open'));
+  });
+
+  document.addEventListener('keydown',event=>{
+    if(event.key==='Escape' && field.classList.contains('is-open')) setOpen(false);
+  });
+})();

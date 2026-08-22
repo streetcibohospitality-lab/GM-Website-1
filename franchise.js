@@ -7,6 +7,10 @@
   const SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndwemZ0bHFxdHVmdHp5Znd0cGtwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY0MjkwMzQsImV4cCI6MjEwMjAwNTAzNH0.VzwizMxvAlI4KX3DOHmOTQZwFcO76X90HAhKC9rIBKc';
   const btn=document.getElementById('franchiseSubmitBtn');
   const status=document.getElementById('franchiseStatus');
+  const formReadyAt=performance.now();
+  const RATE_KEY='gmFranchiseLastSubmitAt';
+  const MIN_FILL_MS=1200;
+  const RESUBMIT_MS=30000;
 
   function setStatus(message,type=''){
     if(status){status.textContent=message;status.dataset.type=type;}
@@ -16,6 +20,15 @@
     e.preventDefault();
     setStatus('');
     if(document.getElementById('fi-company')?.value) return;
+    if(performance.now()-formReadyAt<MIN_FILL_MS){
+      setStatus('Please take a moment to review your details before submitting.','error');
+      return;
+    }
+    const lastSubmit=Number(sessionStorage.getItem(RATE_KEY)||0);
+    if(lastSubmit && Date.now()-lastSubmit<RESUBMIT_MS){
+      setStatus('Your enquiry was just submitted. Please wait a moment before sending another.','error');
+      return;
+    }
     if(!form.reportValidity()){
       /* reportValidity() pops the browser's own bubble on a single field, which
          a screen reader user may never receive. Name the outstanding fields in
@@ -45,15 +58,16 @@
           Prefer:'return=minimal'
         },
         body:JSON.stringify({
-          full_name:document.getElementById('fi-name').value.trim(),
-          phone:document.getElementById('fi-phone').value.trim(),
-          email:document.getElementById('fi-email').value.trim(),
-          city:document.getElementById('fi-city').value.trim(),
-          budget:document.getElementById('fi-budget').value||null,
-          message:document.getElementById('fi-message').value.trim()||null
+          full_name:document.getElementById('fi-name').value.trim().slice(0,80),
+          phone:document.getElementById('fi-phone').value.trim().slice(0,24),
+          email:document.getElementById('fi-email').value.trim().slice(0,120),
+          city:document.getElementById('fi-city').value.trim().slice(0,80),
+          budget:(document.getElementById('fi-budget').value||'').slice(0,40)||null,
+          message:document.getElementById('fi-message').value.trim().slice(0,800)||null
         })
       });
       if(!response.ok) throw new Error(`HTTP ${response.status}`);
+      sessionStorage.setItem(RATE_KEY,String(Date.now()));
       form.reset();
       btn.textContent='Enquiry Sent';
       btn.style.background='var(--gm-teal)';

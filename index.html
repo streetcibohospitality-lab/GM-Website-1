@@ -6,13 +6,8 @@
 <meta name="theme-color" content="#3A3A3A">
 <link rel="preload" as="font" type="font/woff2" href="fonts/Jaro-Regular.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="fonts/Lexend-400.woff2" crossorigin>
-<link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="retro-ambient.css">
-<link rel="stylesheet" href="material-light.css">
-<link rel="stylesheet" href="diner-counter-spread.css">
-<link rel="stylesheet" href="interactive-diner.css">
-<link rel="stylesheet" href="new-motion.css">
-<link rel="stylesheet" href="final-detail-pass.css">
+<link rel="stylesheet" href="styles-base.css">
+<link rel="stylesheet" href="styles-interactive.css">
 <link rel="stylesheet" href="gm-corrections.css">
 <link rel="icon" href="favicon.png" type="image/png">
 
@@ -36,7 +31,10 @@
       "logo": "https://www.grubmonkeys.in/images/img-002.jpg",
       "sameAs": [
         "https://www.instagram.com/grubmonkeysbangalore/",
-        "https://www.instagram.com/grubmonkeysmangalore/"
+        "https://www.instagram.com/grubmonkeysmanipal/",
+        "https://www.instagram.com/grubmonkeysmysore/",
+        "https://www.instagram.com/grubmonkeysmangalore/",
+        "https://www.instagram.com/grubmonkeysmoodbidri/"
       ]
     },
     {
@@ -285,8 +283,8 @@
 </div>
     <div class="hero-city-line">Bengaluru · Manipal · Mangalore · Moodbidri · Mysore</div>
   </div>
-  <div class="hero-photo-panel">
-    <img src="images/food/01-korean-kong-hero.jpeg" alt="Grub Monkeys Korean Kong fried chicken burger on a red diner counter" width="1536" height="1024" fetchpriority="high" decoding="async">
+  <div class="hero-photo-panel hero-photo-panel--korean-kong">
+    <img class="hero-photo-image hero-photo-image--korean-kong" src="images/food/01-korean-kong-hero-new.webp" alt="Grub Monkeys Korean Kong fried chicken burger on a red diner counter" width="1122" height="1402" fetchpriority="high" decoding="async">
     <div class="hero-photo-label"><span>GM / THE GRUB</span><strong>KOREAN KONG</strong></div>
     <div class="hero-photo-stamp" aria-hidden="true">HOT<br>GRUB</div>
   </div>
@@ -389,7 +387,7 @@
           <div class="sig-item-name">PBJ Shake</div>
           <span class="sig-item-price">₹160</span>
         </div>
-        <div class="sig-item-desc">Thick enough to eat with a spoon.</div>
+        <div class="sig-item-desc">Thick, creamy peanut butter shake swirled with jelly.</div>
       </div>
     </div>
 
@@ -399,10 +397,10 @@
       <span class="retro-frame-glint" aria-hidden="true"></span></div>
       <div class="sig-item-label">
         <div class="sig-item-title-row">
-          <div class="sig-item-name">MOAW — Spicy Pulled Chicken</div>
-          <span class="sig-item-price">₹170</span>
+          <div class="sig-item-name">MOAW — Batter Fried Chicken</div>
+          <span class="sig-item-price">₹180</span>
         </div>
-        <div class="sig-item-desc">Mother Of All Wraps: romaine, red cabbage, bell peppers, fries, cheese and chipotle, rolled tight.</div>
+        <div class="sig-item-desc">Mother Of All Wraps: romaine, red cabbage, bell peppers, fries, cheese and chipotle, packed with batter fried chicken.</div>
       </div>
     </div>
   </div>
@@ -420,9 +418,9 @@
   <h2 class="poster-h" style="color:var(--gm-white); font-size:clamp(2.4rem,6vw,4.6rem);">Walk In. <em>Stay A While.</em></h2>
 </div>
 <div class="atmo-neon-elements" aria-hidden="true">
-  <span class="atmo-neon atmo-neon--star">★</span>
-  <span class="atmo-neon atmo-neon--bolt">↯</span>
-  <span class="atmo-neon atmo-neon--sixty3">63</span>
+  <span class="atmo-neon-sign">
+    <img src="images/american-diner-neon.webp" alt="" width="1100" height="367">
+  </span>
 </div>
 </div>
 <div class="atmo-grid">
@@ -439,6 +437,7 @@
 <div class="atmo-tag on"><em>Checkerboard</em> Floors.</div>
 <div class="atmo-tag on">Big Burgers.</div>
 <div class="atmo-tag on">Loud Rock.</div>
+<span class="atmo-panel-indicator" aria-hidden="true"></span>
 <div class="atmo-race-strip" aria-hidden="true"><span></span></div>
 </div>
 </div>
@@ -483,9 +482,14 @@
             <span class="clock-zone">IST</span>
           </div>
         </div>
-        <div class="matchbook-deco" aria-hidden="true">
+        <div class="matchbook-deco matchbook-deco--stat" role="img" aria-label="Served 10 lakh plus customers">
           <div class="matchbook-lid"></div>
-          <div class="matchbook-brand">GRUB MONKEYS</div>
+          <div class="matchbook-inside">
+            <span class="matchbook-kicker">SERVED</span>
+            <strong class="matchbook-stat">10 LAKH+</strong>
+            <span class="matchbook-sub">CUSTOMERS</span>
+          </div>
+          <div class="matchbook-brand">AND COUNTING</div>
         </div>
       </div>
     </div>
@@ -633,7 +637,7 @@
 <div class="loc-row-name-wrap" tabindex="0" role="button" aria-label="Select Koramangala 8th Block as your diner">
 <div class="loc-row-tag">Bengaluru</div>
 <div class="loc-row-name">Koramangala 8th Block</div>
-<div class="loc-live-status" data-loc-status><span aria-hidden="true"></span><b>CHECKING HOURS…</b></div>
+<div class="loc-live-status" data-loc-status><span aria-hidden="true"></span><b>DINING HOURS TO CONFIRM</b></div>
 </div>
 <div class="loc-row-address">20, MIG, Ground Floor, KHB Colony, Koramangala 8th Block, Bengaluru</div>
 <div class="loc-row-links">
@@ -674,11 +678,24 @@
 </section>
 <section class="jukebox-section" id="jukebox">
   <div class="retro-upholstery retro-upholstery--dark retro-upholstery--jukebox" aria-hidden="true"></div>
-  <div class="juke-vinyl-field" aria-hidden="true">
-    <span class="loose-vinyl loose-vinyl--one"><i>63</i></span>
-    <span class="loose-vinyl loose-vinyl--two"><i>GM</i></span>
-    <span class="loose-vinyl loose-vinyl--three"><i>A1</i></span>
-    <span class="loose-vinyl loose-vinyl--four"><i>ROCK</i></span>
+  <div class="juke-vinyl-field">
+    <button type="button" class="vinyl-rack" id="vinylRack" aria-expanded="false" aria-controls="vinylRackRecords">
+      <span class="vinyl-rack__hinge" aria-hidden="true"></span>
+      <span class="vinyl-rack__title">VINYL STACK</span>
+      <span class="vinyl-rack__subtitle">TAP TO OPEN</span>
+      <span class="vinyl-rack__sleeves" aria-hidden="true">
+        <i class="vinyl-rack__sleeve vinyl-rack__sleeve--one"></i>
+        <i class="vinyl-rack__sleeve vinyl-rack__sleeve--two"></i>
+        <i class="vinyl-rack__sleeve vinyl-rack__sleeve--three"></i>
+      </span>
+    </button>
+    <div class="vinyl-rack-records" id="vinylRackRecords" aria-hidden="true">
+      <span class="vinyl-card vinyl-card--one"><b>ROUTE 63</b><small>ROADHOUSE ROCK</small></span>
+      <span class="vinyl-card vinyl-card--two"><b>JUKE JOINT</b><small>CLASSIC CUTS</small></span>
+      <span class="vinyl-card vinyl-card--three"><b>MONKEY FM</b><small>LOUD &amp; LIVE</small></span>
+      <span class="vinyl-card vinyl-card--four"><b>HOT WAX</b><small>DINER HITS</small></span>
+      <span class="vinyl-card vinyl-card--five"><b>GARAGE GOLD</b><small>ALL NIGHT</small></span>
+    </div>
   </div>
   <div class="juke-ghost-code" aria-hidden="true">A1</div>
   <div class="jukebox-copy reveal">
@@ -780,43 +797,43 @@
           <article class="review-slide review-slide--google">
             <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
             <p class="review-quote">My kid loved the place — so many board games. The burgers were yummy, and the fish and chips was really good.</p>
-            <div class="review-meta">Priyanka A. · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grub+Monkeys+Mangalore" rel="noopener" target="_blank">5★ Google Review</a> · Mangalore</div>
+            <div class="review-meta">Priyanka A. · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grub+Monkeys%2C+Platinum+Point+Building%2C+Falnir+Rd%2C+Bendoor%2C+Mangaluru%2C+Karnataka" rel="noopener" target="_blank">5★ Google Review</a> · Mangalore</div>
           </article>
 
           <article class="review-slide review-slide--google">
             <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
             <p class="review-quote">Absolutely loved the experience — delicious food, cozy ambience, welcoming service, and a perfect addition to Mangalore’s cafe scene.</p>
-            <div class="review-meta">Trishal P. · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grub+Monkeys+Mangalore" rel="noopener" target="_blank">5★ Google Review</a> · Mangalore</div>
+            <div class="review-meta">Trishal P. · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grub+Monkeys%2C+Platinum+Point+Building%2C+Falnir+Rd%2C+Bendoor%2C+Mangaluru%2C+Karnataka" rel="noopener" target="_blank">5★ Google Review</a> · Mangalore</div>
           </article>
 
           <article class="review-slide review-slide--google">
             <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
             <p class="review-quote">Loved the American diner vibes! The crispy chicken burger was juicy and crunchy, and the wings were bursting with flavor.</p>
-            <div class="review-meta">Shaswath S. · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grub+Monkeys+Mangalore" rel="noopener" target="_blank">5★ Google Review</a> · Mangalore</div>
+            <div class="review-meta">Shaswath S. · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grub+Monkeys%2C+Platinum+Point+Building%2C+Falnir+Rd%2C+Bendoor%2C+Mangaluru%2C+Karnataka" rel="noopener" target="_blank">5★ Google Review</a> · Mangalore</div>
           </article>
 
           <article class="review-slide review-slide--google">
             <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
             <p class="review-quote">Good food and even better vibes — cozy, comfortable and welcoming, with every dish tasty and well presented.</p>
-            <div class="review-meta">Nishmitha S. · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grub+Monkeys+Mangalore" rel="noopener" target="_blank">5★ Google Review</a> · Mangalore</div>
+            <div class="review-meta">Nishmitha S. · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grub+Monkeys%2C+Platinum+Point+Building%2C+Falnir+Rd%2C+Bendoor%2C+Mangaluru%2C+Karnataka" rel="noopener" target="_blank">5★ Google Review</a> · Mangalore</div>
           </article>
 
           <article class="review-slide review-slide--google">
             <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
             <p class="review-quote">Fabulous ambience. Must visit. Delicious dining.</p>
-            <div class="review-meta">Shri N. · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grub+Monkeys+Mangalore" rel="noopener" target="_blank">5★ Google Review</a> · Mangalore</div>
+            <div class="review-meta">Shri N. · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grub+Monkeys%2C+Platinum+Point+Building%2C+Falnir+Rd%2C+Bendoor%2C+Mangaluru%2C+Karnataka" rel="noopener" target="_blank">5★ Google Review</a> · Mangalore</div>
           </article>
 
           <article class="review-slide review-slide--google">
             <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
             <p class="review-quote">Great food and nice ambiance!</p>
-            <div class="review-meta">Preethika A. · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grub+Monkeys+Mangalore" rel="noopener" target="_blank">5★ Google Review</a> · Mangalore</div>
+            <div class="review-meta">Preethika A. · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grub+Monkeys%2C+Platinum+Point+Building%2C+Falnir+Rd%2C+Bendoor%2C+Mangaluru%2C+Karnataka" rel="noopener" target="_blank">5★ Google Review</a> · Mangalore</div>
           </article>
 
           <article class="review-slide review-slide--google">
             <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
             <p class="review-quote">Felt like being back home — familiar burgers, now with a little retro American diner ambience.</p>
-            <div class="review-meta">Aysha T. · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grub+Monkeys+Mangalore" rel="noopener" target="_blank">5★ Google Review</a> · Mangalore</div>
+            <div class="review-meta">Aysha T. · <a href="https://www.google.com/maps/search/?api=1&amp;query=Grub+Monkeys%2C+Platinum+Point+Building%2C+Falnir+Rd%2C+Bendoor%2C+Mangaluru%2C+Karnataka" rel="noopener" target="_blank">5★ Google Review</a> · Mangalore</div>
           </article>
         </div>
 
@@ -930,9 +947,11 @@
       <div class="foot-col-title">Follow Us</div>
       <ul class="foot-links">
         <li><a href="https://www.instagram.com/grubmonkeysbangalore/" target="_blank" rel="noopener">Instagram — Bangalore</a></li>
+        <li><a href="https://www.instagram.com/grubmonkeysmanipal/" target="_blank" rel="noopener">Instagram — Manipal</a></li>
+        <li><a href="https://www.instagram.com/grubmonkeysmysore/" target="_blank" rel="noopener">Instagram — Mysore</a></li>
         <li><a href="https://www.instagram.com/grubmonkeysmangalore/" target="_blank" rel="noopener">Instagram — Mangalore</a></li>
+        <li><a href="https://www.instagram.com/grubmonkeysmoodbidri/" target="_blank" rel="noopener">Instagram — Moodbidri</a></li>
         <li><a href="https://in.linkedin.com/in/mueen-ahmed90" target="_blank" rel="noopener">Founder — LinkedIn</a></li>
-        <li><a href="https://www.zomato.com/bangalore/restaurants/grub-monkeys" target="_blank" rel="noopener">Zomato</a></li>
       </ul>
     </div>
   </div>
@@ -940,7 +959,7 @@
   <div class="foot-bottom">
     <span>© <span class="js-year"></span> Grub Monkeys — A StreetCibo Hospitality Pvt Ltd brand. All rights reserved.</span>
     <div class="foot-social">
-      <a href="https://www.instagram.com/grubmonkeysbangalore/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.instagram.com/grubmonkeysbangalore/" target="_blank" rel="noopener">Instagram — Bangalore</a>
       <a href="https://www.swiggy.com/city/bangalore/grub-monkeys" target="_blank" rel="noopener">Swiggy</a>
       <a href="https://www.zomato.com/bangalore/restaurants/grub-monkeys" target="_blank" rel="noopener">Zomato</a>
     </div>

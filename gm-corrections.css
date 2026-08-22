@@ -437,3 +437,19 @@
     font-size:clamp(1rem, 12cqw, 2.4rem);
   }
 }
+
+/* ============================================================
+   DINER PANEL — TWO-TONE HEADLINE
+   ============================================================ */
+
+/* .atmo-tag em uses --gm-grey on the red panel for the emphasised word
+   ("RED", "CHECKERBOARD"). #3A3A3A on #EB0000 is 2.45:1, and at ~49px
+   this is large text needing 3:1. Darkened to #222222 (3.43:1), which
+   still reads as the brand charcoal against red rather than pure black
+   and keeps the two-tone treatment intact. Note this is the inverse of
+   the "Stay A While." case above it, where Monkey Red sits on charcoal:
+   that one cannot be fixed without changing the red itself, so it is
+   left as a brand decision. */
+.atmo-tag em{
+  color:#222222;
+}
