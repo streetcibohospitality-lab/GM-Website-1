@@ -399,7 +399,12 @@
     if(!row) return;
     selectedDinerSlug=row.dataset.diner;
     if(persist){ try{sessionStorage.setItem(selectedDinerKey,selectedDinerSlug);}catch(err){} }
-    locRows.forEach(r=>r.classList.toggle('is-selected-diner',r===row));
+    locRows.forEach(r=>{
+      const selected=r===row;
+      r.classList.toggle('is-selected-diner',selected);
+      const picker=r.querySelector('.loc-row-name-wrap[role="button"]');
+      if(picker) picker.setAttribute('aria-pressed',selected?'true':'false');
+    });
     previewDiner(row);
     const status=statusForRow(row);
     const label=(row.querySelector('.loc-row-name')?.textContent||'Your diner').trim();
@@ -414,6 +419,12 @@
     picker?.addEventListener('click',()=>applySelectedDiner(row,true));
     picker?.addEventListener('keydown',evt=>{
       if(evt.key==='Enter' || evt.key===' '){evt.preventDefault();applySelectedDiner(row,true);}
+    });
+    /* On touch screens there is no hover. Make the whole location card an
+       intentional selection target while preserving its Call/Order/Directions links. */
+    row.addEventListener('click',evt=>{
+      if(evt.target.closest('a,button,.loc-row-name-wrap')) return;
+      applySelectedDiner(row,true);
     });
     row.querySelectorAll('.loc-row-links a').forEach(link=>link.addEventListener('click',()=>applySelectedDiner(row,true)));
   });

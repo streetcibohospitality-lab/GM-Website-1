@@ -216,17 +216,10 @@
   padding-bottom:26px;
 }
 
-/* Footer and franchise teaser: trim the leading/trailing bands that
-   carry no type. */
-.foot-tagline{
-  padding-top:38px;
-  padding-bottom:28px;
-}
-.foot-grid{
-  padding-top:32px;
-  padding-bottom:24px;
-  gap:32px;
-}
+/* Footer trims removed: the footer was redesigned in the Aug 22 refinement
+   pass, which sets its own tagline padding, columns, gap and grid padding.
+   The old .foot-tagline and .foot-grid trims here were written against the
+   previous footer and, loading last, would have overridden the new one. */
 .franchise-teaser-home .fr-teaser{
   padding-top:24px;
   padding-bottom:24px;
@@ -505,3 +498,26 @@ body[data-page="franchise"] .gm-fr-phone__video{
    1.5:1. Against the bar that actually renders it is 7.63:1 to 10.45:1.
    Recolouring it to --gm-teal-ink would have dropped it to 2.42-3.31:1.
    Check the painted background before "fixing" anything on that bar. */
+
+/* ============================================================
+   FOOTER SMALL TEXT — AA CORRECTIONS
+   The footer was rebuilt in the Aug 22 refinement pass. Its supporting
+   copy is Sorta White at low alpha over the charcoal ground, which
+   composites well below AA at these sizes. Alphas raised to clear 4.5:1
+   while keeping the tiered hierarchy: links brightest, then the parent
+   brand line, then the copyright.
+     0.32 composites to rgb(116,116,114) .... 2.43:1
+     0.60 composites to rgb(167,167,163) .... 4.71:1
+   ============================================================ */
+.foot-links a{
+  color:rgba(240,239,233,.72);
+}
+.foot-parent{
+  color:rgba(240,239,233,.62);
+}
+.foot-bottom{
+  color:rgba(240,239,233,.60);
+}
+.foot-social a{
+  color:rgba(240,239,233,.72);
+}

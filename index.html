@@ -8,6 +8,7 @@
 <link rel="preload" as="font" type="font/woff2" href="fonts/Lexend-400.woff2" crossorigin>
 <link rel="stylesheet" href="styles-base.css">
 <link rel="stylesheet" href="styles-interactive.css">
+<link rel="stylesheet" href="styles-refinement.css">
 <link rel="stylesheet" href="gm-corrections.css">
 <link rel="icon" href="favicon.png" type="image/png">
 
@@ -418,9 +419,21 @@
   <h2 class="poster-h" style="color:var(--gm-white); font-size:clamp(2.4rem,6vw,4.6rem);">Walk In. <em>Stay A While.</em></h2>
 </div>
 <div class="atmo-neon-elements" aria-hidden="true">
-  <span class="atmo-neon-sign">
-    <img src="images/american-diner-neon.webp" alt="" width="1100" height="367">
-  </span>
+  <div class="gm-diner-marquee">
+    <div class="gm-diner-marquee__meta">
+      <span>GM / DINER 63</span>
+      <i></i>
+      <span>OPEN FOR GRUB</span>
+    </div>
+    <span class="atmo-neon-sign">
+      <img src="images/american-diner-neon.webp" alt="" width="1100" height="367">
+    </span>
+    <div class="gm-diner-marquee__rail">
+      <span>BURGERS · WINGS · SHAKES</span>
+      <b></b>
+      <small>MANIPAL → KARNATAKA</small>
+    </div>
+  </div>
 </div>
 </div>
 <div class="atmo-grid">
@@ -944,8 +957,14 @@
 <footer>
   <div class="foot-tagline poster-h">Eat Like <em>It's 1963.</em></div>
   <div class="foot-grid">
-    <div>
-      <div class="foot-brand">Grub Monkeys</div>
+    <div class="foot-brand-panel">
+      <div class="foot-brand-lockup">
+        <img src="images/img-002.jpg" alt="" width="1032" height="1032">
+        <div>
+          <div class="foot-brand">GRUB MONKEYS</div>
+          <span class="foot-diner-code">BORN IN MANIPAL / DINER 63</span>
+        </div>
+      </div>
       <p class="foot-tag">A 1960s-inspired American diner serving burgers, wings, fries, shakes and more across Karnataka.</p>
       <p class="foot-parent">A StreetCibo Hospitality Pvt Ltd Brand</p>
     </div>

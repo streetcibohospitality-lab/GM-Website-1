@@ -1,0 +1,375 @@
+/* ============================================================
+   GRUB MONKEYS — AUG 22 REFINEMENT PASS
+   ------------------------------------------------------------
+   Design work from the Aug 22 refinement package. It arrived appended
+   to gm-corrections.css; split out here so the corrections layer stays
+   what its own header promises -- fixes applied on top of the design,
+   loaded last. Load order is:
+     styles-base -> styles-interactive -> styles-refinement -> gm-corrections
+   ============================================================ */
+
+/* ============================================================
+   AUG 22 — APPROVED VISUAL REFINEMENT PASS
+   Brand lockup, diner transition, conservative rhythm, footer,
+   touch locations, menu selector, franchise reel controls, type.
+   ============================================================ */
+
+/* NAV — stronger brand presence without changing the fixed nav height. */
+nav{padding-top:14px;padding-bottom:14px}
+.nav-logo{gap:12px}
+.nav-logo img{width:46px;height:46px}
+.nav-logo-text{font-size:1.34rem;line-height:.9;letter-spacing:.01em}
+.mm-brand{gap:12px}
+.mm-brand img{width:46px;height:46px}
+.mm-brand .nav-logo-text{font-size:1.28rem}
+@media(max-width:880px){
+  nav{padding-top:12px;padding-bottom:12px}
+  .nav-logo img{width:42px;height:42px}
+  .nav-logo-text{font-size:1.2rem}
+}
+@media(max-width:380px){
+  .nav-logo{gap:8px}
+  .nav-logo img{width:39px;height:39px}
+  .nav-logo-text{font-size:1.08rem}
+}
+
+/* THE DINER — turn the formerly isolated neon into a real architectural
+   marquee. The photo/panel grid below is unchanged. */
+body[data-page="home"] .atmo-head{
+  display:grid;
+  grid-template-columns:minmax(0,1.1fr) minmax(360px,.9fr);
+  align-items:end;
+  gap:clamp(28px,5vw,72px);
+  margin-bottom:22px;
+}
+body[data-page="home"] .atmo-head-copy{min-width:0}
+body[data-page="home"] .atmo-neon-elements{
+  position:relative;
+  inset:auto;
+  width:auto;
+  height:auto;
+  min-height:0;
+  display:block;
+  align-self:end;
+  margin-left:0;
+  padding:0;
+  pointer-events:none;
+}
+body[data-page="home"] .gm-diner-marquee{
+  position:relative;
+  min-width:0;
+  overflow:hidden;
+  isolation:isolate;
+  padding:14px 18px 13px;
+  border:2px solid #efeee8;
+  outline:3px solid #6e6e6b;
+  outline-offset:3px;
+  background:#b60000;
+  box-shadow:
+    0 0 0 6px #a7a7a3,
+    0 0 0 7px #3a3a3a,
+    10px 11px 0 rgba(0,0,0,.2),
+    inset 0 0 0 1px rgba(255,255,255,.16);
+}
+body[data-page="home"] .gm-diner-marquee::before{
+  content:"";
+  position:absolute;
+  z-index:0;
+  inset:0;
+  pointer-events:none;
+  opacity:.32;
+  background:
+    linear-gradient(104deg,transparent 0 34%,rgba(255,255,255,.18) 42%,transparent 50% 100%),
+    repeating-linear-gradient(0deg,rgba(0,0,0,.05) 0 1px,transparent 1px 6px);
+}
+body[data-page="home"] .gm-diner-marquee::after{
+  content:"";
+  position:absolute;
+  z-index:1;
+  inset:7px;
+  border:1px solid rgba(240,239,233,.38);
+  pointer-events:none;
+}
+body[data-page="home"] .gm-diner-marquee__meta,
+body[data-page="home"] .gm-diner-marquee__rail,
+body[data-page="home"] .atmo-neon-sign{position:relative;z-index:2}
+body[data-page="home"] .gm-diner-marquee__meta{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:10px;
+  color:#fff;
+  font-size:.5rem;
+  line-height:1;
+  font-weight:900;
+  letter-spacing:.13em;
+}
+body[data-page="home"] .gm-diner-marquee__meta i{
+  height:1px;
+  background:rgba(0,221,194,.76);
+}
+body[data-page="home"] .atmo-neon-sign{
+  display:grid;
+  place-items:center;
+  width:100%;
+  margin:9px 0 7px;
+  padding:5px 12px;
+}
+body[data-page="home"] .atmo-neon-sign img{
+  display:block;
+  width:min(100%,410px);
+  height:auto;
+  max-height:104px;
+  object-fit:contain;
+  filter:drop-shadow(0 0 4px rgba(235,0,0,.65)) drop-shadow(0 0 10px rgba(255,255,255,.14));
+}
+body[data-page="home"] .gm-diner-marquee__rail{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:10px;
+  padding-top:8px;
+  border-top:1px solid rgba(240,239,233,.42);
+  color:rgba(240,239,233,.94);
+  font-size:.48rem;
+  line-height:1;
+  font-weight:800;
+  letter-spacing:.11em;
+}
+body[data-page="home"] .gm-diner-marquee__rail b{
+  height:4px;
+  border-radius:999px;
+  background:linear-gradient(180deg,#fafaf5,#777 45%,#383838 55%,#d7d7d2);
+}
+body[data-page="home"] .gm-diner-marquee__rail small{
+  color:var(--gm-teal);
+  font:inherit;
+}
+@media(max-width:900px){
+  body[data-page="home"] .atmo-head{
+    grid-template-columns:1fr;
+    gap:22px;
+    margin-bottom:20px;
+  }
+  body[data-page="home"] .gm-diner-marquee{max-width:620px}
+}
+@media(max-width:520px){
+  body[data-page="home"] .gm-diner-marquee{padding:12px 13px 11px}
+  body[data-page="home"] .gm-diner-marquee__meta,
+  body[data-page="home"] .gm-diner-marquee__rail{font-size:.43rem;gap:7px}
+  body[data-page="home"] .gm-diner-marquee__rail{grid-template-columns:1fr auto}
+  body[data-page="home"] .gm-diner-marquee__rail b{display:none}
+  body[data-page="home"] .atmo-neon-sign img{max-height:90px}
+}
+
+/* HOME RHYTHM — deliberately conservative. This only shaves repeated dead
+   space; it does not change section order, grids or feature dimensions. */
+@media(min-width:901px){
+  body[data-page="home"] .locations{padding-top:34px;padding-bottom:38px}
+  body[data-page="home"] .social{padding-top:36px;padding-bottom:46px}
+  body[data-page="home"] .diner-counter-spread{padding-top:30px;padding-bottom:34px}
+  body[data-page="home"] .jukebox-section{padding-top:30px;padding-bottom:30px}
+  body[data-page="home"] .campaign-band,
+  body[data-page="home"] .flipboard-band{padding-top:16px;padding-bottom:16px}
+}
+
+/* LOCATIONS — mobile/touch gets an explicit selected card rather than a hover
+   dependency. Desktop hover behavior is preserved. */
+@media(max-width:900px){
+  body[data-page="home"] .loc-row{
+    position:relative;
+    cursor:pointer;
+    transition:background .18s ease,box-shadow .18s ease,padding-left .18s ease;
+  }
+  body[data-page="home"] .loc-row.is-selected-diner{
+    background:rgba(0,221,194,.09);
+    box-shadow:inset 6px 0 0 var(--gm-teal),inset 0 -1px 0 rgba(58,58,58,.12);
+  }
+  body[data-page="home"] .loc-row.is-selected-diner .loc-row-name{
+    text-decoration:underline;
+    text-decoration-color:var(--gm-teal);
+    text-decoration-thickness:3px;
+    text-underline-offset:5px;
+  }
+  body[data-page="home"] .loc-row-name-wrap[role="button"]{min-height:44px}
+  body[data-page="home"] .loc-row-links{position:relative;z-index:2}
+}
+
+/* MENU — physical selector refinement; same data, same colors, same motion. */
+body[data-page="menu"] .menu-tabs{
+  padding:4px 4px 0;
+  border:2px solid #777773;
+  border-bottom:0;
+  background:linear-gradient(180deg,#8f8f8b 0 3px,#202020 3px 100%);
+  box-shadow:0 5px 0 rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.36);
+}
+body[data-page="menu"] .menu-tab{
+  min-height:57px;
+  border-right:1px solid rgba(240,239,233,.22);
+  border-bottom:3px solid #777773;
+  background:#252525;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),inset 0 -3px 0 rgba(0,0,0,.42);
+}
+body[data-page="menu"] .menu-tab::before{
+  content:"";
+  position:absolute;
+  top:7px;
+  right:7px;
+  width:4px;
+  height:4px;
+  border-radius:50%;
+  background:#797975;
+  box-shadow:0 0 0 1px #111,inset 0 1px 0 rgba(255,255,255,.4);
+}
+body[data-page="menu"] .menu-tab[aria-selected="true"]{
+  transform:translateY(1px);
+  border-bottom-color:#c7c7c2;
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.16),inset 0 -4px 0 rgba(78,0,0,.3);
+}
+body[data-page="menu"] .menu-tab[aria-selected="true"]::before{background:var(--gm-teal)}
+@media(max-width:860px){
+  body[data-page="menu"] .menu-tabs{padding-left:var(--pad-x);padding-top:4px}
+  body[data-page="menu"] .menu-tab{min-height:60px}
+}
+
+/* FRANCHISE REEL — controls become a single hardware dock attached visually
+   to the portrait device instead of three unrelated web buttons. */
+body[data-page="franchise"] .gm-fr-hero-media{gap:10px}
+body[data-page="franchise"] .gm-fr-hero-controls{
+  position:relative;
+  z-index:10;
+  gap:0;
+  padding:5px;
+  border:2px solid #252524;
+  border-radius:12px;
+  background:linear-gradient(180deg,#e9e8e2 0%,#777773 25%,#d8d7d1 47%,#565653 55%,#bdbdb8 100%);
+  box-shadow:0 3px 0 #202020,0 9px 16px rgba(0,0,0,.2);
+}
+body[data-page="franchise"] .gm-fr-hero-controls button{
+  min-height:38px;
+  padding:9px 7px 8px;
+  border:0;
+  border-right:1px solid rgba(240,239,233,.22);
+  border-radius:0;
+  background:#202020;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),inset 0 -2px 0 rgba(0,0,0,.65);
+}
+body[data-page="franchise"] .gm-fr-hero-controls button:first-child{border-radius:7px 0 0 7px}
+body[data-page="franchise"] .gm-fr-hero-controls button:last-child{border-right:0;border-radius:0 7px 7px 0}
+body[data-page="franchise"] .gm-fr-hero-controls button[aria-pressed="true"]{color:var(--gm-teal)}
+body[data-page="franchise"] .gm-fr-hero-controls button:hover{background:#2d2d2c}
+
+/* FOOTER — stronger final brand moment while retaining all existing links. */
+body > footer{
+  position:relative;
+  overflow:hidden;
+  border-top:4px solid #9a9a96;
+  box-shadow:inset 0 2px 0 #f0efe9;
+}
+body > footer::before{
+  content:"GM / DINER 63";
+  position:absolute;
+  right:var(--pad-x);
+  top:18px;
+  color:rgba(240,239,233,.14);
+  font-family:var(--f-display);
+  font-size:clamp(2.5rem,6vw,5.6rem);
+  line-height:1;
+  letter-spacing:.02em;
+  pointer-events:none;
+}
+.foot-tagline{
+  position:relative;
+  padding:48px var(--pad-x) 34px;
+  border-bottom:4px solid var(--gm-red);
+  background:linear-gradient(90deg,rgba(235,0,0,.12),transparent 32%,transparent 68%,rgba(0,221,194,.05));
+}
+.foot-tagline::after{
+  content:"BORN IN MANIPAL · SERVING KARNATAKA";
+  display:block;
+  margin-top:12px;
+  color:var(--gm-teal);
+  font-family:var(--f-body);
+  font-size:.52rem;
+  line-height:1;
+  font-weight:900;
+  letter-spacing:.15em;
+}
+.foot-grid{
+  position:relative;
+  grid-template-columns:minmax(300px,1.55fr) minmax(160px,.8fr) minmax(240px,1fr);
+  gap:clamp(30px,5vw,68px);
+  padding-top:38px;
+  padding-bottom:32px;
+}
+.foot-brand-panel{
+  max-width:520px;
+  padding:18px 20px 17px;
+  border:1px solid rgba(240,239,233,.18);
+  border-left:4px solid var(--gm-red);
+  background:rgba(240,239,233,.025);
+}
+.foot-brand-lockup{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+.foot-brand-lockup img{
+  width:64px;
+  height:64px;
+  flex:0 0 auto;
+  object-fit:cover;
+  border-radius:50%;
+  border:2px solid var(--gm-white);
+  box-shadow:0 0 0 3px var(--gm-red);
+}
+.foot-brand{margin:0;font-size:2rem;line-height:.88}
+.foot-diner-code{
+  display:block;
+  margin-top:7px;
+  color:var(--gm-teal);
+  font-size:.5rem;
+  line-height:1.2;
+  font-weight:900;
+  letter-spacing:.13em;
+}
+.foot-tag{color:rgba(240,239,233,.7);line-height:1.65}
+.foot-parent{color:rgba(240,239,233,.46)}
+.foot-col-title{
+  padding-bottom:8px;
+  border-bottom:1px solid rgba(0,221,194,.46);
+  color:var(--gm-teal);
+}
+.foot-links{gap:0}
+.foot-links li{border-bottom:1px solid rgba(240,239,233,.08)}
+.foot-links a{display:block;padding:8px 0;color:rgba(240,239,233,.72)}
+.foot-bottom{padding-top:20px;border-top:1px solid rgba(240,239,233,.12)}
+@media(max-width:760px){
+  body > footer::before{top:22px;right:14px;font-size:2.5rem}
+  .foot-tagline{padding-top:42px;padding-bottom:28px}
+  .foot-grid{grid-template-columns:1fr;gap:26px;padding-top:30px}
+  .foot-brand-panel{max-width:none}
+  .foot-brand-lockup img{width:58px;height:58px}
+  .foot-brand{font-size:1.8rem}
+  .foot-social{justify-content:center;flex-wrap:wrap}
+}
+
+/* TYPOGRAPHY — utility labels now share one typographic voice across Home,
+   Menu and Franchise. Display headlines and body copy are untouched. */
+.hero-kicker,
+.page-code,
+.order-code,
+.sec-num .t,
+.loc-row-tag,
+.roadside-route,
+.foot-col-title,
+.gm-diner-marquee__meta,
+.gm-diner-marquee__rail{
+  font-family:var(--f-body);
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.13em;
+}
+.page-code,.order-code{font-size:.62rem;line-height:1.3}
+.sec-num .t{font-size:.68rem;line-height:1.2}
+.loc-row-tag,.roadside-route{line-height:1.25}
+
+@media(prefers-reduced-motion:reduce){
+  body[data-page="menu"] .menu-tab{transition:none!important}
+}
