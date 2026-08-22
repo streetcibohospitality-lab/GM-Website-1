@@ -473,3 +473,40 @@ body[data-page="menu"] .menu-row .name{
   flex:1 1 auto;
   min-width:0;
 }
+
+/* Paired with gm-corrections.js: when the vibe-check reel cannot be
+   used, the controls are disabled and the frame is dimmed slightly so
+   the poster reads as a still rather than a paused video. */
+.gm-fr-vibe__screen.is-unavailable{
+  filter:grayscale(.35);
+}
+
+/* ============================================================
+   FRANCHISE VIBE CHECK — AA CORRECTIONS
+   ============================================================ */
+
+/* These carry the body[data-page="franchise"] prefix to match the
+   specificity of the rules they override: a bare class selector loses to
+   them even though this file loads later. */
+
+/* Sorta White on Monkey Red is 4.02:1 at 8.8px; pure white is 4.63:1. */
+body[data-page="franchise"] .gm-fr-vibe__badge{
+  color:#FFFFFF;
+}
+
+/* NOT corrected: .gm-fr-vibe__controls-label reads as a failure to the
+   contrast sweep, which resolves backgrounds by walking up for the first
+   opaque background-color. The controls bar paints itself with a
+   background-IMAGE gradient, rgb(48,48,47) to rgb(22,22,22), which that
+   walk skips, so the sweep attributes the section's cream to the label
+   and scores brand teal at 1.5:1. Against the bar that actually renders,
+   #00DDC2 measures 7.63:1 at the light end and 10.45:1 at the dark end.
+   Recolouring it to --gm-teal-ink would have dropped it to 2.42-3.31:1.
+   Left as authored. */
+
+/* The <video> fallback copy inherits the grey ink and sits on the near
+   black screen at 1.66:1. It is only rendered when the browser cannot
+   play video at all, which is exactly when it has to be readable. */
+.gm-fr-vibe__video{
+  color:var(--gm-white,#F0EFE9);
+}

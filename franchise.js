@@ -82,3 +82,84 @@
     }
   });
 })();
+
+/* FRANCHISE — Option B / Vibe Check video controls */
+(function(){
+  const video=document.getElementById('gmFrVibeVideo');
+  const screen=document.getElementById('gmFrVibeScreen');
+  const screenToggle=document.getElementById('gmFrVibeScreenToggle');
+  const playButton=document.getElementById('gmFrVibePlay');
+  const soundButton=document.getElementById('gmFrVibeSound');
+  const restartButton=document.getElementById('gmFrVibeRestart');
+  if(!video || !screen || !screenToggle || !playButton || !soundButton || !restartButton) return;
+
+  const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let userPaused=reduceMotion;
+
+  function sync(){
+    const paused=video.paused;
+    screen.classList.toggle('is-paused',paused);
+    playButton.textContent=paused?'PLAY':'PAUSE';
+    screenToggle.querySelector('span').textContent=paused?'▶':'Ⅱ';
+    screenToggle.setAttribute('aria-label',paused?'Play vibe check video':'Pause vibe check video');
+    soundButton.textContent=video.muted?'SOUND ON':'SOUND OFF';
+    soundButton.setAttribute('aria-pressed',String(!video.muted));
+  }
+
+  async function playVideo(){
+    userPaused=false;
+    try{ await video.play(); }catch(err){ userPaused=true; }
+    sync();
+  }
+
+  function pauseVideo(){
+    userPaused=true;
+    video.pause();
+    sync();
+  }
+
+  function togglePlayback(){
+    if(video.paused) playVideo();
+    else pauseVideo();
+  }
+
+  playButton.addEventListener('click',togglePlayback);
+  screenToggle.addEventListener('click',togglePlayback);
+
+  soundButton.addEventListener('click',async()=>{
+    video.muted=!video.muted;
+    if(video.paused && !userPaused){
+      try{ await video.play(); }catch(err){}
+    }
+    sync();
+  });
+
+  restartButton.addEventListener('click',async()=>{
+    video.currentTime=0;
+    userPaused=false;
+    try{ await video.play(); }catch(err){}
+    sync();
+  });
+
+  video.addEventListener('play',sync);
+  video.addEventListener('pause',sync);
+  video.addEventListener('volumechange',sync);
+
+  if(reduceMotion){
+    video.removeAttribute('autoplay');
+    video.pause();
+  }else{
+    video.muted=true;
+    video.play().catch(()=>{ userPaused=true; sync(); });
+  }
+
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden){
+      if(!video.paused) video.pause();
+    }else if(!userPaused && !reduceMotion){
+      video.play().catch(()=>{});
+    }
+  });
+
+  sync();
+})();
