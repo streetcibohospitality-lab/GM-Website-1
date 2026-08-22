@@ -284,7 +284,7 @@
   /* The legacy flipboard cycle (CHANNEL 63 / BURGERS / WINGS / SHAKES /
      OPEN LATE on a 4.6s interval) was removed per the Interactive Diner V2
      de-duplication map: interactive-diner.js repurposes this same board into
-     one per-session SPECIAL OF THE DAY. Leaving the old timer running would
+     one daily SPECIAL OF THE DAY. Leaving the old timer running would
      have kept overwriting the special. The board markup is untouched — only
      the interval that mutated it is gone. */
 
@@ -298,6 +298,7 @@
   const roadsideCall=document.getElementById('roadsideCall');
   const roadsideDirections=document.getElementById('roadsideDirections');
   const roadsidePanel=document.getElementById('roadsidePanel');
+  const roadsidePhoto=roadsidePanel?.querySelector('.roadside-photo img');
   const orderDinerName=document.getElementById('orderDinerName');
   const orderDinerStatus=document.getElementById('orderDinerStatus');
   const locRows=[...document.querySelectorAll('.loc-row[data-diner]')];
@@ -377,6 +378,13 @@
     if(roadsideHours) roadsideHours.textContent=status.text;
     if(roadsideCall){ roadsideCall.href=`tel:${row.dataset.phone||''}`; roadsideCall.textContent='CALL DINER →'; }
     if(roadsideDirections && row.dataset.directions) roadsideDirections.href=row.dataset.directions;
+    if(roadsidePhoto && row.dataset.image){
+      const nextSrc=row.dataset.image;
+      if(roadsidePhoto.getAttribute('src')!==nextSrc){
+        roadsidePhoto.src=nextSrc;
+      }
+      roadsidePhoto.alt=`Grub Monkeys ${name} diner`;
+    }
     if(roadsidePanel && !reduceMotion){
       roadsidePanel.animate([{transform:'translateY(3px)',opacity:.9},{transform:'translateY(0)',opacity:1}],{duration:220,easing:'ease-out'});
     }
@@ -411,6 +419,12 @@
   });
   const initialSelected=locRows.find(row=>row.dataset.diner===selectedDinerSlug) || locRows[0];
   applySelectedDiner(initialSelected,false);
+  locRows.forEach(row=>{
+    if(!row.dataset.image) return;
+    const img=new Image();
+    img.decoding='async';
+    img.src=row.dataset.image;
+  });
   syncLocationStatuses();
   window.setInterval(syncLocationStatuses,60000);
 

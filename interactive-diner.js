@@ -622,18 +622,41 @@
   /* ----------------------------------------------------------
      9. SPECIAL OF THE DAY — REUSE V11 FLIPBOARD, NO SECOND BOARD
      Clone detaches it from V11's old cycling interval, then chooses
-     one curated special once per session.
+     one curated special for each IST calendar day.
      ---------------------------------------------------------- */
   const oldBoard=$('#flipboard');
   if(oldBoard){
     const boardBand=oldBoard.closest('.flipboard-band');
-    const currentSpecialKey='gm_session_special_v2';
     const specials=['KOREAN KONG','DIRTY FRIES','PBJ SHAKE'];
-    let special=safeStore(sessionStorage,currentSpecialKey);
-    if(!special || !specials.includes(special)){
-      special=specials[Math.floor(Math.random()*specials.length)];
-      safeStore(sessionStorage,currentSpecialKey,special);
+
+    // Daily, deterministic IST pick: every visitor sees the same special for
+    // the same India calendar date. We derive the sequence from a fixed epoch
+    // and prevent consecutive repeats without relying on local/session storage.
+    const istDateParts=()=>{
+      const parts=new Intl.DateTimeFormat('en-GB',{
+        timeZone:'Asia/Kolkata',year:'numeric',month:'2-digit',day:'2-digit'
+      }).formatToParts(new Date());
+      return Object.fromEntries(parts.filter(p=>p.type!=='literal').map(p=>[p.type,Number(p.value)]));
+    };
+    const hashDay=(ordinal)=>{
+      let x=(ordinal + 0x9e3779b9) | 0;
+      x ^= x >>> 16; x=Math.imul(x,0x21f0aaad);
+      x ^= x >>> 15; x=Math.imul(x,0x735a2d97);
+      x ^= x >>> 15;
+      return x >>> 0;
+    };
+    const d=istDateParts();
+    const epoch=Date.UTC(2024,0,1);
+    const today=Date.UTC(d.year,d.month-1,d.day);
+    const dayIndex=Math.max(0,Math.floor((today-epoch)/86400000));
+    let selected=hashDay(0)%specials.length;
+    for(let n=1;n<=dayIndex;n++){
+      let candidate=hashDay(n)%specials.length;
+      if(candidate===selected) candidate=(candidate+1+(hashDay(n+7001)%(specials.length-1)))%specials.length;
+      if(candidate===selected) candidate=(candidate+1)%specials.length;
+      selected=candidate;
     }
+    const special=specials[selected];
     // Detach visible board from the legacy interval without touching the old source at runtime.
     const newBoard=oldBoard.cloneNode(true);
     oldBoard.replaceWith(newBoard);

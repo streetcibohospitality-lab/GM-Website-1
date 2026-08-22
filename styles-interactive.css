@@ -1336,7 +1336,7 @@
 .gm-condiment:hover::after,.gm-condiment:focus-visible::after{transform:translateX(-50%) scale(1)}
 
 /* Existing mechanical board becomes ONE session special, not a second board */
-.flipboard-band.gm-special-board .flip-kicker::after{content:" / SESSION PICK"}
+.flipboard-band.gm-special-board .flip-kicker::after{content:" / DAILY PICK"}
 
 /* Current motel tag is the location selector. Do not add a second booth selector. */
 .motel-keytag.gm-location-picked::after{
@@ -5251,4 +5251,208 @@ body[data-page="menu"] .menu-order-actions [hidden]{
   body[data-page="menu"] .menu-preview-media{
     transition:none!important;
   }
+}
+
+
+/* =============================================================
+   AUG 22 — TARGETED UI/UX REFINEMENTS
+   ============================================================= */
+
+/* MENU / NOW SERVING: larger, clearer board; remove the midline that crossed text. */
+body[data-page="menu"] .menu-split-board{
+  width:clamp(292px,28vw,348px);
+  padding:9px;
+}
+body[data-page="menu"] .menu-split-board__label{
+  margin-bottom:7px;
+  font-size:.48rem;
+}
+body[data-page="menu"] .menu-split-board__window{
+  height:60px;
+}
+body[data-page="menu"] .menu-split-board__face{
+  grid-template-columns:48px minmax(0,1fr);
+  gap:11px;
+  padding:9px 12px;
+}
+body[data-page="menu"] .menu-split-board__face b{
+  font-size:1.5rem;
+}
+body[data-page="menu"] .menu-split-board__face strong{
+  font-size:.68rem;
+  line-height:1.08;
+}
+body[data-page="menu"] .menu-split-board__hinge{
+  display:none!important;
+}
+@media(max-width:860px){
+  body[data-page="menu"] .menu-split-board{
+    width:min(100%,340px);
+  }
+}
+
+/* HOME / CONTROLLED LENGTH COMPRESSION
+   Reduce accumulated scroll, not content. Photography, interactions and
+   hierarchy remain intact; savings come from section height, row spacing and
+   oversized media footprints. */
+@media(min-width:901px){
+  body[data-page="home"] .hero.hero-split{
+    min-height:82svh;
+  }
+  body[data-page="home"] .hero-photo-panel{
+    min-height:calc(82svh - 74px);
+  }
+  body[data-page="home"] .hero-copy{
+    padding-top:clamp(38px,5.5vw,76px);
+    padding-bottom:46px;
+  }
+  body[data-page="home"] .hero-kicker{margin-bottom:20px}
+  body[data-page="home"] .hero-sub-split{margin-top:22px}
+  body[data-page="home"] .hero-btns-split{margin-top:20px}
+  body[data-page="home"] .hero-city-line{margin-top:28px}
+
+  body[data-page="home"] .monkey-tv-section{
+    padding-top:30px;
+    padding-bottom:30px;
+    gap:clamp(28px,4vw,58px);
+  }
+  body[data-page="home"] .crt-wrap{
+    width:min(820px,62vw);
+  }
+
+  body[data-page="home"] .signature{
+    padding-top:28px;
+    padding-bottom:28px;
+  }
+  body[data-page="home"] .signature .sig-head{
+    margin-bottom:18px;
+  }
+
+  body[data-page="home"] .atmosphere{
+    padding-top:28px;
+  }
+  body[data-page="home"] .atmo-photo.big{
+    min-height:clamp(280px,38svh,390px);
+  }
+
+  body[data-page="home"] .diner-counter{
+    padding-top:20px;
+    padding-bottom:20px;
+    min-height:210px;
+  }
+
+  body[data-page="home"] .story.story-v5{
+    padding-top:30px;
+    padding-bottom:30px;
+  }
+  body[data-page="home"] .story-v5 .story-grid{
+    gap:clamp(42px,6vw,82px);
+  }
+  body[data-page="home"] .story-text p{
+    line-height:1.7;
+    margin-bottom:.82rem;
+  }
+  body[data-page="home"] .story-decor-row{
+    margin-top:22px;
+  }
+  body[data-page="home"] .team-live-board{
+    padding:clamp(20px,2.4vw,30px);
+  }
+  body[data-page="home"] .team-live-rule{
+    margin:14px 0 13px;
+  }
+  body[data-page="home"] .team-live-people{
+    margin:7px 0 16px;
+  }
+  body[data-page="home"] .team-live-divider{
+    margin-bottom:14px;
+  }
+  body[data-page="home"] .team-live-copy{
+    padding-bottom:24px;
+  }
+
+  body[data-page="home"] .campaign-band{
+    padding-top:18px;
+    padding-bottom:18px;
+  }
+  body[data-page="home"] .flipboard-band{
+    padding-top:18px;
+    padding-bottom:18px;
+  }
+
+  body[data-page="home"] .locations{
+    padding-top:38px;
+    padding-bottom:42px;
+  }
+  body[data-page="home"] .loc-head{
+    margin-bottom:26px;
+  }
+  body[data-page="home"] .locations-stage{
+    gap:34px;
+  }
+  body[data-page="home"] .roadside-photo{
+    height:300px;
+  }
+  body[data-page="home"] .roadside-sign{
+    padding:18px;
+  }
+  body[data-page="home"] .loc-row{
+    padding-top:16px;
+    padding-bottom:16px;
+  }
+
+  body[data-page="home"] .jukebox-section{
+    padding-top:34px;
+    padding-bottom:34px;
+    gap:clamp(30px,5vw,68px);
+  }
+  body[data-page="home"] .gm-jukebox{
+    max-width:600px;
+  }
+
+  body[data-page="home"] .social{
+    padding-top:40px;
+    padding-bottom:54px;
+  }
+  body[data-page="home"] .social-head{
+    margin-bottom:28px;
+  }
+  body[data-page="home"] .social-strip{
+    max-width:1040px;
+    padding-top:8px;
+    padding-bottom:42px;
+  }
+
+  body[data-page="home"] .diner-counter-spread{
+    padding-top:34px;
+    padding-bottom:38px;
+  }
+  body[data-page="home"] .counter-shell{
+    min-height:500px;
+  }
+  body[data-page="home"] .counter-review-note{
+    min-height:330px;
+  }
+}
+
+/* Mobile gets a gentler compression so stacked controls remain comfortable. */
+@media(max-width:900px){
+  body[data-page="home"] .monkey-tv-section,
+  body[data-page="home"] .signature,
+  body[data-page="home"] .story.story-v5,
+  body[data-page="home"] .locations,
+  body[data-page="home"] .jukebox-section,
+  body[data-page="home"] .social,
+  body[data-page="home"] .diner-counter-spread{
+    padding-top:28px;
+    padding-bottom:30px;
+  }
+  body[data-page="home"] .atmosphere{padding-top:24px}
+  body[data-page="home"] .atmo-photo.big{min-height:clamp(230px,32svh,310px)}
+  body[data-page="home"] .diner-counter{padding-top:18px;padding-bottom:18px}
+  body[data-page="home"] .campaign-band{padding-top:16px;padding-bottom:16px}
+  body[data-page="home"] .flipboard-band{padding-top:16px;padding-bottom:16px}
+  body[data-page="home"] .loc-head{margin-bottom:22px}
+  body[data-page="home"] .loc-row{padding-top:16px;padding-bottom:16px}
+  body[data-page="home"] .social-head{margin-bottom:22px}
 }

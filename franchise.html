@@ -63,40 +63,45 @@
       <h1 class="page-title poster-h">BRING THE<br><em>MONKEY BUSINESS.</em></h1>
       <p>Build the next Grub Monkeys diner. Explore the support on offer and send the team your details.</p>
     </div>
-    <img src="images/img-001.jpg" alt="Grub Monkeys diner interior with red booths and checkerboard floor" width="800" height="600">
+    <div class="gm-fr-hero-media" aria-label="Grub Monkeys vibe check reel">
+      <div class="gm-fr-phone">
+        <div class="gm-fr-phone__hardware" aria-hidden="true">
+          <span class="gm-fr-phone__camera"></span>
+          <span class="gm-fr-phone__speaker"></span>
+        </div>
+
+        <div class="gm-fr-phone__screen" id="gmFrVibeScreen">
+          <video id="gmFrVibeVideo" class="gm-fr-phone__video" width="512" height="910" poster="media/franchise-vibe-check-poster.jpg" preload="metadata" playsinline muted loop autoplay aria-label="Grub Monkeys diner vibe check reel">
+            <source src="media/franchise-vibe-check.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+          </video>
+
+          <div class="gm-fr-phone__topline" aria-hidden="true">
+            <span class="gm-fr-phone__rec" id="gmFrVibeRec"><i></i>REC</span>
+            <span>VIBE CHECK</span>
+          </div>
+
+          <button class="gm-fr-phone__screen-toggle" id="gmFrVibeScreenToggle" type="button" aria-label="Pause vibe check video">
+            <span aria-hidden="true">Ⅱ</span>
+          </button>
+
+          <div class="gm-fr-phone__screen-label" aria-hidden="true">
+            LIVE FROM THE DINER
+          </div>
+        </div>
+
+        <div class="gm-fr-phone__homebar" aria-hidden="true"></div>
+      </div>
+
+      <div class="gm-fr-hero-controls" aria-label="Vibe check video controls">
+        <button type="button" id="gmFrVibePlay">PAUSE</button>
+        <button type="button" id="gmFrVibeSound" aria-pressed="false">SOUND ON</button>
+        <button type="button" id="gmFrVibeRestart">RESTART</button>
+      </div>
+    </div>
   </header>
   <div class="checker-strip big on-red"></div>
 <div class="retro-chrome-rail retro-chrome-rail--subpage" aria-hidden="true"><span></span></div>
-
-  <section class="gm-fr-vibe" id="vibe-check" aria-labelledby="gmFrVibeTitle">
-    <div class="gm-fr-vibe__head reveal">
-      <span class="gm-fr-vibe__badge">VIBE CHECK / 24 SEC</span>
-      <h2 class="poster-h" id="gmFrVibeTitle">See The <em>Monkey Business</em> In Motion.</h2>
-      <p>A quick look at the energy behind the diner — red booths, loud music and a room that comes alive.</p>
-    </div>
-
-    <div class="gm-fr-vibe__frame reveal">
-      <div class="gm-fr-vibe__screen" id="gmFrVibeScreen">
-        <video id="gmFrVibeVideo" class="gm-fr-vibe__video" width="512" height="910" poster="media/franchise-vibe-check-poster.jpg" preload="metadata" playsinline muted loop autoplay aria-label="Grub Monkeys diner vibe check reel">
-          <source src="media/franchise-vibe-check.mp4" type="video/mp4">
-          Your browser does not support HTML5 video.
-        </video>
-        <div class="gm-fr-vibe__rec" id="gmFrVibeRec" aria-hidden="true"><span></span>REC</div>
-        <button class="gm-fr-vibe__screen-toggle" id="gmFrVibeScreenToggle" type="button" aria-label="Pause vibe check video">
-          <span aria-hidden="true">Ⅱ</span>
-        </button>
-      </div>
-
-      <div class="gm-fr-vibe__controls" aria-label="Vibe check video controls">
-        <div class="gm-fr-vibe__controls-label">LIVE FROM THE DINER</div>
-        <div class="gm-fr-vibe__controls-buttons">
-          <button type="button" id="gmFrVibePlay">PAUSE</button>
-          <button type="button" id="gmFrVibeSound" aria-pressed="false">SOUND ON</button>
-          <button type="button" id="gmFrVibeRestart">RESTART</button>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <section class="franchise franchise-page-section">
     <div class="fr-teaser reveal">

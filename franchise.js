@@ -83,7 +83,7 @@
   });
 })();
 
-/* FRANCHISE — Option B / Vibe Check video controls */
+/* FRANCHISE — Hero portrait Vibe Check video controls */
 (function(){
   const video=document.getElementById('gmFrVibeVideo');
   const screen=document.getElementById('gmFrVibeScreen');
