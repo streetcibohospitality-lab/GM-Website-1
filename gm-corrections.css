@@ -457,3 +457,19 @@
 .gm-chrome-panel__footer p{
   color:#FFFFFF;
 }
+
+/* ============================================================
+   MENU ROWS — LET THE DISH NAME SHRINK
+   ============================================================ */
+
+/* .menu-row .name is flex:0 0 auto, so it cannot shrink at all. At 360px
+   the row is 320px wide but its contents need 358px: dot 7 + name 231 +
+   leader 16 + price 64, plus three 11px gaps. The price was pushed 31px
+   past the row and 11px past the viewport, which made the whole menu page
+   scroll sideways on small phones. Allowing the name to shrink lets it
+   wrap instead; the strengthened price alignment and its 58px minimum are
+   left exactly as authored. */
+body[data-page="menu"] .menu-row .name{
+  flex:1 1 auto;
+  min-width:0;
+}

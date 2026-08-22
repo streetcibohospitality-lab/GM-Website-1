@@ -71,7 +71,7 @@
   <section class="menu-section" id="menu">
 <div class="menu-head reveal">
 <div class="sec-num on-dark"><span class="n">01</span><span class="t">The Full Spread</span></div>
-<h2 class="poster-h" style="color:var(--gm-white); font-size:clamp(2.8rem,8vw,7rem);">The Menu.</h2>
+<h2 class="poster-h menu-department-title">Pick Your <em>Department.</em></h2>
 <div class="menu-split-board" id="menuSplitBoard">
   <span class="menu-split-board__label">NOW SERVING</span>
   <span class="sr-only" id="menuSplitLive" aria-live="polite" aria-atomic="true">A1 Fries &amp; Nachos</span>
@@ -351,12 +351,18 @@
 </div>
 <div class="menu-preview-col">
 <div class="menu-preview-sticky" id="menuPreviewSticky">
-<img alt="" id="menuPreviewImg" width="1086" height="1448" src="images/food/04-loaded-fries.jpeg"/>
-<div class="menu-preview-heat" aria-hidden="true"><i></i><i></i><i></i></div>
-<div class="menu-fountain-fizz" aria-hidden="true">
-  <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-  <span>FIZZ</span>
-</div>
+  <div class="menu-preview-media">
+    <img alt="" id="menuPreviewImg" width="1086" height="1448" src="images/food/04-loaded-fries.jpeg"/>
+    <div class="menu-preview-heat" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="menu-fountain-fizz" aria-hidden="true">
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      <span>FIZZ</span>
+    </div>
+  </div>
+  <div class="menu-preview-plate" aria-hidden="true">
+    <span id="menuPreviewCode">A1</span>
+    <strong id="menuPreviewLabel">FRIES &amp; NACHOS</strong>
+  </div>
 </div>
 </div>
 </div>
@@ -428,14 +434,22 @@
       </div>
     </div>
   </section>
-  <section class="order-band grain" id="order">
-  <div>
+  <section class="order-band grain menu-order-band" id="order">
+  <div class="menu-order-copy">
     <span class="order-code">ORDER / ONLINE</span>
     <h2>Hot Grub.<br>Few Taps.</h2>
   </div>
-  <div class="order-actions">
-    <a href="https://www.swiggy.com/city/bangalore/grub-monkeys" target="_blank" rel="noopener" class="btn btn-ticket on-dark">Order On Swiggy <span class="arrow" aria-hidden="true">→</span></a>
-    <a href="https://www.zomato.com/bangalore/restaurants/grub-monkeys" target="_blank" rel="noopener" class="btn btn-ticket on-dark">Order On Zomato <span class="arrow" aria-hidden="true">→</span></a>
+
+  <div class="menu-order-context" aria-live="polite">
+    <span>YOUR DINER</span>
+    <strong id="menuOrderDinerName">NEW BEL ROAD · FLAGSHIP</strong>
+    <small id="menuOrderDinerStatus">CHECKING HOURS…</small>
+    <a href="index.html#locations">CHANGE DINER →</a>
+  </div>
+
+  <div class="order-actions menu-order-actions">
+    <a href="https://www.swiggy.com/city/bangalore/grub-monkeys-new-bel-road-rest466237" target="_blank" rel="noopener" class="btn btn-ticket on-dark" data-menu-order-platform="swiggy">Order On Swiggy <span class="arrow" aria-hidden="true">→</span></a>
+    <a href="https://www.zomato.com/bangalore/grub-monkeys-new-bel-road-bangalore" target="_blank" rel="noopener" class="btn btn-ticket on-dark" data-menu-order-platform="zomato">Order On Zomato <span class="arrow" aria-hidden="true">→</span></a>
   </div>
 </section>
 </main>
