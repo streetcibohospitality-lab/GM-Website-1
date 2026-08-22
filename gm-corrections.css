@@ -407,11 +407,20 @@
     container-name:gmteam;
   }
   .team-person__name{
-    font-size:clamp(.62rem, 5.4cqw, 1.24rem);
+    font-size:clamp(.62rem, 5.5cqw, 1.35rem);
     hyphens:none;
   }
+  /* Re-tuned after the board was widened and the founder name asked to be
+     larger. Their clamp(2.9rem,5.9vw,5.75rem) is still viewport-based and
+     would overflow again, but the intent is honoured here: 10.6cqw is close to the
+     largest value that still fits at every width tested (1920, 1600, 1440,
+     1280, 1150, 1101, 1000, 900, 768, 600, 390, 360), and takes the name
+     from 27.3px to 41.6px at 1440. 12cqw starts overflowing at 1000.
+     Their line-height and letter-spacing are adopted as authored. */
   .team-person--founder .team-person__name{
-    font-size:clamp(.9rem, 9.4cqw, 2.1rem);
+    font-size:clamp(.9rem, 10.6cqw, 2.6rem);
+    line-height:.92;
+    letter-spacing:.018em;
   }
 }
 
