@@ -60,7 +60,10 @@ button{ font-family:inherit; cursor:pointer; background:none; border:none; }
     transition-duration: 0.01ms !important;
     transition-delay: 0s !important;
     scroll-behavior: auto !important;
-   .cassette-orbit,.cassette-spin{animation:none!important}}
+  }
+  .cassette-orbit,.cassette-spin{
+    animation:none!important;
+  }
 }
 
 :focus-visible{ outline:3px solid var(--gm-teal); outline-offset:3px; }

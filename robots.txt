@@ -1,4 +1,3 @@
-# Grub Monkeys — https://www.grubmonkeys.in/
 User-agent: *
 Allow: /
 

@@ -79,7 +79,7 @@
     'mysore':{
       label:'MYSORE DINER',
       open:'12:00',close:'22:00',verified:true,
-      swiggy:'https://www.swiggy.com/restaurants/959068/dineout',
+      swiggy:'https://www.swiggy.com/city/mysore/grub-monkey-vv-mohalla-mysore-city-rest488396',
       zomato:'https://www.zomato.com/mysore/grub-monkeys-gokulam'
     },
     'new-bel-road':{
