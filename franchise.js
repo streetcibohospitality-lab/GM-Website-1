@@ -3,8 +3,25 @@
   const form=document.getElementById('franchiseForm');
   if(!form) return;
 
-  const SUPABASE_URL='https://wpzftlqqtuftzyfwtpkp.supabase.co';
-  const SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndwemZ0bHFxdHVmdHp5Znd0cGtwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY0MjkwMzQsImV4cCI6MjEwMjAwNTAzNH0.VzwizMxvAlI4KX3DOHmOTQZwFcO76X90HAhKC9rIBKc';
+  /* -------------------------------------------------------------
+     Enquiries are emailed, not stored. Web3Forms relays the POST to
+     the address registered against the access key; no database, so
+     nothing to pause, no RLS to keep correct, and no personal data
+     sitting in a table indefinitely.
+
+     ACCESS KEY: paste the key from web3forms.com below. The key only
+     identifies the destination mailbox -- it is safe in client-side
+     code and cannot be used to read anything.
+
+     To move to another provider, change these two constants and the
+     JSON body sent below; nothing else here is specific to Web3Forms.
+     ------------------------------------------------------------- */
+  const FORM_ENDPOINT='https://api.web3forms.com/submit';
+  const FORM_ACCESS_KEY='PASTE_YOUR_WEB3FORMS_ACCESS_KEY_HERE';
+
+  /* Shown when the relay is unreachable, so a franchise lead always has
+     somewhere to go rather than a dead end. */
+  const FALLBACK_CONTACT='+91 63661 66696';
   const btn=document.getElementById('franchiseSubmitBtn');
   const status=document.getElementById('franchiseStatus');
   const formReadyAt=performance.now();
@@ -44,29 +61,51 @@
       return;
     }
 
+    /* If the site is deployed before the access key is pasted in, every
+       submission would post to the relay, be rejected, and come back as a
+       generic "try again" that never succeeds. Detect the placeholder and
+       send the enquirer straight to the phone number instead. */
+    if(!FORM_ACCESS_KEY || FORM_ACCESS_KEY.indexOf('PASTE_YOUR')===0){
+      console.error('Franchise form: FORM_ACCESS_KEY is not set in franchise.js.');
+      setStatus('Our enquiry form is being set up. Please call us on '+FALLBACK_CONTACT+' and we will take your details.','error');
+      return;
+    }
+
     btn.disabled=true;
     btn.textContent='Sending…';
     setStatus('Sending your enquiry…');
 
     try{
-      const response=await fetch(`${SUPABASE_URL}/rest/v1/franchise_enquiries`,{
+      const v=id=>(document.getElementById(id)||{}).value||'';
+      const name=v('fi-name').trim().slice(0,80);
+      const city=v('fi-city').trim().slice(0,80);
+      const response=await fetch(FORM_ENDPOINT,{
         method:'POST',
-        headers:{
-          apikey:SUPABASE_ANON_KEY,
-          Authorization:`Bearer ${SUPABASE_ANON_KEY}`,
-          'Content-Type':'application/json',
-          Prefer:'return=minimal'
-        },
+        headers:{'Content-Type':'application/json',Accept:'application/json'},
         body:JSON.stringify({
-          full_name:document.getElementById('fi-name').value.trim().slice(0,80),
-          phone:document.getElementById('fi-phone').value.trim().slice(0,24),
-          email:document.getElementById('fi-email').value.trim().slice(0,120),
-          city:document.getElementById('fi-city').value.trim().slice(0,80),
-          budget:(document.getElementById('fi-budget').value||'').slice(0,40)||null,
-          message:document.getElementById('fi-message').value.trim().slice(0,800)||null
+          access_key:FORM_ACCESS_KEY,
+          /* subject and from_name are what the inbox shows at a glance */
+          subject:`Franchise enquiry — ${name}${city?' · '+city:''}`,
+          from_name:'Grub Monkeys Website',
+          name:name,
+          phone:v('fi-phone').trim().slice(0,24),
+          email:v('fi-email').trim().slice(0,120),
+          city:city,
+          budget:v('fi-budget').slice(0,40)||'Not specified',
+          message:v('fi-message').trim().slice(0,800)||'(no message)'
         })
       });
-      if(!response.ok) throw new Error(`HTTP ${response.status}`);
+      /* Treat it as sent only on an explicit success:true. Web3Forms
+         answers 200 with {success:false} for a bad or missing key, and a
+         proxy error page or captive portal can return a 200 that is not
+         JSON at all. Anything short of a positive acknowledgement has to
+         surface as a failure -- telling someone their franchise enquiry
+         was sent when it was not is the one outcome worth avoiding. */
+      let payload=null;
+      try{ payload=await response.json(); }catch(err){ /* not JSON */ }
+      if(!response.ok || !payload || payload.success!==true){
+        throw new Error((payload&&payload.message)||`HTTP ${response.status}`);
+      }
       sessionStorage.setItem(RATE_KEY,String(Date.now()));
       form.reset();
       btn.textContent='Enquiry Sent';
@@ -78,7 +117,7 @@
       console.error('Franchise enquiry failed',err);
       btn.disabled=false;
       btn.textContent='Submit Enquiry';
-      setStatus('Could not submit right now. Please try again or contact Grub Monkeys directly.','error');
+      setStatus('Could not send your enquiry right now. Please try again, or call us on '+FALLBACK_CONTACT+'.','error');
     }
   });
 })();
