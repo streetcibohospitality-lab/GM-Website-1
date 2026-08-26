@@ -17,7 +17,7 @@
      JSON body sent below; nothing else here is specific to Web3Forms.
      ------------------------------------------------------------- */
   const FORM_ENDPOINT='https://api.web3forms.com/submit';
-  const FORM_ACCESS_KEY='PASTE_YOUR_WEB3FORMS_ACCESS_KEY_HERE';
+  const FORM_ACCESS_KEY='c6229879-4e6c-46ed-b734-7a976fa5689a';
 
   /* Shown when the relay is unreachable, so a franchise lead always has
      somewhere to go rather than a dead end. */
