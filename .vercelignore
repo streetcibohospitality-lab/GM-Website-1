@@ -1,0 +1,5 @@
+# Internal design and QA notes. They belong in the repository as a record
+# of why things are built the way they are, but a deploy serves the whole
+# tree at the domain root -- without this, grubmonkeys.in/README-CLAUDE.md
+# and the rest would be publicly readable.
+*.md
