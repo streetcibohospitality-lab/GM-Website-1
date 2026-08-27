@@ -29,6 +29,19 @@
   const MIN_FILL_MS=1200;
   const RESUBMIT_MS=30000;
 
+  /* sessionStorage throws on access, not just on use, in private browsing
+     and wherever site data is blocked. Reading it unguarded threw before
+     the enquiry was ever sent, so the form did nothing at all for those
+     visitors -- no message, no request, a lead lost in silence. The
+     resubmit throttle is a convenience; it must never be able to stop an
+     enquiry going out. */
+  function readStore(key){
+    try{ return window.sessionStorage.getItem(key); }catch(err){ return null; }
+  }
+  function writeStore(key,value){
+    try{ window.sessionStorage.setItem(key,value); }catch(err){}
+  }
+
   function setStatus(message,type=''){
     if(status){status.textContent=message;status.dataset.type=type;}
   }
@@ -41,7 +54,7 @@
       setStatus('Please take a moment to review your details before submitting.','error');
       return;
     }
-    const lastSubmit=Number(sessionStorage.getItem(RATE_KEY)||0);
+    const lastSubmit=Number(readStore(RATE_KEY)||0);
     if(lastSubmit && Date.now()-lastSubmit<RESUBMIT_MS){
       setStatus('Your enquiry was just submitted. Please wait a moment before sending another.','error');
       return;
@@ -106,7 +119,7 @@
       if(!response.ok || !payload || payload.success!==true){
         throw new Error((payload&&payload.message)||`HTTP ${response.status}`);
       }
-      sessionStorage.setItem(RATE_KEY,String(Date.now()));
+      writeStore(RATE_KEY,String(Date.now()));
       form.reset();
       btn.textContent='Enquiry Sent';
       btn.style.background='var(--gm-teal)';

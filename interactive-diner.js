@@ -11,7 +11,20 @@
   const $ = (sel, root=document) => root.querySelector(sel);
   const $$ = (sel, root=document) => [...root.querySelectorAll(sel)];
 
-  function safeStore(store, key, value){
+  /* Storage can throw when it is merely read, not only when it is used:
+     a browser in private mode or with site data blocked raises
+     SecurityError on `window.sessionStorage` itself. Passing the store in
+     as an argument evaluated it at the call site, outside this try, so the
+     guard below never got the chance to run. Take the name instead and
+     resolve it in here. */
+  function pickStore(kind){
+    try{ return kind==='local' ? window.localStorage : window.sessionStorage; }
+    catch(e){ return null; }
+  }
+
+  function safeStore(kind, key, value){
+    const store = pickStore(kind);
+    if(!store) return null;
     try{
       if(arguments.length===2) return store.getItem(key);
       store.setItem(key,value);
@@ -25,7 +38,7 @@
      ---------------------------------------------------------- */
   const sessionKey = 'gm_diner_session_v3';
   let session = null;
-  try{ session = JSON.parse(safeStore(sessionStorage,sessionKey) || 'null'); }catch(e){}
+  try{ session = JSON.parse(safeStore('session',sessionKey) || 'null'); }catch(e){}
   if(!session || !session.label || !session.number){
     const labels=['TABLE','BOOTH','COUNTER'];
     const numbers=['04','08','12','27','36','69'];
@@ -33,7 +46,7 @@
       label:labels[Math.floor(Math.random()*labels.length)],
       number:Math.random()<.28?'69':numbers[Math.floor(Math.random()*numbers.length)]
     };
-    safeStore(sessionStorage,sessionKey,JSON.stringify(session));
+    safeStore('session',sessionKey,JSON.stringify(session));
   }
   const sessionText = `${session.label} ${session.number}`;
 
@@ -77,9 +90,9 @@
   const isHome = !!$('#signature') && !!$('#order');
   if(isHome && !reduceMotion){
     const seenKey='gm_open_sign_seen_session';
-    const seen=safeStore(sessionStorage,seenKey);
+    const seen=safeStore('session',seenKey);
     if(!seen){
-      safeStore(sessionStorage,seenKey,'1');
+      safeStore('session',seenKey,'1');
       const intro=document.createElement('div');
       intro.className='gm-door-intro';
       intro.setAttribute('aria-hidden','true');
