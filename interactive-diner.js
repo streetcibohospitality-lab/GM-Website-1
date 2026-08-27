@@ -429,14 +429,18 @@
     const list=$('#gmSauceFlavourList',heat);
     const buttons=$$('.gm-sauce-meter__level',heat);
 
-    /* HEAT-DATA.md is the source of truth. Names are reproduced exactly as
-       supplied — including "Carribean" and "Carolina Gold (BBQ & Must)" —
-       and must not be reordered or silently corrected. */
+    /* HEAT-DATA.md is the source of truth for the flavours and their order,
+       which must not be reordered. Names are reproduced as supplied --
+       including "Carolina Gold (BBQ & Must)" -- with one deliberate
+       exception: HEAT-DATA.md spells it "Carribean", corrected to
+       "Caribbean" here and across menu.html on request. The rest of the
+       site already used the correct spelling, so this also settles a
+       disagreement between the menu and the random-order feature. */
     const levels=[
       {name:'MILD',angle:-160,accent:'#00DDC2',
         flavours:['Cheese Sauce','Thai Chilli','Honey Buffalo','Teriyaki','Maple Glazed']},
       {name:'WARM',angle:-118,accent:'#E5A12A',
-        flavours:['Carribean Dry','Creamy Butter Garlic','Lemon Pepper Ranch','Sesame Thai Glaze Lemon','Carolina Gold (BBQ & Must)']},
+        flavours:['Caribbean Dry','Creamy Butter Garlic','Lemon Pepper Ranch','Sesame Thai Glaze Lemon','Carolina Gold (BBQ & Must)']},
       {name:'HOT',angle:-62,accent:'#E95C22',
         flavours:['Nashville','Texas BBQ','Citrus Pepper','Lemon Chilli Dry','Peri Peri Dry']},
       {name:'MONKEY BUSINESS',angle:-20,accent:'#EB0000',
