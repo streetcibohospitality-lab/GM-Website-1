@@ -281,7 +281,7 @@
     blindIo.observe(sigWindow);
   } else if(sigWindow) sigWindow.classList.add('blind-open');
 
-  /* The legacy flipboard cycle (CHANNEL 63 / BURGERS / WINGS / SHAKES /
+  /* The legacy flipboard cycle (CHANNEL 69 / BURGERS / WINGS / SHAKES /
      OPEN LATE on a 4.6s interval) was removed per the Interactive Diner V2
      de-duplication map: interactive-diner.js repurposes this same board into
      one daily SPECIAL OF THE DAY. Leaving the old timer running would
@@ -542,7 +542,7 @@
   document.querySelectorAll('.js-year').forEach(el=>el.textContent=new Date().getFullYear());
 })();
 
-/* GRUB MONKEYS — KOT 063 hero printer interaction */
+/* GRUB MONKEYS — KOT 069 hero printer interaction */
 (function(){
   const terminal=document.getElementById('kotTerminal');
   const button=document.getElementById('kotPrintButton');

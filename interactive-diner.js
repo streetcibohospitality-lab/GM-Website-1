@@ -2,7 +2,7 @@
    GRUB MONKEYS — INTERACTIVE DINER PATCH V2
    Visuals/motion live in CSS. JS only creates semantic markup,
    manages state, session identity, and interaction triggers.
-   Load after the existing V11 scripts and after KOT 063 if present.
+   Load after the existing V11 scripts and after KOT 069 if present.
    ============================================================ */
 (function(){
   'use strict';
@@ -23,15 +23,15 @@
      1. DINER SESSION ID
      One session identity is reused in KOT, receipt, TV and order.
      ---------------------------------------------------------- */
-  const sessionKey = 'gm_diner_session_v2';
+  const sessionKey = 'gm_diner_session_v3';
   let session = null;
   try{ session = JSON.parse(safeStore(sessionStorage,sessionKey) || 'null'); }catch(e){}
   if(!session || !session.label || !session.number){
     const labels=['TABLE','BOOTH','COUNTER'];
-    const numbers=['04','08','12','27','36','63'];
+    const numbers=['04','08','12','27','36','69'];
     session={
       label:labels[Math.floor(Math.random()*labels.length)],
-      number:Math.random()<.28?'63':numbers[Math.floor(Math.random()*numbers.length)]
+      number:Math.random()<.28?'69':numbers[Math.floor(Math.random()*numbers.length)]
     };
     safeStore(sessionStorage,sessionKey,JSON.stringify(session));
   }
@@ -47,7 +47,7 @@
   }
   $$('[data-gm-session]').forEach(el=>el.textContent=sessionText);
 
-  // Existing KOT 063: replace the fixed WEB-063 only. Do not add another printer.
+  // Existing KOT 069: replace the fixed WEB-069 only. Do not add another printer.
   const kotSessionRow = $('#kotTerminal .kot-meta span:nth-child(2)');
   if(kotSessionRow) kotSessionRow.innerHTML=`SESSION <b>${sessionText}</b>`;
 
@@ -104,7 +104,7 @@
     section.innerHTML=`
       <div class="gm-fortune-shell">
         <div class="gm-fortune-copy">
-          <span class="gm-machine-code">COUNTER 63 / HOUSE PICK</span>
+          <span class="gm-machine-code">COUNTER 69 / HOUSE PICK</span>
           <h2>What Should<br><em>I Order?</em></h2>
           <p>Pick your appetite and your lane. Every pull is a fresh menu pick — the hungrier you are, the bigger the order.</p>
         </div>
@@ -359,7 +359,7 @@
     heat.innerHTML=`
       <header class="gm-sauce-meter__head">
         <div>
-          <p class="gm-sauce-meter__eyebrow">GRUB MONKEYS · SAUCE CONTROL 063</p>
+          <p class="gm-sauce-meter__eyebrow">GRUB MONKEYS · SAUCE CONTROL 069</p>
           <h3 id="gmSauceMeterTitle">Pick your heat.</h3>
         </div>
         <div class="gm-sauce-meter__live" aria-hidden="true">
@@ -372,7 +372,7 @@
           <img src="images/food/02-wing-sauce-action.jpeg" alt="Glazed chicken wing being dipped into sauce" width="1122" height="1402" loading="lazy" decoding="async">
           <figcaption class="gm-sauce-meter__photo-label">
             <span>WING TEST</span>
-            <strong>SAUCE / 063</strong>
+            <strong>SAUCE / 069</strong>
           </figcaption>
         </figure>
         <div class="gm-sauce-meter__instrument" aria-label="Interactive sauce heat meter">
@@ -392,7 +392,7 @@
               <span class="gm-sauce-meter__dial-label gm-sauce-meter__dial-label--hot">HOT</span>
               <span class="gm-sauce-meter__dial-label gm-sauce-meter__dial-label--monkey">MONKEY<br>BUSINESS</span>
               <div class="gm-sauce-meter__needle" id="gmSauceNeedle"></div>
-              <div class="gm-sauce-meter__hub"><span>63</span></div>
+              <div class="gm-sauce-meter__hub"><span>69</span></div>
             </div>
             <div class="gm-sauce-meter__glass" aria-hidden="true"></div>
           </div>
@@ -407,7 +407,7 @@
             <article class="gm-sauce-meter__ticket" id="gmSauceTicket">
               <div class="gm-sauce-meter__ticket-top">
                 <span>HEAT LEVEL</span>
-                <span>ORDER 063</span>
+                <span>ORDER 069</span>
               </div>
               <h4 id="gmSauceLevelName">MILD</h4>
               <ul id="gmSauceFlavourList"></ul>

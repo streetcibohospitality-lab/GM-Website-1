@@ -267,7 +267,7 @@ body > footer{
   box-shadow:inset 0 2px 0 #f0efe9;
 }
 body > footer::before{
-  content:"GM / DINER 63";
+  content:"GM / DINER 69";
   position:absolute;
   right:var(--pad-x);
   top:18px;

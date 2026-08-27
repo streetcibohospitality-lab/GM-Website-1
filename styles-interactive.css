@@ -941,7 +941,7 @@
 /* ===== INTERACTIVE DINER ===== */
 /* ============================================================
    GRUB MONKEYS — INTERACTIVE DINER PATCH V2
-   Target: V11 + KOT 063 + live motion patch
+   Target: V11 + KOT 069 + live motion patch
    New visuals are HTML/CSS. JS only manages state, real time/session,
    interaction triggers, and URL/menu selection.
    No GIF/Lottie/Canvas/animation library required.
@@ -1297,7 +1297,7 @@
 }
 .gm-photo-strip img{width:100%;aspect-ratio:3/4;object-fit:cover;filter:saturate(.92) contrast(1.04)}
 .gm-photobooth-stage.done .gm-photo-strip{animation:gmStripOut .75s var(--gm-id-ease) forwards}
-.gm-photo-strip::after{content:"GRUB MONKEYS · PHOTO BOOTH · CHANNEL 63";position:absolute;left:0;right:0;bottom:11px;text-align:center;color:var(--gm-id-grey);font-size:.52rem;letter-spacing:.1em;text-transform:uppercase}
+.gm-photo-strip::after{content:"GRUB MONKEYS · PHOTO BOOTH · CHANNEL 69";position:absolute;left:0;right:0;bottom:11px;text-align:center;color:var(--gm-id-grey);font-size:.52rem;letter-spacing:.1em;text-transform:uppercase}
 @keyframes gmBoothFlash{0%,10%,28%,45%,62%,78%,100%{opacity:0}6%,24%,41%,58%{opacity:.9}}
 @keyframes gmStripOut{0%{opacity:0;transform:translateY(-120%)}100%{opacity:1;transform:translateY(0)}}
 
@@ -3688,7 +3688,7 @@ body[data-page="menu"] .dot.nv{
 }
 
 .atmo-race-strip::after{
-  content:"DINER 63";
+  content:"DINER 69";
   position:absolute;
   right:14px;
   top:50%;
