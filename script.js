@@ -47,17 +47,63 @@
     });
   }
 
-  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  /* Section links scroll without leaving a #fragment in the address bar.
+
+     Two shapes exist. On the homepage the links are "#story"; from the menu
+     and franchise pages they are "/#story", which is a genuine navigation
+     and has to carry the fragment to say where to scroll on arrival. Only
+     the first shape used to be intercepted, so arriving from another page
+     left "grubmonkeys.in/#story" showing. Both are handled here, and a
+     fragment that survives a real navigation is cleared once it has been
+     acted on. */
+  const smoothOK=!window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const onHome=location.pathname==='/'||/\/index(\.html)?$/.test(location.pathname);
+
+  function sectionFor(fragment){
+    /* A fragment can be anything a link author typed; querySelector throws
+       on one that is not a valid selector, e.g. "#1963". */
+    try{ return fragment && fragment!=='#' ? document.querySelector(fragment) : null; }
+    catch(err){ return null; }
+  }
+
+  function scrollToSection(target,smooth){
+    const top=target.getBoundingClientRect().top+window.scrollY-72;
+    window.scrollTo({top,behavior:smooth?'smooth':'auto'});
+  }
+
+  function stripFragment(){
+    if(location.hash) history.replaceState(null,'',location.pathname+location.search);
+  }
+
+  document.querySelectorAll('a[href^="#"], a[href^="/#"]').forEach(a=>{
     a.addEventListener('click',e=>{
-      const href=a.getAttribute('href');
-      if(!href||href==='#') return;
-      const target=document.querySelector(href);
+      const href=a.getAttribute('href')||'';
+      /* "/#order" means the homepage's order section. menu.html has a
+         section of its own with that id, so matching on the fragment alone
+         would scroll down the menu page instead of going home. Anything
+         rooted at "/" stays a real navigation unless we are already home. */
+      if(href.charAt(0)==='/' && !onHome) return;
+      const fragment=href.slice(href.indexOf('#'));
+      const target=sectionFor(fragment);
       if(!target) return;
       e.preventDefault();
-      const top=target.getBoundingClientRect().top+window.scrollY-72;
-      window.scrollTo({top,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+      scrollToSection(target,smoothOK);
+      stripFragment();
     });
   });
+
+  /* Arrived with a fragment from another page: scroll to it, then tidy the
+     URL. Waits for load so images and fonts have settled -- measuring the
+     offset before then lands short. */
+  if(location.hash && onHome){
+    const landing=sectionFor(location.hash);
+    if(landing){
+      window.addEventListener('load',()=>{
+        scrollToSection(landing,false);
+        stripFragment();
+      });
+    }
+  }
 
   const revealEls=document.querySelectorAll('.reveal');
   const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
