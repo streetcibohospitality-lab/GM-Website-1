@@ -87,8 +87,8 @@
           </div>
         </div>`;
       document.body.appendChild(intro);
-      setTimeout(()=>intro.classList.add('is-leaving'),340);
-      setTimeout(()=>intro.remove(),590);
+      setTimeout(()=>intro.classList.add('is-leaving'),1150);
+      setTimeout(()=>intro.remove(),1500);
     }
   }
 
@@ -319,7 +319,7 @@
         <strong>${title}</strong>
         <div class="gm-fortune-result-meta">${count} MENU PICK${count===1?'':'S'} · ${lane}</div>
         <ul>${picks.map(pick=>`<li><span>${pick.role}</span><b>${pick.item}</b></li>`).join('')}</ul>
-        <small>${sessionText} · RANDOMIZED FROM THE CURRENT MENU · <a href="menu.html" style="color:inherit;font-weight:900">VIEW MENU →</a></small>`;
+        <small>${sessionText} · RANDOMIZED FROM THE CURRENT MENU · <a href="/menu" style="color:inherit;font-weight:900">VIEW MENU →</a></small>`;
 
       machine.classList.remove('is-dispensing');
       void machine.offsetWidth;
@@ -518,7 +518,7 @@
         <button type="button" class="gm-tray-item" data-tab="shakes">Shakes</button>
       </div>`;
     order.appendChild(tray);
-    $$('.gm-tray-item',tray).forEach(btn=>btn.addEventListener('click',()=>{location.href=`menu.html?tab=${encodeURIComponent(btn.dataset.tab)}`;}));
+    $$('.gm-tray-item',tray).forEach(btn=>btn.addEventListener('click',()=>{location.href=`/menu?tab=${encodeURIComponent(btn.dataset.tab)}`;}));
     if('IntersectionObserver' in window && !reduceMotion){
       const io=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){tray.classList.add('in');io.disconnect();}}),{threshold:.25});
       io.observe(order);

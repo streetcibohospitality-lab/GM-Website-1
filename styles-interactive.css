@@ -967,13 +967,13 @@
   background:rgba(58,58,58,.96);
   opacity:1;
 }
-.gm-door-intro.is-leaving{animation:gmIntroClear .28s ease forwards}
+.gm-door-intro.is-leaving{animation:gmIntroClear .35s ease forwards}
 .gm-open-hanger{
   position:relative;
   width:min(330px,76vw);
   padding-top:74px;
   transform-origin:50% -48px;
-  animation:gmOpenSwing .38s var(--gm-id-ease) both;
+  animation:gmOpenSwing .95s var(--gm-id-ease) both;
 }
 .gm-open-hanger::before,
 .gm-open-hanger::after{

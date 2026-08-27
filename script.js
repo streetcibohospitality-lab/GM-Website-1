@@ -560,14 +560,14 @@
       lines:['1 × KOREAN KONG','1 × DIRTY FRIES','1 × PBJ SHAKE'],
       note:'HOUSE RULE: COME HUNGRY.',
       cta:'VIEW THE FULL MENU',
-      href:'menu.html'
+      href:'/menu'
     },
     {
       title:'WING DEPARTMENT',
       lines:['START SAFE → MAPLE GLAZED','TURN IT UP → PERI PERI','GO FULL MONKEY → GHOST PEPPER'],
       note:'20+ FLAVOURS. PICK YOUR DAMAGE.',
       cta:'SEE THE WINGS',
-      href:'menu.html'
+      href:'/menu'
     },
     {
       title:'YOUR TABLE IS READY.',
