@@ -67,15 +67,19 @@
   addSessionChip($('#order > div:first-child'));
 
   /* ----------------------------------------------------------
-     2. FIRST-VISIT OPEN SIGN
-     First visit only; under 600ms and never shown again locally.
+     2. OPENING SIGN
+     Runs 1.5s on the first homepage view of a browser session, then stays
+     out of the way until the browser is closed and opened again. It was
+     previously kept in localStorage, which meant anyone who had ever
+     visited never saw it again -- including after the timing changed.
+     Skipped entirely under reduced motion.
      ---------------------------------------------------------- */
   const isHome = !!$('#signature') && !!$('#order');
   if(isHome && !reduceMotion){
-    const seenKey='gm_open_sign_seen_v2';
-    const seen=safeStore(localStorage,seenKey);
+    const seenKey='gm_open_sign_seen_session';
+    const seen=safeStore(sessionStorage,seenKey);
     if(!seen){
-      safeStore(localStorage,seenKey,'1');
+      safeStore(sessionStorage,seenKey,'1');
       const intro=document.createElement('div');
       intro.className='gm-door-intro';
       intro.setAttribute('aria-hidden','true');
