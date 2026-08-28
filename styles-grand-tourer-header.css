@@ -1,0 +1,823 @@
+
+/* ============================================================
+   GRUB MONKEYS — GRAND TOURER HEADER
+   Coachbuilt late-1960s American automotive luxury, expressed
+   through material, proportion and motion — never as a literal
+   dashboard. Header-only enhancement.
+   ============================================================ */
+
+#siteNav.gm-grand-nav{
+  --gt-ink:var(--gm-grey);
+  --gt-ink-hi:#30302f;
+  --gt-cream:var(--gm-white);
+  --gt-chrome:#e4e3dc;
+  --gt-chrome-mid:#858582;
+  --gt-red:var(--gm-red);
+  --gt-teal:var(--gm-teal);
+  --gt-sheen-x:50%;
+  --gt-marker-x:0px;
+  --gt-marker-w:0px;
+  --gt-marker-o:0;
+  --gt-chrome-x:50%;
+  --gt-chrome-bright:1;
+  --gt-logo-x:0px;
+  --gt-logo-y:0px;
+
+  min-height:76px;
+  padding:10px var(--pad-x) 11px;
+  gap:clamp(18px,2vw,34px);
+  background:
+    radial-gradient(340px 96px at var(--gt-sheen-x) -12px,rgba(255,255,255,.045),transparent 74%),
+    repeating-linear-gradient(92deg,rgba(255,255,255,.010) 0 1px,rgba(0,0,0,.010) 1px 3px),
+    linear-gradient(180deg,#343432 0%,var(--gm-grey) 58%,#2a2a29 100%);
+  border:0;
+  isolation:isolate;
+  overflow:visible;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.10),
+    inset 0 -1px 0 rgba(0,0,0,.82),
+    0 2px 0 #666662,
+    0 3px 0 var(--gm-white),
+    0 5px 0 #666662,
+    0 8px 14px rgba(0,0,0,.16);
+  transition:
+    min-height .32s var(--gm-ease-editorial),
+    padding .32s var(--gm-ease-editorial),
+    background .24s ease,
+    box-shadow .32s ease;
+}
+
+/* Coachline + chrome blade. */
+#siteNav.gm-grand-nav::before{
+  content:"";
+  position:absolute;
+  z-index:1;
+  left:var(--pad-x);
+  right:var(--pad-x);
+  bottom:5px;
+  height:3px;
+  pointer-events:none;
+  border-radius:999px;
+  background:
+    radial-gradient(72px 120% at var(--gt-chrome-x) 50%,rgba(255,255,255,.78) 0%,rgba(255,255,255,.18) 34%,transparent 72%),
+    linear-gradient(180deg,#fafaf5 0%,#858582 42%,#3f3f3e 54%,#c9c9c5 76%,#f5f5f0 100%);
+  background-size:100% 100%;
+  background-position:center;
+  box-shadow:
+    0 1px 0 #050505,
+    0 -3px 0 -2px rgba(235,0,0,.72);
+  filter:brightness(var(--gt-chrome-bright));
+  transform-origin:center;
+  transition:filter var(--gm-motion-fast) linear;
+}
+
+/* Single power-on catch-light across the chrome blade. */
+#siteNav.gm-grand-nav.is-ready::before{
+  animation:gmGtChromeWake .72s cubic-bezier(.18,.76,.22,1) both;
+}
+
+@keyframes gmGtChromeWake{
+  0%{
+    filter:brightness(.78);
+    background-position:100% 0;
+    opacity:.72;
+    transform:scaleX(.94);
+  }
+  38%{
+    filter:brightness(1.32);
+    opacity:1;
+  }
+  100%{
+    filter:brightness(1);
+    opacity:1;
+    transform:scaleX(1);
+  }
+}
+
+/* Fine pointer-responsive surface light. Intentionally faint. */
+#siteNav.gm-grand-nav::after{
+  content:"";
+  position:absolute;
+  z-index:0;
+  inset:0;
+  pointer-events:none;
+  opacity:var(--gt-sheen-o,0);
+  background:
+    radial-gradient(
+      260px 72px at var(--gt-sheen-x) 0,
+      rgba(255,255,255,.105),
+      rgba(255,255,255,.025) 42%,
+      transparent 72%
+    );
+  transition:opacity .34s ease;
+}
+
+/* ============================================================
+   BRAND LOCKUP — chrome-ringed badge + existing Jaro wordmark
+   ============================================================ */
+#siteNav.gm-grand-nav .nav-logo{
+  position:relative;
+  z-index:5;
+  flex:0 0 auto;
+  gap:13px;
+  min-width:max-content;
+  padding:1px 0;
+  color:var(--gt-cream);
+  transform:translate3d(var(--gt-logo-x),var(--gt-logo-y),0);
+  will-change:transform;
+  transition:transform .16s ease-out;
+}
+
+#siteNav.gm-grand-nav .nav-logo img{
+  width:50px;
+  height:50px;
+  flex:0 0 50px;
+  border-radius:50%;
+  border:2px solid #f1f0ea;
+  background:#111;
+  object-fit:cover;
+  box-shadow:
+    0 0 0 2px #777773,
+    0 0 0 4px #20211f,
+    inset 0 1px 0 rgba(255,255,255,.24),
+    0 4px 12px rgba(0,0,0,.30);
+  transform:translateZ(0);
+  transition:
+    transform .20s var(--gm-ease-snap),
+    box-shadow .20s var(--gm-ease-snap);
+}
+
+#siteNav.gm-grand-nav.is-ignition .nav-logo img{
+  animation:gmGtBadgeSettle .46s cubic-bezier(.16,.92,.25,1) both;
+}
+
+@keyframes gmGtBadgeSettle{
+  0%{transform:translateY(-3px) scale(.965)}
+  58%{transform:translateY(1px) scale(1.008)}
+  100%{transform:translateY(0) scale(1)}
+}
+
+#siteNav.gm-grand-nav .nav-logo:hover img{
+  transform:translateY(-1px);
+  box-shadow:
+    0 0 0 2px #f5f4ee,
+    0 0 0 4px #7e7e79,
+    0 0 0 5px rgba(235,0,0,.74),
+    0 5px 14px rgba(0,0,0,.32);
+}
+
+#siteNav.gm-grand-nav .nav-logo:active img{
+  transform:translateY(1px) scale(.985);
+}
+
+#siteNav.gm-grand-nav .nav-logo-text{
+  color:var(--gt-cream)!important;
+  font-size:1.38rem;
+  line-height:.84;
+  letter-spacing:.012em;
+  text-shadow:0 1px 0 #000;
+}
+
+#siteNav.gm-grand-nav .nav-logo-text::after{
+  content:"EAT LIKE IT'S 1969";
+  display:block;
+  margin-top:7px;
+  color:rgba(240,239,233,.57);
+  font-family:var(--f-body);
+  font-size:.39rem;
+  font-weight:850;
+  line-height:1;
+  letter-spacing:.17em;
+  text-shadow:none;
+  white-space:nowrap;
+  transition:
+    opacity .24s ease,
+    transform .24s var(--gm-ease-editorial);
+}
+
+/* ============================================================
+   NAVIGATION — jewelry-like controls, not themed buttons
+   ============================================================ */
+#siteNav.gm-grand-nav .nav-links{
+  position:relative;
+  z-index:5;
+  flex:1 1 auto;
+  justify-content:center;
+  gap:clamp(2px,.38vw,6px);
+  max-width:550px;
+  min-width:0;
+  padding:0 8px 10px;
+}
+
+/* Brushed metal datum line. */
+#siteNav.gm-grand-nav .nav-links::before{
+  content:"";
+  position:absolute;
+  left:10px;
+  right:10px;
+  bottom:2px;
+  height:1px;
+  pointer-events:none;
+  background:var(--gm-line-on-dark);
+}
+
+/* Animated red carriage that glides beneath active/hovered links. */
+#siteNav.gm-grand-nav .nav-links::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:var(--gt-marker-w);
+  height:3px;
+  border-radius:999px;
+  pointer-events:none;
+  background:var(--gt-red);
+  box-shadow:
+    0 0 0 1px rgba(235,0,0,.13),
+    0 0 8px rgba(235,0,0,.34);
+  opacity:calc(var(--gt-marker-o) * var(--gt-marker-live,0));
+  transform:translateX(var(--gt-marker-x));
+  transition:
+    transform var(--gm-motion-medium) cubic-bezier(.22,1.08,.36,1),
+    width var(--gm-motion-medium) cubic-bezier(.22,1.06,.36,1),
+    opacity .18s ease;
+}
+
+#siteNav.gm-grand-nav .nav-links li{
+  min-width:0;
+}
+
+#siteNav.gm-grand-nav .nav-links a{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:42px;
+  padding:10px 15px 9px;
+  color:rgba(240,239,233,.80)!important;
+  border:1px solid transparent;
+  background:transparent;
+  font-size:.72rem;
+  font-weight:700;
+  line-height:1;
+  letter-spacing:.06em;
+  text-shadow:0 1px 0 rgba(0,0,0,.92);
+  transition:
+    color .18s ease,
+    transform .16s var(--gm-ease-snap),
+    background .18s ease,
+    border-color .18s ease;
+}
+
+#siteNav.gm-grand-nav .nav-links a::after{
+  display:none;
+}
+
+/* Tiny jewel lamp: the only teal detail in the desktop nav. */
+#siteNav.gm-grand-nav .nav-links a::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:6px;
+  width:3px;
+  height:3px;
+  border-radius:50%;
+  background:var(--gt-teal);
+  box-shadow:0 0 6px rgba(0,221,194,.62);
+  opacity:0;
+  transform:translate(-50%,4px);
+  transition:
+    opacity .16s ease,
+    transform .16s var(--gm-ease-snap);
+}
+
+#siteNav.gm-grand-nav .nav-links a:hover,
+#siteNav.gm-grand-nav .nav-links a:focus-visible{
+  color:#fff!important;
+  background:rgba(255,255,255,.035);
+  border-color:rgba(240,239,233,.075);
+  transform:translateY(-1px);
+}
+
+#siteNav.gm-grand-nav .nav-links a:hover::before,
+#siteNav.gm-grand-nav .nav-links a:focus-visible::before,
+#siteNav.gm-grand-nav .nav-links a.is-current::before{
+  opacity:.92;
+  transform:translate(-50%,0);
+}
+
+#siteNav.gm-grand-nav .nav-links a.is-current{
+  color:#fff!important;
+}
+
+#siteNav.gm-grand-nav .nav-links a:active{
+  transform:translateY(1px);
+}
+
+/* ============================================================
+   ORDER CONTROL — red enamel with a polished metal bezel
+   ============================================================ */
+#siteNav.gm-grand-nav > .btn-diner{
+  position:relative;
+  z-index:5;
+  flex:0 0 auto;
+  min-height:44px;
+  overflow:hidden;
+  padding:12px 19px 11px;
+  border:2px solid #f0efe9;
+  background:#d90000;
+  color:#fff;
+  box-shadow:
+    0 0 0 2px #777773,
+    0 0 0 4px #1d1e1c,
+    inset 0 1px 0 rgba(255,255,255,.25),
+    inset 0 -3px 0 rgba(70,0,0,.30),
+    3px 4px 0 rgba(0,0,0,.20);
+  font-size:.67rem;
+  letter-spacing:.075em;
+  transition:
+    transform .16s var(--gm-ease-snap),
+    box-shadow .16s var(--gm-ease-snap),
+    background .16s ease;
+}
+
+#siteNav.gm-grand-nav > .btn-diner::before{
+  content:"";
+  width:6px;
+  height:6px;
+  flex:0 0 6px;
+  border-radius:50%;
+  background:var(--gt-teal);
+  box-shadow:0 0 0 rgba(0,221,194,0);
+  opacity:.12;
+  filter:brightness(.7);
+  transition:
+    opacity .28s ease,
+    filter .28s ease,
+    box-shadow .28s ease;
+}
+
+#siteNav.gm-grand-nav.is-lit > .btn-diner::before{
+  opacity:.9;
+  filter:brightness(1);
+  box-shadow:0 0 5px rgba(0,221,194,.30),0 0 9px rgba(0,221,194,.12);
+  animation:gmGtLowVoltage 4.35s linear infinite;
+}
+
+@keyframes gmGtLowVoltage{
+  0%,18%,32%,57%,77%,100%{
+    opacity:.9;
+    filter:brightness(1);
+    box-shadow:0 0 5px rgba(0,221,194,.30),0 0 9px rgba(0,221,194,.12);
+  }
+  21%{
+    opacity:.76;
+    filter:brightness(.80);
+    box-shadow:0 0 3px rgba(0,221,194,.16),0 0 6px rgba(0,221,194,.07);
+  }
+  48%{opacity:.84;filter:brightness(.93)}
+  67%{
+    opacity:.98;
+    filter:brightness(1.08);
+    box-shadow:0 0 6px rgba(0,221,194,.34),0 0 10px rgba(0,221,194,.14);
+  }
+  86%{opacity:.72;filter:brightness(.76)}
+  88%{opacity:.94;filter:brightness(1.03)}
+}
+
+/* Gloss catch that appears only on interaction. */
+#siteNav.gm-grand-nav > .btn-diner::after{
+  content:"";
+  position:absolute;
+  top:-35%;
+  bottom:-35%;
+  left:-38%;
+  width:22%;
+  pointer-events:none;
+  opacity:0;
+  transform:skewX(-16deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);
+}
+
+#siteNav.gm-grand-nav > .btn-diner:hover{
+  background:#eb0000;
+  transform:translateY(-1px);
+  box-shadow:
+    0 0 0 2px #f4f3ed,
+    0 0 0 4px #1d1e1c,
+    inset 0 1px 0 rgba(255,255,255,.28),
+    inset 0 -3px 0 rgba(70,0,0,.24),
+    3px 5px 0 rgba(0,0,0,.22);
+}
+
+#siteNav.gm-grand-nav > .btn-diner:hover::after{
+  animation:gmGtEnamelGlint .55s cubic-bezier(.2,.74,.25,1) 1 both;
+}
+
+@keyframes gmGtEnamelGlint{
+  0%{left:-38%;opacity:0}
+  22%{opacity:.5}
+  100%{left:116%;opacity:0}
+}
+
+#siteNav.gm-grand-nav > .btn-diner:hover .arrow{
+  transform:translateX(4px);
+}
+
+#siteNav.gm-grand-nav > .btn-diner:active{
+  transform:translateY(2px);
+  box-shadow:
+    0 0 0 2px #dcdad4,
+    0 0 0 4px #1d1e1c,
+    inset 0 3px 7px rgba(65,0,0,.38);
+}
+
+/* ============================================================
+   SCROLL STATE — same object, lower profile
+   ============================================================ */
+#siteNav.gm-grand-nav.scrolled{
+  min-height:62px;
+  padding-top:6px;
+  padding-bottom:7px;
+  background:
+    radial-gradient(300px 76px at var(--gt-sheen-x) -10px,rgba(255,255,255,.035),transparent 74%),
+    repeating-linear-gradient(92deg,rgba(255,255,255,.009) 0 1px,rgba(0,0,0,.009) 1px 3px),
+    var(--gm-grey);
+  border-bottom:0;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 2px 0 #686864,
+    0 3px 0 var(--gm-white),
+    0 5px 0 #686864,
+    0 7px 14px rgba(0,0,0,.17);
+}
+
+#siteNav.gm-grand-nav.scrolled .nav-logo img{
+  width:42px;
+  height:42px;
+  flex-basis:42px;
+}
+
+#siteNav.gm-grand-nav.scrolled .nav-logo-text{
+  font-size:1.18rem;
+}
+
+#siteNav.gm-grand-nav.scrolled .nav-logo-text::after{
+  opacity:0;
+  transform:translateY(-3px);
+}
+
+#siteNav.gm-grand-nav.scrolled .nav-links a{
+  min-height:36px;
+  padding-top:8px;
+  padding-bottom:8px;
+}
+
+/* Neutralize legacy light-header scroll rules. */
+body[data-page] #siteNav.gm-grand-nav .nav-logo-text,
+body[data-page] #siteNav.gm-grand-nav .nav-links a,
+body[data-page] #siteNav.gm-grand-nav.scrolled .nav-logo-text,
+body[data-page] #siteNav.gm-grand-nav.scrolled .nav-links a{
+  color:var(--gt-cream)!important;
+}
+
+/* ============================================================
+   MOBILE — tailored black-leather menu, restrained chrome
+   ============================================================ */
+@media(max-width:880px){
+  #siteNav.gm-grand-nav{
+    min-height:68px;
+    padding:7px var(--pad-x) 8px;
+    gap:12px;
+  }
+
+  #siteNav.gm-grand-nav .nav-logo img{
+    width:44px;
+    height:44px;
+    flex-basis:44px;
+  }
+
+  #siteNav.gm-grand-nav .nav-logo-text{
+    font-size:1.18rem;
+  }
+
+  #siteNav.gm-grand-nav .nav-logo-text::after{
+    margin-top:5px;
+    font-size:.32rem;
+    letter-spacing:.13em;
+  }
+
+  #siteNav.gm-grand-nav .hamburger{
+    position:relative;
+    display:flex;
+    width:46px;
+    height:42px;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    padding:9px;
+    border:1px solid #777773;
+    background:#2a2a29;
+    box-shadow:
+      0 0 0 1px #292a28,
+      inset 0 1px 0 rgba(255,255,255,.08),
+      inset 0 -2px 4px rgba(0,0,0,.50);
+    transition:
+      transform .16s var(--gm-ease-snap),
+      border-color .16s ease;
+  }
+
+  #siteNav.gm-grand-nav .hamburger span{
+    width:22px;
+    height:2px;
+    background:#f0efe9!important;
+    box-shadow:0 1px 0 rgba(0,0,0,.72);
+  }
+
+  #siteNav.gm-grand-nav .hamburger:hover{
+    border-color:#b7b6b0;
+  }
+
+  #siteNav.gm-grand-nav .hamburger:active{
+    transform:translateY(1px);
+  }
+
+  .mobile-menu{
+    display:flex;
+    visibility:hidden;
+    opacity:0;
+    pointer-events:none;
+    transform:translateY(-14px);
+    background:
+      repeating-linear-gradient(92deg,rgba(255,255,255,.010) 0 1px,rgba(0,0,0,.010) 1px 3px),
+      var(--gm-grey);
+    border-top:3px solid #deddd7;
+    transition:
+      opacity .22s ease,
+      transform .28s var(--gm-ease-editorial),
+      visibility 0s linear .28s;
+  }
+
+  .mobile-menu::before{
+    content:"";
+    position:absolute;
+    z-index:0;
+    left:var(--pad-x);
+    right:var(--pad-x);
+    top:78px;
+    height:1px;
+    background:linear-gradient(90deg,transparent,rgba(235,0,0,.72) 12%,rgba(235,0,0,.72) 88%,transparent);
+  }
+
+  .mobile-menu.open{
+    visibility:visible;
+    opacity:1;
+    pointer-events:auto;
+    transform:translateY(0);
+    transition-delay:0s;
+  }
+
+  .mm-top,
+  .mm-links,
+  .mm-foot{
+    position:relative;
+    z-index:1;
+  }
+
+  .mm-top{
+    padding:15px var(--pad-x) 18px;
+    border-bottom:0;
+    background:rgba(0,0,0,.04);
+  }
+
+  .mm-brand{
+    gap:12px;
+  }
+
+  .mm-brand img{
+    width:45px;
+    height:45px;
+    border:2px solid #efeee8;
+    border-radius:50%;
+    box-shadow:0 0 0 2px #777773,0 0 0 4px #20211f;
+  }
+
+  .mm-brand .nav-logo-text{
+    color:#f0efe9!important;
+    font-size:1.22rem!important;
+  }
+
+  .mm-brand .nav-logo-text::after{
+    content:"EAT LIKE IT'S 1969";
+    display:block;
+    margin-top:6px;
+    color:rgba(240,239,233,.54);
+    font-family:var(--f-body);
+    font-size:.34rem;
+    font-weight:850;
+    line-height:1;
+    letter-spacing:.14em;
+  }
+
+  .mm-close{
+    width:42px;
+    height:40px;
+    display:grid;
+    place-items:center;
+    border:1px solid #6b6b67;
+    background:#2a2a29;
+    color:#f0efe9;
+    font-size:1.12rem;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.07),
+      inset 0 -2px 4px rgba(0,0,0,.46);
+  }
+
+  .mm-links{
+    gap:0;
+    justify-content:center;
+    padding:20px var(--pad-x);
+  }
+
+  .mm-links a{
+    min-height:68px;
+    align-items:center;
+    gap:18px;
+    padding:13px 5px 12px;
+    border:0;
+    border-bottom:1px solid rgba(240,239,233,.13);
+    background:transparent;
+    color:#f0efe9;
+    font-size:clamp(1.75rem,8.6vw,2.55rem);
+    line-height:.9;
+    opacity:0;
+    transform:translateY(9px);
+    transition:
+      opacity .22s ease,
+      transform .28s var(--gm-ease-editorial),
+      color .16s ease;
+  }
+
+  .mobile-menu.open .mm-links a{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  .mobile-menu.open .mm-links a:nth-child(1){transition-delay:.035s}
+  .mobile-menu.open .mm-links a:nth-child(2){transition-delay:.075s}
+  .mobile-menu.open .mm-links a:nth-child(3){transition-delay:.115s}
+  .mobile-menu.open .mm-links a:nth-child(4){transition-delay:.155s}
+
+  .mm-links a:hover,
+  .mm-links a:focus-visible{
+    color:#fff;
+  }
+
+  .mm-links a .mm-idx{
+    min-width:32px;
+    color:var(--gt-teal);
+    opacity:.76;
+    font-size:.58rem;
+    font-weight:900;
+    letter-spacing:.10em;
+  }
+
+  .mm-foot{
+    padding:8px var(--pad-x) calc(24px + env(safe-area-inset-bottom));
+  }
+
+  .mm-order{
+    position:relative;
+    overflow:hidden;
+    border:2px solid #efeee8;
+    background:#d90000;
+    color:#fff;
+    box-shadow:
+      0 0 0 2px #747470,
+      0 0 0 4px #20211f,
+      inset 0 1px 0 rgba(255,255,255,.22);
+    font-size:1.14rem;
+    letter-spacing:.06em;
+  }
+
+  .mobile-menu .checker-strip{
+    display:none;
+  }
+}
+
+@media(max-width:430px){
+  #siteNav.gm-grand-nav .nav-logo{gap:9px}
+  #siteNav.gm-grand-nav .nav-logo img{width:41px;height:41px;flex-basis:41px}
+  #siteNav.gm-grand-nav .nav-logo-text{font-size:1.04rem}
+  #siteNav.gm-grand-nav .nav-logo-text::after{
+    font-size:.29rem;
+    letter-spacing:.10em;
+  }
+}
+
+@media(max-width:350px){
+  #siteNav.gm-grand-nav .nav-logo-text::after{display:none}
+}
+
+/* Accessibility and motion preferences. */
+#siteNav.gm-grand-nav a:focus-visible,
+#siteNav.gm-grand-nav button:focus-visible{
+  outline:2px solid var(--gt-teal);
+  outline-offset:3px;
+}
+
+@media(prefers-reduced-motion:reduce){
+  #siteNav.gm-grand-nav::before,
+  #siteNav.gm-grand-nav .nav-logo img,
+  #siteNav.gm-grand-nav > .btn-diner::after{
+    animation:none!important;
+  }
+
+  #siteNav.gm-grand-nav,
+  #siteNav.gm-grand-nav .nav-logo,
+  #siteNav.gm-grand-nav .nav-logo img,
+  #siteNav.gm-grand-nav .nav-logo-text::after,
+  #siteNav.gm-grand-nav .nav-links a,
+  #siteNav.gm-grand-nav .nav-links::after,
+  #siteNav.gm-grand-nav > .btn-diner,
+  .mobile-menu,
+  .mm-links a{
+    transition:none!important;
+  }
+
+  .mobile-menu.open .mm-links a{
+    opacity:1;
+    transform:none;
+  }
+}
+
+
+/* GRAND TOURER PLUS — ignition staging */
+#siteNav.gm-grand-nav.is-marker-live{
+  --gt-marker-live:1;
+}
+
+@media(prefers-reduced-motion:reduce){
+  #siteNav.gm-grand-nav{
+    --gt-logo-x:0px!important;
+    --gt-logo-y:0px!important;
+    --gt-chrome-x:50%!important;
+    --gt-chrome-bright:1!important;
+  }
+  #siteNav.gm-grand-nav.is-marker-live{
+    --gt-marker-live:1;
+  }
+  #siteNav.gm-grand-nav > .btn-diner::before{
+    opacity:.86!important;
+    filter:none!important;
+    box-shadow:0 0 6px rgba(0,221,194,.55)!important;
+  }
+}
+
+
+/* SITE-BLEND PASS — the header ends as a material seam, not a floating card. */
+#siteNav.gm-grand-nav .gm-site-seam{
+  display:none;
+}
+
+#siteNav.gm-grand-nav .nav-logo-text::after{
+  letter-spacing:.16em;
+}
+
+/* Keep chrome/teal behavior consistent with the rest of the diner hardware. */
+#siteNav.gm-grand-nav.is-lit .nav-links a.is-current::before{
+  opacity:.88;
+  box-shadow:0 0 5px rgba(0,221,194,.28);
+}
+
+/* Header motion uses the global motion scale wherever a custom duration is not essential. */
+#siteNav.gm-grand-nav .nav-logo,
+#siteNav.gm-grand-nav .nav-logo img,
+#siteNav.gm-grand-nav .nav-links a,
+#siteNav.gm-grand-nav > .btn-diner{
+  -webkit-tap-highlight-color:transparent;
+}
+
+@media(max-width:880px){
+  .mobile-menu{
+    color:var(--gm-white);
+  }
+
+  .mm-links a{
+    border-bottom-color:var(--gm-line-on-dark);
+  }
+
+  .mm-order{
+    background:var(--gm-red);
+    color:var(--gm-white);
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  #siteNav.gm-grand-nav.is-lit > .btn-diner::before{
+    animation:none!important;
+    opacity:.9!important;
+    filter:none!important;
+  }
+}
