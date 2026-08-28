@@ -521,3 +521,15 @@ body[data-page="franchise"] .gm-fr-phone__video{
 .foot-social a{
   color:rgba(240,239,233,.72);
 }
+
+/* Roadside sign actions -- CALL DINER / GET DIRECTIONS
+   Text-only links styled at .56rem, ~17px tall on mobile: under the 24px
+   minimum touch target, on a phone-call CTA. Padding grows the tappable
+   box; the equal negative margin cancels it back out of the flex row's
+   layout, so neither the text position nor the gap to the neighbouring
+   link changes -- only the hit area does. */
+.roadside-actions a{
+  display:inline-block;
+  padding:6px 7px;
+  margin:-6px -7px;
+}
