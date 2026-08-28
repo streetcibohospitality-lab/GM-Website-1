@@ -32,12 +32,12 @@
     list.style.setProperty('--gt-marker-o','1');
   }
 
-  function showCurrent(link){
+  function showCurrent(link,currentType='page'){
     current=link||null;
     links.forEach(a=>{
       const active=a===current;
       a.classList.toggle('is-current',active);
-      if(active) a.setAttribute('aria-current','page');
+      if(active) a.setAttribute('aria-current',currentType);
       else a.removeAttribute('aria-current');
     });
     if(!hover) measure(current);
@@ -83,9 +83,9 @@
   /* Page-level active state. */
   const path=location.pathname.replace(/\/+$/,'') || '/';
   if(path==='/menu'){
-    showCurrent(links.find(a=>a.getAttribute('href')==='/menu'));
+    showCurrent(links.find(a=>a.getAttribute('href')==='/menu'),'page');
   }else if(path==='/franchise'){
-    showCurrent(links.find(a=>a.getAttribute('href')==='/franchise'));
+    showCurrent(links.find(a=>a.getAttribute('href')==='/franchise'),'page');
   }else{
     showCurrent(null);
   }
@@ -125,7 +125,7 @@
           best=link;
         }
       });
-      showCurrent(best);
+      showCurrent(best,'location');
     },{
       rootMargin:'-24% 0px -57% 0px',
       threshold:[0,.2,.35,.55,.75]
@@ -203,6 +203,39 @@
         {duration:140,easing:'steps(3,end)'}
       );
     });
+  }
+
+  /* ---------------------------------------------------------
+     Mobile overlay accessibility:
+     while the full-screen menu is open, underlying page content is
+     made inert so keyboard and assistive-tech focus cannot escape
+     behind the navigation layer.
+     --------------------------------------------------------- */
+  const mobileMenu=document.getElementById('mobileMenu');
+  const inertTargets=[
+    document.querySelector('main'),
+    document.querySelector('footer'),
+    ...document.querySelectorAll('.mobile-sticky,.sticky-order-bar,.mobile-order-bar')
+  ].filter((el,index,arr)=>el && arr.indexOf(el)===index);
+
+  function syncMobileInert(){
+    if(!mobileMenu) return;
+    const open=mobileMenu.classList.contains('open');
+    inertTargets.forEach(el=>{
+      if(open){
+        el.setAttribute('inert','');
+        el.setAttribute('aria-hidden','true');
+      }else{
+        el.removeAttribute('inert');
+        el.removeAttribute('aria-hidden');
+      }
+    });
+  }
+
+  if(mobileMenu){
+    const menuObserver=new MutationObserver(syncMobileInert);
+    menuObserver.observe(mobileMenu,{attributes:true,attributeFilter:['class']});
+    syncMobileInert();
   }
 
   /* Re-measure active marker after responsive/font changes. */
