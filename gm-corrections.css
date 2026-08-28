@@ -533,3 +533,73 @@ body[data-page="franchise"] .gm-fr-phone__video{
   padding:6px 7px;
   margin:-6px -7px;
 }
+
+/* Jukebox coin token -- covers the "SELECT" label
+   .coin-token's position is defined three times in styles-base.css: a base
+   rule, an animation-only rule, and a "compact" variant whose surrounding
+   @media(min-width:861px) block closes two rules early, leaking it out to
+   apply at every width unconditionally. That compact rule (top:-20px) wins
+   the cascade everywhere and puts the coin directly over the right half of
+   "25¢ / SELECT" -- measured 19x18px of overlap on the 72x18px label,
+   identical at 390px and 1440px. Left as a small negative offset so the
+   coin still reads as hovering at the slot, just clear of the label above
+   it. */
+.coin-token{
+  top:1px !important;
+}
+
+/* Jukebox vinyl-rack button -- hidden behind the player panel
+   .vinyl-rack is not inside .gm-jukebox-shell; it lives in
+   .juke-vinyl-field, a sibling that spans the whole .jukebox-section
+   (copy text and jukebox graphic together, position:absolute;inset:0).
+   Its left:52%/top:56% is a position within that combined area, which
+   only clears the graphic once the section's copy+graphic columns sit
+   side by side at a wide enough width. Measured: overlapping up to
+   1100px (e.g. 40x146px at 1024px), clear from 1152px on -- so this is
+   scoped to stop just below that boundary and leaves anything at
+   1152px+ untouched. */
+@media(max-width:1100px){
+  /* First attempt was two different fixes: reposition below the graphic
+     under 861px (where copy stacks above it, leaving no free space
+     beside it), and shift left within 861-1100px on the theory that the
+     side-by-side layout there leaves room beside the panel instead.
+     It doesn't: measured gap between the copy column and the player
+     panel is only 70-72px at 861-900px (rack is 132px wide) and doesn't
+     open up past ~125px until closer to 1000px, and shifting left far
+     enough to clear the panel walked the card into the "Monkey Jukebox"
+     heading text instead. Below the whole section, where both the
+     870-page and side-by-side layouts have already stopped needing that
+     horizontal space, is the one spot that holds at every width in this
+     range. */
+  body[data-page="home"] .jukebox-section{
+    padding-bottom:200px;
+  }
+  /* .vinyl-rack's own transform is translate(-50%,-50%) rotate(-3deg) --
+     built to centre the card ON its top/left point. bottom:24px alone
+     does not account for that: the existing -50% Y-translate still
+     shifts the card up by half its own height afterwards. Keeping
+     top+translate as the positioning model, just retargeting the centre
+     point, is what actually respects that. */
+  .vinyl-rack{
+    top:calc(100% - 90px) !important;
+    bottom:auto !important;
+    left:50% !important;
+    transform:translate(-50%,-50%) rotate(-3deg) !important;
+  }
+}
+
+/* Homepage Hall of Fame "HOUSE PICK" stamp -- behind the heading
+   .retro-stamp--hof anchors bottom-right of .sig-head (right:8%;bottom:4px),
+   which puts it directly under the last word of "Hall Of Fame." at every
+   width from 768px up -- the heading spans nearly the full container, so
+   its own bottom edge sits right where the stamp does. Confirmed
+   unreadable by screenshot (only "OU P..." visible through the letters).
+   Moved to align with the "02 Fan Favourites" row above the heading
+   instead, where that label's own text ends well short of the stamp's
+   position (up to 511px of clear space measured at 768px) and the
+   nearby decorative spark cluster doesn't reach it either. */
+.retro-stamp--hof{
+  top:2px !important;
+  bottom:auto !important;
+  right:6% !important;
+}
