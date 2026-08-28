@@ -1,0 +1,595 @@
+
+/* ============================================================
+   GRUB MONKEYS — CADILLAC HEADER
+   Late-60s American luxury-car influence, not a literal dashboard.
+   Header only. No page content below the header is changed.
+   ============================================================ */
+
+#siteNav.gm-cadillac-nav{
+  --cad-ink:#171817;
+  --cad-ink-hi:#242523;
+  --cad-cream:#f0efe9;
+  --cad-chrome:#deddd7;
+  --cad-chrome-mid:#8b8b86;
+  --cad-red:#eb0000;
+  --cad-teal:#00ddc2;
+
+  min-height:76px;
+  padding:10px var(--pad-x);
+  gap:clamp(18px,2.2vw,34px);
+  background:
+    radial-gradient(circle at 18% 8%,rgba(255,255,255,.055) 0 1px,transparent 1.4px) 0 0/16px 16px,
+    linear-gradient(180deg,#282927 0%,#1b1c1b 54%,#121312 100%);
+  border:0;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.12),
+    inset 0 -1px 0 rgba(0,0,0,.88),
+    0 2px 0 #777773,
+    0 3px 0 #f2f1eb,
+    0 5px 0 #71716d,
+    0 10px 22px rgba(0,0,0,.18);
+  isolation:isolate;
+  overflow:visible;
+  transition:
+    min-height .30s var(--gm-ease-editorial),
+    padding .30s var(--gm-ease-editorial),
+    box-shadow .30s var(--gm-ease-editorial),
+    background .30s var(--gm-ease-editorial);
+}
+
+/* Fine red coachline above the chrome lower rail. */
+#siteNav.gm-cadillac-nav::before{
+  content:"";
+  position:absolute;
+  left:var(--pad-x);
+  right:var(--pad-x);
+  bottom:5px;
+  height:1px;
+  z-index:1;
+  pointer-events:none;
+  background:linear-gradient(90deg,transparent,var(--cad-red) 8%,var(--cad-red) 92%,transparent);
+  opacity:.58;
+}
+
+/* One subtle chrome reflection on initial load. */
+#siteNav.gm-cadillac-nav::after{
+  content:"";
+  position:absolute;
+  z-index:20;
+  top:0;
+  bottom:-5px;
+  left:-20%;
+  width:9%;
+  pointer-events:none;
+  opacity:0;
+  transform:skewX(-16deg);
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.03),
+    rgba(255,255,255,.23),
+    rgba(255,255,255,.04),
+    transparent
+  );
+}
+
+#siteNav.gm-cadillac-nav.is-powered::after{
+  animation:gmCadillacSweep .92s cubic-bezier(.2,.72,.24,1) .16s 1 both;
+}
+
+@keyframes gmCadillacSweep{
+  0%{left:-20%;opacity:0}
+  18%{opacity:.42}
+  82%{opacity:.12}
+  100%{left:112%;opacity:0}
+}
+
+/* ------------------------------------------------------------
+   Brand lockup — chrome-ringed hood badge, but restrained.
+   ------------------------------------------------------------ */
+#siteNav.gm-cadillac-nav .nav-logo{
+  position:relative;
+  z-index:4;
+  flex:0 0 auto;
+  gap:13px;
+  min-width:max-content;
+  padding:1px 0;
+  color:var(--cad-cream);
+}
+
+#siteNav.gm-cadillac-nav .nav-logo img{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  border:2px solid #efeee8;
+  background:#111;
+  object-fit:cover;
+  box-shadow:
+    0 0 0 2px #777773,
+    0 0 0 3px #222321,
+    0 2px 8px rgba(0,0,0,.30);
+  transition:
+    transform .18s var(--gm-ease-snap),
+    box-shadow .18s var(--gm-ease-snap);
+}
+
+#siteNav.gm-cadillac-nav .nav-logo:hover img{
+  transform:translateY(-1px);
+  box-shadow:
+    0 0 0 2px #f3f2ec,
+    0 0 0 3px var(--cad-red),
+    0 4px 10px rgba(0,0,0,.30);
+}
+
+#siteNav.gm-cadillac-nav .nav-logo:active img{
+  transform:translateY(1px) scale(.985);
+}
+
+#siteNav.gm-cadillac-nav .nav-logo-text{
+  display:block;
+  color:var(--cad-cream)!important;
+  font-size:1.37rem;
+  line-height:.84;
+  letter-spacing:.012em;
+  text-shadow:0 1px 0 #000;
+}
+
+#siteNav.gm-cadillac-nav .nav-logo-text::after{
+  content:"EAT LIKE IT'S 1969";
+  display:block;
+  margin-top:7px;
+  color:rgba(240,239,233,.58);
+  font-family:var(--f-body);
+  font-size:.39rem;
+  font-weight:850;
+  line-height:1;
+  letter-spacing:.17em;
+  text-shadow:none;
+  white-space:nowrap;
+}
+
+/* ------------------------------------------------------------
+   Navigation — elegant engraved switch bank, not fake radio keys.
+   ------------------------------------------------------------ */
+#siteNav.gm-cadillac-nav .nav-links{
+  --gm-marker-x:0px;
+  --gm-marker-w:0px;
+  position:relative;
+  z-index:4;
+  flex:1 1 auto;
+  max-width:530px;
+  min-width:0;
+  justify-content:center;
+  gap:clamp(2px,.45vw,6px);
+  padding:0 8px 9px;
+}
+
+/* Chrome spine */
+#siteNav.gm-cadillac-nav .nav-links::before{
+  content:"";
+  position:absolute;
+  left:8px;
+  right:8px;
+  bottom:1px;
+  height:2px;
+  border-radius:999px;
+  background:linear-gradient(180deg,#faf9f4 0%,#8b8b86 46%,#42423f 100%);
+  box-shadow:0 1px 0 #000;
+  opacity:.78;
+}
+
+/* Moving red active-page marker */
+#siteNav.gm-cadillac-nav .nav-links::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:var(--gm-marker-w);
+  height:3px;
+  border-radius:999px;
+  background:var(--cad-red);
+  box-shadow:
+    0 0 0 1px rgba(235,0,0,.18),
+    0 0 7px rgba(235,0,0,.34);
+  transform:translateX(var(--gm-marker-x));
+  opacity:var(--gm-marker-visible,0);
+  transition:
+    transform .34s cubic-bezier(.2,.75,.2,1),
+    width .34s cubic-bezier(.2,.75,.2,1),
+    opacity .18s ease;
+  pointer-events:none;
+}
+
+#siteNav.gm-cadillac-nav .nav-links a{
+  position:relative;
+  min-height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 14px 9px;
+  color:rgba(240,239,233,.80)!important;
+  border:1px solid transparent;
+  text-shadow:0 1px 0 #000;
+  font-size:.68rem;
+  font-weight:780;
+  line-height:1;
+  letter-spacing:.07em;
+  transition:
+    color .18s ease,
+    transform .16s var(--gm-ease-snap),
+    background .18s ease,
+    border-color .18s ease;
+}
+
+#siteNav.gm-cadillac-nav .nav-links a::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:7px;
+  width:3px;
+  height:3px;
+  border-radius:50%;
+  background:var(--cad-teal);
+  box-shadow:0 0 6px rgba(0,221,194,.65);
+  opacity:0;
+  transform:translate(-50%,4px);
+  transition:opacity .16s ease,transform .16s var(--gm-ease-snap);
+}
+
+#siteNav.gm-cadillac-nav .nav-links a::after{
+  display:none;
+}
+
+#siteNav.gm-cadillac-nav .nav-links a:hover,
+#siteNav.gm-cadillac-nav .nav-links a:focus-visible{
+  color:#fff!important;
+  background:rgba(255,255,255,.045);
+  border-color:rgba(240,239,233,.09);
+  transform:translateY(-1px);
+}
+
+#siteNav.gm-cadillac-nav .nav-links a:hover::before,
+#siteNav.gm-cadillac-nav .nav-links a:focus-visible::before,
+#siteNav.gm-cadillac-nav .nav-links a.is-current::before{
+  opacity:.92;
+  transform:translate(-50%,0);
+}
+
+#siteNav.gm-cadillac-nav .nav-links a.is-current{
+  color:#fff!important;
+}
+
+#siteNav.gm-cadillac-nav .nav-links a:active{
+  transform:translateY(1px);
+}
+
+/* ------------------------------------------------------------
+   ORDER — red enamel control with chrome bezel.
+   ------------------------------------------------------------ */
+#siteNav.gm-cadillac-nav > .btn-diner{
+  position:relative;
+  z-index:4;
+  flex:0 0 auto;
+  min-height:44px;
+  padding:12px 20px 11px;
+  border:2px solid #efeee8;
+  background:
+    linear-gradient(180deg,#ff1515 0%,#eb0000 55%,#c90000 100%);
+  color:#fff;
+  box-shadow:
+    0 0 0 2px #767672,
+    0 0 0 3px #20211f,
+    inset 0 1px 0 rgba(255,255,255,.28),
+    inset 0 -3px 0 rgba(80,0,0,.28),
+    3px 4px 0 rgba(0,0,0,.20);
+  font-size:.67rem;
+  letter-spacing:.075em;
+  transition:
+    transform .16s var(--gm-ease-snap),
+    box-shadow .16s var(--gm-ease-snap),
+    filter .16s ease;
+}
+
+#siteNav.gm-cadillac-nav > .btn-diner::before{
+  content:"";
+  width:6px;
+  height:6px;
+  flex:0 0 6px;
+  margin-right:1px;
+  border-radius:50%;
+  background:var(--cad-teal);
+  box-shadow:0 0 6px rgba(0,221,194,.60);
+  opacity:.86;
+}
+
+#siteNav.gm-cadillac-nav > .btn-diner:hover{
+  transform:translateY(-1px);
+  filter:brightness(1.04);
+  box-shadow:
+    0 0 0 2px #f4f3ed,
+    0 0 0 3px #21221f,
+    inset 0 1px 0 rgba(255,255,255,.30),
+    inset 0 -3px 0 rgba(80,0,0,.24),
+    3px 5px 0 rgba(0,0,0,.22);
+}
+
+#siteNav.gm-cadillac-nav > .btn-diner:hover .arrow{
+  transform:translateX(4px);
+}
+
+#siteNav.gm-cadillac-nav > .btn-diner:active{
+  transform:translateY(2px);
+  box-shadow:
+    0 0 0 2px #dfded8,
+    0 0 0 3px #20211f,
+    inset 0 3px 6px rgba(80,0,0,.28);
+}
+
+/* ------------------------------------------------------------
+   Scroll state — same design, simply settles lower and tighter.
+   ------------------------------------------------------------ */
+#siteNav.gm-cadillac-nav.scrolled{
+  min-height:62px;
+  padding-top:6px;
+  padding-bottom:7px;
+  background:
+    radial-gradient(circle at 18% 8%,rgba(255,255,255,.045) 0 1px,transparent 1.4px) 0 0/16px 16px,
+    linear-gradient(180deg,#232422 0%,#171817 55%,#101110 100%);
+  border-bottom:0;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.09),
+    0 2px 0 #777773,
+    0 3px 0 #e8e7e1,
+    0 5px 0 #666662,
+    0 9px 18px rgba(0,0,0,.22);
+}
+
+#siteNav.gm-cadillac-nav.scrolled .nav-logo img{
+  width:41px;
+  height:41px;
+}
+
+#siteNav.gm-cadillac-nav.scrolled .nav-logo-text{
+  font-size:1.18rem;
+}
+
+#siteNav.gm-cadillac-nav.scrolled .nav-logo-text::after{
+  margin-top:5px;
+  font-size:.34rem;
+}
+
+#siteNav.gm-cadillac-nav.scrolled .nav-links a{
+  min-height:36px;
+  padding-top:8px;
+  padding-bottom:8px;
+}
+
+/* Existing global rules try to make scrolled nav light; force Cadillac palette. */
+body[data-page] #siteNav.gm-cadillac-nav.scrolled .nav-logo-text,
+body[data-page] #siteNav.gm-cadillac-nav.scrolled .nav-links a{
+  color:var(--cad-cream)!important;
+}
+
+/* ------------------------------------------------------------
+   MOBILE — quiet coachbuilt slide-down menu.
+   No fake dashboard/radio metaphors.
+   ------------------------------------------------------------ */
+@media(max-width:880px){
+  #siteNav.gm-cadillac-nav{
+    min-height:68px;
+    padding:7px var(--pad-x) 8px;
+    gap:12px;
+  }
+
+  #siteNav.gm-cadillac-nav .nav-logo img{
+    width:44px;
+    height:44px;
+  }
+
+  #siteNav.gm-cadillac-nav .nav-logo-text{
+    font-size:1.18rem;
+  }
+
+  #siteNav.gm-cadillac-nav .nav-logo-text::after{
+    margin-top:5px;
+    font-size:.32rem;
+    letter-spacing:.13em;
+  }
+
+  #siteNav.gm-cadillac-nav .hamburger{
+    position:relative;
+    display:flex;
+    width:46px;
+    height:42px;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    padding:9px;
+    border:1px solid #777773;
+    background:#151614;
+    box-shadow:
+      0 0 0 1px #292a28,
+      inset 0 1px 0 rgba(255,255,255,.08),
+      inset 0 -2px 4px rgba(0,0,0,.48);
+  }
+
+  #siteNav.gm-cadillac-nav .hamburger span{
+    width:22px;
+    height:2px;
+    background:#efeee8!important;
+    box-shadow:0 1px 0 rgba(0,0,0,.72);
+  }
+
+  #siteNav.gm-cadillac-nav .hamburger:active{
+    transform:translateY(1px);
+  }
+
+  .mobile-menu{
+    display:flex;
+    visibility:hidden;
+    opacity:0;
+    pointer-events:none;
+    transform:translateY(-14px);
+    background:
+      radial-gradient(circle at 22% 10%,rgba(255,255,255,.04) 0 1px,transparent 1.4px) 0 0/16px 16px,
+      linear-gradient(180deg,#222321 0%,#151614 100%);
+    border-top:3px solid #d6d5cf;
+    transition:
+      opacity .22s ease,
+      transform .28s var(--gm-ease-editorial),
+      visibility 0s linear .28s;
+  }
+
+  .mobile-menu.open{
+    visibility:visible;
+    opacity:1;
+    pointer-events:auto;
+    transform:translateY(0);
+    transition-delay:0s;
+  }
+
+  .mm-top{
+    padding:16px var(--pad-x);
+    border-bottom:1px solid rgba(240,239,233,.16);
+    background:rgba(0,0,0,.08);
+  }
+
+  .mm-brand img{
+    width:45px;
+    height:45px;
+    border:2px solid #efeee8;
+    border-radius:50%;
+    box-shadow:0 0 0 2px #777773;
+  }
+
+  .mm-brand .nav-logo-text{
+    color:var(--cad-cream)!important;
+    font-size:1.22rem!important;
+  }
+
+  .mm-brand .nav-logo-text::after{
+    content:"EAT LIKE IT'S 1969";
+    display:block;
+    margin-top:6px;
+    color:rgba(240,239,233,.54);
+    font-family:var(--f-body);
+    font-size:.34rem;
+    font-weight:850;
+    line-height:1;
+    letter-spacing:.14em;
+  }
+
+  .mm-close{
+    width:42px;
+    height:40px;
+    display:grid;
+    place-items:center;
+    border:1px solid #686864;
+    background:#121311;
+    color:#f0efe9;
+    font-size:1.16rem;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.07);
+  }
+
+  .mm-links{
+    gap:0;
+    justify-content:center;
+    padding:18px var(--pad-x);
+  }
+
+  .mm-links a{
+    min-height:68px;
+    align-items:center;
+    gap:18px;
+    padding:13px 4px 12px;
+    border:0;
+    border-bottom:1px solid rgba(240,239,233,.14);
+    background:transparent;
+    color:var(--cad-cream);
+    font-size:clamp(1.75rem,8.6vw,2.55rem);
+    line-height:.9;
+    opacity:0;
+    transform:translateY(8px);
+    transition:
+      opacity .20s ease,
+      transform .26s var(--gm-ease-editorial),
+      color .16s ease;
+  }
+
+  .mobile-menu.open .mm-links a{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  .mobile-menu.open .mm-links a:nth-child(1){transition-delay:.03s}
+  .mobile-menu.open .mm-links a:nth-child(2){transition-delay:.06s}
+  .mobile-menu.open .mm-links a:nth-child(3){transition-delay:.09s}
+  .mobile-menu.open .mm-links a:nth-child(4){transition-delay:.12s}
+
+  .mm-links a:hover,
+  .mm-links a:focus-visible{
+    color:#fff;
+  }
+
+  .mm-links a .mm-idx{
+    min-width:32px;
+    color:var(--cad-teal);
+    opacity:.78;
+    font-size:.58rem;
+    font-weight:900;
+    letter-spacing:.10em;
+  }
+
+  .mm-foot{
+    padding:8px var(--pad-x) calc(24px + env(safe-area-inset-bottom));
+  }
+
+  .mm-order{
+    border:2px solid #efeee8;
+    background:linear-gradient(180deg,#ff1515 0%,#eb0000 56%,#c90000 100%);
+    color:#fff;
+    box-shadow:
+      0 0 0 2px #747470,
+      inset 0 1px 0 rgba(255,255,255,.24);
+    font-size:1.14rem;
+    letter-spacing:.06em;
+  }
+
+  .mobile-menu .checker-strip{
+    display:none;
+  }
+}
+
+@media(max-width:430px){
+  #siteNav.gm-cadillac-nav .nav-logo{gap:9px}
+  #siteNav.gm-cadillac-nav .nav-logo img{width:41px;height:41px}
+  #siteNav.gm-cadillac-nav .nav-logo-text{font-size:1.04rem}
+  #siteNav.gm-cadillac-nav .nav-logo-text::after{
+    font-size:.29rem;
+    letter-spacing:.10em;
+  }
+}
+
+/* Accessibility */
+#siteNav.gm-cadillac-nav a:focus-visible,
+#siteNav.gm-cadillac-nav button:focus-visible{
+  outline:2px solid var(--cad-teal);
+  outline-offset:3px;
+}
+
+@media(prefers-reduced-motion:reduce){
+  #siteNav.gm-cadillac-nav::after{animation:none!important}
+  #siteNav.gm-cadillac-nav .nav-logo img,
+  #siteNav.gm-cadillac-nav .nav-links a,
+  #siteNav.gm-cadillac-nav .nav-links::after,
+  #siteNav.gm-cadillac-nav > .btn-diner,
+  .mobile-menu,
+  .mm-links a{
+    transition:none!important;
+  }
+  .mobile-menu.open .mm-links a{
+    opacity:1;
+    transform:none;
+  }
+}
