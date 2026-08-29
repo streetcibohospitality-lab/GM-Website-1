@@ -498,7 +498,6 @@
     const a=Math.sin(dLat/2)**2+Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*Math.sin(dLng/2)**2;
     return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
   }
-  function formatKm(km){ return km<1?`${Math.round(km*1000)} m`:`${km.toFixed(1)} km`; }
   function setNearestStatus(text,type=''){
     if(!findNearestStatus) return;
     findNearestStatus.textContent=text;
@@ -519,15 +518,13 @@
         let best=null,bestKm=Infinity;
         geoRows.forEach(row=>{
           const km=haversineKm(latitude,longitude,parseFloat(row.dataset.lat),parseFloat(row.dataset.lng));
-          const chip=row.querySelector('[data-loc-distance]');
-          if(chip){ chip.textContent=`${formatKm(km)} away`; chip.classList.add('is-visible'); }
           if(km<bestKm){ bestKm=km; best=row; }
         });
         if(best){
           applySelectedDiner(best,true);
           best.scrollIntoView({behavior:reduceMotion?'auto':'smooth',block:'center'});
           const name=(best.querySelector('.loc-row-name')?.textContent||'your nearest diner').trim();
-          setNearestStatus(`Nearest diner: ${name} — about ${formatKm(bestKm)} away.`,'success');
+          setNearestStatus(`Nearest diner: ${name}`,'success');
         }else{
           setNearestStatus("Couldn't match a diner to your location — browse the list below.",'error');
         }
