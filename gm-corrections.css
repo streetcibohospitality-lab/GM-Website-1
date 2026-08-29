@@ -603,3 +603,26 @@ body[data-page="franchise"] .gm-fr-phone__video{
   bottom:auto !important;
   right:6% !important;
 }
+
+/* "SERVED / 10 LAKH+ / CUSTOMERS" milestone card — CUSTOMERS was cut off
+   The card gives .matchbook-inside a fixed band (top/bottom insets inside a
+   fixed-height card) and clips it with overflow:hidden. The three lines plus
+   their gaps need 2-6px more than that band offers, depending on breakpoint,
+   so the last line lost its descenders or vanished entirely -- worst on
+   phones, where the card is smallest, but present at every width.
+
+   The room comes from the bottom inset, not from shrinking the type: that
+   inset reserves a strip for the "AND COUNTING" line, which sits at
+   bottom:8px and needs roughly half of what was set aside. Reclaiming part
+   of it, and tightening the row gap by a pixel, leaves real headroom rather
+   than landing exactly on the limit the way the original values did. */
+.matchbook-deco--stat .matchbook-inside{
+  bottom:16px;
+  gap:4px;
+}
+@media(max-width:560px){
+  .matchbook-deco--stat .matchbook-inside{
+    bottom:14px;
+    gap:3px;
+  }
+}
