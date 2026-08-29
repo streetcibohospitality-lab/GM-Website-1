@@ -584,6 +584,8 @@
     }
   }
   if(h&&m&&s){ setClock(); setInterval(setClock,1000); }
+
+  document.querySelectorAll('.js-year').forEach(el=>el.textContent=new Date().getFullYear());
 })();
 
 /* GRUB MONKEYS — KOT 069 hero printer interaction */
