@@ -863,3 +863,79 @@ body[data-page="franchise"] .fr-perks > div:hover .fr-perk-num{
   color:var(--gm-teal);
   transition:color .2s ease;
 }
+
+/* FRANCHISE HERO — entrance choreography.
+   This is above the fold, so it fires on load like the homepage hero's
+   own line-reveal (a scroll-triggered IntersectionObserver would be
+   wrong here -- there's no scroll distance for it to trigger on). Both
+   sides of the hero animate together -- copy and phone -- so it reads
+   as one considered entrance rather than text moving while the media
+   panel just pops in static. */
+body[data-page="franchise"] .line-mask{ overflow:hidden; display:block; }
+body[data-page="franchise"] .line-mask span{
+  display:block;
+  transform:translateY(115%);
+  animation:frLineReveal .7s var(--gm-ease-editorial) forwards;
+}
+body[data-page="franchise"] .line-mask:nth-of-type(1) span{ animation-delay:.16s; }
+body[data-page="franchise"] .line-mask:nth-of-type(2) span{ animation-delay:.28s; }
+@keyframes frLineReveal{ to{ transform:translateY(0); } }
+
+body[data-page="franchise"] .fr-hero-in{
+  opacity:0;
+  transform:translateY(10px);
+  animation:frHeroRise .5s var(--gm-ease-editorial) forwards;
+}
+body[data-page="franchise"] .fr-hero-in--code{ animation-delay:.04s; }
+body[data-page="franchise"] .fr-hero-in--sub{ animation-delay:.52s; }
+@keyframes frHeroRise{ to{ opacity:1; transform:translateY(0); } }
+
+body[data-page="franchise"] .gm-fr-phone{
+  opacity:0;
+  transform:scale(.96);
+  animation:frPhoneIn .6s var(--gm-ease-editorial) .18s forwards;
+}
+@keyframes frPhoneIn{ to{ opacity:1; transform:scale(1); } }
+
+body[data-page="franchise"] .gm-fr-hero-controls{
+  opacity:0;
+  transform:translateY(8px);
+  animation:frHeroRise .45s var(--gm-ease-editorial) .6s forwards;
+}
+
+body[data-page="franchise"] .gm-fr-hero-rail,
+body[data-page="franchise"] .retro-halftone--fr-hero{
+  opacity:0;
+  animation:frFadeIn .5s ease .7s forwards;
+}
+body[data-page="franchise"] .retro-spark-cluster--fr-hero{
+  opacity:0;
+  animation:frFadeIn .5s ease .78s forwards;
+}
+@keyframes frFadeIn{ to{ opacity:1; } }
+
+/* The stamp settles in with a small rotation snap, matching its own
+   "stamped down" motif -- it lands 4 degrees past rest and eases back,
+   rather than just fading in flat like the other props. */
+body[data-page="franchise"] .retro-stamp--fr-hero{
+  opacity:0;
+  transform:rotate(2deg) scale(1.08);
+  animation:frStampDown .4s var(--gm-ease-editorial) .82s forwards;
+}
+@keyframes frStampDown{ to{ opacity:.6; transform:rotate(-2deg) scale(1); } }
+
+@media(prefers-reduced-motion:reduce){
+  body[data-page="franchise"] .line-mask span,
+  body[data-page="franchise"] .fr-hero-in,
+  body[data-page="franchise"] .gm-fr-phone,
+  body[data-page="franchise"] .gm-fr-hero-controls,
+  body[data-page="franchise"] .gm-fr-hero-rail,
+  body[data-page="franchise"] .retro-halftone--fr-hero,
+  body[data-page="franchise"] .retro-spark-cluster--fr-hero,
+  body[data-page="franchise"] .retro-stamp--fr-hero{
+    animation:none!important;
+    opacity:1!important;
+    transform:none!important;
+  }
+  body[data-page="franchise"] .retro-stamp--fr-hero{ opacity:.6!important; }
+}
