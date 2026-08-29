@@ -665,3 +665,64 @@ body[data-page="franchise"] .gm-fr-phone__video{
    instead; the columns are unaffected since grid items default to stretch
    individually unless overridden. */
 .foot-brand-panel{ align-self:start; }
+
+/* FIND NEAREST DINER — a button-triggered lookup, not an auto-prompt on
+   page load: asking for location the instant someone lands on the page
+   reads as pushy and gets reflexively declined, while a labelled button
+   makes the value clear before the permission prompt appears. */
+.loc-nearest{
+  max-width:var(--max);
+  margin:0 auto 28px;
+  padding:0 var(--pad-x);
+  display:flex;
+  align-items:center;
+  gap:16px;
+  flex-wrap:wrap;
+}
+.loc-nearest-btn{
+  background:transparent;
+  border:2px solid var(--gm-grey);
+  color:var(--gm-grey);
+  font-family:inherit;
+  font-weight:700;
+  font-size:0.78rem;
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+  padding:12px 20px;
+  cursor:pointer;
+  transition:border-color var(--gm-motion-fast),color var(--gm-motion-fast);
+}
+.loc-nearest-btn:hover:not(:disabled){ border-color:var(--gm-teal); color:var(--gm-teal); }
+.loc-nearest-btn:disabled{ opacity:0.5; cursor:default; }
+.loc-nearest-status{
+  font-size:0.8rem;
+  color:rgba(58,58,58,0.6);
+  margin:0;
+}
+.loc-nearest-status.is-success{ color:var(--gm-teal-ink); font-weight:700; }
+.loc-nearest-status.is-error{ color:var(--gm-red-ink); }
+.loc-row-distance{
+  display:none;
+  margin-left:8px;
+  font-size:0.65rem;
+  font-weight:700;
+  letter-spacing:0.03em;
+  text-transform:uppercase;
+  color:var(--gm-teal-ink);
+  background:rgba(0,221,194,0.12);
+  border:1px solid rgba(0,221,194,0.4);
+  border-radius:20px;
+  padding:2px 9px;
+}
+.loc-row-distance.is-visible{ display:inline-block; }
+/* The featured row is solid red; the chip's translucent teal fill composites
+   down to ~1:1 contrast against it (invisible). Match the white-pill/red-text
+   override the row's own links already use on that background. */
+.loc-row.featured .loc-row-distance{
+  color:var(--gm-red-ink);
+  background:var(--gm-white);
+  border-color:var(--gm-white);
+}
+@media(max-width:600px){
+  .loc-nearest{ flex-direction:column; align-items:flex-start; gap:10px; }
+}

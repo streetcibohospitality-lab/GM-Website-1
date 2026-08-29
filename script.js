@@ -485,6 +485,62 @@
   syncLocationStatuses();
   window.setInterval(syncLocationStatuses,60000);
 
+  /* FIND NEAREST DINER — client-side only: geolocation coords never leave
+     the browser. Only rows with verified coordinates (data-lat/data-lng)
+     are compared; a row without them (Koramangala, pending verification)
+     is simply left out of the comparison rather than guessed at. */
+  const findNearestBtn=document.getElementById('findNearestBtn');
+  const findNearestStatus=document.getElementById('findNearestStatus');
+  const geoRows=locRows.filter(row=>row.dataset.lat && row.dataset.lng);
+  function haversineKm(lat1,lng1,lat2,lng2){
+    const R=6371, toRad=d=>d*Math.PI/180;
+    const dLat=toRad(lat2-lat1), dLng=toRad(lng2-lng1);
+    const a=Math.sin(dLat/2)**2+Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*Math.sin(dLng/2)**2;
+    return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+  }
+  function formatKm(km){ return km<1?`${Math.round(km*1000)} m`:`${km.toFixed(1)} km`; }
+  function setNearestStatus(text,type=''){
+    if(!findNearestStatus) return;
+    findNearestStatus.textContent=text;
+    findNearestStatus.classList.toggle('is-error',type==='error');
+    findNearestStatus.classList.toggle('is-success',type==='success');
+  }
+  findNearestBtn?.addEventListener('click',()=>{
+    if(!('geolocation' in navigator)){
+      setNearestStatus("Your browser doesn't support location — browse diners below.",'error');
+      return;
+    }
+    findNearestBtn.disabled=true;
+    setNearestStatus('Finding your nearest diner…');
+    navigator.geolocation.getCurrentPosition(
+      pos=>{
+        findNearestBtn.disabled=false;
+        const{latitude,longitude}=pos.coords;
+        let best=null,bestKm=Infinity;
+        geoRows.forEach(row=>{
+          const km=haversineKm(latitude,longitude,parseFloat(row.dataset.lat),parseFloat(row.dataset.lng));
+          const chip=row.querySelector('[data-loc-distance]');
+          if(chip){ chip.textContent=`${formatKm(km)} away`; chip.classList.add('is-visible'); }
+          if(km<bestKm){ bestKm=km; best=row; }
+        });
+        if(best){
+          applySelectedDiner(best,true);
+          best.scrollIntoView({behavior:reduceMotion?'auto':'smooth',block:'center'});
+          const name=(best.querySelector('.loc-row-name')?.textContent||'your nearest diner').trim();
+          setNearestStatus(`Nearest diner: ${name} — about ${formatKm(bestKm)} away.`,'success');
+        }else{
+          setNearestStatus("Couldn't match a diner to your location — browse the list below.",'error');
+        }
+      },
+      err=>{
+        findNearestBtn.disabled=false;
+        const messages={1:'Location access was denied — browse diners below.',2:'Your location is unavailable right now — browse diners below.',3:'Finding your location took too long — browse diners below.'};
+        setNearestStatus(messages[err.code]||'Could not get your location — browse diners below.','error');
+      },
+      {enableHighAccuracy:false,timeout:8000,maximumAge:300000}
+    );
+  });
+
   const socialStrip=document.querySelector('.social-strip');
   if(socialStrip && 'IntersectionObserver' in window && !reduceMotion){
     const socialIo=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('mounted');socialIo.unobserve(entry.target);}})},{threshold:.22});
