@@ -1,0 +1,791 @@
+/* ============================================================
+   GRUB MONKEYS — FRANCHISE PAGE V2
+   Typography-led persuasion flow from section 02 onward.
+   Hero remains controlled by franchise-diner-booth.css.
+   ============================================================ */
+
+body[data-page="franchise"] .gm-fr-v2{
+  --fr-pad:clamp(24px,5vw,72px);
+  background:var(--gm-white);
+  color:var(--gm-grey);
+}
+
+body[data-page="franchise"] .gm-fr-v2-section{
+  position:relative;
+  overflow:hidden;
+  padding:clamp(74px,8vw,124px) 0;
+  border-bottom:1px solid rgba(58,58,58,.16);
+}
+
+body[data-page="franchise"] .gm-fr-v2-shell{
+  width:min(100%,1440px);
+  margin:0 auto;
+  padding:0 var(--fr-pad);
+}
+
+body[data-page="franchise"] .gm-fr-v2-kicker{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:clamp(28px,3vw,44px);
+  color:var(--gm-grey);
+  font:800 .64rem/1 var(--f-body);
+  letter-spacing:.15em;
+  text-transform:uppercase;
+}
+
+body[data-page="franchise"] .gm-fr-v2-kicker span:first-child{
+  color:var(--gm-red);
+}
+
+body[data-page="franchise"] .gm-fr-v2-display{
+  margin:0;
+  font-family:var(--f-display);
+  font-size:clamp(4rem,7.7vw,8.3rem);
+  font-weight:400;
+  line-height:.79;
+  letter-spacing:-.018em;
+  text-transform:uppercase;
+}
+
+body[data-page="franchise"] .gm-fr-v2-display em{
+  color:var(--gm-red);
+  font-style:normal;
+}
+
+body[data-page="franchise"] .gm-fr-v2 p{
+  font-family:var(--f-body);
+  font-size:clamp(.9rem,1.05vw,1.02rem);
+  line-height:1.75;
+}
+
+body[data-page="franchise"] .gm-fr-v2-opportunity{
+  background:var(--gm-white);
+}
+
+body[data-page="franchise"] .gm-fr-v2-opportunity-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.16fr) minmax(300px,.84fr);
+  gap:clamp(38px,6vw,100px);
+  align-items:end;
+}
+
+body[data-page="franchise"] .gm-fr-v2-intro{
+  max-width:520px;
+  padding-bottom:10px;
+}
+
+body[data-page="franchise"] .gm-fr-v2-intro p{
+  color:rgba(58,58,58,.78);
+}
+
+body[data-page="franchise"] .gm-fr-v2-text-link{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  margin-top:24px;
+  padding-bottom:7px;
+  border-bottom:2px solid var(--gm-red);
+  color:var(--gm-grey);
+  font:800 .66rem/1 var(--f-body);
+  letter-spacing:.08em;
+  text-decoration:none;
+  text-transform:uppercase;
+}
+
+body[data-page="franchise"] .gm-fr-v2-text-link span{
+  color:var(--gm-red);
+  transition:transform var(--gm-motion-fast) var(--gm-ease-snap);
+}
+
+body[data-page="franchise"] .gm-fr-v2-text-link:hover span,
+body[data-page="franchise"] .gm-fr-v2-text-link:focus-visible span{
+  transform:translateY(3px);
+}
+
+body[data-page="franchise"] .gm-fr-v2-proof-rail{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  margin-top:clamp(52px,6vw,90px);
+  border-top:3px solid var(--gm-grey);
+  border-bottom:1px solid rgba(58,58,58,.22);
+}
+
+body[data-page="franchise"] .gm-fr-v2-proof-rail > div{
+  min-width:0;
+  padding:clamp(20px,2.4vw,34px) clamp(14px,2vw,28px);
+}
+
+body[data-page="franchise"] .gm-fr-v2-proof-rail > div:first-child{
+  padding-left:0;
+}
+
+body[data-page="franchise"] .gm-fr-v2-proof-rail > div + div{
+  border-left:1px solid rgba(58,58,58,.18);
+}
+
+body[data-page="franchise"] .gm-fr-v2-proof-rail strong{
+  display:block;
+  min-height:1.1em;
+  font-family:var(--f-display);
+  font-size:clamp(2.2rem,3.8vw,4.3rem);
+  font-weight:400;
+  line-height:.86;
+  color:var(--gm-grey);
+  text-transform:uppercase;
+}
+
+body[data-page="franchise"] .gm-fr-v2-proof-rail span{
+  display:block;
+  margin-top:11px;
+  color:var(--gm-red);
+  font:800 .55rem/1 var(--f-body);
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+
+body[data-page="franchise"] .gm-fr-v2-proof-rail small{
+  display:block;
+  margin-top:8px;
+  color:rgba(58,58,58,.64);
+  font:600 .68rem/1.35 var(--f-body);
+}
+
+/* Playbook */
+body[data-page="franchise"] .gm-fr-v2-playbook{
+  background:var(--gm-grey);
+  color:var(--gm-white);
+}
+
+body[data-page="franchise"] .gm-fr-v2-playbook .gm-fr-v2-kicker{
+  color:rgba(240,239,233,.72);
+}
+
+body[data-page="franchise"] .gm-fr-v2-playbook .gm-fr-v2-section-head{
+  display:grid;
+  grid-template-columns:minmax(0,1.12fr) minmax(300px,.7fr);
+  gap:clamp(38px,7vw,120px);
+  align-items:end;
+}
+
+body[data-page="franchise"] .gm-fr-v2-playbook .gm-fr-v2-section-head p{
+  max-width:520px;
+  padding-bottom:8px;
+  color:rgba(240,239,233,.68);
+}
+
+body[data-page="franchise"] .gm-fr-v2-support-list{
+  margin-top:clamp(54px,6vw,92px);
+  border-top:1px solid rgba(240,239,233,.26);
+}
+
+body[data-page="franchise"] .gm-fr-v2-support-row{
+  display:grid;
+  grid-template-columns:64px minmax(210px,.75fr) minmax(300px,1.25fr);
+  gap:clamp(16px,3vw,48px);
+  align-items:start;
+  padding:clamp(24px,3vw,38px) 0;
+  border-bottom:1px solid rgba(240,239,233,.18);
+}
+
+body[data-page="franchise"] .gm-fr-v2-support-num{
+  color:var(--gm-teal);
+  font:800 .65rem/1 var(--f-body);
+  letter-spacing:.12em;
+}
+
+body[data-page="franchise"] .gm-fr-v2-support-row h3{
+  margin:0;
+  font-family:var(--f-display);
+  font-size:clamp(1.85rem,3vw,3.3rem);
+  font-weight:400;
+  line-height:.9;
+  color:var(--gm-white);
+  text-transform:uppercase;
+}
+
+body[data-page="franchise"] .gm-fr-v2-support-row p{
+  max-width:620px;
+  color:rgba(240,239,233,.66);
+}
+
+/* Build preview */
+body[data-page="franchise"] .gm-fr-v2-build{
+  background:var(--gm-white);
+}
+
+body[data-page="franchise"] .gm-fr-v2-build-grid{
+  display:grid;
+  grid-template-columns:minmax(320px,.78fr) minmax(460px,1.22fr);
+  gap:clamp(40px,6vw,100px);
+  align-items:center;
+}
+
+body[data-page="franchise"] .gm-fr-v2-build-copy p{
+  max-width:520px;
+  margin-top:28px;
+  color:rgba(58,58,58,.72);
+}
+
+body[data-page="franchise"] .gm-fr-v2-build-steps{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:10px 12px;
+  margin-top:34px;
+  color:var(--gm-grey);
+  font:800 .54rem/1 var(--f-body);
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+body[data-page="franchise"] .gm-fr-v2-build-steps i{
+  width:28px;
+  height:1px;
+  background:var(--gm-red);
+}
+
+body[data-page="franchise"] .gm-fr-v2-blueprint{
+  position:relative;
+  min-height:clamp(360px,39vw,590px);
+  display:grid;
+  place-items:end center;
+  overflow:hidden;
+  padding:clamp(34px,4vw,58px) clamp(22px,3vw,44px) 0;
+  background:
+    linear-gradient(rgba(0,221,194,.075) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,221,194,.075) 1px,transparent 1px),
+    var(--gm-grey);
+  background-size:32px 32px,32px 32px,auto;
+  border:1px solid rgba(58,58,58,.16);
+  box-shadow:10px 12px 0 var(--gm-red);
+}
+
+body[data-page="franchise"] .gm-fr-v2-blueprint::before,
+body[data-page="franchise"] .gm-fr-v2-blueprint::after{
+  content:"";
+  position:absolute;
+  z-index:1;
+  pointer-events:none;
+}
+
+body[data-page="franchise"] .gm-fr-v2-blueprint::before{
+  inset:18px;
+  border:1px solid rgba(240,239,233,.18);
+}
+
+body[data-page="franchise"] .gm-fr-v2-blueprint::after{
+  left:28px;
+  right:28px;
+  bottom:26px;
+  height:2px;
+  background:var(--gm-red);
+  transform:scaleX(0);
+  transform-origin:left center;
+}
+
+body[data-page="franchise"] .gm-fr-v2-blueprint img{
+  position:relative;
+  z-index:2;
+  width:min(100%,900px);
+  max-height:86%;
+  object-fit:contain;
+  object-position:center bottom;
+  filter:drop-shadow(0 22px 18px rgba(0,0,0,.24));
+  opacity:0;
+  clip-path:inset(0 100% 0 0);
+  transform:translateY(16px);
+}
+
+body[data-page="franchise"] .gm-fr-v2-blueprint__rail{
+  position:absolute;
+  z-index:3;
+  left:28px;
+  top:26px;
+  width:0;
+  height:3px;
+  background:var(--gm-red);
+}
+
+body[data-page="franchise"] .gm-fr-v2-blueprint__scan{
+  position:absolute;
+  z-index:4;
+  top:18px;
+  bottom:18px;
+  left:-2px;
+  width:2px;
+  opacity:0;
+  background:var(--gm-teal);
+  box-shadow:0 0 0 1px rgba(0,221,194,.08);
+}
+
+body[data-page="franchise"] .gm-fr-v2-blueprint__label{
+  position:absolute;
+  z-index:4;
+  left:28px;
+  top:38px;
+  color:rgba(240,239,233,.68);
+  font:800 .47rem/1 var(--f-body);
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  opacity:0;
+}
+
+body[data-page="franchise"] .gm-fr-v2-build-visual.is-in .gm-fr-v2-blueprint::after{
+  animation:gmFrV2Datum .6s var(--gm-ease-editorial) .18s both;
+}
+
+body[data-page="franchise"] .gm-fr-v2-build-visual.is-in .gm-fr-v2-blueprint img{
+  animation:gmFrV2DinerReveal 1.15s var(--gm-ease-editorial) .34s both;
+}
+
+body[data-page="franchise"] .gm-fr-v2-build-visual.is-in .gm-fr-v2-blueprint__rail{
+  animation:gmFrV2Rail .65s var(--gm-ease-editorial) .06s both;
+}
+
+body[data-page="franchise"] .gm-fr-v2-build-visual.is-in .gm-fr-v2-blueprint__scan{
+  animation:gmFrV2Scan 1.15s var(--gm-ease-editorial) .30s both;
+}
+
+body[data-page="franchise"] .gm-fr-v2-build-visual.is-in .gm-fr-v2-blueprint__label{
+  animation:gmFrV2Fade .35s ease .18s both;
+}
+
+@keyframes gmFrV2Rail{
+  from{width:0}
+  to{width:clamp(90px,16vw,220px)}
+}
+
+@keyframes gmFrV2Datum{
+  from{transform:scaleX(0)}
+  to{transform:scaleX(1)}
+}
+
+@keyframes gmFrV2DinerReveal{
+  0%{opacity:0;clip-path:inset(0 100% 0 0);transform:translateY(16px)}
+  20%{opacity:1}
+  100%{opacity:1;clip-path:inset(0);transform:none}
+}
+
+@keyframes gmFrV2Scan{
+  0%{left:0;opacity:0}
+  8%{opacity:1}
+  92%{opacity:1}
+  100%{left:calc(100% - 2px);opacity:0}
+}
+
+@keyframes gmFrV2Fade{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+/* Proof it travels */
+body[data-page="franchise"] .gm-fr-v2-travels{
+  background:var(--gm-red);
+  color:var(--gm-white);
+}
+
+body[data-page="franchise"] .gm-fr-v2-travels .gm-fr-v2-kicker{
+  color:rgba(240,239,233,.72);
+}
+
+body[data-page="franchise"] .gm-fr-v2-travels .gm-fr-v2-kicker span:first-child{
+  color:var(--gm-grey);
+}
+
+body[data-page="franchise"] .gm-fr-v2-travels .gm-fr-v2-display em{
+  color:var(--gm-grey);
+}
+
+body[data-page="franchise"] .gm-fr-v2-travels-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.18fr) minmax(320px,.72fr);
+  gap:clamp(40px,6vw,96px);
+  align-items:end;
+}
+
+body[data-page="franchise"] .gm-fr-v2-travels-copy{
+  padding-bottom:10px;
+}
+
+body[data-page="franchise"] .gm-fr-v2-travels-copy strong{
+  display:block;
+  font-family:var(--f-display);
+  font-size:clamp(2rem,3.6vw,4rem);
+  font-weight:400;
+  line-height:.9;
+  text-transform:uppercase;
+}
+
+body[data-page="franchise"] .gm-fr-v2-travels-copy p{
+  max-width:500px;
+  margin-top:18px;
+  color:rgba(240,239,233,.76);
+}
+
+body[data-page="franchise"] .gm-fr-v2-travel-markers{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  margin-top:clamp(54px,6vw,88px);
+  border-top:1px solid rgba(240,239,233,.36);
+  border-bottom:1px solid rgba(240,239,233,.36);
+}
+
+body[data-page="franchise"] .gm-fr-v2-travel-markers > div{
+  padding:24px clamp(12px,2vw,26px);
+}
+
+body[data-page="franchise"] .gm-fr-v2-travel-markers > div:first-child{
+  padding-left:0;
+}
+
+body[data-page="franchise"] .gm-fr-v2-travel-markers > div + div{
+  border-left:1px solid rgba(240,239,233,.30);
+}
+
+body[data-page="franchise"] .gm-fr-v2-travel-markers span{
+  display:block;
+  /* var(--gm-grey) here was 2.45:1 on this section's red background --
+     nearly invisible. Even the brand's cream tops out at 4.02:1 on this
+     red (documented at the top of gm-corrections.css); pure white is the
+     established fix for light text on Monkey Red, at 4.63:1. */
+  color:#FFFFFF;
+  font:800 .52rem/1 var(--f-body);
+  letter-spacing:.12em;
+}
+
+body[data-page="franchise"] .gm-fr-v2-travel-markers strong{
+  display:block;
+  margin-top:10px;
+  font-family:var(--f-display);
+  font-size:clamp(2rem,3.3vw,3.8rem);
+  font-weight:400;
+  line-height:.86;
+  text-transform:uppercase;
+}
+
+body[data-page="franchise"] .gm-fr-v2-travel-markers small{
+  display:block;
+  margin-top:8px;
+  color:rgba(240,239,233,.72);
+  font:600 .65rem/1.35 var(--f-body);
+}
+
+/* Fit */
+body[data-page="franchise"] .gm-fr-v2-fit{
+  background:var(--gm-white);
+}
+
+body[data-page="franchise"] .gm-fr-v2-fit .gm-fr-v2-section-head{
+  display:grid;
+  grid-template-columns:minmax(0,1.06fr) minmax(320px,.7fr);
+  gap:clamp(40px,7vw,110px);
+  align-items:end;
+}
+
+body[data-page="franchise"] .gm-fr-v2-fit .gm-fr-v2-section-head p{
+  max-width:520px;
+  padding-bottom:8px;
+  color:rgba(58,58,58,.72);
+}
+
+body[data-page="franchise"] .gm-fr-v2-fit-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  margin-top:clamp(52px,6vw,84px);
+  border-top:3px solid var(--gm-grey);
+}
+
+body[data-page="franchise"] .gm-fr-v2-fit-item{
+  padding:clamp(24px,3vw,38px) clamp(18px,2.6vw,34px) 4px;
+}
+
+body[data-page="franchise"] .gm-fr-v2-fit-item:first-child{
+  padding-left:0;
+}
+
+body[data-page="franchise"] .gm-fr-v2-fit-item + .gm-fr-v2-fit-item{
+  border-left:1px solid rgba(58,58,58,.18);
+}
+
+body[data-page="franchise"] .gm-fr-v2-fit-item > span{
+  color:var(--gm-teal);
+  font:800 .55rem/1 var(--f-body);
+  letter-spacing:.12em;
+}
+
+body[data-page="franchise"] .gm-fr-v2-fit-item h3{
+  margin:18px 0 14px;
+  font-family:var(--f-display);
+  font-size:clamp(2rem,3vw,3.3rem);
+  font-weight:400;
+  line-height:.9;
+  text-transform:uppercase;
+}
+
+body[data-page="franchise"] .gm-fr-v2-fit-item p{
+  max-width:360px;
+  color:rgba(58,58,58,.68);
+}
+
+/* Enquiry */
+body[data-page="franchise"] .gm-fr-v2-enquire{
+  background:var(--gm-grey);
+  color:var(--gm-white);
+}
+
+body[data-page="franchise"] .gm-fr-v2-enquire-grid{
+  display:grid;
+  grid-template-columns:minmax(320px,.82fr) minmax(520px,1.18fr);
+  gap:clamp(48px,7vw,118px);
+  align-items:start;
+}
+
+body[data-page="franchise"] .gm-fr-v2-enquire .gm-fr-v2-kicker{
+  color:rgba(240,239,233,.72);
+}
+
+body[data-page="franchise"] .gm-fr-v2-enquire-copy{
+  position:sticky;
+  top:112px;
+}
+
+body[data-page="franchise"] .gm-fr-v2-enquire-copy > div:nth-child(2) p{
+  max-width:500px;
+  margin-top:28px;
+  color:rgba(240,239,233,.70);
+}
+
+body[data-page="franchise"] .gm-fr-v2-enquire-note{
+  max-width:470px;
+  margin-top:38px;
+  padding-top:18px;
+  border-top:1px solid rgba(240,239,233,.22);
+}
+
+body[data-page="franchise"] .gm-fr-v2-enquire-note span{
+  display:block;
+  margin-bottom:8px;
+  color:var(--gm-teal);
+  font:800 .56rem/1 var(--f-body);
+  letter-spacing:.14em;
+}
+
+body[data-page="franchise"] .gm-fr-v2-enquire-note p{
+  color:rgba(240,239,233,.58);
+  font-size:.8rem;
+}
+
+body[data-page="franchise"] .gm-fr-v2-form{
+  width:100%;
+  background:#2b2b2a;
+  border:1px solid rgba(240,239,233,.28);
+  box-shadow:10px 12px 0 var(--gm-red);
+}
+
+body[data-page="franchise"] .gm-fr-v2-form .fr-form-title{
+  font-size:clamp(2.2rem,3.4vw,3.8rem);
+}
+
+body[data-page="franchise"] .gm-fr-v2-form .fr-form-sub{
+  max-width:54ch;
+}
+
+body[data-page="franchise"] .gm-fr-v2-form .fr-submit{
+  min-height:52px;
+}
+
+body[data-page="franchise"] .gm-fr-v2-form .fr-submit:hover,
+body[data-page="franchise"] .gm-fr-v2-form .fr-submit:focus-visible{
+  background:var(--gm-teal);
+  color:var(--gm-grey);
+}
+
+/* One-time editorial reveals */
+body[data-page="franchise"] .gm-fr-v2-reveal{
+  opacity:0;
+  transform:translateY(22px);
+  transition:
+    opacity .62s var(--gm-ease-editorial),
+    transform .62s var(--gm-ease-editorial);
+}
+
+body[data-page="franchise"] .gm-fr-v2-reveal.is-in{
+  opacity:1;
+  transform:none;
+}
+
+body[data-page="franchise"] .gm-fr-v2-support-row:nth-child(2),
+body[data-page="franchise"] .gm-fr-v2-fit-item:nth-child(2){
+  transition-delay:55ms;
+}
+
+body[data-page="franchise"] .gm-fr-v2-support-row:nth-child(3),
+body[data-page="franchise"] .gm-fr-v2-fit-item:nth-child(3){
+  transition-delay:110ms;
+}
+
+body[data-page="franchise"] .gm-fr-v2-support-row:nth-child(4){
+  transition-delay:165ms;
+}
+
+/* Responsive */
+@media(max-width:980px){
+  body[data-page="franchise"] .gm-fr-v2-opportunity-grid,
+  body[data-page="franchise"] .gm-fr-v2-playbook .gm-fr-v2-section-head,
+  body[data-page="franchise"] .gm-fr-v2-build-grid,
+  body[data-page="franchise"] .gm-fr-v2-travels-grid,
+  body[data-page="franchise"] .gm-fr-v2-fit .gm-fr-v2-section-head,
+  body[data-page="franchise"] .gm-fr-v2-enquire-grid{
+    grid-template-columns:1fr;
+  }
+
+  body[data-page="franchise"] .gm-fr-v2-intro,
+  body[data-page="franchise"] .gm-fr-v2-playbook .gm-fr-v2-section-head p,
+  body[data-page="franchise"] .gm-fr-v2-fit .gm-fr-v2-section-head p{
+    max-width:640px;
+  }
+
+  body[data-page="franchise"] .gm-fr-v2-proof-rail{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  body[data-page="franchise"] .gm-fr-v2-proof-rail > div:nth-child(3){
+    border-left:0;
+    border-top:1px solid rgba(58,58,58,.18);
+    padding-left:0;
+  }
+
+  body[data-page="franchise"] .gm-fr-v2-proof-rail > div:nth-child(4){
+    border-top:1px solid rgba(58,58,58,.18);
+  }
+
+  body[data-page="franchise"] .gm-fr-v2-support-row{
+    grid-template-columns:52px minmax(210px,.72fr) minmax(280px,1fr);
+  }
+
+  body[data-page="franchise"] .gm-fr-v2-build-visual{
+    order:-1;
+  }
+
+  body[data-page="franchise"] .gm-fr-v2-fit-grid{
+    grid-template-columns:1fr;
+  }
+
+  body[data-page="franchise"] .gm-fr-v2-fit-item{
+    padding-left:0;
+    padding-right:0;
+  }
+
+  body[data-page="franchise"] .gm-fr-v2-fit-item + .gm-fr-v2-fit-item{
+    border-left:0;
+    border-top:1px solid rgba(58,58,58,.18);
+  }
+
+  body[data-page="franchise"] .gm-fr-v2-enquire-copy{
+    position:static;
+  }
+}
+
+@media(max-width:700px){
+  body[data-page="franchise"] .gm-fr-v2-section{
+    padding:64px 0;
+  }
+
+  body[data-page="franchise"] .gm-fr-v2-display{
+    font-size:clamp(3.25rem,15vw,5.6rem);
+  }
+
+  body[data-page="franchise"] .gm-fr-v2-proof-rail{
+    grid-template-columns:1fr;
+  }
+
+  body[data-page="franchise"] .gm-fr-v2-proof-rail > div,
+  body[data-page="franchise"] .gm-fr-v2-proof-rail > div:first-child,
+  body[data-page="franchise"] .gm-fr-v2-proof-rail > div:nth-child(3){
+    padding:20px 0;
+    border-left:0;
+    border-top:1px solid rgba(58,58,58,.16);
+  }
+
+  body[data-page="franchise"] .gm-fr-v2-proof-rail > div:first-child{
+    border-top:0;
+  }
+
+  body[data-page="franchise"] .gm-fr-v2-support-row{
+    grid-template-columns:42px 1fr;
+    gap:12px 14px;
+  }
+
+  body[data-page="franchise"] .gm-fr-v2-support-row p{
+    grid-column:2;
+  }
+
+  body[data-page="franchise"] .gm-fr-v2-blueprint{
+    min-height:330px;
+    padding-left:12px;
+    padding-right:12px;
+    box-shadow:7px 8px 0 var(--gm-red);
+  }
+
+  body[data-page="franchise"] .gm-fr-v2-travel-markers{
+    grid-template-columns:1fr;
+  }
+
+  body[data-page="franchise"] .gm-fr-v2-travel-markers > div,
+  body[data-page="franchise"] .gm-fr-v2-travel-markers > div:first-child{
+    padding:20px 0;
+  }
+
+  body[data-page="franchise"] .gm-fr-v2-travel-markers > div + div{
+    border-left:0;
+    border-top:1px solid rgba(240,239,233,.30);
+  }
+
+  body[data-page="franchise"] .gm-fr-v2-enquire-grid{
+    gap:38px;
+  }
+
+  body[data-page="franchise"] .gm-fr-v2-form{
+    box-shadow:6px 7px 0 var(--gm-red);
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  body[data-page="franchise"] .gm-fr-v2-reveal,
+  body[data-page="franchise"] .gm-fr-v2-reveal.is-in{
+    opacity:1!important;
+    transform:none!important;
+    transition:none!important;
+  }
+
+  body[data-page="franchise"] .gm-fr-v2-blueprint::after,
+  body[data-page="franchise"] .gm-fr-v2-blueprint img,
+  body[data-page="franchise"] .gm-fr-v2-blueprint__rail,
+  body[data-page="franchise"] .gm-fr-v2-blueprint__scan,
+  body[data-page="franchise"] .gm-fr-v2-blueprint__label{
+    animation:none!important;
+  }
+
+  body[data-page="franchise"] .gm-fr-v2-blueprint::after{
+    transform:none!important;
+  }
+
+  body[data-page="franchise"] .gm-fr-v2-blueprint img{
+    opacity:1!important;
+    clip-path:none!important;
+    transform:none!important;
+  }
+
+  body[data-page="franchise"] .gm-fr-v2-blueprint__rail{
+    width:clamp(90px,16vw,220px)!important;
+  }
+
+  body[data-page="franchise"] .gm-fr-v2-blueprint__scan{
+    display:none!important;
+  }
+
+  body[data-page="franchise"] .gm-fr-v2-blueprint__label{
+    opacity:1!important;
+  }
+}

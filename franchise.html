@@ -10,6 +10,8 @@
 <link rel="preload" as="font" type="font/woff2" href="fonts/Lexend-400.woff2" crossorigin>
 <link rel="stylesheet" href="styles-base.css">
 <link rel="stylesheet" href="styles-refinement.css">
+<link rel="stylesheet" href="franchise-diner-booth.css">
+<link rel="stylesheet" href="franchise-page-v2.css">
 <link rel="stylesheet" href="gm-corrections.css">
 <link rel="icon" href="favicon.png" type="image/png">
 
@@ -19,19 +21,16 @@
 <meta property="og:title" content="Franchise Opportunities in Karnataka | Grub Monkeys">
 <meta property="og:url" content="https://www.grubmonkeys.in/franchise">
 <meta property="og:description" content="Bring a Grub Monkeys American diner to your city. Franchise enquiries across Karnataka — training, site guidance, launch support and brand communication.">
-<meta property="og:image" content="https://www.grubmonkeys.in/images/og/og-franchise.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:type" content="image/jpeg">
-<meta property="og:image:alt" content="Interior of a Grub Monkeys 1960s American diner — red booths, checkerboard tiling and vintage signage">
+<meta property="og:image" content="https://www.grubmonkeys.in/media/franchise-vibe-check-poster.jpg">
+<meta property="og:image:alt" content="Grub Monkeys franchise diner vibe check">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Grub Monkeys">
 <meta property="og:locale" content="en_IN">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Franchise Opportunities in Karnataka | Grub Monkeys">
 <meta name="twitter:description" content="Bring a Grub Monkeys American diner to your city. Franchise enquiries across Karnataka — training, site guidance, launch support and brand communication.">
-<meta name="twitter:image" content="https://www.grubmonkeys.in/images/og/og-franchise.jpg">
-<meta name="twitter:image:alt" content="Interior of a Grub Monkeys 1960s American diner — red booths, checkerboard tiling and vintage signage">
+<meta name="twitter:image" content="https://www.grubmonkeys.in/media/franchise-vibe-check-poster.jpg">
+<meta name="twitter:image:alt" content="Grub Monkeys franchise diner vibe check">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -92,7 +91,7 @@
     <li><a href="/#story">Our Story</a></li>
     <li><a href="/franchise">Franchise</a></li>
   </ul>
-  <a href="/#order" class="btn btn-diner">Order Now <span class="arrow" aria-hidden="true">→</span></a>
+<a href="/#order" class="btn btn-diner">Order Now <span class="arrow" aria-hidden="true">→</span></a>
   <button class="hamburger" id="mobileMenuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
     <span></span><span></span><span></span>
   </button>
@@ -128,11 +127,7 @@
       </h1>
       <p class="fr-hero-in fr-hero-in--sub">Build the next Grub Monkeys diner. Explore the support on offer and send the team your details.</p>
     </div>
-    <div class="gm-fr-hero-media" aria-label="Grub Monkeys vibe check reel">
-      <div class="gm-fr-hero-rail" aria-hidden="true"><span>Own A Diner</span><span>GM / 69</span></div>
-      <div class="retro-halftone retro-halftone--fr-hero" aria-hidden="true"></div>
-      <div class="retro-spark-cluster retro-spark-cluster--fr-hero" aria-hidden="true"><i></i><i></i><i></i></div>
-      <div class="retro-stamp retro-stamp--fr-hero" aria-hidden="true">Now Franchising</div>
+    <div class="gm-fr-hero-media gm-fr-hero-media--booth" aria-label="Grub Monkeys vibe check reel">
       <div class="gm-fr-phone">
         <div class="gm-fr-phone__hardware" aria-hidden="true">
           <span class="gm-fr-phone__camera"></span>
@@ -172,52 +167,276 @@
   <div class="checker-strip big on-red"></div>
 <div class="retro-chrome-rail retro-chrome-rail--subpage" aria-hidden="true"><span></span></div>
 
-  <section class="franchise franchise-page-section">
-    <div class="fr-teaser reveal">
-      <div class="sec-num on-dark"><span class="n">01</span><span class="t">Franchise Overview</span></div>
-      <h2 class="poster-h" style="color:var(--gm-white);">Build A <em>Grub Monkeys</em> Diner.</h2>
-      <p>From signature recipes and training to site setup, operations and digital support, the franchise team helps operators bring the Grub Monkeys diner experience to new cities.</p>
-    </div>
-    <div class="fr-grid">
-      <div class="fr-void-watermark" aria-hidden="true">FRANCHISE</div>
-      <div class="fr-perks reveal">
-        <div><span class="fr-perk-num">01</span><div class="fr-perk-title">Signature Menu & Recipes</div><div class="fr-perk-desc">Training around the existing Grub Monkeys menu and operating standards.</div></div>
-        <div><span class="fr-perk-num">02</span><div class="fr-perk-title">Site & Diner Setup Support</div><div class="fr-perk-desc">Guidance around location selection, diner setup and the physical brand experience.</div></div>
-        <div><span class="fr-perk-num">03</span><div class="fr-perk-title">Training & Operations</div><div class="fr-perk-desc">Operational guidance for launching and running the diner experience consistently.</div></div>
-        <div><span class="fr-perk-num">04</span><div class="fr-perk-title">Marketing & Digital</div><div class="fr-perk-desc">Support for brand communication, digital presence and delivery-platform onboarding.</div></div>
-      </div>
 
-      <div class="fr-form reveal">
-        <div class="fr-form-title">Enquire <em>Now</em></div>
-        <div class="fr-form-sub">Send your details to the Grub Monkeys franchise team.</div>
-        <form id="franchiseForm" novalidate>
-          <div class="hp-field" aria-hidden="true">
-            <label for="fi-company">Company</label>
-            <input type="text" id="fi-company" name="company" tabindex="-1" autocomplete="off">
+  <div class="gm-fr-v2" id="franchiseDetails">
+    <section class="gm-fr-v2-section gm-fr-v2-opportunity" aria-labelledby="gmFrOpportunityTitle">
+      <div class="gm-fr-v2-shell">
+        <div class="gm-fr-v2-kicker gm-fr-v2-reveal">
+          <span>02</span>
+          <span>THE OPPORTUNITY</span>
+        </div>
+
+        <div class="gm-fr-v2-opportunity-grid">
+          <div class="gm-fr-v2-copy gm-fr-v2-reveal">
+            <h2 id="gmFrOpportunityTitle" class="gm-fr-v2-display">
+              BUILD SOMETHING<br>
+              <em>PEOPLE REMEMBER.</em>
+            </h2>
           </div>
-          <div class="fr-row">
-            <div class="fr-group"><label class="fr-label" for="fi-name">Full Name</label><input class="fr-input" type="text" id="fi-name" name="Full Name" autocomplete="name" maxlength="80" required></div>
-            <div class="fr-group"><label class="fr-label" for="fi-phone">Phone Number</label><input class="fr-input" type="tel" id="fi-phone" name="Phone Number" autocomplete="tel" inputmode="tel" maxlength="24" required></div>
+
+          <div class="gm-fr-v2-intro gm-fr-v2-reveal">
+            <p>Grub Monkeys brings together an American diner identity, an established menu and operating support designed to help bring the experience to new cities.</p>
+            <a class="gm-fr-v2-text-link" href="#franchisePlaybook">See the playbook <span aria-hidden="true">↓</span></a>
           </div>
-          <div class="fr-group"><label class="fr-label" for="fi-email">Email Address</label><input class="fr-input" type="email" id="fi-email" name="Email Address" autocomplete="email" maxlength="120" required></div>
-          <div class="fr-row">
-            <div class="fr-group"><label class="fr-label" for="fi-city">City of Interest</label><input class="fr-input" type="text" id="fi-city" name="City of Interest" autocomplete="address-level2" maxlength="80" required></div>
-            <div class="fr-group">
-              <label class="fr-label" for="fi-budget">Investment Budget</label>
-              <select class="fr-select" id="fi-budget" name="Investment Budget">
-                <option value="" selected>Select range</option>
-                <option>₹10L – ₹20L</option><option>₹20L – ₹40L</option><option>₹40L – ₹60L</option><option>₹60L+</option>
-              </select>
-            </div>
+        </div>
+
+        <div class="gm-fr-v2-proof-rail gm-fr-v2-reveal" aria-label="Grub Monkeys franchise proof points">
+          <div>
+            <strong>6</strong>
+            <span>OUTLETS</span>
+            <small>Across Karnataka</small>
           </div>
-          <div class="fr-group"><label class="fr-label" for="fi-message">Tell us about yourself</label><textarea class="fr-textarea" id="fi-message" name="Message" maxlength="800" placeholder="Business background, city, location ideas, or anything useful."></textarea></div>
-          <button class="fr-submit" type="submit" id="franchiseSubmitBtn">Submit Enquiry</button>
-          <div class="fr-note">By submitting, you agree to be contacted by the Grub Monkeys franchise team.</div>
-          <div id="franchiseStatus" class="form-status" role="status" aria-live="polite"></div>
-        </form>
+          <div>
+            <strong>MANIPAL</strong>
+            <span>BORN HERE</span>
+            <small>Growing since 2017</small>
+          </div>
+          <div>
+            <strong>10 LAKH+</strong>
+            <span>CUSTOMERS</span>
+            <small>And counting</small>
+          </div>
+          <div>
+            <strong>MORE</strong>
+            <span>CITIES NEXT</span>
+            <small>Built to travel</small>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <section class="gm-fr-v2-section gm-fr-v2-playbook" id="franchisePlaybook" aria-labelledby="gmFrPlaybookTitle">
+      <div class="gm-fr-v2-shell">
+        <div class="gm-fr-v2-kicker gm-fr-v2-reveal">
+          <span>03</span>
+          <span>THE PLAYBOOK</span>
+        </div>
+
+        <div class="gm-fr-v2-section-head gm-fr-v2-reveal">
+          <h2 id="gmFrPlaybookTitle" class="gm-fr-v2-display">
+            THE DINER.<br>
+            THE SYSTEM.<br>
+            <em>THE SUPPORT.</em>
+          </h2>
+          <p>Enough structure to protect the Grub Monkeys experience. Enough support to help you get the diner ready for opening day.</p>
+        </div>
+
+        <div class="gm-fr-v2-support-list">
+          <article class="gm-fr-v2-support-row gm-fr-v2-reveal">
+            <span class="gm-fr-v2-support-num">01</span>
+            <h3>THE FOOD SYSTEM</h3>
+            <p>Training around the existing Grub Monkeys menu, recipes and operating standards.</p>
+          </article>
+
+          <article class="gm-fr-v2-support-row gm-fr-v2-reveal">
+            <span class="gm-fr-v2-support-num">02</span>
+            <h3>SITE + DINER SETUP</h3>
+            <p>Guidance around location selection, physical setup and translating the diner identity into the store.</p>
+          </article>
+
+          <article class="gm-fr-v2-support-row gm-fr-v2-reveal">
+            <span class="gm-fr-v2-support-num">03</span>
+            <h3>TRAINING + OPERATIONS</h3>
+            <p>Pre-launch training and operating guidance designed to help run the diner experience consistently.</p>
+          </article>
+
+          <article class="gm-fr-v2-support-row gm-fr-v2-reveal">
+            <span class="gm-fr-v2-support-num">04</span>
+            <h3>BRAND + MARKETING</h3>
+            <p>Ongoing support around brand communication, marketing and digital presence.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="gm-fr-v2-section gm-fr-v2-build" aria-labelledby="gmFrBuildTitle">
+      <div class="gm-fr-v2-shell gm-fr-v2-build-grid">
+        <div class="gm-fr-v2-build-copy">
+          <div class="gm-fr-v2-kicker gm-fr-v2-reveal">
+            <span>04</span>
+            <span>FROM PLAN TO DINER</span>
+          </div>
+
+          <div class="gm-fr-v2-reveal">
+            <h2 id="gmFrBuildTitle" class="gm-fr-v2-display">
+              SEE IT<br>
+              BEFORE YOU<br>
+              <em>BUILD IT.</em>
+            </h2>
+            <p>The team can help develop store visuals from initial plans — including the shopfront, furniture and diner theme — so you can get a clearer picture of the finished space before launch.</p>
+          </div>
+
+          <div class="gm-fr-v2-build-steps gm-fr-v2-reveal" aria-label="Diner development stages">
+            <span>PLAN</span><i aria-hidden="true"></i>
+            <span>VISUALISE</span><i aria-hidden="true"></i>
+            <span>SET UP</span><i aria-hidden="true"></i>
+            <span>OPEN</span>
+          </div>
+        </div>
+
+        <div class="gm-fr-v2-build-visual gm-fr-v2-reveal" aria-hidden="true">
+          <div class="gm-fr-v2-blueprint">
+            <span class="gm-fr-v2-blueprint__rail"></span>
+            <span class="gm-fr-v2-blueprint__scan"></span>
+            <span class="gm-fr-v2-blueprint__label">DINER VISUAL / BUILD PREVIEW</span>
+            <img src="images/franchise-diner-build.webp" width="1500" height="750" alt="">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gm-fr-v2-section gm-fr-v2-travels" aria-labelledby="gmFrTravelsTitle">
+      <div class="gm-fr-v2-shell">
+        <div class="gm-fr-v2-kicker gm-fr-v2-reveal">
+          <span>05</span>
+          <span>PROOF IT TRAVELS</span>
+        </div>
+
+        <div class="gm-fr-v2-travels-grid">
+          <div class="gm-fr-v2-reveal">
+            <h2 id="gmFrTravelsTitle" class="gm-fr-v2-display">
+              FROM MANIPAL<br>
+              <em>TO MORE CITIES.</em>
+            </h2>
+          </div>
+
+          <div class="gm-fr-v2-travels-copy gm-fr-v2-reveal">
+            <strong>6 OUTLETS ACROSS KARNATAKA.</strong>
+            <p>A recognisable American diner experience designed to stay familiar as the brand grows.</p>
+          </div>
+        </div>
+
+        <div class="gm-fr-v2-travel-markers gm-fr-v2-reveal" aria-label="Grub Monkeys growth">
+          <div><span>01</span><strong>2017</strong><small>Manipal beginning</small></div>
+          <div><span>02</span><strong>6 OUTLETS</strong><small>Across Karnataka</small></div>
+          <div><span>03</span><strong>10 LAKH+</strong><small>Customers served</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gm-fr-v2-section gm-fr-v2-fit" aria-labelledby="gmFrFitTitle">
+      <div class="gm-fr-v2-shell">
+        <div class="gm-fr-v2-kicker gm-fr-v2-reveal">
+          <span>06</span>
+          <span>THE FIT</span>
+        </div>
+
+        <div class="gm-fr-v2-section-head gm-fr-v2-reveal">
+          <h2 id="gmFrFitTitle" class="gm-fr-v2-display">
+            YOUR CITY.<br>
+            <em>OUR MONKEY BUSINESS.</em>
+          </h2>
+          <p>A franchise works best when the operator understands the market, cares about hospitality and wants to build the brand for the long term.</p>
+        </div>
+
+        <div class="gm-fr-v2-fit-grid">
+          <article class="gm-fr-v2-fit-item gm-fr-v2-reveal">
+            <span>01</span>
+            <h3>LOCAL INSTINCT</h3>
+            <p>You understand your city, its audience and where the diner can earn attention.</p>
+          </article>
+          <article class="gm-fr-v2-fit-item gm-fr-v2-reveal">
+            <span>02</span>
+            <h3>OPERATOR MINDSET</h3>
+            <p>You care about consistency, hospitality and the experience customers actually remember.</p>
+          </article>
+          <article class="gm-fr-v2-fit-item gm-fr-v2-reveal">
+            <span>03</span>
+            <h3>LONG-TERM THINKING</h3>
+            <p>You want to build a restaurant business, not simply put a logo on a storefront.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="gm-fr-v2-section gm-fr-v2-enquire" id="franchiseEnquiry" aria-labelledby="gmFrEnquiryTitle">
+      <div class="gm-fr-v2-shell gm-fr-v2-enquire-grid">
+        <div class="gm-fr-v2-enquire-copy">
+          <div class="gm-fr-v2-kicker gm-fr-v2-reveal">
+            <span>07</span>
+            <span>START A CONVERSATION</span>
+          </div>
+
+          <div class="gm-fr-v2-reveal">
+            <h2 id="gmFrEnquiryTitle" class="gm-fr-v2-display">
+              THINK YOUR CITY<br>
+              <em>HAS THE INSTINCT?</em>
+            </h2>
+            <p>Tell us about yourself, your city and what you are looking to build. The franchise team will take it from there.</p>
+          </div>
+
+          <div class="gm-fr-v2-enquire-note gm-fr-v2-reveal">
+            <span>KEEP IT SIMPLE.</span>
+            <p>Your background, preferred city and any location ideas are enough to start the conversation.</p>
+          </div>
+        </div>
+
+        <div class="fr-form gm-fr-v2-form gm-fr-v2-reveal">
+          <div class="fr-form-title">Tell Us About Your City</div>
+          <div class="fr-form-sub">Share the basics and the Grub Monkeys franchise team will get in touch.</div>
+          <form id="franchiseForm" novalidate>
+            <div class="hp-field" aria-hidden="true">
+              <label for="fi-company">Company</label>
+              <input type="text" id="fi-company" name="company" tabindex="-1" autocomplete="off">
+            </div>
+
+            <div class="fr-row">
+              <div class="fr-group">
+                <label class="fr-label" for="fi-name">Full Name</label>
+                <input class="fr-input" type="text" id="fi-name" name="Full Name" autocomplete="name" maxlength="80" required>
+              </div>
+              <div class="fr-group">
+                <label class="fr-label" for="fi-phone">Phone Number</label>
+                <input class="fr-input" type="tel" id="fi-phone" name="Phone Number" autocomplete="tel" inputmode="tel" maxlength="24" required>
+              </div>
+            </div>
+
+            <div class="fr-group">
+              <label class="fr-label" for="fi-email">Email Address</label>
+              <input class="fr-input" type="email" id="fi-email" name="Email Address" autocomplete="email" maxlength="120" required>
+            </div>
+
+            <div class="fr-row">
+              <div class="fr-group">
+                <label class="fr-label" for="fi-city">City of Interest</label>
+                <input class="fr-input" type="text" id="fi-city" name="City of Interest" autocomplete="address-level2" maxlength="80" required>
+              </div>
+              <div class="fr-group">
+                <label class="fr-label" for="fi-budget">Investment Budget</label>
+                <select class="fr-select" id="fi-budget" name="Investment Budget">
+                  <option value="" selected>Select range</option>
+                  <option>₹10L – ₹20L</option>
+                  <option>₹20L – ₹40L</option>
+                  <option>₹40L – ₹60L</option>
+                  <option>₹60L+</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="fr-group">
+              <label class="fr-label" for="fi-message">Tell us about yourself</label>
+              <textarea class="fr-textarea" id="fi-message" name="Message" maxlength="800" placeholder="Business background, city, location ideas, or anything useful."></textarea>
+            </div>
+
+            <button class="fr-submit" type="submit" id="franchiseSubmitBtn">Send Franchise Enquiry</button>
+            <div class="fr-note">By submitting, you agree to be contacted by the Grub Monkeys franchise team.</div>
+            <div id="franchiseStatus" class="form-status" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+
 </main>
 
 <footer>
@@ -270,5 +489,6 @@
 <script src="franchise.js" defer></script>
 <script src="retro-ambient.js" defer></script>
 <script src="gm-corrections.js" defer></script>
+<script src="franchise-page-v2.js" defer></script>
 </body>
 </html>

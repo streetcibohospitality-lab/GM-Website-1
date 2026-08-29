@@ -1,0 +1,247 @@
+/* =============================================================
+   FRANCHISE HERO — REAL DINER BOOTH BACKDROP
+   Uses the supplied diner interior image as the actual environment
+   around the existing portrait video device. Desktop enhancement only.
+   ============================================================= */
+
+body[data-page="franchise"] .gm-fr-hero-media--booth{
+  position:relative;
+  background-image:
+    linear-gradient(90deg,
+      rgba(58,58,58,.18) 0%,
+      rgba(58,58,58,.03) 22%,
+      rgba(58,58,58,.03) 78%,
+      rgba(58,58,58,.18) 100%),
+    linear-gradient(180deg,
+      rgba(58,58,58,.04) 0%,
+      rgba(58,58,58,.08) 62%,
+      rgba(58,58,58,.20) 100%),
+    url("images/franchise-diner-booth-bg.webp");
+  background-size:cover;
+  background-position:center center;
+  background-repeat:no-repeat;
+  border-left:1px solid rgba(240,239,233,.12);
+  box-shadow:inset 0 0 90px rgba(58,58,58,.22);
+}
+
+/* The photo already contains real wood grain, framed posters, chrome trim,
+   pendant lights, booth upholstery and a table. Disable the old dot texture
+   so the image stays photographic instead of becoming visually noisy. */
+body[data-page="franchise"] .gm-fr-hero-media--booth::before{
+  opacity:0;
+  background:none;
+  -webkit-mask-image:none;
+  mask-image:none;
+}
+
+/* Keep the phone and controls visually above the photographic environment. */
+body[data-page="franchise"] .gm-fr-hero-media--booth .gm-fr-phone,
+body[data-page="franchise"] .gm-fr-hero-media--booth .gm-fr-hero-controls{
+  position:relative;
+  z-index:2;
+}
+
+/* A small vertical adjustment lines the device up with the booth/table area
+   in the supplied photograph rather than leaving it floating on the wall. */
+body[data-page="franchise"] .gm-fr-hero-media--booth .gm-fr-phone{
+  transform:translateY(8px);
+}
+
+body[data-page="franchise"] .gm-fr-hero-media--booth .gm-fr-hero-controls{
+  transform:translateY(8px);
+}
+
+/* At narrower desktop widths the media cell becomes taller relative to its
+   width. Bias the crop slightly upward so both pendant lamps and booth trim
+   remain visible around the phone. */
+@media(max-width:1120px) and (min-width:861px){
+  body[data-page="franchise"] .gm-fr-hero-media--booth{
+    background-position:center 44%;
+  }
+}
+
+/* The user's concern is desktop negative space. On mobile, return to the
+   existing simpler dark media field so the portrait phone remains readable
+   and the 4:3 booth photograph is not awkwardly cropped into a narrow strip. */
+@media(max-width:860px){
+  body[data-page="franchise"] .gm-fr-hero-media--booth{
+    background-image:
+      radial-gradient(circle at 72% 24%,rgba(235,0,0,.14),transparent 28%),
+      radial-gradient(circle at 28% 72%,rgba(0,221,194,.07),transparent 26%);
+    background-color:#262626;
+    background-position:center;
+    box-shadow:none;
+  }
+
+  body[data-page="franchise"] .gm-fr-hero-media--booth::before{
+    opacity:.22;
+    background-image:radial-gradient(circle,rgba(240,239,233,.16) 0 1px,transparent 1.2px);
+    background-size:17px 17px;
+    -webkit-mask-image:linear-gradient(180deg,transparent,#000 18%,#000 82%,transparent);
+    mask-image:linear-gradient(180deg,transparent,#000 18%,#000 82%,transparent);
+  }
+
+  body[data-page="franchise"] .gm-fr-hero-media--booth .gm-fr-phone,
+  body[data-page="franchise"] .gm-fr-hero-media--booth .gm-fr-hero-controls{
+    transform:none;
+  }
+}
+
+/* =============================================================
+   ENVIRONMENTAL POLISH — real-photo integration only
+   No synthetic booth furniture, lamps or posters are added.
+   ============================================================= */
+
+/* A very light photographic vignette keeps the phone legible without making
+   the diner image feel "filtered". */
+body[data-page="franchise"] .gm-fr-hero-media--booth::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  opacity:1;
+  background:
+    linear-gradient(90deg,
+      rgba(58,58,58,.18) 0%,
+      rgba(58,58,58,.03) 25%,
+      transparent 42%,
+      transparent 58%,
+      rgba(58,58,58,.03) 75%,
+      rgba(58,58,58,.18) 100%),
+    linear-gradient(180deg,
+      rgba(58,58,58,.03) 0%,
+      transparent 48%,
+      rgba(58,58,58,.14) 100%);
+  -webkit-mask-image:none;
+  mask-image:none;
+}
+
+/* Real pendant lights already exist in the photo. This overlay merely adds a
+   faint warm response around those exact areas so the scene feels less flat.
+   The change is intentionally almost imperceptible. */
+body[data-page="franchise"] .gm-fr-hero-media--booth::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  opacity:.18;
+  background:
+    radial-gradient(circle at 12% 16%,
+      rgba(240,239,233,.24) 0%,
+      rgba(240,239,233,.08) 9%,
+      transparent 24%),
+    radial-gradient(circle at 88% 16%,
+      rgba(240,239,233,.24) 0%,
+      rgba(240,239,233,.08) 9%,
+      transparent 24%);
+  animation:gmFrBoothAmbient 11s ease-in-out infinite;
+}
+
+/* The phone now picks up only a trace of the site's red/teal light, while the
+   main shadow remains neutral. This is more like environmental reflection
+   than an artificial glow. */
+body[data-page="franchise"] .gm-fr-hero-media--booth .gm-fr-phone{
+  z-index:3;
+  filter:
+    drop-shadow(0 24px 24px rgba(58,58,58,.42))
+    drop-shadow(-7px 2px 12px rgba(0,221,194,.035))
+    drop-shadow(7px 2px 14px rgba(235,0,0,.055));
+}
+
+/* Slow down the existing chrome sweep so it reads as a material reflection,
+   not an effect. */
+body[data-page="franchise"] .gm-fr-hero-media--booth .gm-fr-phone::after{
+  animation-duration:12.5s;
+}
+
+/* Contact pool visually seats the device/control deck into the real booth
+   table instead of letting it float in front of the photograph. */
+body[data-page="franchise"] .gm-fr-hero-media--booth .gm-fr-hero-controls{
+  z-index:3;
+  isolation:isolate;
+}
+
+body[data-page="franchise"] .gm-fr-hero-media--booth .gm-fr-hero-controls::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  left:50%;
+  bottom:-22px;
+  width:155%;
+  height:58px;
+  transform:translateX(-50%);
+  pointer-events:none;
+  background:radial-gradient(ellipse at center,
+    rgba(58,58,58,.48) 0%,
+    rgba(58,58,58,.24) 38%,
+    transparent 72%);
+  filter:blur(4px);
+}
+
+/* One tiny franchise plaque replaces the need for more decorative objects.
+   It only appears where there is genuine desktop room. */
+@media(min-width:1180px){
+  body[data-page="franchise"] .gm-fr-hero-media--booth .gm-fr-hero-controls::after{
+    content:"FEED THE INSTINCT.  /  NOW FRANCHISING";
+    position:absolute;
+    left:calc(100% + clamp(22px,3vw,42px));
+    bottom:4px;
+    width:max-content;
+    max-width:170px;
+    padding:8px 10px 7px;
+    border:1px solid rgba(0,221,194,.62);
+    background:rgba(58,58,58,.72);
+    color:var(--gm-teal);
+    font:800 .45rem/1.25 var(--f-body);
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    transform:rotate(-1.2deg);
+    box-shadow:
+      inset 0 0 0 1px rgba(240,239,233,.06),
+      0 5px 12px rgba(58,58,58,.26);
+    pointer-events:none;
+  }
+}
+
+@keyframes gmFrBoothAmbient{
+  0%,100%{opacity:.15}
+  50%{opacity:.21}
+}
+
+/* Narrow desktop: preserve the photograph and phone first; remove the plaque
+   and keep the integration layer quiet. */
+@media(max-width:1179px) and (min-width:861px){
+  body[data-page="franchise"] .gm-fr-hero-media--booth::after{
+    opacity:.14;
+  }
+}
+
+/* Mobile keeps the existing clean treatment; none of the desktop atmospheric
+   integration is carried into the narrow layout. */
+@media(max-width:860px){
+  body[data-page="franchise"] .gm-fr-hero-media--booth::after{
+    content:none;
+  }
+
+  body[data-page="franchise"] .gm-fr-hero-media--booth .gm-fr-phone{
+    filter:none;
+  }
+
+  body[data-page="franchise"] .gm-fr-hero-media--booth .gm-fr-hero-controls::before,
+  body[data-page="franchise"] .gm-fr-hero-media--booth .gm-fr-hero-controls::after{
+    content:none;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  body[data-page="franchise"] .gm-fr-hero-media--booth::after{
+    animation:none!important;
+    opacity:.18;
+  }
+
+  body[data-page="franchise"] .gm-fr-hero-media--booth .gm-fr-phone::after{
+    animation:none!important;
+  }
+}

@@ -748,120 +748,12 @@ body[data-page="franchise"] .gm-fr-phone__video{
   .loc-list{ padding-bottom:560px; }
 }
 
-/* FRANCHISE PAGE — fill negative space, desktop.
-   Purely decorative additions; nothing existing moves or resizes. The
-   rest of the site is dense with retro texture (halftones, ghosted
-   watermark text, stamps, spark clusters) -- this page had exactly one
-   checker-strip and one chrome rail, which is why it reads as
-   comparatively bare next to its siblings. */
-
-/* Hero: .gm-fr-hero-media already has position:relative and its own
-   ::before grain texture, so these anchor to it safely without
-   disturbing the existing phone mockup or its controls. */
-body[data-page="franchise"] .gm-fr-hero-rail{
-  position:absolute;
-  z-index:1;
-  left:14px;
-  top:12%;
-  bottom:12%;
-  width:24px;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  align-items:center;
-  border-left:2px solid rgba(240,239,233,.28);
-  border-right:2px solid rgba(240,239,233,.28);
-  padding:8px 0;
-  color:rgba(240,239,233,.5);
-  font-family:var(--f-display);
-  font-size:.62rem;
-  letter-spacing:.12em;
-  writing-mode:vertical-rl;
-  transform:rotate(180deg);
-  text-transform:uppercase;
-  pointer-events:none;
-}
-body[data-page="franchise"] .retro-halftone--fr-hero{
-  right:6%;
-  top:8%;
-  width:170px;
-  height:130px;
-  opacity:.10;
-  background-image:radial-gradient(circle,rgba(240,239,233,.9) 1.4px,transparent 1.6px);
-}
-body[data-page="franchise"] .retro-spark-cluster--fr-hero{
-  left:8%;
-  bottom:10%;
-}
-body[data-page="franchise"] .retro-stamp--fr-hero{
-  right:7%;
-  bottom:9%;
-  color:var(--gm-teal);
-  mix-blend-mode:normal;
-  opacity:.6;
-}
-@media(max-width:860px){
-  body[data-page="franchise"] .gm-fr-hero-rail,
-  body[data-page="franchise"] .retro-halftone--fr-hero,
-  body[data-page="franchise"] .retro-spark-cluster--fr-hero,
-  body[data-page="franchise"] .retro-stamp--fr-hero{
-    display:none;
-  }
-}
-
-/* Perks/form section: the perks list is much shorter than the form
-   beside it, leaving a large flat void to its right and below it.
-   .fr-grid gets position:relative purely so this can anchor to it --
-   the grid's own layout, columns and gap are untouched. */
-body[data-page="franchise"] .fr-grid{ position:relative; }
-body[data-page="franchise"] .fr-void-watermark{
-  position:absolute;
-  z-index:0;
-  left:0;
-  top:50%;
-  transform:translateY(-50%);
-  font-family:var(--f-display);
-  font-size:clamp(6rem,13vw,11rem);
-  line-height:1;
-  color:rgba(240,239,233,.05);
-  white-space:nowrap;
-  pointer-events:none;
-}
-body[data-page="franchise"] .fr-perks,
+/* .fr-form is reused by the v2 enquiry section, so this stacking-context
+   rule still applies; the .fr-perks/.fr-grid/.fr-void-watermark rules
+   that used to sit here were removed with the section 02+ rebuild. */
 body[data-page="franchise"] .fr-form{
   position:relative;
   z-index:1;
-}
-@media(max-width:860px){
-  body[data-page="franchise"] .fr-void-watermark{ display:none; }
-}
-
-/* Perk items: a small hover/focus accent so the list isn't static text.
-   padding-left/margin-left cancel out, so nothing shifts at rest --
-   only the accent bar animates in on interaction. */
-body[data-page="franchise"] .fr-perks > div{
-  position:relative;
-  padding-left:14px;
-  margin-left:-14px;
-}
-body[data-page="franchise"] .fr-perks > div::before{
-  content:"";
-  position:absolute;
-  left:0;
-  top:2px;
-  bottom:2px;
-  width:3px;
-  background:var(--gm-red);
-  transform:scaleY(0);
-  transform-origin:top center;
-  transition:transform .3s var(--gm-ease-editorial);
-}
-body[data-page="franchise"] .fr-perks > div:hover::before{
-  transform:scaleY(1);
-}
-body[data-page="franchise"] .fr-perks > div:hover .fr-perk-num{
-  color:var(--gm-teal);
-  transition:color .2s ease;
 }
 
 /* FRANCHISE HERO — entrance choreography.
@@ -903,39 +795,13 @@ body[data-page="franchise"] .gm-fr-hero-controls{
   animation:frHeroRise .45s var(--gm-ease-editorial) .6s forwards;
 }
 
-body[data-page="franchise"] .gm-fr-hero-rail,
-body[data-page="franchise"] .retro-halftone--fr-hero{
-  opacity:0;
-  animation:frFadeIn .5s ease .7s forwards;
-}
-body[data-page="franchise"] .retro-spark-cluster--fr-hero{
-  opacity:0;
-  animation:frFadeIn .5s ease .78s forwards;
-}
-@keyframes frFadeIn{ to{ opacity:1; } }
-
-/* The stamp settles in with a small rotation snap, matching its own
-   "stamped down" motif -- it lands 4 degrees past rest and eases back,
-   rather than just fading in flat like the other props. */
-body[data-page="franchise"] .retro-stamp--fr-hero{
-  opacity:0;
-  transform:rotate(2deg) scale(1.08);
-  animation:frStampDown .4s var(--gm-ease-editorial) .82s forwards;
-}
-@keyframes frStampDown{ to{ opacity:.6; transform:rotate(-2deg) scale(1); } }
-
 @media(prefers-reduced-motion:reduce){
   body[data-page="franchise"] .line-mask span,
   body[data-page="franchise"] .fr-hero-in,
   body[data-page="franchise"] .gm-fr-phone,
-  body[data-page="franchise"] .gm-fr-hero-controls,
-  body[data-page="franchise"] .gm-fr-hero-rail,
-  body[data-page="franchise"] .retro-halftone--fr-hero,
-  body[data-page="franchise"] .retro-spark-cluster--fr-hero,
-  body[data-page="franchise"] .retro-stamp--fr-hero{
+  body[data-page="franchise"] .gm-fr-hero-controls{
     animation:none!important;
     opacity:1!important;
     transform:none!important;
   }
-  body[data-page="franchise"] .retro-stamp--fr-hero{ opacity:.6!important; }
 }
