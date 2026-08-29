@@ -704,3 +704,46 @@ body[data-page="franchise"] .gm-fr-phone__video{
 @media(max-width:600px){
   .loc-nearest{ flex-direction:column; align-items:flex-start; gap:10px; }
 }
+
+/* LOCATIONS — the sticky photo panel wasn't sticking at all, at any
+   scroll position, not just near the last row. Measured directly: its
+   viewport position tracked scroll 1:1 the entire way down, exactly as
+   if position were static.
+
+   Cause: .locations has overflow:hidden (to clip the oversized "KARNATAKA"
+   watermark text, which is deliberately 110% wide and would otherwise
+   cause horizontal bleed/scroll). Any ancestor with overflow other than
+   visible becomes the containing block position:sticky measures against
+   -- and because .locations itself never independently scrolls (the
+   whole section just moves with the page, like any block element), the
+   panel's "stuck" calculation saw no scroll delta to react to and never
+   engaged, in any browser, on any device, regardless of screen height.
+   This is why it read as "loses the picture on the last row" -- the
+   panel was never actually sticking; it was simply sitting at its
+   natural position, which happens to still overlap the viewport for the
+   first row or two and then scrolls away like any other content.
+
+   Fix: the watermark only overflows horizontally (width:110%), so only
+   the X axis needs clipping. overflow-x:clip contains that bleed without
+   establishing a scroll container on the Y axis, which is what sticky
+   positioning actually depends on here. */
+.locations{
+  overflow:visible;
+  overflow-x:clip;
+}
+
+/* With sticky now genuinely engaging, the second half of the original
+   symptom still applies once you reach the last row: a position:sticky
+   element can never stick past the bottom edge of its containing block,
+   and that block currently ends exactly where the list ends, with no
+   slack reserved for the panel's own height. Reserved height (measured,
+   desktop widths 861-1920px): panel height 460-519px + 96px sticky
+   offset. A flat 560px bottom reserve covers that range with a small
+   margin, so the panel now stays fully docked through the last row and
+   only releases once you've scrolled past it. Only needed at the width
+   where the sticky/grid layout is active -- below 860px the section
+   switches to a static stacked layout with no sticky panel, so this
+   would just be dead space there. */
+@media(min-width:861px){
+  .loc-list{ padding-bottom:560px; }
+}
