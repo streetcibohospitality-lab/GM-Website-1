@@ -657,3 +657,11 @@ body[data-page="franchise"] .gm-fr-phone__video{
 @media(max-width:860px){
   .fr-form{ box-shadow:6px 7px 0 var(--gm-red); }
 }
+
+/* FOOTER — brand panel was stretching to match the two link columns'
+   height (default grid stretch), which the unbordered link columns don't
+   show but the bordered brand panel does: a ~100px empty gap between its
+   last line of text and the bottom of its own box. Size it to its content
+   instead; the columns are unaffected since grid items default to stretch
+   individually unless overridden. */
+.foot-brand-panel{ align-self:start; }
