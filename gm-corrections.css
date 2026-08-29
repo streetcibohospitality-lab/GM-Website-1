@@ -626,3 +626,34 @@ body[data-page="franchise"] .gm-fr-phone__video{
     gap:3px;
   }
 }
+
+/* FRANCHISE FORM — bring the enquiry card into the site's own "retro plate"
+   family (review board, roadside location card, CRT TV frame all share this:
+   a recessed dark fill, a heavy light frame, the brand's offset red drop-
+   shadow). The card previously sat at a 5% white tint on a section that is
+   already that same dark grey, so it read as a plain, ungrounded form next
+   to a page full of diner signage. */
+.fr-form{
+  background:#2f2f2f;
+  border:4px solid var(--gm-white);
+  box-shadow:10px 12px 0 var(--gm-red);
+}
+.fr-form-title{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.fr-form-title::before{
+  content:"";
+  width:26px;
+  height:3px;
+  background:var(--gm-red);
+  flex:none;
+}
+.fr-form-title em{ font-style:normal; color:var(--gm-red); }
+.fr-input, .fr-select, .fr-textarea{
+  background:rgba(240,239,233,.09);
+}
+@media(max-width:860px){
+  .fr-form{ box-shadow:6px 7px 0 var(--gm-red); }
+}
