@@ -319,7 +319,7 @@ nav.scrolled .hamburger span{ background: var(--gm-grey); }
    ============================================================ */
 .story{ padding: 92px var(--pad-x); background: var(--gm-white); max-width: var(--max); margin:0 auto; }
 .story-grid{ display:grid; grid-template-columns: 0.95fr 1.05fr; gap: 60px; align-items:center; }
-.story-text p{ font-size: 0.95rem; line-height:1.85; color:#4a4a4a; margin-bottom: 1.1rem; max-width: 46ch; }
+.story-text p{ font-size: 0.95rem; line-height:1.85; color:#4a4a4a; margin-bottom: 1.1rem; max-width: 60ch; }
 .story-founder{ font-size:0.75rem; letter-spacing:0.04em; text-transform:uppercase; color: var(--gm-red); font-weight:700; margin-top: 1.6rem; }
 .story-h{ font-size: clamp(2.4rem,5vw,4.2rem); margin-bottom:20px; }
 
@@ -1329,8 +1329,8 @@ section[id], #order{scroll-margin-top:82px}
 
 /* STORY — intentional quiet space */
 .story{max-width:1180px;padding-top:120px;padding-bottom:120px}
-.story-v5 .story-grid{grid-template-columns:1.18fr .82fr;gap:clamp(64px,9vw,130px)}
-.story-text{padding-left:clamp(0px,3vw,38px)}
+.story-v5 .story-grid{grid-template-columns:1.5fr .9fr;gap:clamp(48px,5vw,80px)}
+.story-text{padding-left:0}
 .story-h{font-size:clamp(2.8rem,5.2vw,4.8rem)}
 .story-origin-poster{min-height:470px}
 .story-decor-row{margin-top:34px;opacity:.92}
