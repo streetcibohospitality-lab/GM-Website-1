@@ -1327,8 +1327,15 @@ section[id], #order{scroll-margin-top:82px}
 .counter-ticket span,.counter-ticket small{display:block;font-size:.52rem;letter-spacing:.1em;text-transform:uppercase}.counter-ticket strong{display:block;font-family:var(--f-display);font-size:1.1rem;line-height:1.1;padding:9px 0;border-top:1px dashed var(--gm-grey);border-bottom:1px dashed var(--gm-grey);margin:8px 0}
 .counter-copy{margin-left:clamp(8px,3vw,42px);align-self:center;max-width:430px}.counter-copy span{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gm-red)}.counter-copy strong{display:block;font-family:var(--f-display);font-size:clamp(2.4rem,5vw,4.9rem);line-height:.86;margin-top:8px;color:var(--gm-grey)}
 
-/* STORY — intentional quiet space */
-.story{max-width:1180px;padding-top:120px;padding-bottom:120px}
+/* STORY — intentional quiet space.
+   max-width used to be hardcoded to 1180px here, well short of the
+   site's standard 1440px container (--max) that every other home
+   section uses -- menu, footer, monkey-tv, signature, locations. That
+   left this one section with visibly wider empty gutters on laptop
+   screens than its neighbours. Matching --max widens both grid columns
+   proportionally (the ratio is untouched), so the team board actually
+   gets bigger rather than shrinking. */
+.story{max-width:var(--max);padding-top:120px;padding-bottom:120px}
 .story-v5 .story-grid{grid-template-columns:1.18fr .82fr;gap:clamp(64px,9vw,130px)}
 .story-text{padding-left:0}
 .story-h{font-size:clamp(2.8rem,5.2vw,4.8rem)}
