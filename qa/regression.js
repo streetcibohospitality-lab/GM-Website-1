@@ -223,6 +223,37 @@ async function run() {
       await page.close();
     }
 
+    // --- hit-testing regression: no invisible element may sit on top of the
+    // vibe-check controls (found when a decorative ::before texture on
+    // .page-hero, missing pointer-events:none unlike every other decorative
+    // pseudo-element in this codebase, happened to geometrically overlap
+    // the right ~75% of the Sound button on phone-width viewports — the
+    // button looked and rendered completely normally, but taps there
+    // silently landed on the header instead) ---
+    console.log('Vibe-check controls hit-testing:');
+    for (const vp of [{ width: 375, height: 812 }, { width: 430, height: 932 }]) {
+      const page = await browser.newPage({ viewport: vp, isMobile: true, hasTouch: true });
+      await page.goto(BASE + '/franchise', { waitUntil: 'networkidle' });
+      for (const id of ['gmFrVibePlay', 'gmFrVibeSound', 'gmFrVibeRestart']) {
+        await page.evaluate((elId) => document.getElementById(elId).scrollIntoView({ block: 'center' }), id);
+        await page.waitForTimeout(500);
+        const result = await page.evaluate((elId) => {
+          const btn = document.getElementById(elId);
+          const rect = btn.getBoundingClientRect();
+          const midY = rect.top + rect.height / 2;
+          const misses = [];
+          for (let f = 0.05; f <= 0.95; f += 0.1) {
+            const x = rect.left + rect.width * f;
+            const el = document.elementFromPoint(x, midY);
+            if (el !== btn) misses.push(Math.round(f * 100) + '%');
+          }
+          return misses;
+        }, id);
+        check(`${id} fully tappable @ ${vp.width}px wide`, result.length === 0, `missed at: ${result.join(', ')}`);
+      }
+      await page.close();
+    }
+
     // --- video control disable/re-enable: homepage Monkey TV reel ---
     console.log('Homepage Monkey TV controls:');
     {

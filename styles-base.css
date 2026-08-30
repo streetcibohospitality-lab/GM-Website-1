@@ -3601,6 +3601,7 @@ body[data-page="franchise"] .page-hero::before{
   bottom:4%;
   width:150px;
   height:100px;
+  pointer-events:none;
   opacity:.055;
   background-image:radial-gradient(circle,var(--gm-grey) 1.4px,transparent 1.6px);
   background-size:9px 9px;
