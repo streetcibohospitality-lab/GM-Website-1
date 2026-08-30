@@ -210,8 +210,17 @@
     video.removeAttribute('autoplay');
     video.pause();
   }else{
-    video.muted=true;
-    video.play().catch(()=>{ userPaused=true; sync(); });
+    /* Browsers only allow autoplay WITH sound once a visitor already has
+       engagement with audio/video on this origin -- there is no way to
+       force it on a fresh visit. Try audible first so returning visitors
+       (and browsers that allow it) get sound by default, and only fall
+       back to the muted autoplay every browser guarantees if the unmuted
+       attempt is rejected. */
+    video.muted=false;
+    video.play().then(sync).catch(()=>{
+      video.muted=true;
+      video.play().then(sync).catch(()=>{ userPaused=true; sync(); });
+    });
   }
 
   document.addEventListener('visibilitychange',()=>{

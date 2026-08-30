@@ -37,8 +37,36 @@
   var screenEl = document.getElementById('gmFrVibeScreen');
   var screenToggle = document.getElementById('gmFrVibeScreenToggle');
   var failed = false;
+  var retryTimer = null;
+  var retryCount = 0;
+  var RETRY_DELAYS_MS = [3000, 8000, 15000];
+
+  /* A fatal `error` event leaves the element in a broken state for good --
+     the browser does not retry the source on its own, so without this the
+     reel (and its controls) stayed dead for the rest of the visit even
+     after a purely transient network drop recovered a second later. Give
+     it a few spaced-out retries via video.load() before accepting the
+     failure as real. */
+  function scheduleRetry() {
+    /* A single failure can fire `error` on both the video and its <source>
+       child (and the 8s stall check can land in the same window too).
+       Without this guard each call overwrote retryTimer with a new id,
+       orphaning the previous timer -- clearTimeout in markAvailable could
+       then only ever cancel the last one, leaving earlier timers to fire
+       a stray retry after the reel had already recovered. */
+    if (retryTimer) return;
+    if (retryCount >= RETRY_DELAYS_MS.length) return;
+    var delay = RETRY_DELAYS_MS[retryCount];
+    retryCount++;
+    retryTimer = window.setTimeout(function () {
+      retryTimer = null;
+      video.load();
+      video.play().catch(function () {});
+    }, delay);
+  }
 
   function markUnavailable() {
+    scheduleRetry();
     if (failed) return;
     failed = true;
 
@@ -84,6 +112,11 @@
      masking the same bug on that button. Three recovery events, since
      which one fires first varies by network and browser. */
   function markAvailable() {
+    retryCount = 0;
+    if (retryTimer) {
+      window.clearTimeout(retryTimer);
+      retryTimer = null;
+    }
     if (!failed) return;
     failed = false;
 

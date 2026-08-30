@@ -195,6 +195,34 @@ async function run() {
       await page.close();
     }
 
+    // --- retry-guard regression: overlapping error events must not orphan a
+    // retry timer (found when the sound button kept breaking on the
+    // franchise page — two error listeners firing for one real failure each
+    // scheduled their own retry timer, and only the last one ever got
+    // cancelled on recovery, leaving the sound button flip back to broken
+    // later on its own) ---
+    console.log('Vibe-check retry-guard:');
+    {
+      const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+      await page.addInitScript(() => {
+        window.__vibeLoadCalls = 0;
+        document.addEventListener('DOMContentLoaded', () => {
+          const v = document.getElementById('gmFrVibeVideo');
+          if (v) v.load = function () { window.__vibeLoadCalls++; };
+        });
+      });
+      await page.goto(BASE + '/franchise', { waitUntil: 'networkidle' });
+      await page.evaluate(() => {
+        const v = document.querySelector('#gmFrVibeVideo');
+        v.dispatchEvent(new Event('error'));
+        v.querySelector('source').dispatchEvent(new Event('error'));
+      });
+      await page.waitForTimeout(3400);
+      const loadCalls = await page.evaluate(() => window.__vibeLoadCalls);
+      check('exactly one retry fires from two overlapping error events', loadCalls === 1, String(loadCalls));
+      await page.close();
+    }
+
     // --- video control disable/re-enable: homepage Monkey TV reel ---
     console.log('Homepage Monkey TV controls:');
     {

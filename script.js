@@ -134,6 +134,9 @@
   let tvStarted=false;
   let tvAutoBooted=false;
   let tvUserPaused=false;
+  let tvRetryTimer=null;
+  let tvRetryCount=0;
+  const TV_RETRY_DELAYS_MS=[3000,8000,15000];
   function syncPlayLabel(){
     if(play && tv) {
       /* Once the reel is known unplayable the button stays NO SIGNAL — play/pause
@@ -167,7 +170,24 @@
        <source> listener is the one that actually catches a missing or
        undecodable MP4. networkState NO_SOURCE is the belt-and-braces case:
        some browsers reject every candidate without firing either event. */
+    /* A fatal `error` leaves the element broken for good -- the browser never
+       retries the source on its own -- so without this a transient network
+       drop left the reel (and its controls) dead for the rest of the visit
+       even after connectivity recovered a second later. */
+    function tvScheduleRetry(){
+      /* A single failure can fire `error` on both the video and its <source>
+         child (and the 8s stall check can land in the same window too).
+         Without this guard each call overwrote tvRetryTimer with a new id,
+         orphaning the previous timer and letting a stray retry fire after
+         the reel had already recovered. */
+      if(tvRetryTimer) return;
+      if(tvRetryCount>=TV_RETRY_DELAYS_MS.length) return;
+      const delay=TV_RETRY_DELAYS_MS[tvRetryCount];
+      tvRetryCount++;
+      tvRetryTimer=window.setTimeout(()=>{ tvRetryTimer=null; tv.load(); tv.play().catch(()=>{}); },delay);
+    }
     function tvUnavailable(){
+      tvScheduleRetry();
       if(!play || play.dataset.failed==='true') return;
       play.dataset.failed='true';
       play.disabled=true;
@@ -189,6 +209,8 @@
        fine, but its controls stay dead. Three recovery events since which
        one fires first varies by network and browser. */
     function tvAvailable(){
+      tvRetryCount=0;
+      if(tvRetryTimer){ window.clearTimeout(tvRetryTimer); tvRetryTimer=null; }
       if(!play || play.dataset.failed!=='true') return;
       play.dataset.failed='';
       play.disabled=false;
