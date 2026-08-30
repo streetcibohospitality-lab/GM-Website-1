@@ -1,0 +1,10 @@
+{
+  "name": "gm-website-qa",
+  "private": true,
+  "scripts": {
+    "test": "node regression.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.47.0"
+  }
+}
