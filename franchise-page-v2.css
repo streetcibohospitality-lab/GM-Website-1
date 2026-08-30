@@ -423,52 +423,76 @@ body[data-page="franchise"] .gm-fr-v2-travels-copy p{
   color:rgba(240,239,233,.76);
 }
 
-body[data-page="franchise"] .gm-fr-v2-travel-markers{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  margin-top:clamp(54px,6vw,88px);
+/* Geographic route. This replaced a three-up KPI strip that repeated the
+   same 2017 / 6 outlets / 10 lakh+ numbers already given in section 02 --
+   the point of this section is where the brand has travelled, not the
+   headline figures again. Typographic wayfinding only: no cards, no map,
+   no pins, no route line. */
+body[data-page="franchise"] .gm-fr-v2-travel-route{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:clamp(10px,1.6vw,22px);
+  margin:clamp(54px,6vw,88px) 0 0;
+  padding-top:clamp(26px,3vw,38px);
   border-top:1px solid rgba(240,239,233,.36);
-  border-bottom:1px solid rgba(240,239,233,.36);
+  list-style:none;
 }
 
-body[data-page="franchise"] .gm-fr-v2-travel-markers > div{
-  padding:24px clamp(12px,2vw,26px);
+body[data-page="franchise"] .gm-fr-v2-travel-route li{
+  display:flex;
+  align-items:baseline;
+  gap:clamp(10px,1.6vw,22px);
 }
 
-body[data-page="franchise"] .gm-fr-v2-travel-markers > div:first-child{
-  padding-left:0;
-}
-
-body[data-page="franchise"] .gm-fr-v2-travel-markers > div + div{
-  border-left:1px solid rgba(240,239,233,.30);
-}
-
-body[data-page="franchise"] .gm-fr-v2-travel-markers span{
-  display:block;
-  /* var(--gm-grey) here was 2.45:1 on this section's red background --
-     nearly invisible. Even the brand's cream tops out at 4.02:1 on this
-     red (documented at the top of gm-corrections.css); pure white is the
-     established fix for light text on Monkey Red, at 4.63:1. */
-  color:#FFFFFF;
-  font:800 .52rem/1 var(--f-body);
-  letter-spacing:.12em;
-}
-
-body[data-page="franchise"] .gm-fr-v2-travel-markers strong{
-  display:block;
-  margin-top:10px;
+body[data-page="franchise"] .gm-fr-v2-travel-city{
   font-family:var(--f-display);
-  font-size:clamp(2rem,3.3vw,3.8rem);
+  font-size:clamp(1.5rem,3vw,3.1rem);
   font-weight:400;
-  line-height:.86;
+  line-height:.95;
   text-transform:uppercase;
 }
 
-body[data-page="franchise"] .gm-fr-v2-travel-markers small{
-  display:block;
-  margin-top:8px;
-  color:rgba(240,239,233,.72);
-  font:600 .65rem/1.35 var(--f-body);
+/* The two Bengaluru diners, marked as a count rather than a repeated
+   city name so the route stays one item per city. */
+body[data-page="franchise"] .gm-fr-v2-travel-city i{
+  font:800 .3em/1 var(--f-body);
+  font-style:normal;
+  letter-spacing:.04em;
+  vertical-align:.5em;
+}
+
+body[data-page="franchise"] .gm-fr-v2-travel-arrow{
+  /* Sorta Grey lands at 2.45:1 on this section's red -- the same problem
+     already fixed above -- so these separators use cream held back to a
+     quiet weight instead, which stays visible without competing. */
+  color:rgba(240,239,233,.66);
+  font:800 1rem/1 var(--f-body);
+}
+
+body[data-page="franchise"] .gm-fr-v2-travel-summary{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:8px 18px;
+  margin-top:clamp(26px,3vw,40px);
+  padding-top:clamp(20px,2.4vw,28px);
+  border-top:1px solid rgba(240,239,233,.36);
+}
+
+body[data-page="franchise"] .gm-fr-v2-travel-summary strong{
+  font-family:var(--f-display);
+  font-size:clamp(1.25rem,2.2vw,2rem);
+  font-weight:400;
+  line-height:1;
+  text-transform:uppercase;
+}
+
+body[data-page="franchise"] .gm-fr-v2-travel-summary span{
+  color:rgba(240,239,233,.76);
+  font:800 .68rem/1 var(--f-body);
+  letter-spacing:.14em;
+  text-transform:uppercase;
 }
 
 /* Fit */
@@ -601,6 +625,24 @@ body[data-page="franchise"] .gm-fr-v2-form .fr-submit:focus-visible{
   color:var(--gm-grey);
 }
 
+/* Privacy route out of the form. Understated on purpose -- it sits inside
+   the existing consent line rather than becoming a badge or a button. */
+body[data-page="franchise"] .fr-note-link{
+  color:var(--gm-teal);
+  border-bottom:1px solid rgba(0,221,194,.4);
+  text-decoration:none;
+  white-space:nowrap;
+}
+
+body[data-page="franchise"] .fr-note-link:hover{
+  border-bottom-color:var(--gm-teal);
+}
+
+body[data-page="franchise"] .fr-note-link:focus-visible{
+  outline:2px solid var(--gm-teal);
+  outline-offset:3px;
+}
+
 /* One-time editorial reveals */
 body[data-page="franchise"] .gm-fr-v2-reveal{
   opacity:0;
@@ -728,18 +770,17 @@ body[data-page="franchise"] .gm-fr-v2-support-row:nth-child(4){
     box-shadow:7px 8px 0 var(--gm-red);
   }
 
-  body[data-page="franchise"] .gm-fr-v2-travel-markers{
-    grid-template-columns:1fr;
+  /* Stack the route and turn the separators downward, so it reads as one
+     column instead of overflowing sideways. */
+  body[data-page="franchise"] .gm-fr-v2-travel-route,
+  body[data-page="franchise"] .gm-fr-v2-travel-route li{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:12px;
   }
 
-  body[data-page="franchise"] .gm-fr-v2-travel-markers > div,
-  body[data-page="franchise"] .gm-fr-v2-travel-markers > div:first-child{
-    padding:20px 0;
-  }
-
-  body[data-page="franchise"] .gm-fr-v2-travel-markers > div + div{
-    border-left:0;
-    border-top:1px solid rgba(240,239,233,.30);
+  body[data-page="franchise"] .gm-fr-v2-travel-arrow{
+    transform:rotate(90deg);
   }
 
   body[data-page="franchise"] .gm-fr-v2-enquire-grid{

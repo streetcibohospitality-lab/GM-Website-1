@@ -1,0 +1,129 @@
+/* ============================================================
+   GRUB MONKEYS — PRIVACY PAGE
+   ------------------------------------------------------------
+   A plain legal-information page, not a marketing page. It borrows the
+   site's existing subpage typography (.page-code / .page-title) but not
+   the two-column .page-hero grid, which expects a hero image this page
+   deliberately does not have.
+
+   Body copy sits on Sorta White with Sorta Grey text, small teal section
+   numbers and a red rule -- the brand system, kept quiet.
+   ============================================================ */
+
+/* The nav's default un-scrolled text is cream, for pages that open on a
+   dark hero. styles-base.css flips it to Sorta Grey for the pages with a
+   light hero, but that rule lists home/menu/franchise by name -- so this
+   page needs the same flip or the wordmark and links sit cream-on-cream
+   and disappear. Kept here rather than added to the shared file so no
+   other page's nav is touched. */
+body[data-page="privacy"] nav:not(.scrolled) .nav-logo-text,
+body[data-page="privacy"] nav:not(.scrolled) .nav-links a{
+  color:var(--gm-grey);
+}
+
+/* Same for the mobile hamburger, whose bars default to cream. */
+body[data-page="privacy"] nav:not(.scrolled) .hamburger span{
+  background:var(--gm-grey);
+}
+
+body[data-page="privacy"] .privacy-hero{
+  background:var(--gm-white);
+  border-bottom:4px solid var(--gm-grey);
+  padding:calc(74px + clamp(56px,7vw,96px)) var(--pad-x) clamp(48px,6vw,76px);
+}
+
+body[data-page="privacy"] .privacy-hero .page-title{
+  font-size:clamp(3.2rem,8vw,6.4rem);
+}
+
+body[data-page="privacy"] .privacy-intro{
+  max-width:52ch;
+  margin-top:26px;
+  color:#615c57;
+  font-size:.92rem;
+  line-height:1.8;
+}
+
+body[data-page="privacy"] .privacy-body{
+  background:var(--gm-white);
+  padding:clamp(56px,7vw,96px) var(--pad-x) clamp(72px,9vw,120px);
+}
+
+body[data-page="privacy"] .privacy-section{
+  display:grid;
+  grid-template-columns:minmax(0,.42fr) minmax(0,1fr);
+  gap:clamp(24px,4vw,64px);
+  max-width:1100px;
+  padding:clamp(30px,3.6vw,46px) 0;
+  border-top:1px solid rgba(58,58,58,.18);
+}
+
+body[data-page="privacy"] .privacy-section:first-child{
+  border-top:0;
+  padding-top:0;
+}
+
+body[data-page="privacy"] .privacy-num{
+  display:flex;
+  align-items:baseline;
+  gap:12px;
+  font:800 .62rem/1.4 var(--f-body);
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--gm-grey);
+}
+
+/* Brand teal (#00DDC2) is only 1.9:1 on Sorta White. --gm-teal-ink is the
+   site's established darker teal for light backgrounds, at 4.74:1. */
+body[data-page="privacy"] .privacy-num span:first-child{
+  color:var(--gm-teal-ink,#00776A);
+}
+
+body[data-page="privacy"] .privacy-copy h2{
+  font-family:var(--f-display);
+  font-size:clamp(1.5rem,2.6vw,2.3rem);
+  font-weight:400;
+  line-height:1;
+  text-transform:uppercase;
+  color:var(--gm-grey);
+}
+
+body[data-page="privacy"] .privacy-copy h2::after{
+  content:"";
+  display:block;
+  width:46px;
+  height:3px;
+  margin-top:14px;
+  background:var(--gm-red);
+}
+
+body[data-page="privacy"] .privacy-copy p{
+  max-width:62ch;
+  margin-top:18px;
+  color:#4a4643;
+  font-size:.92rem;
+  line-height:1.85;
+}
+
+body[data-page="privacy"] .privacy-copy a{
+  color:var(--gm-red-ink,#DC0000);
+  border-bottom:1px solid rgba(220,0,0,.4);
+  text-decoration:none;
+  word-break:break-word;
+}
+
+body[data-page="privacy"] .privacy-copy a:hover{
+  border-bottom-color:var(--gm-red-ink,#DC0000);
+}
+
+body[data-page="privacy"] .privacy-copy a:focus-visible{
+  outline:2px solid var(--gm-red-ink,#DC0000);
+  outline-offset:3px;
+}
+
+@media(max-width:860px){
+  body[data-page="privacy"] .privacy-section{
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+}
