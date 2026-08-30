@@ -1329,7 +1329,7 @@ section[id], #order{scroll-margin-top:82px}
 
 /* STORY — intentional quiet space */
 .story{max-width:1180px;padding-top:120px;padding-bottom:120px}
-.story-v5 .story-grid{grid-template-columns:1.5fr .9fr;gap:clamp(48px,5vw,80px)}
+.story-v5 .story-grid{grid-template-columns:1.18fr .82fr;gap:clamp(64px,9vw,130px)}
 .story-text{padding-left:0}
 .story-h{font-size:clamp(2.8rem,5.2vw,4.8rem)}
 .story-origin-poster{min-height:470px}

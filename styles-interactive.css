@@ -3887,7 +3887,7 @@ body[data-page="menu"] .dot.nv{
 
 @media(min-width:1101px){
   .story-v5 .story-grid:has(.team-live-board){
-    grid-template-columns:1.35fr .95fr;
+    grid-template-columns:.86fr 1.14fr;
     gap:clamp(34px,4vw,58px);
   }
 
@@ -3904,7 +3904,7 @@ body[data-page="menu"] .dot.nv{
 
 @media(min-width:861px) and (max-width:1100px){
   .story-v5 .story-grid:has(.team-live-board){
-    grid-template-columns:1.2fr .95fr;
+    grid-template-columns:.92fr 1.08fr;
     gap:clamp(30px,4vw,46px);
   }
 
@@ -5346,7 +5346,7 @@ body[data-page="menu"] .menu-split-board__hinge{
     padding-bottom:30px;
   }
   body[data-page="home"] .story-v5 .story-grid{
-    gap:clamp(32px,4vw,56px);
+    gap:clamp(42px,6vw,82px);
   }
   body[data-page="home"] .story-text p{
     line-height:1.7;
