@@ -179,21 +179,29 @@
   screenToggle.addEventListener('click',togglePlayback);
 
   soundButton.addEventListener('click',async()=>{
-    video.muted=!video.muted;
-    video.volume=1;
-    /* Tapping this button is itself the user gesture asking to hear the
-       reel, so it should resume playback regardless of *why* the video is
-       currently paused -- including the userPaused case, which also
-       covers the initial autoplay attempt failing (iOS commonly blocks
-       it), leaving the reel frozen on a still frame. The old `&&
-       !userPaused` guard skipped resuming in exactly that situation: the
-       mute flag flipped, the button relabelled, but nothing ever played,
-       so there was nothing to hear. */
-    if(video.paused){
-      userPaused=false;
-      try{ await video.play(); }catch(err){ userPaused=true; }
+    /* Wrapped in try/finally so the button's label always reflects reality
+       even if something above throws -- iOS specifically ties volume to
+       its hardware buttons and can reject a script trying to touch
+       video.volume, which used to abort this handler before it ever
+       reached sync(), leaving Sound looking dead while Play/Restart (which
+       never touched volume) kept working fine. */
+    try{
+      video.muted=!video.muted;
+      /* Tapping this button is itself the user gesture asking to hear the
+         reel, so it should resume playback regardless of *why* the video is
+         currently paused -- including the userPaused case, which also
+         covers the initial autoplay attempt failing (iOS commonly blocks
+         it), leaving the reel frozen on a still frame. The old `&&
+         !userPaused` guard skipped resuming in exactly that situation: the
+         mute flag flipped, the button relabelled, but nothing ever played,
+         so there was nothing to hear. */
+      if(video.paused){
+        userPaused=false;
+        try{ await video.play(); }catch(err){ userPaused=true; }
+      }
+    } finally {
+      sync();
     }
-    sync();
   });
 
   restartButton.addEventListener('click',async()=>{
@@ -214,7 +222,6 @@
     /* Autoplay must begin muted on modern browsers. Sound is controlled
        only by the visitor through the SOUND ON / SOUND OFF button. */
     video.muted=true;
-    video.volume=1;
     video.play().then(sync).catch(()=>{
       userPaused=true;
       sync();
