@@ -389,8 +389,12 @@ body[data-page="franchise"] .gm-fr-v2-travels .gm-fr-v2-kicker{
   color:rgba(240,239,233,.72);
 }
 
+/* The section index sat in Sorta Grey at 2.45:1 on this red and was all
+   but invisible. Pure white (4.63:1) is the established fix for light
+   text on Monkey Red, and makes the number the brightest mark in the
+   kicker, which is what an index should be. */
 body[data-page="franchise"] .gm-fr-v2-travels .gm-fr-v2-kicker span:first-child{
-  color:var(--gm-grey);
+  color:#FFFFFF;
 }
 
 body[data-page="franchise"] .gm-fr-v2-travels .gm-fr-v2-display em{
