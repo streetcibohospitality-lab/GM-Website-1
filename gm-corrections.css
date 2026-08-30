@@ -406,8 +406,10 @@
      entire 60% of extra board width. 2.2rem is that same 5.5cqw
      ratio carried through to the new plateau -- checked for clean
      wrapping at 921/1000/1100/1101/1150/1280/1440/1728. */
+  /* Sized down 9% from the previous pass -- the names read clustered
+     against the divider lines at the board's new width and plateau. */
   .team-person__name{
-    font-size:clamp(.62rem, 5.5cqw, 2.2rem);
+    font-size:clamp(.56rem, 5cqw, 2rem);
     hyphens:none;
   }
   /* Re-tuned after the board was widened and the founder name asked to be
@@ -421,8 +423,9 @@
      Ceiling raised again for the same reason as .team-person__name above --
      4.2rem carries the 10.6cqw ratio through to the board's new 629px
      plateau instead of freezing at the old ~393px one. */
+  /* Same 9% reduction as .team-person__name above. */
   .team-person--founder .team-person__name{
-    font-size:clamp(.9rem, 10.6cqw, 4.2rem);
+    font-size:clamp(.82rem, 9.6cqw, 3.8rem);
     line-height:.92;
     letter-spacing:.018em;
   }
