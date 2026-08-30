@@ -399,8 +399,15 @@
     container-type:inline-size;
     container-name:gmteam;
   }
+  /* Ceiling raised from 1.35rem: the story column widened (--max
+     alignment) and pushed .team-live-people from ~393px up to a
+     629px plateau at 1440px+ viewports, but this cap was never
+     revisited, so the name sat frozen at its old size across that
+     entire 60% of extra board width. 2.2rem is that same 5.5cqw
+     ratio carried through to the new plateau -- checked for clean
+     wrapping at 921/1000/1100/1101/1150/1280/1440/1728. */
   .team-person__name{
-    font-size:clamp(.62rem, 5.5cqw, 1.35rem);
+    font-size:clamp(.62rem, 5.5cqw, 2.2rem);
     hyphens:none;
   }
   /* Re-tuned after the board was widened and the founder name asked to be
@@ -409,9 +416,13 @@
      largest value that still fits at every width tested (1920, 1600, 1440,
      1280, 1150, 1101, 1000, 900, 768, 600, 390, 360), and takes the name
      from 27.3px to 41.6px at 1440. 12cqw starts overflowing at 1000.
-     Their line-height and letter-spacing are adopted as authored. */
+     Their line-height and letter-spacing are adopted as authored.
+
+     Ceiling raised again for the same reason as .team-person__name above --
+     4.2rem carries the 10.6cqw ratio through to the board's new 629px
+     plateau instead of freezing at the old ~393px one. */
   .team-person--founder .team-person__name{
-    font-size:clamp(.9rem, 10.6cqw, 2.6rem);
+    font-size:clamp(.9rem, 10.6cqw, 4.2rem);
     line-height:.92;
     letter-spacing:.018em;
   }
@@ -420,14 +431,18 @@
 /* The brand lockup has the same problem: clamp(2rem,4.6vw,4.6rem) is
    66px at a 1440 viewport, and the name sits in a 152px cell inside the
    378px board. Measured scrollWidth 271 against clientWidth 152, so
-   "GRUB MONKEYS" rendered as "GRUB MONKE". Sized against the lockup. */
+   "GRUB MONKEYS" rendered as "GRUB MONKE". Sized against the lockup.
+
+   Ceiling raised from 2.4rem for the same reason as the two rules above:
+   .team-live-brand plateaus at 629px now too, and 4.75rem carries the
+   12cqw ratio through to that width instead of the old ~320px one. */
 @media(min-width:921px){
   .team-live-brand{
     container-type:inline-size;
     container-name:gmteambrand;
   }
   .team-live-brand__name{
-    font-size:clamp(1rem, 12cqw, 2.4rem);
+    font-size:clamp(1rem, 12cqw, 4.75rem);
   }
 }
 
