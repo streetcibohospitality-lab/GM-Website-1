@@ -147,6 +147,11 @@
 
   const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let userPaused=reduceMotion;
+  /* Bumped by any explicit user action so the initial autoplay-with-sound
+     attempt below -- an async chain that can still be settling a moment
+     after the page loads -- can never stomp on a choice the visitor just
+     made by finishing late and reapplying its own idea of the mute state. */
+  let interactionGen=0;
 
   function sync(){
     const paused=video.paused;
@@ -159,12 +164,14 @@
   }
 
   async function playVideo(){
+    interactionGen++;
     userPaused=false;
     try{ await video.play(); }catch(err){ userPaused=true; }
     sync();
   }
 
   function pauseVideo(){
+    interactionGen++;
     userPaused=true;
     video.pause();
     sync();
@@ -179,7 +186,9 @@
   screenToggle.addEventListener('click',togglePlayback);
 
   soundButton.addEventListener('click',async()=>{
+    interactionGen++;
     video.muted=!video.muted;
+    video.volume=1;
     /* Tapping this button is itself the user gesture asking to hear the
        reel, so it should resume playback regardless of *why* the video is
        currently paused -- including the userPaused case, which also
@@ -196,6 +205,7 @@
   });
 
   restartButton.addEventListener('click',async()=>{
+    interactionGen++;
     video.currentTime=0;
     userPaused=false;
     try{ await video.play(); }catch(err){}
@@ -216,10 +226,16 @@
        (and browsers that allow it) get sound by default, and only fall
        back to the muted autoplay every browser guarantees if the unmuted
        attempt is rejected. */
+    const gen=interactionGen;
     video.muted=false;
     video.play().then(sync).catch(()=>{
+      if(gen!==interactionGen) return;
       video.muted=true;
-      video.play().then(sync).catch(()=>{ userPaused=true; sync(); });
+      video.play().then(()=>{ if(gen===interactionGen) sync(); }).catch(()=>{
+        if(gen!==interactionGen) return;
+        userPaused=true;
+        sync();
+      });
     });
   }
 

@@ -34,7 +34,7 @@ const VIEWPORTS = [
 ];
 
 const CSP = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; " +
-  "font-src 'self'; img-src 'self' data:; connect-src 'self' https://api.web3forms.com; " +
+  "font-src 'self'; img-src 'self' data:; media-src 'self'; connect-src 'self' https://api.web3forms.com; " +
   "frame-src https://www.mixcloud.com; child-src https://www.mixcloud.com; " +
   "object-src 'none'; base-uri 'self'; form-action 'self' https://api.web3forms.com; " +
   "frame-ancestors 'self'";
