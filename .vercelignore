@@ -3,3 +3,10 @@
 # tree at the domain root -- without this, grubmonkeys.in/README-CLAUDE.md
 # and the rest would be publicly readable.
 *.md
+
+# GM Command Center: a separate Next.js app (own Vercel project, own
+# dashboard.grubmonkeys.in domain), kept in this repo only because a new
+# repo couldn't be created. This project's deploy serves the whole tree at
+# the domain root, so without this its full source -- including backend
+# security/auth logic -- would be publicly readable at grubmonkeys.in/command-center/.
+command-center/

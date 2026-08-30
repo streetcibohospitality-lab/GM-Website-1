@@ -1,0 +1,26 @@
+-- Run only with the Neon administrator connection after the three Clerk production users exist.
+-- Replace the three placeholders with the exact immutable Clerk user IDs, then execute once.
+-- Never commit the completed file containing real IDs if you prefer to keep them out of source history.
+
+BEGIN;
+
+UPDATE owner_access_registry
+SET clerk_user_id='REPLACE_MUEEN_CLERK_USER_ID', bound_at=NOW(), updated_at=NOW()
+WHERE email='mueen.ahmed1922@gmail.com' AND clerk_user_id IS NULL;
+
+UPDATE owner_access_registry
+SET clerk_user_id='REPLACE_AFRIDI_CLERK_USER_ID', bound_at=NOW(), updated_at=NOW()
+WHERE email='reachafridi@gmail.com' AND clerk_user_id IS NULL;
+
+UPDATE owner_access_registry
+SET clerk_user_id='REPLACE_HISHAM_CLERK_USER_ID', bound_at=NOW(), updated_at=NOW()
+WHERE email='md.hisham29@gmail.com' AND clerk_user_id IS NULL;
+
+DO $$
+BEGIN
+  IF (SELECT COUNT(*) FROM owner_access_registry WHERE active AND clerk_user_id IS NOT NULL) <> 3 THEN
+    RAISE EXCEPTION 'all_three_owner_identities_must_be_bound';
+  END IF;
+END $$;
+
+COMMIT;

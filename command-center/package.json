@@ -1,0 +1,38 @@
+{
+  "name": "grub-monkeys-command-center",
+  "version": "1.1.4",
+  "private": true,
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "node scripts/vercel-build.mjs",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "security:audit": "node scripts/security-static-audit.mjs",
+    "verify:source": "node scripts/verify-source.mjs",
+    "verify": "npm run verify:static && npm run typecheck && npm run production:build",
+    "framework:gate": "node scripts/framework-gate.mjs",
+    "production:build": "npm run framework:gate && next build",
+    "verify:static": "npm run security:audit && npm run verify:source && npm run interaction:audit && npm run qa:release",
+    "interaction:audit": "node scripts/interaction-static-audit.mjs",
+    "ci": "npm run verify:static && npm run typecheck && npm run production:build",
+    "qa:release": "node scripts/release-qa-audit.mjs"
+  },
+  "dependencies": {
+    "@clerk/nextjs": "7.8.0",
+    "postgres": "3.4.5",
+    "next": "16.3.3",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "24.0.0",
+    "@types/react": "19.0.0",
+    "@types/react-dom": "19.0.0",
+    "typescript": "5.9.3"
+  },
+  "packageManager": "npm@10.9.2"
+}
