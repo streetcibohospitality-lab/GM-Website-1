@@ -385,20 +385,23 @@ body[data-page="franchise"] .gm-fr-v2-travels{
   color:var(--gm-white);
 }
 
-body[data-page="franchise"] .gm-fr-v2-travels .gm-fr-v2-kicker{
-  color:rgba(240,239,233,.72);
-}
-
-/* The section index sat in Sorta Grey at 2.45:1 on this red and was all
-   but invisible. Pure white (4.63:1) is the established fix for light
-   text on Monkey Red, and makes the number the brightest mark in the
-   kicker, which is what an index should be. */
+/* Everywhere else the kicker is a Sorta Grey label with a Monkey Red
+   index. Neither works on red, and the held-back cream this section used
+   composited to 2.46:1 -- failing at 0.64rem. Monkey Teal is no better
+   here (2.67:1), so the whole kicker goes pure white at 4.63:1 and gives
+   up the index/label colour split, which this background cannot carry. */
+body[data-page="franchise"] .gm-fr-v2-travels .gm-fr-v2-kicker,
 body[data-page="franchise"] .gm-fr-v2-travels .gm-fr-v2-kicker span:first-child{
   color:#FFFFFF;
 }
 
+/* The second headline line keeps the site's two-tone em treatment -- red
+   is the accent everywhere else, and dark ink is its stand-in on red.
+   Sorta Grey sat at 2.45:1 and read muddy rather than deliberate; this
+   deeper ink is 3.76:1, clearing the 3:1 bar that applies at display
+   size while still reading as the brand's dark rather than a new colour. */
 body[data-page="franchise"] .gm-fr-v2-travels .gm-fr-v2-display em{
-  color:var(--gm-grey);
+  color:#1A1A1A;
 }
 
 body[data-page="franchise"] .gm-fr-v2-travels-grid{
