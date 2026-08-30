@@ -1,0 +1,11 @@
+"use client";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+export function DeviceRegistration({ nextPath = "/overview" }: { nextPath?: string }) {
+  const router = useRouter();
+  const [state, setState] = useState<"idle" | "busy" | "pending" | "approved" | "error">("idle");
+  const [message, setMessage] = useState("");
+  useEffect(() => { void (async () => { const r = await fetch("/api/security/device/status", { cache: "no-store" }); if (!r.ok) return; const d = await r.json(); if (d.status === "approved") { setState("approved"); router.replace(nextPath); } else if (d.status === "pending") setState("pending"); })(); }, [nextPath, router]);
+  const register = async () => { setState("busy"); setMessage(""); try { const r = await fetch("/api/security/device/register", { method: "POST" }); const d = await r.json().catch(() => ({})); if (!r.ok) { if (d.code === "MFA_REQUIRED") { router.replace(`/security/verify?next=${encodeURIComponent(`/device/register?next=${encodeURIComponent(nextPath)}`)}`); return; } throw new Error(d.error || "Could not register device"); } if (d.status === "approved") { setState("approved"); router.replace(nextPath); router.refresh(); } else setState("pending"); } catch (e) { setState("error"); setMessage(e instanceof Error ? e.message : "Could not register device"); } };
+  return <section className="auth-control-card"><span className="auth-kicker">DEVICE TRUST / OWNER ACCESS</span><h2>{state === "pending" ? "Approval requested." : "Trust this browser."}</h2><p>{state === "pending" ? "Another Owner on an already trusted device must approve this browser before business data is returned." : "This browser receives an HttpOnly, SameSite=Strict device token. Only its SHA-256 hash is stored. Your first MFA-verified browser can bootstrap once; future browsers require approval."}</p>{state === "pending" ? <div className="pending-beacon"><i/><span><b>PENDING OWNER APPROVAL</b><small>No Command Center data has been disclosed.</small></span></div> : <button className="command-button full" disabled={state === "busy"} onClick={() => void register()}>{state === "busy" ? "REGISTERING…" : "TRUST THIS DEVICE"} <span>→</span></button>}{message && <small className="auth-error">{message}</small>}</section>;
+}
