@@ -431,6 +431,19 @@
   }
 }
 
+/* On phones the two non-founder names (Afridi, Hisham) sit at the base
+   rule's floor -- clamp(1.22rem,2.55vw,2.3rem) in styles-interactive.css,
+   where 2.55vw is under the 1.22rem floor at every real phone width, so
+   they render at exactly 19.52px regardless of device. Raised ~17% (mid
+   of the requested 15-20%) to 1.43rem = 22.88px. Desktop/tablet (≥921px)
+   are untouched -- they're on the cqw-based sizing above, a separate
+   rule this doesn't affect. */
+@media(max-width:560px){
+  .team-person__name{
+    font-size:clamp(1.43rem, 2.55vw, 2.3rem);
+  }
+}
+
 /* The brand lockup has the same problem: clamp(2rem,4.6vw,4.6rem) is
    66px at a 1440 viewport, and the name sits in a 152px cell inside the
    378px board. Measured scrollWidth 271 against clientWidth 152, so
