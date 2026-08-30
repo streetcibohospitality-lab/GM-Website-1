@@ -180,8 +180,17 @@
 
   soundButton.addEventListener('click',async()=>{
     video.muted=!video.muted;
-    if(video.paused && !userPaused){
-      try{ await video.play(); }catch(err){}
+    /* Tapping this button is itself the user gesture asking to hear the
+       reel, so it should resume playback regardless of *why* the video is
+       currently paused -- including the userPaused case, which also
+       covers the initial autoplay attempt failing (iOS commonly blocks
+       it), leaving the reel frozen on a still frame. The old `&&
+       !userPaused` guard skipped resuming in exactly that situation: the
+       mute flag flipped, the button relabelled, but nothing ever played,
+       so there was nothing to hear. */
+    if(video.paused){
+      userPaused=false;
+      try{ await video.play(); }catch(err){ userPaused=true; }
     }
     sync();
   });
