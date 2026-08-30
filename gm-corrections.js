@@ -71,9 +71,36 @@
     }
   }, 8000);
 
-  /* If it does become playable later, clear the flag so the page's own
-     control sync takes back over. */
-  video.addEventListener('loadedmetadata', function () {
+  /* If it does become playable later, undo everything markUnavailable did.
+     Clearing the `failed` flag alone (the previous version of this fix)
+     left the buttons permanently disabled: franchise.js's own sync()
+     never touches the `disabled` property, so a false positive here --
+     the metadata simply taking longer than 8s on a slower connection,
+     not the file actually being broken -- locked the reel's Sound,
+     Restart and screen-tap controls dead for the rest of the visit even
+     once the video started playing normally. The Play button's label
+     alone looked fine again, because sync() runs on the video's native
+     'play' event and overwrites its text -- but not its disabled state --
+     masking the same bug on that button. Three recovery events, since
+     which one fires first varies by network and browser. */
+  function markAvailable() {
+    if (!failed) return;
     failed = false;
-  });
+
+    if (play) {
+      play.disabled = false;
+      play.setAttribute('aria-label', video.paused ? 'Play vibe check video' : 'Pause vibe check video');
+    }
+    if (sound) sound.disabled = false;
+    if (restart) restart.disabled = false;
+    if (screenToggle) {
+      screenToggle.disabled = false;
+      screenToggle.setAttribute('aria-label', video.paused ? 'Play vibe check video' : 'Pause vibe check video');
+    }
+    if (screenEl) screenEl.classList.remove('is-unavailable');
+  }
+
+  video.addEventListener('loadedmetadata', markAvailable);
+  video.addEventListener('canplay', markAvailable);
+  video.addEventListener('playing', markAvailable);
 })();

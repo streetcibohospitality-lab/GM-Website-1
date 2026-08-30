@@ -180,7 +180,26 @@
     tv.addEventListener('error',tvUnavailable);
     const tvSource=tv.querySelector('source');
     if(tvSource) tvSource.addEventListener('error',tvUnavailable);
-    tv.addEventListener('loadedmetadata',()=>{ if(play){ play.dataset.failed=''; } });
+    /* Clearing play.dataset.failed alone left the reel stuck: syncPlayLabel
+       would relabel PLAY correctly, but restart/sound stayed disabled
+       forever and tv-no-signal never lifted, since nothing else here ever
+       un-disables what tvUnavailable disabled. A slow connection taking
+       longer than the 8s check below to load metadata -- not an actually
+       broken file -- triggered exactly that: the reel goes on to play
+       fine, but its controls stay dead. Three recovery events since which
+       one fires first varies by network and browser. */
+    function tvAvailable(){
+      if(!play || play.dataset.failed!=='true') return;
+      play.dataset.failed='';
+      play.disabled=false;
+      syncPlayLabel();
+      if(restart) restart.disabled=false;
+      if(sound) sound.disabled=false;
+      if(tvShell) tvShell.classList.remove('tv-no-signal');
+    }
+    tv.addEventListener('loadedmetadata',tvAvailable);
+    tv.addEventListener('canplay',tvAvailable);
+    tv.addEventListener('playing',tvAvailable);
     window.setTimeout(()=>{
       if(tv.networkState===HTMLMediaElement.NETWORK_NO_SOURCE && tv.readyState===0) tvUnavailable();
     },8000);
