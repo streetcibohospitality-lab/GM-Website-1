@@ -13,21 +13,10 @@ body[data-page="menu"]{
   --gm-menu-snap:cubic-bezier(.2,.82,.24,1);
 }
 
-/* Small details that make the hero feel connected to the menu system. */
-body[data-page="menu"] .menu-page-hero{
-  isolation:isolate;
-  overflow:hidden;
-}
-body[data-page="menu"] .menu-page-hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:1;
-  pointer-events:none;
-  background:
-    linear-gradient(110deg,rgba(0,0,0,.08),transparent 34%,rgba(255,255,255,.045) 54%,transparent 72%),
-    repeating-linear-gradient(0deg,rgba(240,239,233,.018) 0 1px,transparent 1px 4px);
-  mix-blend-mode:screen;
+/* Hero treatment is intentionally mobile-only. Desktop remains pixel-compatible with the original page. */
+@media (max-width:900px){
+body[data-page="menu"] .menu-page-hero{ isolation:isolate; overflow:hidden; }
+body[data-page="menu"] .menu-page-hero::after{ content:""; position:absolute; inset:0; z-index:1; pointer-events:none; background:linear-gradient(110deg,rgba(0,0,0,.08),transparent 34%,rgba(255,255,255,.045) 54%,transparent 72%),repeating-linear-gradient(0deg,rgba(240,239,233,.018) 0 1px,transparent 1px 4px); mix-blend-mode:screen; }
 }
 
 @media (max-width:900px){
@@ -159,14 +148,12 @@ body[data-page="menu"] .menu-page-hero::after{
 
   /* On mobile every department is part of one continuous menu.
 
-     content-visibility:auto was dropped here: its 900px placeholder
-     height was far short of a real panel's rendered height (often
-     1900px+, department-dependent), so as each panel's true size was
-     revealed on scroll the whole page kept jumping under the visitor,
-     and it desynced the active-tab tracking below (IntersectionObserver
-     reads real layout, which kept moving). Eight short panels cost
-     nothing to lay out upfront, so the correctness this loses isn't
-     worth the render-skipping it would have bought. */
+     content-visibility:auto is deliberately not used here: its
+     placeholder height is always far short of a real panel's rendered
+     height (often 1900px+, department-dependent), so as each panel's
+     true size is revealed on scroll the whole page jumps under the
+     visitor, and it desyncs the active-tab tracking below (which reads
+     real layout). Eight short panels cost nothing to lay out upfront. */
   body[data-page="menu"] .menu-panel,
   body[data-page="menu"] .menu-panel[hidden],
   body[data-page="menu"] .menu-panel.active{
@@ -503,4 +490,303 @@ body[data-page="menu"] .menu-page-hero::after{
   body[data-page="menu"] .gm-menu-chapter__image{clip-path:none!important}
   body[data-page="menu"] .gm-menu-chapter__wipe{display:none!important}
   body[data-page="menu"] .gm-menu-chapter__title span{transform:none!important}
+}
+
+
+/* === GRUB MONKEYS PREMIUM MENU V2 / MOBILE ART DIRECTION === */
+@media (max-width:900px){
+  body[data-page="menu"] .gm-menu-instrument{position:fixed;z-index:44;right:12px;bottom:18px;display:grid;grid-template-columns:42px minmax(0,1fr);align-items:center;width:min(232px,calc(100vw - 24px));min-height:52px;overflow:hidden;border:1px solid rgba(240,239,233,.2);background:rgba(25,25,24,.94);box-shadow:0 14px 34px rgba(0,0,0,.3),inset 0 1px rgba(255,255,255,.04);color:var(--gm-menu-paper);opacity:0;transform:translate3d(0,12px,0);transition:opacity .35s ease,transform .55s var(--gm-menu-ease);pointer-events:none}
+  body[data-page="menu"] .gm-menu-instrument.is-on{opacity:1;transform:none}
+  body[data-page="menu"] .gm-menu-instrument__num{height:52px;overflow:hidden;border-right:1px solid rgba(240,239,233,.14);background:var(--gm-menu-red);font-family:var(--f-display);font-size:1.55rem;line-height:52px;text-align:center}
+  body[data-page="menu"] .gm-menu-instrument__num span{display:block;height:52px;transition:transform .48s cubic-bezier(.22,.8,.22,1)}
+  body[data-page="menu"] .gm-menu-instrument.is-rolling .gm-menu-instrument__num span{transform:translateY(-52px)}
+  body[data-page="menu"] .gm-menu-instrument__label{min-width:0;padding:0 12px;font-family:var(--f-body);font-size:.58rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  body[data-page="menu"] .gm-menu-instrument__label::before{content:"NOW SERVING / ";color:var(--gm-menu-teal)}
+
+  /* Editorial compositions: deliberately varied, never one repeated card template. */
+  body[data-page="menu"] .menu-panel:nth-of-type(4n+2) .gm-menu-chapter{height:clamp(285px,82vw,430px);margin-left:calc(var(--pad-x) * -1);margin-right:calc(var(--pad-x) * -1);border-left:0;border-right:0;box-shadow:0 22px 44px rgba(0,0,0,.24)}
+  body[data-page="menu"] .menu-panel:nth-of-type(4n+2) .gm-menu-chapter__title{left:var(--pad-x);right:30%;bottom:22px}
+  body[data-page="menu"] .menu-panel:nth-of-type(4n+2) .gm-menu-chapter__ghost{right:auto;left:-12px;top:auto;bottom:-30px}
+
+  body[data-page="menu"] .menu-panel:nth-of-type(4n+3) .gm-menu-chapter{width:84%;margin-left:auto;height:clamp(300px,88vw,455px);box-shadow:-10px 11px 0 rgba(240,239,233,.92),0 24px 44px rgba(0,0,0,.24)}
+  body[data-page="menu"] .menu-panel:nth-of-type(4n+3) .gm-menu-chapter::before{background:linear-gradient(180deg,transparent 18%,rgba(0,0,0,.18) 48%,rgba(0,0,0,.86)),linear-gradient(90deg,transparent 40%,rgba(235,0,0,.34))}
+  body[data-page="menu"] .menu-panel:nth-of-type(4n+3) .gm-menu-chapter__code{left:auto;right:14px}
+  body[data-page="menu"] .menu-panel:nth-of-type(4n+3) .gm-menu-chapter__title{left:-18%;right:10px}
+
+  body[data-page="menu"] .menu-panel:nth-of-type(4n+4) .gm-menu-chapter{height:clamp(225px,62vw,340px);box-shadow:10px 11px 0 rgba(0,221,194,.82),0 22px 42px rgba(0,0,0,.22)}
+  body[data-page="menu"] .menu-panel:nth-of-type(4n+4) .gm-menu-chapter__title{max-width:72%}
+
+  /* Alternating cinematic reveal direction. */
+  body[data-page="menu"] .menu-panel:nth-of-type(even) .gm-menu-chapter__image{clip-path:inset(0 0 0 100%)}
+  body[data-page="menu"] .menu-panel:nth-of-type(even).gm-inview .gm-menu-chapter__image{clip-path:inset(0)}
+  body[data-page="menu"] .menu-panel:nth-of-type(even).gm-inview .gm-menu-chapter__wipe{transform:translateX(-103%)}
+
+  /* Brief old-print registration snap on category typography. */
+  body[data-page="menu"] .gm-menu-chapter__title b{position:relative}
+  body[data-page="menu"] .gm-menu-chapter__title b::before{content:attr(data-gm-title);position:absolute;inset:0;color:var(--gm-menu-red);opacity:0;transform:translate3d(-5px,2px,0);mix-blend-mode:screen;pointer-events:none}
+  body[data-page="menu"] .menu-panel.gm-inview .gm-menu-chapter__title b::before{animation:gmRegister .46s steps(3,end) .48s both}
+  @keyframes gmRegister{0%{opacity:.7;transform:translate3d(-6px,2px,0)}45%{opacity:.5;transform:translate3d(3px,-1px,0)}75%{opacity:.28;transform:translate3d(-1px,0,0)}100%{opacity:0;transform:none}}
+
+  /* Tactile ledger rows. */
+  body[data-page="menu"] .menu-row::after{content:"";position:absolute;left:0;bottom:-1px;width:0;height:1px;background:var(--gm-menu-red);transition:width .32s var(--gm-menu-ease)}
+  body[data-page="menu"] .menu-row:active::after{width:100%}
+  body[data-page="menu"] .menu-row .price{transition:transform .22s var(--gm-menu-ease),color .22s ease}
+  body[data-page="menu"] .menu-row:active .price{transform:translateX(-3px);color:var(--gm-menu-red)}
+
+  /* Sparse registration marks / bookends. */
+  body[data-page="menu"] .menu-panel:nth-of-type(3n)::before{content:"+";position:absolute;right:8px;top:14px;color:rgba(0,221,194,.42);font:800 1rem/1 var(--f-body);transform:rotate(45deg)}
+  body[data-page="menu"] .menu-panel:nth-of-type(3n+1)::before{content:"69";position:absolute;right:-.08em;top:.1em;color:rgba(240,239,233,.025);font:400 clamp(8rem,40vw,16rem)/.8 var(--f-display);pointer-events:none}
+  body[data-page="menu"] .menu-panel:first-child{padding-top:44px}
+  body[data-page="menu"] .menu-panel:last-child{padding-bottom:96px}
+  body[data-page="menu"] .menu-panel:last-child::after{height:3px;background:linear-gradient(90deg,var(--gm-menu-red) 0 33%,var(--gm-menu-paper) 33% 66%,var(--gm-menu-teal) 66%)}
+}
+@media (max-width:420px){
+  body[data-page="menu"] .gm-menu-instrument{right:10px;bottom:12px;width:min(218px,calc(100vw - 20px))}
+  body[data-page="menu"] .menu-panel:nth-of-type(4n+3) .gm-menu-chapter{width:88%}
+}
+@media (prefers-reduced-motion:reduce){
+  body[data-page="menu"] .gm-menu-instrument,body[data-page="menu"] .gm-menu-instrument__num span,body[data-page="menu"] .gm-menu-chapter__title b::before,body[data-page="menu"] .menu-row::after,body[data-page="menu"] .menu-row .price{animation:none!important;transition:none!important}
+}
+
+/* ============================================================
+   FINAL REFINEMENT — QUIETER, MORE EXPENSIVE, LESS EFFECT-HEAVY
+   ============================================================ */
+@media (max-width:900px){
+  /* Remove V2 overlay/instrument entirely. */
+  body[data-page="menu"] .gm-menu-instrument{display:none!important}
+
+  /* Category rail: typographic, slim, one moving registration line. */
+  body[data-page="menu"] .menu-tabs{
+    position:sticky;
+    top:62px;
+    gap:22px;
+    padding:12px max(var(--pad-x),18px) 13px;
+    background:rgba(37,37,36,.985);
+    border-bottom:1px solid rgba(240,239,233,.14);
+    box-shadow:0 8px 24px rgba(0,0,0,.15);
+    -webkit-backdrop-filter:none;
+    backdrop-filter:none;
+  }
+  body[data-page="menu"] .menu-tabs::after{flex:0 0 max(var(--pad-x),18px)}
+  body[data-page="menu"] .gm-menu-rail-indicator{
+    position:absolute;
+    left:0;
+    bottom:0;
+    height:3px;
+    width:0;
+    background:linear-gradient(90deg,var(--gm-menu-red) 0 82%,var(--gm-menu-teal) 82% 100%);
+    transform:translate3d(0,0,0);
+    transition:transform .5s var(--gm-menu-ease),width .5s var(--gm-menu-ease);
+    pointer-events:none;
+  }
+  body[data-page="menu"] .menu-tab{
+    min-height:34px;
+    display:flex;
+    gap:7px;
+    padding:4px 0 6px;
+    border:0;
+    border-radius:0;
+    background:transparent!important;
+    box-shadow:none!important;
+    color:rgba(240,239,233,.55);
+    font-size:.66rem;
+    letter-spacing:.055em;
+  }
+  body[data-page="menu"] .menu-tab::before{display:none}
+  body[data-page="menu"] .menu-tab .jcode{min-width:0;color:rgba(0,221,194,.68);font-size:.69rem}
+  body[data-page="menu"] .menu-tab.active,
+  body[data-page="menu"] .menu-tab[aria-selected="true"]{color:#fff}
+  body[data-page="menu"] .menu-tab.active .jcode,
+  body[data-page="menu"] .menu-tab[aria-selected="true"] .jcode{color:var(--gm-menu-red)}
+  body[data-page="menu"] .menu-tab:active{transform:translateY(1px)}
+
+  /* Departments become one continuous printed sheet each.
+     content-visibility:auto is intentionally omitted (see the earlier
+     .menu-panel rule for why). */
+  body[data-page="menu"] .menu-panel,
+  body[data-page="menu"] .menu-panel[hidden],
+  body[data-page="menu"] .menu-panel.active{
+    margin:0 var(--pad-x) 30px;
+    padding:0 0 24px;
+    overflow:hidden;
+    background:var(--gm-menu-paper);
+    color:var(--gm-menu-ink);
+    border:1px solid rgba(0,0,0,.18);
+    box-shadow:0 20px 42px rgba(0,0,0,.18);
+  }
+  body[data-page="menu"] .menu-panel + .menu-panel{border-top:1px solid rgba(0,0,0,.18)}
+  body[data-page="menu"] .menu-panel::after{display:none!important}
+  body[data-page="menu"] .menu-panel::before{display:none!important}
+  body[data-page="menu"] .menu-panel:first-child{padding-top:0}
+  body[data-page="menu"] .menu-panel:last-child{padding-bottom:24px}
+
+  /* One confident chapter system. No offset cards, no parallax, no giant colored shadows. */
+  body[data-page="menu"] .gm-menu-chapter,
+  body[data-page="menu"] .menu-panel:nth-of-type(4n+2) .gm-menu-chapter,
+  body[data-page="menu"] .menu-panel:nth-of-type(4n+3) .gm-menu-chapter,
+  body[data-page="menu"] .menu-panel:nth-of-type(4n+4) .gm-menu-chapter{
+    width:auto;
+    height:clamp(235px,67vw,360px);
+    min-height:0;
+    margin:0 0 2px;
+    border:0;
+    box-shadow:none;
+    background:#191918;
+    transform:translateY(14px);
+  }
+  body[data-page="menu"] .gm-menu-chapter::before,
+  body[data-page="menu"] .menu-panel:nth-of-type(4n+3) .gm-menu-chapter::before{
+    background:linear-gradient(180deg,rgba(0,0,0,.04) 5%,rgba(0,0,0,.12) 45%,rgba(0,0,0,.82) 100%);
+  }
+  body[data-page="menu"] .gm-menu-chapter::after{opacity:.055}
+  body[data-page="menu"] .gm-menu-chapter__image,
+  body[data-page="menu"] .menu-panel:nth-of-type(even) .gm-menu-chapter__image{
+    inset:0;
+    width:100%;
+    height:100%;
+    transform:scale(1.045);
+    filter:saturate(.94) contrast(1.03);
+    clip-path:inset(0 100% 0 0);
+    transition:clip-path .8s var(--gm-menu-ease),transform 1.05s var(--gm-menu-ease);
+    translate:none!important;
+  }
+  body[data-page="menu"] .menu-panel.gm-inview .gm-menu-chapter__image,
+  body[data-page="menu"] .menu-panel:nth-of-type(even).gm-inview .gm-menu-chapter__image{
+    clip-path:inset(0);
+    transform:scale(1);
+  }
+  body[data-page="menu"] .gm-menu-chapter__wipe,
+  body[data-page="menu"] .menu-panel:nth-of-type(even) .gm-menu-chapter__wipe{
+    background:var(--gm-menu-red);
+    transform:translateX(0);
+    transition:transform .82s var(--gm-menu-ease) .04s;
+  }
+  body[data-page="menu"] .menu-panel.gm-inview .gm-menu-chapter__wipe,
+  body[data-page="menu"] .menu-panel:nth-of-type(even).gm-inview .gm-menu-chapter__wipe{transform:translateX(103%)}
+  body[data-page="menu"] .gm-menu-chapter__code,
+  body[data-page="menu"] .menu-panel:nth-of-type(4n+3) .gm-menu-chapter__code{
+    top:16px;left:16px;right:auto;
+    padding:0;
+    border:0;
+    background:transparent;
+    font-size:.56rem;
+    letter-spacing:.16em;
+  }
+  body[data-page="menu"] .gm-menu-chapter__code i{width:5px;height:5px;box-shadow:none}
+  body[data-page="menu"] .gm-menu-chapter__title,
+  body[data-page="menu"] .menu-panel:nth-of-type(4n+2) .gm-menu-chapter__title,
+  body[data-page="menu"] .menu-panel:nth-of-type(4n+3) .gm-menu-chapter__title,
+  body[data-page="menu"] .menu-panel:nth-of-type(4n+4) .gm-menu-chapter__title{
+    left:16px;right:16px;bottom:17px;
+    max-width:9ch;
+    font-size:clamp(2.7rem,12.2vw,4.6rem);
+  }
+  body[data-page="menu"] .gm-menu-chapter__ghost,
+  body[data-page="menu"] .menu-panel:nth-of-type(4n+2) .gm-menu-chapter__ghost{
+    right:8px;left:auto;top:6px;bottom:auto;
+    color:rgba(240,239,233,.09);
+    font-size:clamp(6.8rem,31vw,11rem);
+  }
+  body[data-page="menu"] .gm-menu-chapter__title b::before{display:none!important}
+
+  /* Wings image repeats the hero, so its chapter is intentionally type-led. */
+  body[data-page="menu"] .gm-menu-chapter--type{
+    height:clamp(190px,49vw,270px);
+    background:
+      linear-gradient(135deg,rgba(235,0,0,.96) 0 34%,transparent 34%),
+      linear-gradient(180deg,#222221,#171716);
+  }
+  body[data-page="menu"] .gm-menu-chapter--type::before{
+    background:repeating-linear-gradient(0deg,rgba(240,239,233,.035) 0 1px,transparent 1px 5px);
+  }
+  body[data-page="menu"] .gm-menu-chapter--type .gm-menu-chapter__wipe{display:none}
+  body[data-page="menu"] .gm-menu-chapter--type .gm-menu-chapter__ghost{color:rgba(240,239,233,.12)}
+  body[data-page="menu"] .gm-menu-chapter--type .gm-menu-chapter__title{max-width:7ch}
+
+  /* Continuous ledger: groups stop looking like stacked component cards. */
+  body[data-page="menu"] .menu-group{
+    margin:0 16px;
+    padding:22px 0 4px;
+    background:transparent;
+    border:0;
+    border-radius:0;
+    box-shadow:none;
+    opacity:1;
+    transform:none;
+    transition:none;
+  }
+  body[data-page="menu"] .menu-group + .menu-group{
+    margin-top:10px;
+    border-top:1px solid rgba(58,58,58,.19);
+  }
+  body[data-page="menu"] .menu-group::before{display:none}
+  body[data-page="menu"] .menu-group-title{
+    margin-bottom:10px;
+    padding-bottom:9px;
+    border-bottom:1px solid var(--gm-menu-red);
+    font-size:1.17rem;
+  }
+  body[data-page="menu"] .menu-group-title::after{
+    content:"DINER MENU";
+    font-size:.44rem;
+    color:rgba(58,58,58,.42);
+  }
+  body[data-page="menu"] .menu-row{
+    min-height:40px;
+    padding:9px 0 8px;
+    opacity:1;
+    transform:none;
+    transition:background .16s ease,padding-left .16s ease;
+  }
+  body[data-page="menu"] .menu-row::after{display:none}
+  body[data-page="menu"] .menu-row .price{transition:color .16s ease;transform:none!important}
+  body[data-page="menu"] .menu-row:active{padding-left:3px;background:rgba(235,0,0,.025)}
+  body[data-page="menu"] .menu-row:active .price{color:var(--gm-menu-red)}
+
+  body[data-page="menu"] .menu-note{
+    margin:15px 16px 0;
+    padding:10px 12px;
+    color:#5b5955;
+    background:rgba(58,58,58,.045);
+    border-left:2px solid var(--gm-menu-teal);
+  }
+
+  /* Keep the close confident but quiet. */
+  body[data-page="menu"] .menu-order-band::before{opacity:.7}
+}
+
+@media (max-width:420px){
+  body[data-page="menu"] .menu-tabs{top:58px;gap:19px;padding-left:16px;padding-right:16px}
+  body[data-page="menu"] .menu-panel,
+  body[data-page="menu"] .menu-panel[hidden],
+  body[data-page="menu"] .menu-panel.active{margin-left:12px;margin-right:12px}
+  body[data-page="menu"] .gm-menu-chapter,
+  body[data-page="menu"] .menu-panel:nth-of-type(4n+2) .gm-menu-chapter,
+  body[data-page="menu"] .menu-panel:nth-of-type(4n+3) .gm-menu-chapter,
+  body[data-page="menu"] .menu-panel:nth-of-type(4n+4) .gm-menu-chapter{height:66vw;min-height:232px}
+  body[data-page="menu"] .gm-menu-chapter--type{height:48vw;min-height:184px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  body[data-page="menu"] .gm-menu-rail-indicator,
+  body[data-page="menu"] .gm-menu-chapter,
+  body[data-page="menu"] .gm-menu-chapter__image,
+  body[data-page="menu"] .gm-menu-chapter__wipe,
+  body[data-page="menu"] .gm-menu-chapter__code,
+  body[data-page="menu"] .gm-menu-chapter__title span,
+  body[data-page="menu"] .gm-menu-chapter__ghost{transition:none!important;animation:none!important}
+}
+
+
+/* ============================================================
+   FINAL QA PATCH
+   Remove the legacy split-board from the mobile/tablet premium
+   experience: sticky section navigation + chapter title already
+   communicate the active department. Keeping all three made the
+   first viewport visually redundant.
+   ============================================================ */
+@media (max-width:900px){
+  body[data-page="menu"] #menuSplitBoard{
+    display:none!important;
+  }
 }
