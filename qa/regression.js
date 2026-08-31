@@ -288,11 +288,21 @@ async function run() {
       // selector that happens to match whichever panel position the
       // type-led chapter lands on -- silently winning regardless of
       // source order and flattening the gradient to a plain dark box.
+      // No live department currently triggers the type-led path (each
+      // has its own distinct photo), so this injects a probe element into
+      // an actual nth-of-type(4n+2) panel -- the exact collision scenario
+      // -- to test the CSS rule itself rather than depending on content
+      // that may or may not exist right now.
       const typeChapterBg = await page.evaluate(() => {
-        const chapter = document.querySelector('.gm-menu-chapter--type');
-        return chapter ? getComputedStyle(chapter).backgroundImage : null;
+        const host = document.getElementById('m1'); // panel position 2 = nth-of-type(4n+2)
+        const probe = document.createElement('div');
+        probe.className = 'gm-menu-chapter gm-menu-chapter--type';
+        host.appendChild(probe);
+        const bg = getComputedStyle(probe).backgroundImage;
+        probe.remove();
+        return bg;
       });
-      check('type-led chapter (hero-repeat department) keeps its gradient background',
+      check('type-led chapter background survives the nth-of-type specificity collision',
         !!typeChapterBg && typeChapterBg !== 'none', `backgroundImage=${typeChapterBg}`);
       await page.close();
     }
