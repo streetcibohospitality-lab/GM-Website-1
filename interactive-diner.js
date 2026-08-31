@@ -79,27 +79,7 @@
   addSessionChip($('.crt-foot'));
   addSessionChip($('#order > div:first-child'));
 
-  /* ----------------------------------------------------------
-     2. OPENING SIGN
-     Runs 1.5s on every homepage load. Skipped entirely under reduced
-     motion.
-     ---------------------------------------------------------- */
   const isHome = !!$('#signature') && !!$('#order');
-  if(isHome && !reduceMotion){
-    const intro=document.createElement('div');
-    intro.className='gm-door-intro';
-    intro.setAttribute('aria-hidden','true');
-    intro.innerHTML=`
-      <div class="gm-open-hanger">
-        <div class="gm-open-sign">
-          <strong>OPEN</strong>
-          <small>${sessionText} · GRUB MONKEYS</small>
-        </div>
-      </div>`;
-    document.body.appendChild(intro);
-    setTimeout(()=>intro.classList.add('is-leaving'),1150);
-    setTimeout(()=>intro.remove(),1500);
-  }
 
   /* ----------------------------------------------------------
      3. WHAT SHOULD I ORDER? — NEW, NOT PRESENT IN V11

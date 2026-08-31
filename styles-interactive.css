@@ -956,70 +956,6 @@
   --gm-id-ease: cubic-bezier(.22,1,.36,1);
 }
 
-/* ---------- FIRST-VISIT OPEN SIGN ---------- */
-.gm-door-intro{
-  position:fixed;
-  inset:0;
-  z-index:9999;
-  display:grid;
-  place-items:center;
-  pointer-events:none;
-  background:rgba(58,58,58,.96);
-  opacity:1;
-}
-.gm-door-intro.is-leaving{animation:gmIntroClear .35s ease forwards}
-.gm-open-hanger{
-  position:relative;
-  width:min(330px,76vw);
-  padding-top:74px;
-  transform-origin:50% -48px;
-  animation:gmOpenSwing .95s var(--gm-id-ease) both;
-}
-.gm-open-hanger::before,
-.gm-open-hanger::after{
-  content:"";
-  position:absolute;
-  top:0;
-  width:3px;
-  height:86px;
-  background:var(--gm-id-white);
-}
-.gm-open-hanger::before{left:30%;transform:rotate(18deg)}
-.gm-open-hanger::after{right:30%;transform:rotate(-18deg)}
-.gm-open-sign{
-  position:relative;
-  border:5px solid var(--gm-id-white);
-  background:var(--gm-id-red);
-  color:var(--gm-id-white);
-  padding:25px 28px 20px;
-  text-align:center;
-  box-shadow:12px 12px 0 #202020;
-}
-.gm-open-sign strong{
-  display:block;
-  font-family:var(--f-display,"Arial Black",sans-serif);
-  font-size:clamp(3rem,12vw,5.6rem);
-  line-height:.78;
-  text-transform:uppercase;
-  letter-spacing:.03em;
-}
-.gm-open-sign small{
-  display:block;
-  margin-top:12px;
-  font-size:.64rem;
-  font-weight:800;
-  letter-spacing:.17em;
-  text-transform:uppercase;
-  color:var(--gm-id-teal);
-}
-@keyframes gmOpenSwing{
-  0%{opacity:0;transform:translateY(-28px) rotate(-8deg)}
-  45%{opacity:1;transform:translateY(0) rotate(4deg)}
-  72%{transform:rotate(-2deg)}
-  100%{transform:rotate(0)}
-}
-@keyframes gmIntroClear{to{opacity:0;visibility:hidden}}
-
 /* ---------- SESSION / TABLE ID ---------- */
 .gm-session-chip{
   display:inline-flex;
@@ -1372,7 +1308,7 @@
 }
 
 @media(prefers-reduced-motion:reduce){
-  .gm-door-intro,.gm-open-hanger,.gm-session-chip::before,
+  .gm-session-chip::before,
   .gm-fortune-machine.is-dispensing .gm-fortune-card,
   .gm-counter-tray.in,.gm-order-status.show,
   .gm-photobooth-stage.shooting .gm-booth-flash,
@@ -1381,7 +1317,6 @@
     animation:none!important;
     transition:none!important;
   }
-  .gm-door-intro{display:none!important}
   .gm-fortune-machine.is-dispensing .gm-fortune-card{opacity:1;transform:translateY(16px) rotateX(0)}
   .gm-counter-tray.in{opacity:1;transform:none}
   .gm-order-status.show{opacity:1;transform:none}

@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="styles-refinement.css">
 <link rel="stylesheet" href="gm-corrections.css">
 <link rel="stylesheet" href="styles-locations-expansion-premium.css">
+<link rel="stylesheet" href="gm-entry.css">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96">
 <link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192">
@@ -318,6 +319,29 @@
 </script>
 </head>
 <body data-page="home">
+
+<div class="gm-entry" id="gmEntry" role="status" aria-label="Grub Monkeys diner is open">
+  <div class="gm-entry__rig">
+    <span class="gm-entry__cord gm-entry__cord--left" aria-hidden="true"></span>
+    <span class="gm-entry__cord gm-entry__cord--right" aria-hidden="true"></span>
+
+    <div class="gm-entry__sign">
+      <div class="gm-entry__eyebrow">Welcome In.</div>
+      <div class="gm-entry__title" aria-hidden="true">
+        <span class="gm-entry__title-small">The Diner's</span>
+        <strong class="gm-entry__title-open">Open</strong>
+      </div>
+      <div class="gm-entry__brand-row" aria-hidden="true">
+        <span></span>
+        <span class="gm-entry__logo-wrap">
+          <img class="gm-entry__logo" src="images/img-002.jpg" alt="" width="1032" height="1032">
+        </span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <div class="gm-entry__micro" aria-hidden="true">Grub Monkeys · Welcome In</div>
+</div>
 
 <nav id="siteNav" aria-label="Primary navigation">
   <a href="/" class="nav-logo" aria-label="Grub Monkeys home">
@@ -1199,5 +1223,6 @@
 <script src="retro-ambient.js" defer></script>
 <script src="new-motion.js" defer></script>
 <script src="locations-expansion-premium.js" defer></script>
+<script src="gm-entry.js" defer></script>
 </body>
 </html>
