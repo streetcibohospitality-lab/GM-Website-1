@@ -1,0 +1,123 @@
+GM Command Center v6.4 Production Candidate — Final Static Validation
+UTC 2026-08-26T07:39:56Z
+
+
+> grub-monkeys-command-center@1.1.4 verify:static
+> npm run security:audit && npm run verify:source && npm run interaction:audit && npm run qa:release
+
+
+> grub-monkeys-command-center@1.1.4 security:audit
+> node scripts/security-static-audit.mjs
+
+PASS three-owner directory
+PASS owner registry table
+PASS owner-only database role constraint
+PASS immutable Clerk binding
+PASS database blocks Owner identity rebind
+PASS production email bootstrap disabled by default
+PASS verified email required
+PASS MFA encryption AES-256-GCM
+PASS TOTP replay protection
+PASS approved device strict cookie
+PASS first device requires MFA
+PASS one active session
+PASS 2-hour absolute session
+PASS inactivity lock
+PASS idle full sign-out
+PASS strict origin middleware
+PASS anti-framing CSP
+PASS no-store headers
+PASS audit logs append-only
+PASS owner registry cannot be expanded by runtime
+PASS closed month database guard
+PASS single demo-data policy
+PASS alert dedupe compatible with upsert
+PASS backend write routes present
+PASS restaurant control rules implemented
+PASS no screenshot/watermark surveillance code
+SECURITY_AUDIT_PASS 26 checks
+
+> grub-monkeys-command-center@1.1.4 verify:source
+> node scripts/verify-source.mjs
+
+SOURCE_PARSE_PASS 103 TS/TSX files
+
+> grub-monkeys-command-center@1.1.4 interaction:audit
+> node scripts/interaction-static-audit.mjs
+
+PASS all 53 visible JSX buttons have an action path
+PASS no stale/misleading copy: vs Jul 2026
+PASS no stale/misleading copy: 18 AUG 2026
+PASS no stale/misleading copy: August group target
+PASS no stale/misleading copy: STOCK ADJUSTMENT
+PASS no stale/misleading copy: NO EMPLOYEE DEVICES
+PASS overview totals recompute when outlet data changes
+PASS overview quick task opens creation flow
+PASS overview expense action opens real entry control
+PASS overview stock action is truthful import workflow
+PASS overview does not use synthetic TinyTrend
+PASS overview period/ranking labels are explicitly non-interactive context
+PASS management pack export is wired
+PASS report OPEN links are real routes
+PASS task create and completion APIs exist
+PASS outlet create API exists
+PASS document create API exists
+PASS expense entry API exists
+PASS customer table has contained horizontal scroll
+PASS customer form uses active reporting period
+PASS outlet audit form uses active reporting period
+PASS maintenance incidents can be edited/resolved
+PASS maintenance assets can be edited
+PASS maintenance exposes reopen/in-progress/resolve actions
+PASS equipment edits update by record id
+PASS command pages do not silently swallow database failures
+PASS tasks have tablet/mobile overflow containment
+PASS documents have tablet/mobile overflow containment
+PASS reports have tablet/mobile overflow containment
+PASS record modals are viewport bounded
+INTERACTION_AUDIT_PASS 30 checks
+
+> grub-monkeys-command-center@1.1.4 qa:release
+> node scripts/release-qa-audit.mjs
+
+PASS Next.js meets 16.3.3 security baseline
+PASS CSV commit uses Neon transaction
+PASS Import job ID is generated before transaction
+PASS Import audit row is finalized inside transaction
+PASS Import API hides raw internal exceptions
+PASS Post-commit alert/security refresh cannot misreport rollback
+PASS Validation API hides raw internal exceptions
+PASS Production command-data failures are not converted to zeros
+PASS Demo-only fallback remains available
+PASS Sidebar command search is a native button
+PASS Command palette exposes modal semantics
+PASS Command palette traps and restores focus
+PASS Reduced-motion preference is supported
+PASS Explicit CSS font-size floor is 9px
+PASS CSS shorthand font-size floor is 9px
+PASS People modal exposes dialog semantics
+PASS People modal traps focus and handles Escape
+PASS Shared record modal traps and restores focus
+PASS Clerk revoke failures are observable
+RELEASE_QA_AUDIT 19/19
+
+
+> grub-monkeys-command-center@1.1.4 framework:gate
+> node scripts/framework-gate.mjs
+
+FRAMEWORK_GATE_PASS Next.js 16.3.3
+
+CSS_PARSE_ERRORS 0
+CSS_EXPLICIT_FONT_MIN 9.0
+CSS_EXPLICIT_LT9 0
+CSS_SHORTHAND_FONT_MIN 9.0
+CSS_SHORTHAND_LT9 0
+
+LOCKFILE_GENERATION_ATTEMPT:
+npm error code EAI_AGAIN
+npm error syscall getaddrinfo
+npm error errno EAI_AGAIN
+npm error request to https://registry.npmjs.org/@clerk%2fnextjs failed, reason: getaddrinfo EAI_AGAIN registry.npmjs.org
+npm error A complete log of this run can be found in: /home/oai/.npm/_logs/2026-08-26T07_38_48_116Z-debug-0.log
+
+QA_DB_ROLLBACK_PROBE: PASS — forced failure left 0 marker rows on QA branch.
