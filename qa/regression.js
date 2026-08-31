@@ -279,6 +279,21 @@ async function run() {
         return tab.getAttribute('aria-selected') === 'true';
       });
       check('tapping a department tab keeps it active once the jump settles', tappedActive === true);
+
+      // A department whose preview photo repeats the hero image gets a
+      // type-led chapter (no duplicate photo) with a red diagonal
+      // gradient background. That background is only set via a single
+      // class selector, while unrelated "editorial composition" layout
+      // variants elsewhere set a flat background via a higher-specificity
+      // selector that happens to match whichever panel position the
+      // type-led chapter lands on -- silently winning regardless of
+      // source order and flattening the gradient to a plain dark box.
+      const typeChapterBg = await page.evaluate(() => {
+        const chapter = document.querySelector('.gm-menu-chapter--type');
+        return chapter ? getComputedStyle(chapter).backgroundImage : null;
+      });
+      check('type-led chapter (hero-repeat department) keeps its gradient background',
+        !!typeChapterBg && typeChapterBg !== 'none', `backgroundImage=${typeChapterBg}`);
       await page.close();
     }
 

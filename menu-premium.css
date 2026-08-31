@@ -689,8 +689,19 @@ body[data-page="menu"] .menu-page-hero::after{ content:""; position:absolute; in
   }
   body[data-page="menu"] .gm-menu-chapter__title b::before{display:none!important}
 
-  /* Wings image repeats the hero, so its chapter is intentionally type-led. */
-  body[data-page="menu"] .gm-menu-chapter--type{
+  /* Wings image repeats the hero, so its chapter is intentionally type-led.
+     Matched against every nth-of-type(...) .gm-menu-chapter combination
+     above: those rules are grouped with the plain .gm-menu-chapter
+     selector and set a flat background, which -- whenever the type-led
+     chapter's own panel position happens to land on one of those
+     variants -- outranks .gm-menu-chapter--type on specificity alone
+     and silently wins regardless of source order, wiping the red
+     diagonal down to a flat dark box (background:<color> resets
+     background-image to none). */
+  body[data-page="menu"] .gm-menu-chapter--type,
+  body[data-page="menu"] .menu-panel:nth-of-type(4n+2) .gm-menu-chapter--type,
+  body[data-page="menu"] .menu-panel:nth-of-type(4n+3) .gm-menu-chapter--type,
+  body[data-page="menu"] .menu-panel:nth-of-type(4n+4) .gm-menu-chapter--type{
     height:clamp(190px,49vw,270px);
     background:
       linear-gradient(135deg,rgba(235,0,0,.96) 0 34%,transparent 34%),
