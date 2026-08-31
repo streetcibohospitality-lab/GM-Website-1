@@ -1,0 +1,8 @@
+import Image from "next/image";
+import { redirect } from "next/navigation";
+import { requireIdentityPageProfile } from "@/lib/access-control";
+import { hasRecentMfaVerification, mfaMaxAges } from "@/lib/mfa";
+import { MfaVerificationForm } from "@/components/mfa-verification-form";
+export const dynamic="force-dynamic";
+function safeNext(value:string|string[]|undefined){const raw=Array.isArray(value)?value[0]:value;if(!raw||!raw.startsWith("/")||raw.startsWith("//")||raw.startsWith("/sign-in")||raw.startsWith("/security/setup"))return"/overview";return raw;}
+export default async function Verify({searchParams}:{searchParams:Promise<{next?:string|string[]}>}){const profile=await requireIdentityPageProfile("/security/verify");if(!profile.mfa_enabled)redirect("/security/setup");const nextPath=safeNext((await searchParams).next);if(await hasRecentMfaVerification(mfaMaxAges.financeSeconds))redirect(nextPath);return <main className="secure-gate"><section className="secure-gate__brand"><Image src="/grub-monkeys-logo.png" width={232} height={84} alt="Grub Monkeys" priority/><span>COMMAND CENTER / SESSION VERIFY</span><h1>Confirm the operator.</h1><p>Clerk has verified your identity. Grub Monkeys now requires the independent management authenticator before this session can continue.</p></section><section className="auth-control-card"><span className="auth-kicker">GM AUTHENTICATOR / {profile.role.toUpperCase()}</span><h2>Enter the current code.</h2><p>Use the 6-digit code from your authenticator, or one unused recovery code.</p><MfaVerificationForm nextPath={nextPath}/></section></main>;}
