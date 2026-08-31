@@ -17,5 +17,5 @@
   }, { once: false });
 
   // Hard fallback in case a browser suppresses animationend.
-  window.setTimeout(finish, 4300);
+  window.setTimeout(finish, 2200);
 })();
