@@ -1,0 +1,26 @@
+GRUB MONKEYS COMMAND CENTER — v6.2 QA FIXED
+
+This package contains the complete corrected project:
+- Next.js frontend
+- Neon/Postgres schema and migrations
+- Owner-only security implementation
+- MFA/device/session controls
+- Business APIs and live-data queries
+- Restaurant-chain control modules
+- Employee lifecycle, salary and performance modules
+- Import templates/logic
+- QA screenshots
+- Security, source and interaction audit scripts
+- Deployment and Claude Code handoff documentation
+
+Latest local static validation before packaging:
+- Security audit: 26/26 PASS
+- Source parse: 102 TS/TSX files PASS
+- Interaction audit: 30/30 PASS
+- Visible JSX buttons: 51/51 have an action path
+
+Important deployment gate:
+Dependency-aware npm/typecheck/Next.js production build still requires a working npm registry and the official patched Next.js release before production deployment.
+
+Patch details: PATCH_REPORT_v6.2.md
+Start with: START_HERE.txt
