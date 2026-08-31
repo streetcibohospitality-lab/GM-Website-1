@@ -81,32 +81,24 @@
 
   /* ----------------------------------------------------------
      2. OPENING SIGN
-     Runs 1.5s on the first homepage view of a browser session, then stays
-     out of the way until the browser is closed and opened again. It was
-     previously kept in localStorage, which meant anyone who had ever
-     visited never saw it again -- including after the timing changed.
-     Skipped entirely under reduced motion.
+     Runs 1.5s on every homepage load. Skipped entirely under reduced
+     motion.
      ---------------------------------------------------------- */
   const isHome = !!$('#signature') && !!$('#order');
   if(isHome && !reduceMotion){
-    const seenKey='gm_open_sign_seen_session';
-    const seen=safeStore('session',seenKey);
-    if(!seen){
-      safeStore('session',seenKey,'1');
-      const intro=document.createElement('div');
-      intro.className='gm-door-intro';
-      intro.setAttribute('aria-hidden','true');
-      intro.innerHTML=`
-        <div class="gm-open-hanger">
-          <div class="gm-open-sign">
-            <strong>OPEN</strong>
-            <small>${sessionText} · GRUB MONKEYS</small>
-          </div>
-        </div>`;
-      document.body.appendChild(intro);
-      setTimeout(()=>intro.classList.add('is-leaving'),1150);
-      setTimeout(()=>intro.remove(),1500);
-    }
+    const intro=document.createElement('div');
+    intro.className='gm-door-intro';
+    intro.setAttribute('aria-hidden','true');
+    intro.innerHTML=`
+      <div class="gm-open-hanger">
+        <div class="gm-open-sign">
+          <strong>OPEN</strong>
+          <small>${sessionText} · GRUB MONKEYS</small>
+        </div>
+      </div>`;
+    document.body.appendChild(intro);
+    setTimeout(()=>intro.classList.add('is-leaving'),1150);
+    setTimeout(()=>intro.remove(),1500);
   }
 
   /* ----------------------------------------------------------
