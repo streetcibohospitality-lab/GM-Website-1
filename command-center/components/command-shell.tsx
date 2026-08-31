@@ -31,7 +31,9 @@ const nav: NavGroup[] = [
     ["13","CK","Daily Checklists","/checklists"],
     ["14","AL","Alerts","/alerts"],
     ["15","TK","Tasks","/tasks"],
-    ["16","IN","Insights","/insights"],
+    ["16","IN","Insights","/insights"]
+  ]},
+  {section:"MANAGEMENT", items:[
     ["17","RP","Reports","/reports"],
     ["18","DC","Documents","/documents"],
     ["19","IM","Imports","/imports"],
