@@ -4,7 +4,7 @@ This is an existing custom Grub Monkeys Command Center, not a starter template. 
 
 ## Design system — do not genericize
 
-Preserve the Grub Monkeys brand system: Jaro/Lexend typography, Monkey Red / Sorta Grey / Sorta White / Monkey Teal palette, custom command rail, ticket-strip motion, editorial control lines, cream analytical surfaces, data matrices and restrained status animation.
+Preserve the Grub Monkeys brand system: Big Shoulders/Lexend typography (display font switched from Jaro, which only ships weight 400 and had no bold — Big Shoulders is a Google Font modeled on Chicago's condensed scoreboard/signage lettering, used at weight 700-800 for real authority), Monkey Red / Sorta Grey / Sorta White / Monkey Teal palette, custom command rail, ticket-strip motion, editorial control lines, cream analytical surfaces, data matrices and restrained status animation.
 
 Do NOT redesign this into generic glassmorphism, purple/blue SaaS cards, gaming neon, gradient-heavy dashboards, Bootstrap/admin-template composition, or a stock icon-card grid.
 

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
-import { Jaro, Lexend } from "next/font/google";
+import { Big_Shoulders, Lexend } from "next/font/google";
 import { SessionSecurityGuard } from "@/components/session-security-guard";
 import "./globals.css";
 
-const jaro=Jaro({subsets:["latin"],variable:"--font-jaro",display:"swap"});
+const jaro=Big_Shoulders({subsets:["latin"],weight:["500","700","800"],variable:"--font-jaro",display:"swap"});
 const lexend=Lexend({subsets:["latin"],variable:"--font-lexend",display:"swap"});
 
 export const metadata:Metadata={

@@ -6,7 +6,7 @@
 
 Full private Owner business command center for `dashboard.grubmonkeys.in`.
 
-The interface is custom to the Grub Monkeys brand: Monkey Red / Sorta Grey / Sorta White / Monkey Teal, Jaro display typography, Lexend product typography, sharp control rails, ticket-style motion and restrained operating-state animation. It deliberately avoids generic SaaS glass cards, purple/blue gaming gradients and stock admin-template composition.
+The interface is custom to the Grub Monkeys brand: Monkey Red / Sorta Grey / Sorta White / Monkey Teal, Big Shoulders display typography (bold/extrabold, condensed scoreboard-style), Lexend product typography, sharp control rails, ticket-style motion and restrained operating-state animation. It deliberately avoids generic SaaS glass cards, purple/blue gaming gradients and stock admin-template composition.
 
 ## Authorized identities
 
