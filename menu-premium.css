@@ -801,3 +801,13 @@ body[data-page="menu"] .menu-page-hero::after{ content:""; position:absolute; in
     display:none!important;
   }
 }
+
+/* Mac & Wings photo: the bowl sits in the lower half of the shot, and the
+   default center crop was cutting into it. Anchoring lower keeps more of
+   the bowl in frame at the cost of the wall art up top, which the site
+   doesn't need here anyway. */
+@media (max-width:900px){
+  body[data-page="menu"] #m1 .gm-menu-chapter__image{
+    object-position:center 80%;
+  }
+}
