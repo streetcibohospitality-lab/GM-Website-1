@@ -1,0 +1,6 @@
+import { z } from "zod";
+import { requireApiProfile } from "@/lib/access-control";
+import { consumeRateLimit, enforceSameOrigin, internalApiError, rateLimitResponse, readJsonWithLimit, requestParseError } from "@/lib/http-security";
+import { validateImport } from "@/lib/imports";
+const schema=z.object({type:z.enum(["outlets","daily_sales","channel_sales","expenses","staff","monthly_financials","inventory","vendors","purchases","menu_performance","cash_reconciliation"]),csv:z.string().min(1).max(2_000_000)});
+export async function POST(req:Request){const same=enforceSameOrigin(req);if(same)return same;const access=await requireApiProfile("/api/imports/validate");if("response" in access)return access.response;const rate=await consumeRateLimit("dash-import-validate",20,300,"user");if(!rate.allowed)return rateLimitResponse(rate.retryAfter);try{const parsed=schema.safeParse(await readJsonWithLimit(req,2_100_000));if(!parsed.success)return Response.json({error:"Invalid import payload"},{status:400});const result=await validateImport(parsed.data.type,parsed.data.csv);return Response.json(result,{headers:{"Cache-Control":"no-store"}});}catch(error){const response=requestParseError(error);if(response)return response;return internalApiError(error,"Import validation failed","IMPORT_VALIDATION_FAILED");}}
