@@ -254,6 +254,34 @@ async function run() {
       await page.close();
     }
 
+    // --- premium mobile menu: no content-visibility layout shift, tap-to-
+    // jump lands on the tapped department (found when contain-intrinsic-size
+    // was far short of real panel height, and the scroll-position tracker
+    // fought a tapped tab's own scroll for up to a second on long jumps) ---
+    console.log('Premium mobile menu:');
+    {
+      const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+      await page.goto(BASE + '/menu', { waitUntil: 'networkidle' });
+      await page.waitForTimeout(300);
+
+      await page.evaluate(() => document.getElementById('m7').scrollIntoView({ block: 'start' }));
+      await page.waitForTimeout(2000);
+      const scrollTop = await page.evaluate(() => document.getElementById('m7').getBoundingClientRect().top);
+      check('scrolling to the last department lands it at the viewport top (no content-visibility drift)',
+        Math.abs(scrollTop) < 5, `top=${scrollTop}`);
+
+      await page.evaluate(() => window.scrollTo(0, 0));
+      await page.waitForTimeout(300);
+      await page.evaluate(() => document.querySelector('#menuTabs .menu-tab:nth-child(4)').click());
+      await page.waitForTimeout(1300);
+      const tappedActive = await page.evaluate(() => {
+        const tab = document.querySelector('#menuTabs .menu-tab:nth-child(4)');
+        return tab.getAttribute('aria-selected') === 'true';
+      });
+      check('tapping a department tab keeps it active once the jump settles', tappedActive === true);
+      await page.close();
+    }
+
     // --- video control disable/re-enable: homepage Monkey TV reel ---
     console.log('Homepage Monkey TV controls:');
     {
